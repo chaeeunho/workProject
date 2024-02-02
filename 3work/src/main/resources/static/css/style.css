@@ -1,0 +1,131 @@
+body {
+    background-color: #F1F3E1;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 40px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex; /* Flexbox 레이아웃을 사용 */
+    flex-direction: column; /* 자식 요소들을 세로로 정렬 */
+    align-items: center; /* 가운데 정렬 */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    width: 100%; /* 입력 필드 너비를 동일하게 설정 */
+    border:none;
+}
+
+
+.address-container {
+    display: flex;
+    justify-content: space-between; /* 요소들 사이에 공간을 균등하게 분배 */
+}
+
+.address-container input[type="text"] {
+    flex-grow:1;
+    width: 60%; /* 입력 상자 너비를 전체의 70%로 설정 */
+    margin-right: 10px; /* 버튼과의 간격 설정 */
+    padding: 10px;
+    border-radius: 5px;
+    height: 28px; /* 높이 조정하여 버튼과 일치시킴 */
+    border: 1px solid #cccccc;
+}
+
+.address-container button {
+    width: 50%; /* 버튼 너비를 전체의 30%에서 약간 줄여 마진 고려 */
+    padding: 30px 30px 40px 50px; /* 상하 패딩만 지정하여 너비에 영향을 주지 않도록 함 */
+    background-color: #F1F3E1;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    height: 48px;
+    white-space: nowrap;
+}
+
+.terms {
+    margin-bottom: 20px; /* 체크박스와 버튼 사이의 간격 */
+}
+
+.terms input[type="checkbox"] {
+    margin-right: 10px; /* 체크박스와 텍스트 사이의 간격 */
+}
+
+.terms label {
+    font-size: 14px; /* 라벨의 폰트 사이즈 */
+}
+
+/* 체크박스 스타일 */
+.terms {
+    display: flex;
+    align-items: center; /* 체크박스와 라벨을 정렬 */
+    margin-bottom: 20px; /* 체크박스와 다음 요소 사이의 간격 */
+}
+
+.terms input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.terms label {
+    font-size: 14px; 
+}
+
+/* 입력 필드 스타일 */
+input[type="email"],
+input[type="text"],
+input[type="password"],
+input[type="date"],
+.address-container input[type="text"] {
+    padding: 10px;
+    margin: 0 auto 20px auto; /* 자동 마진으로 중앙 정렬 */
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    width: 90%; /* 너비를 80%로 설정 */
+}
+.submit-button{
+    background-color: #f1f3e1;
+    height: 48px;
+    width: 100%; /* 너비를 80%로 설정 */
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    border-radius: 5px;
+    border: none;
+    margin: 0 auto; /* 자동 마진으로 중앙 정렬 */
+}
+.address-container button{
+    font-size: 0.1em;
+    width: 30%; /* 너비를 80%로 설정, flex 사용 시 다른 방식으로 조정 필요 */
+    padding: 10px 20px;
+    background-color: #F1F3E1;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    height: 48px;
+    margin-left: 30px; /* 버튼을 왼쪽으로 정렬하려면 이를 조정 */
+    margin-right: 20px; /* 주소 입력 상자와의 간격 */
+}
+

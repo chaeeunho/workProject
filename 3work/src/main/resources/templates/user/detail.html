@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원정보...</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{header::header-fragment}"></div>
+	<div id="container">
+	  <section id="detail">
+		<h2>회원 정보</h2>
+		<div class="detail">
+		  <form>
+			   <fieldset>
+			  	<ul>
+			  		<li>
+			  			<label for="uId">아이</label>
+			  			<input type="text" name="uId" readonly
+			  				id="uId" th:value="${users.uId}">
+			  		</li>
+			  		<li>
+			  			<label for="upassword">비밀번호</label>
+			  			<input type="password" name="upassword" readonly
+			  			    id="upassword" th:value="${users.upassword}">
+			  		</li>
+			  		<li>
+			  			<label for="uname">이름</label>
+			  			<input type="text" name="uname" readonly
+			  			    id="uname" th:value="${users.uname}">
+			  		</li>
+			  		<li>
+			  			<label for="unickname">별명</label>
+			  			<input type="text" name="unickname" readonly
+			  			    id="unickname" th:value="${users.unickname}">
+			  		</li>
+			  		<li>
+			  			<label for="uaddress">이름</label>
+			  			<input type="text" name="uaddress" readonly
+			  			    id="uaddress" th:value="${users.uaddress}">
+			  		</li>
+			  		<li>
+			  			<label for="ubirth">이름</label>
+			  			<input type="text" name="ubirth" readonly
+			  			    id="ubirth" th:value="${users.ubirth}">
+			  		</li>
+			  	    <li>
+			  			<a th:href="@{/user/list}">
+			  				<button type="button">목록</button>
+			  			</a>
+			  		</li>
+			  	</ul>
+		  	  </fieldset>
+	  	  </form>
+	  	</div>
+	  </section>
+	</div>
+	<div th:replace="~{footer::footer-fragment}"></div>
+</body>
+</html>

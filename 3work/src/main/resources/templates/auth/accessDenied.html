@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index...</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- footer.html 연결  -->
+	<div th:replace="~{header::header-fragment}"></div>
+	<div id="container">
+	   <section id="main">
+		<h1>권한이 없습니다. 다른 메뉴를 사용해주세요</h1>
+	  </section>
+	</div>
+	<!-- footer.html 연결  -->
+	<div th:replace="~{footer::footer-fragment}"></div>
+</body>
+</html>
