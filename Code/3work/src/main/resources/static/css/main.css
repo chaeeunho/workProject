@@ -50,8 +50,12 @@
 	transform: translate(-50%, -50%);
 	padding: 5%;
 }
-.slide_content p, 
-.slide_content2 p, 
+.slide_content p{
+	color: #f7f6df;
+}
+.slide_content2 p{
+	color: #bccdb4;
+} 
 .slide_content3 p{
 	color: #CDCDCD;
 }
@@ -157,13 +161,14 @@
 	border-bottom: 1px solid #cccccc;
 	font-family: 'SBAggroM';
 }
-#work_recommend{
-	clear: both;
-  position: relative;
-  width: 94%;
-  height: 502px;
-  margin: 40px;
-}
+
+
+
+/* --------------------------------------------------------- */
+
+
+
+/* 추천, 정보 공통 CSS */
 .work_title{
 	background: #F1F3E1;
 	border-radius: 30px;
@@ -182,17 +187,124 @@
 .work_menu a:hover{
 	color: black;
 }
-#work_recommend_link a{
-	text-decoration: none;
+
+
+
+/* --------------------------------------------------------- */
+
+
+
+/* 3WORK RECOMMEND의 CSS */
+#work_recommend{
+	clear: both;
+  position: relative;
+  width: 94%;
+  height: 502px;
+  margin: 40px;
 }
-#work_recommend_link img{
-	width: 31.8%;
+#work_recommend img{
 	height: 400px;
 	margin: 0 16px 10px 0;
 }
+#work_recommend_link a{
+	text-decoration: none;
+}
+/* 노래 추천 CSS */
+#work_music{
+	width: 31.8%;
+	position: absolute;
+	left: 0;
+}
+#work_music a img{
+	width: 100%;
+	z-index: -1;
+}
+#work_music_content{
+	position: absolute;
+	bottom: 0;
+	left: 15px;
+	text-align: left;
+	line-height: 0.5;
+}
+#work_music_content p:nth-of-type(1){
+	color: #A09D9D;
+	font-size: 13px;
+}
+#work_music_content p:nth-of-type(3){
+	color: #8B8989;
+	font-size: 15px;
+}
+#work_music_content p:nth-of-type(4){
+	color: #000000;
+	font-size: 17px;
+	line-height: 1.4;
+}
+/* 음식 추천 CSS */
+#work_food{
+	width: 31.8%;
+	position: absolute;
+	left: 34%;
+}
+#work_food a img{
+	width: 100%;
+	z-index: -1;
+}
+#work_food a img:nth-of-type(2){
+	width: 19%;
+	height: 18%;
+	position: absolute;
+	top: 8px;
+	right: -16px;
+}
+#work_food_content{
+	position: absolute;
+	top: 10px;
+	left: 25px;
+	text-align: left;
+	line-height: 1;
+}
+#work_food_content p:nth-of-type(1){
+	color: #cccccc;
+	font-size: 15px;
+}
+#work_food_content p:nth-of-type(2){
+	color: #ffffff;
+	font-size: 17px;
+}
+/* 아이템 추천 CSS */
+#work_item{
+	width: 31.8%;
+	position: absolute;
+	left: 68%;
+}
 #work_item a img{
+	width: 100%;
+	z-index: -1;
 	margin-right: 0;
 }
+#work_item_content{
+	position: absolute;
+	top: 10px;
+	left: 25px;
+	text-align: left;
+	line-height: 1;
+}
+#work_item_content p:nth-of-type(1){
+	color: #cccccc;
+	font-size: 15px;
+}
+#work_item_content p:nth-of-type(2){
+	color: #000000;
+	font-size: 17px;
+}
+
+
+
+/* --------------------------------------------------------- */
+
+
+
+/* 3WORK INFORMATION의 CSS */
 #work_info{
 	clear: both;
   position: relative;
@@ -203,9 +315,10 @@
 #work_info img{
 	height: 400px;
 }
-#work_news a{
+#work_info_link a{
 	text-decoration: none;
 }
+/* 뉴스 CSS */
 #work_news{
 	width: 43%;
 	position: absolute;
@@ -234,6 +347,7 @@
 	color: #000000;
 	font-size: 17px;
 }
+/* 지도 CSS */
 #work_map{
 	width: 43%;
 	position: absolute;
@@ -258,6 +372,7 @@
 	color: #000000;
 	font-size: 17px;
 }
+/* 운동 꿅팁 CSS */
 #work_method{
 	width: 23.7%;
 	position: absolute;
