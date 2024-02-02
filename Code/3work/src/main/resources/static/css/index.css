@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+/* index.html */
+#index{
+  background-color: #ffffff;
+  width: 95%;
+  height: 90%;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+} 
+#main_door{
+  width: 700px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.main_door_logo {
+  width: 670px;
+  height: 300px;
+}
+#loading_image{
+  margin-top: 10px;;
+}
+/* 아보카도 타이핑 */
+.loading_image_avocado{
+  display: none;
+}
+/* 로딩중 타이핑 */
+.typing-txt {
+  display: none;
+}
+.typing {
+  display: inline-block;
+  color: #AEBD3B;
+  font-family: 'SBAggroM';
+}
