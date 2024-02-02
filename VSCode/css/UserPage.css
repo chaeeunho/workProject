@@ -1,0 +1,177 @@
+/* Userpage CSS */
+/* 글씨체 */
+@font-face {
+  font-family: 'SBAggroL';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SBAggroM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SBAggroB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* 공통 스타일 */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F1F3E1;
+}
+
+
+#container{
+  background-color: #ffffff;
+  width: 95%;
+  height: 95%;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+
+
+
+
+/* 유저 페이지 메인 css */
+#userMain {
+  position: relative;
+  width: 1300px;
+  height: 700px;
+}
+ /* BGM 바와 버튼 스타일 */
+ #bgm-bar {
+  font-family: 'SBAggroM';
+  font-size: 0.7em;
+  position: absolute;
+  top: 6%;
+  right: -11%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  border-radius: 20px;
+  background-color: #F1F3E1;
+  color: #838383;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#bgm-bar span{
+  padding: 5px;
+}
+#bgm-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#bgm-buttons button {
+  color: #838383;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* 프로필 스타일 */
+#profile, #comments {
+  flex: 1; /* 나머지 공간을 1:1로 나누어 차지하도록 설정 */
+  padding: 20px;
+}
+
+#profile {
+  font-family: 'SBAggroL';
+  text-align: left;
+  width: 300px;
+  height: 100%;
+}
+
+#profile p {
+  margin-bottom: 5px;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+#profile p:nth-of-type(1){
+  margin-top: 30px;
+}
+
+#today-visits {
+  font-family: 'SBAggroL';
+  color: red;
+}
+
+#profile-pic {
+  width: 300px;
+  height: 350px;
+  border: 3px solid #ccc;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+#profile p:nth-child(3) {
+  font-family: 'SBAggroB';
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+#profile p:nth-child(4),
+#profile p:nth-child(6) {
+  font-family: 'SBAggroM';
+  margin-top: 10px;
+  font-size: 1em;
+  color: #838383;
+}
+
+#setting {
+  color: #ccc;
+}
+
+/* 방명록 스타일 */
+#comments {
+  position: absolute; bottom: 2%; right: 0%;
+  font-family: 'SBAggroL';
+  width: 850px;
+  height: 250px;
+  text-align: left;
+}
+#comments h2 {margin-bottom: 15px;}
+#comment-form { margin-bottom: 15px;}
+#comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+#comment-list li {
+  margin-bottom: 10px;
+  font-size: 0.8em;
+}
+#comment{
+  width: 750px;
+  height: 20px;
+  padding: 5px;
+  font-size: 10px;
+  outline: none;
+}
+#btns{
+  background-color: #f1f3e1;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 20%;
+  margin-left: 15px;
+  font-size: 13px;
+}
+
+
+
+
+
+
+
