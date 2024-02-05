@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+
+/* foodform.html & itemform.html 공유 */
+/* 정보 입력 전체 사이즈 */
+#foodform{
+  position: relative;
+  width: 100%;
+  height: 1250px;
+}
+#foodform_body{
+	width: 100%;
+	height: 500px;
+}
+
+
+
+/* ------------------------------------------- */
+
+
+
+/* 정보 입력 제목 */
+#foodform_title{
+	width: 800px;
+	border-radius: 10px;
+	padding : 10px 15px;
+	text-align: center;
+	margin: 0 auto;
+}
+#foodform_title p:nth-of-type(1) {
+	font-size: 30px;
+	font-family: 'SBAggroM';
+}
+
+
+
+/* ------------------------------------------- */
+
+
+
+/* 입력 */
+/* 입력 폼 - 공통 스타일 */
+#foodform_tbl{
+	width: 300px;
+	height: 300px;
+	border-radius: 10px;
+	text-align: center;
+	margin: 50px auto;
+	/* border: 1px solid #8B8989; */
+}
+.foodform_input{
+	position: relative;
+	width: 100%;
+	height: 90px;
+	padding-bottom: 30px;
+}
+.foodform_input input{
+	width: 280px;
+	margin: 10px 0;
+	border: none;
+	outline: none;
+	padding: 5px;
+  border-bottom: 1px solid #5E5E5E;
+}
+.foodform_input:nth-child(2){
+	height: 130px;
+}
+.foodform_input textarea{
+	width: 280px;
+	margin: 10px 0;
+	outline: none;
+	padding: 5px;
+  border: 1px solid #5E5E5E;
+  resize: none;
+}
+.foodform_input_content{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.foodform_input_content label{
+	width: 100%;
+	color: #5E5E5E;
+	float: left;
+  text-align: left;
+}
+.update_file{
+	position: relative;
+	width: 100%;
+	height: 70px;
+	padding-bottom: 30px;
+}
+.update_file_content{
+	position: absolute;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+}
+.file_title{
+	color: #5E5E5E;
+}
+/* 파일 첨부 기존 스타일 없애기 */
+.filebox input[type="file"]{
+	position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  border: 0;
+}
+.upload-name{
+	width: 204px;
+	margin: 10px 0;
+	outline: none;
+	padding: 5px 0;
+	border: none;
+  border-bottom: 1px solid #5E5E5E;
+  resize: none;
+  color: #9C9C9C;
+} 
+.file_btn{
+	background: #F1F3E1;
+	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+	color: black;
+	padding: 5px 15px;
+	font-size: 12px;
+	margin-left: 10px;
+	border: none;
+	font-family: 'SBAggroL';
+}
+#save_btn{
+	background: #F1F3E1;
+	border: none;
+	border-radius: 5px;
+	padding: 13px 41%;
+	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+	font-size: 13px;
+	margin-top: 22px;
+	font-family: 'SBAggroM';
+}
