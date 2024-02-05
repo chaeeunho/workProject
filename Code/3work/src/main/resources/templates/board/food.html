@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board/food.css}">
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="musicboard">
+		<div id="container">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="msection">
+      	<div id="mcontainer">
+      		<div class="mbox">
+      			<div class="t_box">
+      				<p class = "tag">건강 관련 식품</p>
+            </div>   
+          	
+          	<div class="card" th:each="food : ${foodList}">
+          		<img th:src="${food.ffilepath}" alt="FoodImage">
+          		<div class="card-content">
+          			<h3 class ="foodh3" th:text="${food.fname}"></h3>
+          			<p class = "foodp" th:text="${food.fcontent}"><br></p>
+          			<p class = "foodprice" th:text="${food.fprice}">원</p>
+          			<p class = foodprice2>
+          				<i class="fa-solid fa-cart-plus" style = "color:green; font-size : 30px; padding-right : 10px;"></i>
+          				<i class="fa-solid fa-link" style = "color:green; font-size : 30px"></i>
+          			</p>
+          		</div>
+          	</div>
+            
+            <!-- 페이지 영역 -->
+            <div class="pagination">
+    
+         
+            </div>
+            
+      		</div>
+      	</div>
+      </section>
+      
+      
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#musicboard{
+  position: relative;
+  width: 100%;
+  height: 2550px;
+}
+
+#mcontainer{
+   width: 80%;
+   height: 1150px;
+   position: relative;
+   margin: 0 auto;
+   padding: 70px 30px; /* 좌우 여백 조정 */
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.t_box{
+    width: 100%;
+    height: 70px;
+    padding-bottom: 40px;
+}
+.tag{
+	font-size: 30px;
+	padding-bottom: 20px; 
+	text-align: left; 
+	font-weight: 700;
+	border-bottom: 2px solid black;
+	font-family: 'SBAggroM';
+}
+
+/* 카드 스타일링 */
+.card {
+    width: calc(33.33% - 20px); /* 3개의 카드가 한 행에 나타나도록 설정 (20px는 마진 고려) */
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card-content {
+    position: relative;
+    padding: 15px;
+    height: 180px;
+    }
+    
+.foodh3{
+   font-size: 25px;
+}
+
+.foodp{
+   font-size: 17px;
+   color: gray;
+}
+
+.foodprice{
+position: absolute; /* 절대 위치 지정 */
+bottom: 0; /* 아래에 위치하도록 설정 */
+left: 0;
+font-size: 35px;
+padding: 10px;
+color: green;
+}
+
+.foodprice2{
+position: absolute; /* 절대 위치 지정 */
+bottom: 0; /* 아래에 위치하도록 설정 */
+right: 0;
+padding: 10px;
+}
+
+.pagination{
+ text-align: center;
+}

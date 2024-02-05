@@ -1,16 +1,13 @@
 @charset "UTF-8";
 
+#container {
+	height: 90%;
+}
+
 #login{
-  background-color: #ffffff;
-  width: 1318.59px;
-  height: 90%;
-  border-radius: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  position: relative;
+  width: 100%;
+  height: 900px;
 }
 
 #login_body{
@@ -21,7 +18,7 @@
 
 #login_title{
 	position: absolute;
-	top: 50%;
+	top: 46%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -29,6 +26,7 @@
 #login_title p:nth-of-type(1) {
 	font-size: 30px;
 	font-family: 'SBAggroM';
+	margin-top: 0;
 	margin-bottom: 30px;
 }
 

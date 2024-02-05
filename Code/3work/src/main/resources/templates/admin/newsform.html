@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW | ADMIN</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/admin/newsform.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="newsform">
+		<div id="container">
+			<!-- header.html 연결 -->
+   		<div th:replace="~{header}"></div>
+   		
+   		<section id="newsform_body">
+   			<div id="newsform_title">
+      		<p>건강뉴스 정보 입력</p>
+      	</div>
+   		
+   			<!-- 건강뉴스 정보 입력 폼 -->
+   			<form th:action="@{/admin/newsform}" method="post" enctype="multipart/form-data">
+   				<table id="newsform_tbl">
+   					<tr class="newsform_input">
+   						<td class="newsform_input_content">
+   							<label for="ntitle">기사제목</label>
+   							<input type="text" name="ntitle" id="ntitle">
+   						</td>
+   					</tr> 
+   					
+   					<tr class="newsform_input">
+   						<td class="newsform_input_content">
+   							<label for="ncontent">기사내용</label>
+   							<textarea rows="20" cols="35" name="ncontent"></textarea>
+   						</td>
+   					</tr> 
+   					
+   					<tr class="newsform_input">
+   						<td class="newsform_input_content">
+   							<label for="ndate">작성일 ('yyyy-mm-dd' 형식)</label>
+   							<input type="text" name="ndate" id="ndate">
+   						</td>
+   					</tr> 
+   					
+   					<tr class="update_file">
+   						<td class="update_file_content">
+   							<label for="nfilename" class="file_title">기사사진</label>
+   							<div class="filebox">
+							    <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
+							    <label for="file" class="file_btn">파일 찾기</label> 
+							    <input type="file" id="file" name="nimage">
+								</div>
+   						</td>
+   					</tr>
+   					
+   					<tr>
+	      			<td>
+	      				<button type="submit" id="save_btn">등록하기</button>
+	      			</td>
+	      		</tr>
+   				</table>
+   			</form>
+   		</section>
+   		
+			<!-- footer.html 연결 -->
+   		<div th:replace="~{footer}"></div>
+		</div>
+	</div>
+	
+	<!-- 파일명 들어가기 -->
+  <script>
+  	$("#file").on('change',function(){
+		  var fileName = $("#file").val();
+		  $(".upload-name").val(fileName);
+		});
+	</script>
+</body>
+</html>

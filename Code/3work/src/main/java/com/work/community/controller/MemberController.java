@@ -30,4 +30,15 @@ public class MemberController {
 	public String pw_search() {
 		return "member/pw_search";
 	}
+	
+	@GetMapping("/member/pw_result")
+	public String pw_result() {
+		return "member/pw_result";
+	}
+	
+	@GetMapping("/member/update")
+	public String update() {
+		return "member/update";
+	}
+	
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/submenu/submenu.css}">
+</head>
+<body>
+	<div id="contact">
+		<div id="container">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="service">
+      	<div class="service-title">
+      		<div class="board">
+               <p>고객센터</p>
+          </div>
+       	</div>
+       	<div class="service-member">
+	        <p>Tel. 070-1234-5678
+	        	<br>
+	          <br>
+	          월요일-금요일
+	         	<br>
+	          09:30-18:30 (break 12:30-13:30)
+	          <br>
+	          <br>
+	          서울 영등포구 선유동2로 57 이레빌딩 19F
+	        </p>
+	        <hr>
+	        <p>Tel. 070-1234-5678
+		       	<br>
+		        <br>
+		        Monday - Friday
+		        <br>
+		        09:30-18:30 (break 12:30-13:30)
+		        <br>
+		        <br>
+		        19F Ire Building, 57 Seonyudong 2-ro,
+		        <br>
+		        Yeongdeungpo-gu, Seoul, Republic of Korea
+	        </p>
+      	</div>
+   		</section>
+      
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW | ADMIN</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/admin/musicform.css}">
+</head>
+<body>
+	<div id="musicform">
+		<div id="container">
+			<!-- header.html 연결 -->
+   		<div th:replace="~{header}"></div>
+   		
+   		<section id="musicform_body">
+   			<div id="musicform_title">
+      		<p>노래 정보 입력</p>
+      	</div>
+   		
+   			<!-- 노래 정보 입력 폼 -->
+   			<form th:action="@{/admin/musicform}" method="post">
+   				<table id="musicform_tbl">
+   					<tr class="musicform_input">
+   						<td class="musicform_input_content">
+   							<label for="mname">곡명</label>
+   							<input type="text" name="mname" id="mname">
+   						</td>
+   					</tr> 
+   					
+   					<tr class="musicform_input">
+   						<td class="musicform_input_content">
+   							<label for="malbum">앨범명</label>
+   							<input type="text" name="malbum" id="malbum">
+   						</td>
+   					</tr> 
+   					
+   					<tr class="musicform_input">
+   						<td class="musicform_input_content">
+   							<label for="msinger">가수명</label>
+   							<input type="text" name="msinger" id="msinger">
+   						</td>
+   					</tr> 
+   					
+   					<tr class="musicform_input">
+   						<td class="musicform_input_content">
+   							<label for="mcategory">카테고리</label>
+   							<select name="mcategory">
+   								<option value="select">---</option>
+   								<option value="요가">요가</option>
+   								<option value="헬스">헬스</option>
+   								<option value="수영">수영</option>
+   							</select>
+   						</td>
+   					</tr> 
+   					
+   					<tr>
+	      			<td>
+	      				<button type="submit" id="save_btn">등록하기</button>
+	      			</td>
+	      		</tr>
+   				</table>
+   			</form>
+   		</section>
+   		
+			<!-- footer.html 연결 -->
+   		<div th:replace="~{footer}"></div>
+		</div>
+	</div>
+</body>
+</html>
