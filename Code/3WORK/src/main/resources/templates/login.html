@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/login.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="login">
+		<div id="container">
+    	<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section id="login_body">
+      	<div id="login_title">
+	      	<p>로그인</p>
+	      	<input type="text" id="search_input" placeholder="이메일 주소">
+	      	<input type="text" id="search_input" placeholder="비밀번호">
+	      	<button type="button" id="login_btn">로그인</span></button>
+	      	<p>회원가입을 하지 않으셨나요 ?
+	      		<a th:href="'#'">회원가입</a>
+	      	</p>
+	      	<p>아이디나 비밀번호가 기억나지 않으신가요 ?
+	      		<a th:href="@{/member/id_search}">아이디 찾기</a>&nbsp;/&nbsp;
+	      		<a th:href="@{/member/pw_search}">비밀번호 찾기</a>
+	      	</p>
+      	</div>
+      </section>
+      
+    	<!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+  	</div>
+  </div>
+</body>
+</html>

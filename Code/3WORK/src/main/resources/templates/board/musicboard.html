@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board/musicboard.css}">
+</head>
+<body>
+	<div id="musicboard">
+		<div id="container">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="msection">
+      	<div id="mcontainer">
+      		<div class="mbox">
+      			<div class="t_box">
+      				<p class = "tag">
+      					운동할 때 들으면 좋은 노래 &nbsp;
+      					<span>&nbsp; 
+      					<button type="button" id="buttonA" onclick="showContent('A')">요가</button>&nbsp;/
+      					<button type="button" id="buttonB" onclick="showContent('B')">헬스</button>&nbsp;/
+      					<button type="button" id="buttonC" onclick="showContent('C')">수영</button>
+      					</span>
+      				</p>
+            </div>   
+            
+            <table id="mtable">
+            	<thead>
+            		<tr>
+            			<th class="td_box">번호</th>
+            			<th class="td_box">곡명</th>
+            			<th class="td_box">앨범명</th>
+            			<th class="td_box">가수명</th>
+            		</tr>
+            	</thead>
+            	
+							<tbody id="contentA">
+								<tr th:each="music : ${musicList}" th:if="${music.mcategory eq '요가'}">
+									<td th:text="${music.mno}"></td>
+	            		<td th:text="${music.mname}"></td>
+	            		<td th:text="${music.malbum}"></td>
+	            		<td th:text="${music.msinger}"></td>
+								</tr>
+							</tbody>
+							
+							<tbody id="contentB">
+								<tr th:each="music : ${musicList}" th:if="${music.mcategory eq '헬스'}">
+									<td th:text="${music.mno}"></td>
+	            		<td th:text="${music.mname}"></td>
+	            		<td th:text="${music.malbum}"></td>
+	            		<td th:text="${music.msinger}"></td>
+								</tr>
+							</tbody>
+							
+							<tbody id="contentC">
+								<tr th:each="music : ${musicList}" th:if="${music.mcategory eq '수영'}">
+									<td th:text="${music.mno}"></td>
+	            		<td th:text="${music.mname}"></td>
+	            		<td th:text="${music.malbum}"></td>
+	            		<td th:text="${music.msinger}"></td>
+								</tr>
+							</tbody>
+            </table> 
+            
+            <!-- 페이지 영역 -->
+            <div class="pagination">
+    
+         
+            </div>
+            
+      		</div>
+      	</div>
+      </section>
+      
+      
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+	
+	<script>
+		$(document).ready(function() {
+			// 페이지 진입 시 기본 값
+		  showContent('A');
+		});
+	
+		function showContent(content) {
+		  var contentA = document.getElementById("contentA");
+		  var contentB = document.getElementById("contentB");
+		  var contentC = document.getElementById("contentC");
+	
+			// 클래스 추가 및 제거를 통한 스타일 조작
+      contentA.classList.add("hidden");
+      contentB.classList.add("hidden");
+      contentC.classList.add("hidden");
+
+      // 선택한 내용 보이기
+      if (content === "A") {
+          contentA.classList.remove("hidden");
+      } else if (content === "B") {
+          contentB.classList.remove("hidden");
+      } else if (content === "C") {
+          contentC.classList.remove("hidden");
+      }
+		}
+	</script>
+</body>
+</html>
