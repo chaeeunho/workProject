@@ -1,6 +1,8 @@
 package com.work.community.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class ItemService {
 	public void save(@Valid ItemDTO itemDTO, MultipartFile iimage) throws Exception {
 		//1. 파일을 서버에 저장하고, 
 		if(!iimage.isEmpty()) { //전달된 파일이 있으면
-		  String filepath = "/Users/rim-yeeun/Finalteam1/Code/3WORK/src/main/resources/static/upload";
+		  String filepath = "/Users/rim-yeeun/Finalteam1/Upload";
 		  
 		  UUID uuid = UUID.randomUUID();  // 무작위 아이디 생성(중복파일의 이름을 생성해줌)
 		  
@@ -34,12 +36,22 @@ public class ItemService {
 		
 		  //2. 파일 이름은 db에 저장
 		  itemDTO.setIfilename(filename);
-		  itemDTO.setIfilepath("/upload/" + filename); // 파일 경로 설정함
+		  itemDTO.setIfilepath(filepath + "/" + filename); // 파일 경로 설정함
 		}
 		// dto -> entity로 변환
 		Item item = Item.toSaveEntity(itemDTO);
 		// entity를 db에 저장
 		itemRepository.save(item);
+	}
+
+	public List<ItemDTO> findAll() {
+		List<Item> itemList = itemRepository.findAll();
+		List<ItemDTO> itemDTOList = new ArrayList<>();
+		for(Item item : itemList) {
+			ItemDTO itemDTO = ItemDTO.toSaveDTO(item);
+			itemDTOList.add(itemDTO);
+		}
+		return itemDTOList;
 	}
 	
 

@@ -12,14 +12,17 @@ public class ItemDTO {
 	
 	private Integer ino;
 	
-	@NotEmpty(message = "곡명은 필수 입력 사항입니다.")
+	@NotEmpty(message = "아이템명은 필수 입력 사항입니다.")
 	private String iname;
 	
-	@NotEmpty(message = "곡명은 필수 입력 사항입니다.")
+	@NotEmpty(message = "아이템 설명은 필수 입력 사항입니다.")
 	private String icontent;
 	
-	@NotEmpty(message = "곡명은 필수 입력 사항입니다.")
+	@NotEmpty(message = "가격은 필수 입력 사항입니다.")
 	private String iprice;
+	
+	@NotEmpty(message = "링크는 필수 입력 사항입니다.")
+	private String ilink; 
 	
 	private String ifilename; 
 	
@@ -31,6 +34,8 @@ public class ItemDTO {
 								 .ino(item.getIno())
 								 .iname(item.getIname())
 								 .icontent(item.getIcontent())
+								 .iprice(item.getIprice())
+								 .ilink(item.getIlink())
 								 .ifilename(item.getIfilename())
 								 .ifilepath(item.getIfilepath())
 								 .build();

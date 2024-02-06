@@ -50,8 +50,8 @@
   						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</span></button>
   					</a>
 	  				<div id="login_menu">
-	  					<a th:href="@{/member/id_search}">아이디 찾기</a>
-	  					<a th:href="@{/member/pw_search}">비밀번호 찾기</a>
+	  					<a th:href="@{/user/id_search}">아이디 찾기</a>
+	  					<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
 	  					<a th:href="'#'">회원가입</a>
 	  				</div>
   				</div>
@@ -80,7 +80,7 @@
   					&nbsp;/&nbsp;
   					<a th:href="@{board/food}">건강 식품</a>
   					&nbsp;/&nbsp;
-  					<a th:href="'#'">운동기구&운동복</a>
+  					<a th:href="'@{board/item}">운동기구&운동복</a>
   				</div>
   				<div id="work_recommend_link">
 	  				<!-- 노래 추천 링크 이동 이미지 -->
@@ -107,7 +107,7 @@
 	  				</div>
 	  				<div id="work_item">
 	  					<!-- 운동기구&운동복 링크 이동 이미지 -->
-	  					<a th:href="'#'">
+	  					<a th:href="@{board/item}">
 		  					<img th:src="@{/images/main_body/3work_recommend_3.png}" alt="3work_recommend_3">
 	  					</a>
 	  					<div id="work_item_content">
@@ -125,16 +125,16 @@
   				</div>
   				<!-- 추천 카데고리의 메뉴  -->
   				<div class="work_menu">
-  					<a th:href="'#'">건강 뉴스</a>
+  					<a th:href="@{board/news}">건강 뉴스</a>
   					&nbsp;/&nbsp;
-  					<a th:href="'#'">지도</a>
+  					<a th:href="'@{board/map}">지도</a>
   					&nbsp;/&nbsp;
-  					<a th:href="'#'">운동 정보</a>
+  					<a th:href="@{board/exercise}">운동 정보</a>
   				</div>
   				<div id="work_info_link">
 	  				<!-- 건강 뉴스 링크 이동 이미지 -->
 	  				<div id="work_news">
-	  					<a th:href="'#'">
+	  					<a th:href="@{board/news}">
 			  				<img th:src="@{/images/main_body/3work_info_1.png}" alt="3work_info_1">
 	  					</a>
 	  					<div id="work_news_content">
@@ -145,7 +145,7 @@
 	  				</div>
 	  				<!-- 지도 링크 이동 이미지 -->
 	  				<div id="work_map">
-	  					<a th:href="'#'">
+	  					<a th:href="@{board/map}">
 		  					<img th:src="@{/images/main_body/3work_info_2.png}" alt="3work_info_2">
 	  					</a>
 	  					<div id="work_map_content">
@@ -155,7 +155,7 @@
 	  				</div>
 	  				<!-- 운동 꿀팁 링크 이동 이미지 -->
 	  				<div id="work_method">
-	  					<a th:href="'#'">
+	  					<a th:href="@{board/exercise}">
 		  					<img th:src="@{/images/main_body/3work_info_3.png}" alt="3work_info_3">
 	  					</a>
 	  					<div id="work_method_content">

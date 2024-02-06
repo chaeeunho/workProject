@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* food.html & item.html의 CSS */
+
 #musicboard{
   position: relative;
   width: 100%;
@@ -81,6 +83,7 @@
    word-break: break-all;
    width: 330px;
    height: 20px;
+   text-align: left;
 }
 
 .foodp{

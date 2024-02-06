@@ -4,41 +4,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MemberController {
+public class UserController {
 	
 	@GetMapping("/login")
 	public String login() {
 		return "login";
 	}
 
-	@GetMapping("/member/join_wel")
+	@GetMapping("/user/join_wel")
 	public String join_wel() {
-		return "member/join_wel";
+		return "user/join_wel";
 	}
 	
-	@GetMapping("/member/id_search")
+	@GetMapping("/user/id_search")
 	public String id_search() {
-		return "member/id_search";
+		return "user/id_search";
 	}
 	
-	@GetMapping("/member/id_result")
+	@GetMapping("/user/id_result")
 	public String id_result() {
-		return "member/id_result";
+		return "user/id_result";
 	}
 	
-	@GetMapping("/member/pw_search")
+	@GetMapping("/user/pw_search")
 	public String pw_search() {
-		return "member/pw_search";
+		return "user/pw_search";
 	}
 	
-	@GetMapping("/member/pw_result")
+	@GetMapping("/user/pw_result")
 	public String pw_result() {
-		return "member/pw_result";
+		return "user/pw_result";
 	}
 	
-	@GetMapping("/member/update")
+	@GetMapping("/user/update")
 	public String update() {
-		return "member/update";
+		return "user/update";
 	}
 	
 }
