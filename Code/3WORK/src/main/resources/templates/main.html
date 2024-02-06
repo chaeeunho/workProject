@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
@@ -44,18 +45,37 @@
   				</div>
   			</div>
   			
-  			<div id="login_box">
-  				<div id="login_box_middle">
-  					<a th:href="@{/login}">
-  						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</span></button>
-  					</a>
-	  				<div id="login_menu">
-	  					<a th:href="@{/user/id_search}">아이디 찾기</a>
-	  					<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-	  					<a th:href="'#'">회원가입</a>
-	  				</div>
-  				</div>
-  			</div>
+  			<!-- 로그인 전 -->
+        <th:block sec:authorize="isAnonymous()">
+           <div id="login_box">
+              <div id="login_box_middle">
+                 <a th:href="@{/login}">
+                    <button type="button" id="login_btn"><span>3WORK&nbsp;:&nbsp;로그인</span></button>
+                 </a>
+                 <div id="login_menu">
+                    <a th:href="@{/user/id_search}">아이디 찾기</a>
+                    <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
+                    <a th:href="@{/user/join}">회원가입</a>
+                 </div>
+              </div>
+           </div>
+        </th:block>
+        <!-- 로그인 후 -->
+        <th:block sec:authorize="isAuthenticated()">
+           <div id="login_box">
+              <div id="login_box_middle">
+                 <a th:href="@{/user/userpage}">
+                    <button type="button" id="login_btn" onclick="openPopup()">
+                    My&nbsp;Home&nbsp;</button>
+                 </a>
+                 <div id="login_menu">
+                    <a th:href="@{/user/id_search}">아이디 찾기</a>
+                    <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
+                    <a th:href="'#'">로그아웃</a>
+                 </div>
+              </div>
+           </div>
+        </th:block>
   			
   			<div id="weather_box">
   				<div id="weather_title">
@@ -76,16 +96,16 @@
   				</div>
   				<!-- 추천 카데고리의 메뉴  -->
   				<div class="work_menu">
-  					<a th:href="@{board/musicboard}">노래 추천</a>
+  					<a th:href="@{/board/musicboard}">노래 추천</a>
   					&nbsp;/&nbsp;
-  					<a th:href="@{board/food}">건강 식품</a>
+  					<a th:href="@{/board/food}">건강 식품</a>
   					&nbsp;/&nbsp;
-  					<a th:href="'@{board/item}">운동기구&운동복</a>
+  					<a th:href="@{/board/item}">운동기구&운동복</a>
   				</div>
   				<div id="work_recommend_link">
 	  				<!-- 노래 추천 링크 이동 이미지 -->
 	  				<div id="work_music">
-	  					<a th:href="@{board/musicboard}">
+	  					<a th:href="@{/board/musicboard}">
 			  				<img th:src="@{/images/main_body/3work_recommend_1.png}" alt="3work_recommend_1">
 	  					</a>
 	  					<div id="work_music_content">
@@ -96,7 +116,7 @@
   					</div>
   					<!-- 식품 추천 링크 이동 이미지 -->
   					<div id="work_food">
-	  					<a th:href="@{board/food}">
+	  					<a th:href="@{/board/food}">
 		  					<img th:src="@{/images/main_body/3work_recommend_2.png}" alt="3work_recommend_2">
 		  					<img th:src="@{/images/main_body/3work_recommend_2_1.png}" alt="3work_recommend_2_1">
 	  					</a>
@@ -107,7 +127,7 @@
 	  				</div>
 	  				<div id="work_item">
 	  					<!-- 운동기구&운동복 링크 이동 이미지 -->
-	  					<a th:href="@{board/item}">
+	  					<a th:href="@{/board/item}">
 		  					<img th:src="@{/images/main_body/3work_recommend_3.png}" alt="3work_recommend_3">
 	  					</a>
 	  					<div id="work_item_content">
@@ -125,16 +145,16 @@
   				</div>
   				<!-- 추천 카데고리의 메뉴  -->
   				<div class="work_menu">
-  					<a th:href="@{board/news}">건강 뉴스</a>
+  					<a th:href="@{/board/news}">건강 뉴스</a>
   					&nbsp;/&nbsp;
-  					<a th:href="'@{board/map}">지도</a>
+  					<a th:href="'#'">지도</a>
   					&nbsp;/&nbsp;
-  					<a th:href="@{board/exercise}">운동 정보</a>
+  					<a th:href="'#'">운동 정보</a>
   				</div>
   				<div id="work_info_link">
 	  				<!-- 건강 뉴스 링크 이동 이미지 -->
 	  				<div id="work_news">
-	  					<a th:href="@{board/news}">
+	  					<a th:href="@{/board/news}">
 			  				<img th:src="@{/images/main_body/3work_info_1.png}" alt="3work_info_1">
 	  					</a>
 	  					<div id="work_news_content">
@@ -145,7 +165,7 @@
 	  				</div>
 	  				<!-- 지도 링크 이동 이미지 -->
 	  				<div id="work_map">
-	  					<a th:href="@{board/map}">
+	  					<a th:href="'#'">
 		  					<img th:src="@{/images/main_body/3work_info_2.png}" alt="3work_info_2">
 	  					</a>
 	  					<div id="work_map_content">
@@ -155,7 +175,7 @@
 	  				</div>
 	  				<!-- 운동 꿀팁 링크 이동 이미지 -->
 	  				<div id="work_method">
-	  					<a th:href="@{board/exercise}">
+	  					<a th:href="'#'">
 		  					<img th:src="@{/images/main_body/3work_info_3.png}" alt="3work_info_3">
 	  					</a>
 	  					<div id="work_method_content">
@@ -174,5 +194,22 @@
   
   <!-- 스크립트 -->
   <script src="/js/main.js"></script>
+  <!-- 팝업창 -->
+  <script>
+	  let popupbtn = document.querySelector('button');
+	
+	  popupbtn.onclick = function() {
+	    th:if = "${#authorization.expression('isAuthenticated()')}"
+	    {
+	      let popOption = "width=1400, height=850";
+	      let openUrl = '/user/userpage';
+	      window.open(openUrl, '미니홈페이지', popOption);
+	    }
+	    th:unless="${#authorization.expression('isAuthenticated()')}"
+	    {
+	      window.location.href = '/login';
+	    }
+	  };
+	</script>
 </body>
 </html>

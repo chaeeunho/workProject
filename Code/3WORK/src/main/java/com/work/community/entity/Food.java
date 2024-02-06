@@ -32,7 +32,7 @@ public class Food {
 	private String fcontent;                                // 식품 설명
 	
 	@Column(nullable = false)                               // not null
-	private String fprice;                                    // 식품 가격
+	private String fprice;                                  // 식품 가격
 	 
 	@Column(nullable = false)                               // not null
 	private String flink;                                   // 식품 판매 링크

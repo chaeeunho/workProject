@@ -22,7 +22,14 @@
           	
           	<div class="parent">
 	          	<div class="card" th:each="food : ${foodList}">
-	          		<img th:src="@{/upload/food/} + ${food.ffilename}" alt="FoodImage">
+	          		<div th:if="${food.ffilename != null}">
+	          			<!-- 이미지 경로를 못찾았을 때, alt 대신 대체 이미지 출력 -->
+									<img th:src="@{${food.ffilepath}}" onerror="this.src='/images/default/default_image.png';">
+						    </div>
+						    <div th:if="${food.ffilename == null}">
+					        <!-- 기본 이미지를 표시할 부분 -->
+					        <img th:src="@{/images/default/default_image.png}" alt="DefaultImage">
+						    </div>
 	          		<div class="card-content">
 	          			<h3 class="foodh3" th:text="${food.fname}"></h3>
 	          			<p class="foodp" th:text="${food.fcontent}"><br></p>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<title>3WORK</title>
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/UserpageCss.css">
+<script src="https://kit.fontawesome.com/7c6041109a.js" crossorigin="anonymous"></script>
+<link href='/css/cal.css' rel='stylesheet' />
+<script src='/js/cal.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/common@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@5.11.2/main.min.js"></script>
+<script type='text/javascript'>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    initialDate: '2020-09-12',
+    navLinks: true, // can click day/week names to navigate views
+    selectable: true,
+    selectMirror: true,
+    select: function(arg) {
+      var title = prompt('Event Title:');
+      if (title) {
+        calendar.addEvent({
+          title: title,
+          start: arg.start,
+          end: arg.end,
+          allDay: arg.allDay
+        })
+      }
+      calendar.unselect()
+    },
+    eventClick: function(arg) {
+      if (confirm('계획을 삭제하시겠습니까?')) {
+        arg.event.remove()
+      }
+    },
+    editable: true,
+    dayMaxEvents: true, // allow "more" link when too many events
+    events: [
+      {
+        title: 'All Day Event',
+        start: '2020-09-01'
+      },
+      {
+        title: 'Long Event',
+        start: '2020-09-07',
+        end: '2020-09-10'
+      },
+      {
+        groupId: 999,
+        title: 'Repeating Event',
+        start: '2020-09-09T16:00:00'
+      },
+      {
+        groupId: 999,
+        title: 'Repeating Event',
+        start: '2020-09-16T16:00:00'
+      },
+      {
+        title: 'Conference',
+        start: '2020-09-11',
+        end: '2020-09-13'
+      },
+      {
+        title: 'Meeting',
+        start: '2020-09-12T10:30:00',
+        end: '2020-09-12T12:30:00'
+      },
+      {
+        title: 'Lunch',
+        start: '2020-09-12T12:00:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2020-09-12T14:30:00'
+      },
+      {
+        title: 'Happy Hour',
+        start: '2020-09-12T17:30:00'
+      },
+      {
+        title: 'Dinner',
+        start: '2020-09-12T20:00:00'
+      },
+      {
+        title: 'Birthday Party',
+        start: '2020-09-13T07:00:00'
+      },
+      {
+        title: 'Click for Google',
+        url: 'http://google.com/',
+        start: '2020-09-28'
+      }
+    ],
+ // 추가된 부분: Google Calendar 이벤트 소스
+    eventSources: [
+        {
+            googleCalendarApiKey: 'AIzaSyCndw5HkzItEmGRP2mPMPOPKPsRKeIZCDc',
+            googleCalendarId: '1515eun30@gmail.com',
+            className: '예은yeeun',
+            color: '#4885ed', // 이벤트 색상 (옵션)
+            textColor: '#ffffff' // 텍스트 색상 (옵션)
+        }
+    ]
+  });
+  calendar.render();
+});
+</script>
+</head>
+<body>
+<div id="userMain">
+    <div id="container">
+<div th:replace="~{header}"></div>
+        <!-- BGM bar 영역 -->
+        <div id="bgm-bar">
+            <span>Love Wins All - 아이유(IU)</span>
+            <div id="bgm-buttons">
+                <button onclick="playPause()">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <button onclick="stop()">
+                    <i class="fa-solid fa-pause"></i>
+                </button>
+                <button onclick="next()">
+                    <i class="fa-solid fa-forward"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 사이드 메뉴 영역 -->
+        <div id="diary">
+         <div id="diary_btn">
+            <a th:href="'#'">나의 건강일지</a>
+         </div>
+      </div>
+        <!-- 프로필, 캘린더 영역 -->
+        <section id="profile">
+            <p>TODAY <span id="today-visits">100</span> | TOTAL 4,300</p>
+            <div id="profile-pic">
+                <img th:src="@{/images/Profile.png}" alt="프로필">
+            </div>
+            <p>USERNAME's HOME
+                <a th:href="@{/user/userupdate}" id="setting">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+            </p>
+            <p>한줄 소개명</p>
+            <p>나 운동 중독남...<br> 나랑 같이 운동하실분! :)</p>
+            <p>좋아하는 것</p>
+            <p>#무게 증량에서 오는 희열감<br>
+                #달리기&nbsp;&nbsp;#탄단지가 가득한 완전식품</p>
+            <div id='calendar'></div>
+        </section>
+
+        <section id="comments">
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                방명록<img th:src="@{/images/pen.png}" alt="방명록">
+            </h2>
+            <!-- 방명록 작성 영역 -->
+            <form id="comment-form">
+                <div id="comment-container">
+                    <input type="text" id="comment" name="comment"
+                           placeholder="자유롭게 방명록을 작성해주세요.">
+                    <button type="submit" id="btns">작성</button>
+                </div>
+            </form>
+            
+            <div id="comment-list">  
+               <ul>
+               <li><span id="replyid">닭가슴살킬러</span> 
+                  <span id="reply_time">2024.01.29 22:28</span> [1]</li> 
+                <li>2월 19일 오후 2시에 같이 운동해요!<p id="replywrite">댓글쓰기</p></li>
+                <li><i class="fa-solid fa-caret-right"></i>&nbsp;
+                   <span id="replyid">주인장</span>: 어키!! 시간 맞춰 갈게요!
+                   <div id="reply_update">
+                      <a th:href="'#'">수정</a> |
+                      <a th:href="'#'">삭제</a>
+                   </div>
+                </li>
+                </ul>
+             </div>
+        </section>
+    </div>
+  </div>
+</body>
+</html>

@@ -24,7 +24,7 @@ public class FoodService {
 	public void save(@Valid FoodDTO foodDTO, MultipartFile fimage) throws Exception {
 		// 1. 파일을 서버에 저장하고, 
 		if(!fimage.isEmpty()) { // 전달된 파일이 있으면
-		  String filepath = "/Users/rim-yeeun/Finalteam1/Code/3WORK/src/main/resources/static/upload/food";
+		  String filepath = System.getProperty("user.dir") + "/src/main/resources/static/upload/food/";
 		  
 		  UUID uuid = UUID.randomUUID();  // 무작위 아이디 생성(중복파일의 이름을 생성해줌)
 		  
@@ -34,10 +34,9 @@ public class FoodService {
 		  File savedFile = new File(filepath, filename); // upload 폴더에 저장
 		  fimage.transferTo(savedFile); 
 		
-		  
 		  // 2. 파일 이름은 db에 저장
 		  foodDTO.setFfilename(filename);
-		  foodDTO.setFfilepath(filepath + "/" + filename); // 파일 경로 설정함
+		  foodDTO.setFfilepath("/upload/food/" + filename); // 파일 경로 설정함
 		}
 		// dto -> entity로 변환
 		Food food = Food.toSaveEntity(foodDTO);

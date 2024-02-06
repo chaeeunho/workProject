@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta name="_csrf" th:content="${_csrf.token}">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/join.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+//아이디 중복 검사
+const checkUserIdOnClick = () => {
+    let inputId = document.getElementById("uid").value;
+    let checkResult = document.getElementById("result");
+    
+    let header = $("meta[name='_csrf_header']").attr('content');
+    let token = $("meta[name='_csrf']").attr('content');
+
+if(uid != "") {
+    $.ajax({
+        type: "POST",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader(header, token);
+        },
+        url: "/user/check-email",
+        data: {uid: inputId},
+        success: function(res) {
+            console.log("성공: ", res);
+        
+            if (res == "OK") {
+                checkResult.innerHTML = "사용 가능한 이메일입니다."
+                checkResult.style.color = "blue"
+                checkResult.style.fontFamily = "SBAggroM";
+            } else { // res == "NO"
+                checkResult.innerHTML = "이미 등록된 이메일입니다."
+                checkResult.style.color = "red"
+                checkResult.style.fontFamily = "SBAggroM";
+            }
+            checkResult.style.fontSize = "0.7em";
+        },
+        error: function(err) {
+            console.log("실패: ", err);
+        }
+    });
+   }else{
+      checkResult.innerHTML = "";
+   }
+};
+//유효성 검사
+//이메일 유효성 검사
+function validateUid() {
+    let uidInput = document.getElementById("uid");
+    let uidError = uidInput.nextElementSibling; //다음 형제 요소에 에러문구 출력
+
+    let uidRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!uidRegex.test(uidInput.value)) {
+        uidError.innerHTML = "이메일 형식이어야 합니다.";
+        uidError.style.color = "blue"
+        uidError.style.fontFamily = "SBAggroM";
+        uidError.style.fontSize = "0.9em";
+    } else {
+        uidError.innerHTML = "";
+    }
+};
+
+// 비밀번호 유효성 검사
+function validateUpassword() {
+console.log("validatePassword called");
+    let passwordInput = document.getElementById("upassword");
+    console.log(passwordInput);
+    let passwordError = passwordInput.nextElementSibling;
+
+    let passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*[0-9]).{8,20}$/;
+    if (!passwordRegex.test(passwordInput.value)) {
+        passwordError.innerHTML = "특수문자, 대소문자를 포함한 8~20자여야 합니다.";
+        passwordError.style.color = "blue"
+        passwordError.style.fontFamily = "SBAggroM";
+        passwordError.style.fontSize = "0.9em";
+    } else {
+        passwordError.innerHTML = "";
+    }
+ };
+// 이름 유효성 검사
+function validateUname() {
+console.log("validatePassword called");
+    let nameInput = document.getElementById("uname");
+    console.log(nameInput);
+    let nameError = nameInput.nextElementSibling;
+
+    let nameRegex = /^[가-힣]*$/;
+    if (!nameRegex.test(nameInput.value)) {
+        nameError.innerHTML = "한글만 입력 가능합니다.";
+        nameError.style.color = "blue"
+        nameError.style.fontFamily = "SBAggroM";
+        nameError.style.fontSize = "0.9em";
+    } else {
+        nameError.innerHTML = "";
+    }
+ };
+//닉네임 유효성 검사
+function validateUnickname() {
+    let nicknameInput = document.getElementById("unickname");
+    let nicknameError = nicknameInput.nextElementSibling;
+
+    let nicknameRegex = /^.{2,6}$/;
+    if (!nicknameRegex.test(nicknameInput.value)) {
+        nicknameError.innerHTML = "2자 이상 6자 이하이어야 합니다.";
+        nicknameError.style.color = "blue"
+        nicknameError.style.fontFamily = "SBAggroM";
+        nicknameError.style.fontSize = "0.9em";
+    } else {
+        nicknameError.innerHTML = "";
+    }
+ };
+//연락처 유효성 검사
+function validateUphone() {
+    let phoneInput = document.getElementById("uphone");
+    let phoneError = phoneInput.nextElementSibling;
+
+    let phoneRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+    if (!phoneRegex.test(phoneInput.value)) {
+        phoneError.innerHTML = "'-'포함 11자리로 입력해주세요.";
+        phoneError.style.color = "blue"
+        phoneError.style.fontFamily = "SBAggroM";
+        phoneError.style.fontSize = "0.9em";
+    } else {
+        phoneError.innerHTML = "";
+    }
+ };
+ //이용약관 동의 알람
+ function validateForm() {
+     var agreeCheckbox = document.getElementById("agree-terms");
+
+     if (!agreeCheckbox.checked) {
+         alert("이용약관과 개인정보 수집 및 활용에 동의해야 합니다.");
+         return false;
+     }
+     return true; //동의에 체크시 가입 가능
+ }
+</script>
+</head>
+<body>
+    <div class="container">
+        <h2>회원가입</h2>
+        <form th:action="@{/user/join}" method="post" 
+           class="join" th:object="${usersDTO}" onsubmit="return validateForm()">
+           
+          <!-- 아이디 필드 -->
+          <p>아이디</p>
+          <button type="button" onclick="checkUserIdOnClick()" id="id-btn">중복 확인</button>
+           <input type="text" th:field="*{uid}" id="uid" placeholder="example@domain.com" onblur="validateUid()">
+           <p th:if="${#fields.hasErrors('uid')}" th:errors="*{uid}" 
+                 th:class="${#fields.hasErrors('uid')} ? 'error-message' : ''"></p>
+           <p id="result"></p>
+           
+            <!-- 비밀번호 필드 -->
+            <input type="password" th:field="*{upassword}" id="upassword" name="upassword"
+               placeholder="비밀번호(영문/대소문자,숫자,특수문자 포함 8~20자)" onblur="validateUpassword()">
+              <p th:if="${#fields.hasErrors('upassword')}" th:errors="*{upassword}" 
+                    th:class="${#fields.hasErrors('upassword')} ? 'error-message' : ''"></p>
+              <p id="result"></p>
+            
+            <!-- 이름 필드 -->
+            <input type="text" th:field="*{uname}" id="uname" name="uname" 
+                  placeholder="이름(한글만 가능)" onblur="validateUname()">
+            <p th:if="${#fields.hasErrors('uname')}" 
+                  th:errors="*{uname}" th:class="${#fields.hasErrors('uname')} ? 'error-message' : ''"></p>
+            <p id="result"></p>
+            
+            <!-- 닉네임 필드 -->
+            <input type="text" th:field="*{unickname}" id="unickname" name="unickname" 
+                  placeholder="별명" onblur="validateUnickname()">
+            <p th:if="${#fields.hasErrors('unickname')}" 
+                  th:errors="*{unickname}" th:class="${#fields.hasErrors('unickname')} ? 'error-message' : ''"></p>
+            <p id="result"></p>
+            
+            <!-- 주소 필드 -->
+            <div class="address-container">
+                <input type="text" th:field="*{uaddress}" id="uaddress" name="uaddress"
+                      placeholder="주소를 검색해 주세요">
+            <p th:if="${#fields.hasErrors('uaddress')}" 
+                 th:errors="*{uaddress}" th:class="${#fields.hasErrors('uaddress')} ? 'error-message' : ''"></p>
+                <button type="button" onclick="sample3_execDaumPostcode()">우편번호 찾기</button>
+            </div>
+            
+            <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+                <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+            </div>
+            
+            <!-- 연락처 필드 -->
+            <input type="text" th:field="*{uphone}" id="uphone" name="uphone" 
+                  placeholder="연락처('-'포함 11자리입력)" onblur="validateUphone()">
+            <p th:if="${#fields.hasErrors('uphone')}" 
+                  th:errors="*{uphone}" th:class="${#fields.hasErrors('uphone')} ? 'error-message' : ''"></p>
+            <p id="result"></p>
+            
+            <!-- 생일 필드 -->
+               <input type="date" id="ubirth" name="ubirth">
+               <p th:if="${#fields.hasErrors('ubirth')}" 
+                  th:errors="*{ubirth}" th:class="${#fields.hasErrors('ubirth')} ? 'error-message' : ''"></p>
+            
+            <div class="terms">
+                <input type="checkbox" id="agree-terms" name="agree-terms">
+                <label for="agree-terms">이용약관과 개인정보 수집 및 활용에 동의합니다.</label>
+            </div>
+            <input type="submit" value="가입" class="submit-button">
+        </form>
+    </div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+
+// 우편번호 찾기 화면을 넣을 element
+var element_wrap = document.getElementById('wrap');
+
+function foldDaumPostcode() {
+    // iframe을 넣은 element를 안보이게 한다.
+    element_wrap.style.display = 'none';
+}
+
+function sample3_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분.
+
+            // 주소 변수와 참고항목 변수
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 도로명 주소를 선택했고, 참고항목을 선택했을 경우
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            var fullAddress = '[' + data.zonecode + '] ' + addr;
+            if(extraAddr !== '') fullAddress += extraAddr;
+            
+            document.getElementById('uaddress').value = fullAddress; // 결과값을 'uaddress' 입력 필드에 설정
+            
+            // iframe을 넣은 element를 안보이게 한다.
+            element_wrap.style.display = 'none';
+            
+            // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
+            document.body.scrollTop = document.documentElement.scrollTop = currentScroll;
+        },
+        width : '100%',
+        height : '100%'
+    }).embed(element_wrap);
+
+    // iframe을 넣은 element를 보이게 한다.
+    element_wrap.style.display = 'block';
+}
+</script>
+</body>
+</html>

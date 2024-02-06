@@ -1,6 +1,8 @@
 package com.work.community.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ public class NewsService {
 
 	public void save(@Valid NewsDTO newsDTO, MultipartFile nimage) throws Exception {	
 		if(!nimage.isEmpty()) {
-			String filepath = "/Users/rim-yeeun/Finalteam1/Code/3WORK/src/main/resources/static/upload";
+			String filepath = System.getProperty("user.dir") + "/src/main/resources/static/upload/news/";
 			
 			UUID uuid = UUID.randomUUID();
 			
@@ -31,10 +33,20 @@ public class NewsService {
 			nimage.transferTo(savedFile);
 			
 			newsDTO.setNfilename(filename);
-			newsDTO.setNfilepath(filepath);
+			newsDTO.setNfilepath("/upload/news/" + filename);
 		}
 		News news = News.toSaveEntity(newsDTO);
 		newsRepository.save(news);
+	}
+
+	public List<NewsDTO> findAll() {
+		List<News> newsList = newsRepository.findAll();
+		List<NewsDTO> newsDTOList = new ArrayList<>();
+		for(News news : newsList) {
+			NewsDTO newsDTO = NewsDTO.toSaveDTO(news);
+			newsDTOList.add(newsDTO);
+		}
+		return newsDTOList;
 	}
 	
 }

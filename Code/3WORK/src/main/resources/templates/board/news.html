@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board/news.css}">
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="musicboard">
+		<div id="container">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="msection">
+      	<div id="mcontainer">
+      		<div class="mbox">
+      			<div class="t_box">
+      				<p class = "tag">건강 관련 뉴스 정보</p>
+            </div>   
+          	
+          	<div class="parent">
+	          	<div class="card" th:each="news : ${newsList}">
+	          		<ul>
+	          			<li>
+	          				<a th:href="'#">
+	          					<div class="newsbox">
+				                 <img th:src="@{${news.nfilepath}}" onerror="this.src='/images/default/default_image.png';" class="thumbnail-image">
+				                 <strong th:text="${news.ntitle}"></strong>
+				                 <br><br>
+		                     <span class="newscon" th:text="${news.ncontent}"></span>
+		                     <br>
+		                     <span class="newscreatetime" th:text="${news.ndate}"></span>
+	          					</div>
+	          				</a>
+	          			</li>
+	          		</ul>
+	          	</div>
+	          </div>
+            
+            <!-- 페이지 영역 -->
+            <div class="pagination">
+    
+         
+            </div>
+      		</div>
+      	</div>
+      </section>
+      
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+</body>
+</html>

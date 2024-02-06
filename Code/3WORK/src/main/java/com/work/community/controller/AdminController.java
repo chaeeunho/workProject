@@ -54,7 +54,6 @@ public class AdminController {
 		return "redirect:/admin/main";
 	}
 	
-	
 	// 건강 식품 - 페이지 이동
 	@GetMapping("/admin/foodform")
 	public String foodForm() {
@@ -67,7 +66,6 @@ public class AdminController {
 		foodService.save(foodDTO, fimage);
 		return "redirect:/admin/main";
 	}
-	
 	
 	// 아이템 - 페이지 이동
 	@GetMapping("/admin/itemform")
@@ -94,7 +92,6 @@ public class AdminController {
 		newsService.save(newsDTO, nimage);
 		return "redirect:/admin/main";
 	}
-	
 	
 	// 효과 - 페이지 이동
 	
