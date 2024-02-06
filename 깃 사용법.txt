@@ -1,0 +1,98 @@
+C드라이브나 원하는 폴더로 이동하기
+파일탐색기 주소 창에 cmd 입력 하기
+
+
+** 깃 처음 셋팅 + pull request 하는 방법 **
+
+1. git clone https://github.com/InkyDChoyee/final-project.git
+   => a. 깃 허브에 올려져 있는 파일 폴더 등 가져오기
+        b. C드라이브나 원하는 폴더에 final-project 폴더가 생성됨
+
+2. git checkout -b 브런치명
+   => a.자신이 맡은 기능 작업을 브런치 명으로 함
+   ex) git checkout -b feat_member
+
+3. cmd를 그대로 두고 final-project 폴더를 열어서,
+   text.txt 를 열고 내용을 아무렇게나 수정한 후에 다시 cmd로 돌아옴
+
+4. git add .
+
+5. git commit -m "코멘트"
+   ex) git commit -m "test: update txt"
+
+6. git push origin 브런치명
+   ex) git push origin feat_member
+
+7. 깃허브로 이동(cmd는 꺼도 됨)
+
+8. final-project 레퍼지터리로 이동
+
+9. 상단 메뉴 중에 Pull requests 로 이동
+
+10. 우측 New pull request 버튼 클릭
+
+11. Compare changes 아래쪽 부분의
+    왼쪽 base 클릭해서 dev로 바꿔줌 (ex. base: dev)
+    바로 옆 compare 클릭해서 생성한 브런치명으로 바꿔줌 (ex. compare: feat_member)
+    바꾸고 난 후 오른쪽 Create pull request 버튼 클릭
+
+12. Add a title에 제목 작성 (ex. 기능명)
+     Add a description 에 내용 작성 (ex. 회원 가입 기능 개발 완료했습니다)
+     작성 완료 후 Create pull request 버튼 클릭
+
+
+
+
+
+
+** 이후 작업 할 때 **
+
+* final-project 폴더에서 탐색기 주소창에 cmd 입력
+
+1. git checkout main
+
+2. git pull
+
+3. 프로그래밍 개발 작업
+
+4. 작업 완료 후 깃에 올리기
+
+5-1. 브런치 새로 생성 시 : git checkout -b 브런치명
+5-2. 브런치 기존 그대로 사용 : git checkout 기존브런치명
+
+6. git add .
+
+7. git commit -m "코멘트"
+
+8. git push origin 브런치명
+
+9. 깃허브로 이동(cmd는 꺼도 됨)
+
+10. final-project 레퍼지터리로 이동
+
+11. 상단 메뉴 중에 Pull requests 로 이동
+
+12. 우측 New pull request 버튼 클릭
+
+13. Compare changes 아래쪽 부분의
+    왼쪽 base 클릭해서 dev로 바꿔줌
+    바로 옆 compare 클릭해서 생성한 브런치명으로 바꿔줌
+    바꾸고 난 후 오른쪽 Create pull request 버튼 클릭
+
+14. Add a title에 제목 작성 (ex. 기능명)
+     Add a description 에 내용 작성 (ex. 회원 가입 기능 개발 완료했습니다)
+     작성 완료 후 Create pull request 버튼 클릭
+
+
+
+11222
+
+*** Create pull request를 하시면 저한테 알림이 옵니다
+    하루 단위로 mergy를 해서 작업 내용 계속 공유할 수 있도록 하겠습니다
+    그래서 필수적으로 다음날에 작업 시작 전에 꼭 main 브런치로 이동하셔서 git pull을 하고 작업 시작하셔야 합니다
+    (안그러면 코드 꼬일 수도 있어요...! 아닐수도 있구요...! 물론 고치는건 제가 하겠지만...ㅠ)
+    mergy 하고나면 바로 단톡에 올려둘게요!
+
+*** git push 하실 때 각자 브런치를 생성한 곳에서 하는거라 전체 코드가 오류나거나 하는 위험성은 없을거라고 생각합니다
+    
+*** Create prll request 하고 난 뒤에도 mergy 전에는 수정하거나 추가 가능 하니까 자유롭게 개발 하시면 되겠습니다
