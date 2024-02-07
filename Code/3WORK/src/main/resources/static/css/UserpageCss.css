@@ -30,24 +30,24 @@
 }
 
 #diary {
-   border: none;
-   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-   width: 100px;
-   height: 40px;
-   position: absolute;
-   top: 18.5%;
-   right: -4%;
-   background-color: #667788;
-   border-radius: 5px;
+	border: none;
+	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+	width: 100px;
+	height: 40px;
+	position: absolute;
+	top: 18.5%;
+	right: -4%;
+	background-color: #667788;
+	border-radius: 5px;
 }
 #diary_btn {
-   margin-top: 10px;
+	margin-top: 10px;
 }
 #diary a{
-   font-family: 'SBAggroM';
-   font-size: 0.8em;
-   text-decoration: none;
-   color: black;
+	font-family: 'SBAggroM';
+	font-size: 0.8em;
+	text-decoration: none;
+	color: black;
 }
 
  /* BGM 바와 버튼 스타일 */
@@ -56,7 +56,7 @@
   font-size: 0.7em;
   position: absolute;
   top: 8%;
-  right: -12%;
+  right: -10%;
   transform: translate(-50%, 50%);
   width: 280px;
   height: 10px;
@@ -130,9 +130,9 @@
   margin-top: 5px;
 }
 #calendar{
-   position: absolute; bottom: 29%; right: 10%;
-   width: 735px; height: 400px;
-   font-size: 0.9em;
+	position: absolute; bottom: 29%; right: 10%;
+	width: 735px; height: 400px;
+	font-size: 0.9em;
 }
 
 /* 방명록 스타일 */
@@ -157,24 +157,24 @@
   font-size: 0.8em;
 }
 #comment-list li #replyid{
-   color: #27a900;
-   font-weight: bold;
+	color: #27a900;
+	font-weight: bold;
 }
 #comment-list li #reply_time {
-   color: #ccc;
-   font-size: 0.2em;
+	color: #ccc;
+	font-size: 0.2em;
 }
 #comment-list li #replywrite{
-   float: right;
-   position: absolute; bottom: 27%; right: 0%;
-   color: #ccc;
+	float: right;
+	position: absolute; bottom: 27%; right: 0%;
+	color: #ccc;
 }
 #reply_update{
-   float: right;
-   position: absolute; bottom: 19%; right: 0%;
+	float: right;
+	position: absolute; bottom: 19%; right: 0%;
 }
 #comment-container{
-   border: 1px solid #ccc;
+	border: 1px solid #ccc;
     border-radius: 10px;
     padding: 3px 10px 10px 10px;
     width: 715px;
@@ -189,13 +189,13 @@
   outline: none;
 }
 #comment-list li:nth-child(2){
-   border-bottom: 1.5px dotted #ccc;
-   width: 100%;
-   }
+	border-bottom: 1.5px dotted #ccc;
+	width: 100%;
+	}
 #comment-list li:nth-child(3){
-   border-bottom: 1.5px solid #ccc;
-   width: 100%;
-   }
+	border-bottom: 1.5px solid #ccc;
+	width: 100%;
+	}
 #comment-list li{padding:3px;}
 #btns{
   background-color: #f1f3e1;
@@ -206,3 +206,10 @@
   font-size: 13px;
   position: absolute; bottom: 62.5%; right: 2%;
 }
+
+
+
+
+
+
+

@@ -37,10 +37,8 @@ public class Food {
 	@Column(nullable = false)                               // not null
 	private String flink;                                   // 식품 판매 링크
 	
-	@Column(nullable = false)                               // not null
 	private String ffilename;                               // 식품 사진명
 	
-	@Column(nullable = false)                               // not null
 	private String ffilepath;                               // 식품 사진 경로
 
 	// dto -> entity 변환

@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <meta name="_csrf" th:content="${_csrf.token}">
-<title>3WORK : WWW</title>
+<title>회원가입...</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
 <link rel="stylesheet" th:href="@{/css/join.css}">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -26,37 +27,37 @@ if(uid != "") {
         url: "/user/check-email",
         data: {uid: inputId},
         success: function(res) {
-            console.log("성공: ", res);
         
             if (res == "OK") {
                 checkResult.innerHTML = "사용 가능한 이메일입니다."
                 checkResult.style.color = "blue"
                 checkResult.style.fontFamily = "SBAggroM";
-            } else { // res == "NO"
+            } else {
                 checkResult.innerHTML = "이미 등록된 이메일입니다."
                 checkResult.style.color = "red"
                 checkResult.style.fontFamily = "SBAggroM";
             }
-            checkResult.style.fontSize = "0.7em";
+            checkResult.style.fontSize = "0.9em";
         },
         error: function(err) {
             console.log("실패: ", err);
         }
     });
-   }else{
-      checkResult.innerHTML = "";
-   }
+	}else{
+		checkResult.innerHTML = "";
+	}
 };
 //유효성 검사
 //이메일 유효성 검사
 function validateUid() {
     let uidInput = document.getElementById("uid");
-    let uidError = uidInput.nextElementSibling; //다음 형제 요소에 에러문구 출력
+    let checkMessageDiv = document.getElementById("idcheck-message");
+    let uidError = checkMessageDiv.querySelector("p"); // 'check-message' div 안의 p 태그 선택
 
     let uidRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!uidRegex.test(uidInput.value)) {
         uidError.innerHTML = "이메일 형식이어야 합니다.";
-        uidError.style.color = "blue"
+        uidError.style.color = "blue";
         uidError.style.fontFamily = "SBAggroM";
         uidError.style.fontSize = "0.9em";
     } else {
@@ -64,64 +65,67 @@ function validateUid() {
     }
 };
 
-// 비밀번호 유효성 검사
+//비밀번호 유효성 검사
 function validateUpassword() {
-console.log("validatePassword called");
     let passwordInput = document.getElementById("upassword");
-    console.log(passwordInput);
-    let passwordError = passwordInput.nextElementSibling;
+    let checkMessageDiv = document.getElementById("pwcheck-message");
+    let passwordError = checkMessageDiv.querySelector("p"); // 'check-message' div 안의 p 태그 선택
 
     let passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*[0-9]).{8,20}$/;
     if (!passwordRegex.test(passwordInput.value)) {
         passwordError.innerHTML = "특수문자, 대소문자를 포함한 8~20자여야 합니다.";
-        passwordError.style.color = "blue"
+        passwordError.style.color = "blue";
         passwordError.style.fontFamily = "SBAggroM";
         passwordError.style.fontSize = "0.9em";
     } else {
         passwordError.innerHTML = "";
     }
  };
+
 // 이름 유효성 검사
 function validateUname() {
-console.log("validatePassword called");
     let nameInput = document.getElementById("uname");
-    console.log(nameInput);
-    let nameError = nameInput.nextElementSibling;
+    let checkMessageDiv = document.getElementById("namecheck-message");
+    let nameError = checkMessageDiv.querySelector("p"); // 'check-message' div 안의 p 태그 선택
 
     let nameRegex = /^[가-힣]*$/;
     if (!nameRegex.test(nameInput.value)) {
         nameError.innerHTML = "한글만 입력 가능합니다.";
-        nameError.style.color = "blue"
+        nameError.style.color = "blue";
         nameError.style.fontFamily = "SBAggroM";
         nameError.style.fontSize = "0.9em";
     } else {
         nameError.innerHTML = "";
     }
  };
+
 //닉네임 유효성 검사
 function validateUnickname() {
     let nicknameInput = document.getElementById("unickname");
-    let nicknameError = nicknameInput.nextElementSibling;
+    let checkMessageDiv = document.getElementById("nicknamecheck-message");
+    let nicknameError = checkMessageDiv.querySelector("p"); // 'check-message' div 안의 p 태그 선택
 
     let nicknameRegex = /^.{2,6}$/;
     if (!nicknameRegex.test(nicknameInput.value)) {
         nicknameError.innerHTML = "2자 이상 6자 이하이어야 합니다.";
-        nicknameError.style.color = "blue"
+        nicknameError.style.color = "blue";
         nicknameError.style.fontFamily = "SBAggroM";
         nicknameError.style.fontSize = "0.9em";
     } else {
         nicknameError.innerHTML = "";
     }
  };
+
 //연락처 유효성 검사
 function validateUphone() {
     let phoneInput = document.getElementById("uphone");
-    let phoneError = phoneInput.nextElementSibling;
+    let checkMessageDiv = document.getElementById("phonecheck-message");
+    let phoneError = checkMessageDiv.querySelector("p"); // 'check-message' div 안의 p 태그 선택
 
     let phoneRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
     if (!phoneRegex.test(phoneInput.value)) {
         phoneError.innerHTML = "'-'포함 11자리로 입력해주세요.";
-        phoneError.style.color = "blue"
+        phoneError.style.color = "blue";
         phoneError.style.fontFamily = "SBAggroM";
         phoneError.style.fontSize = "0.9em";
     } else {
@@ -141,46 +145,72 @@ function validateUphone() {
 </script>
 </head>
 <body>
-    <div class="container">
+<div id="join">
+<div id="container"> 
+    <div class="container2">
+<div th:replace="~{header}"></div>
         <h2>회원가입</h2>
         <form th:action="@{/user/join}" method="post" 
-           class="join" th:object="${usersDTO}" onsubmit="return validateForm()">
-           
-          <!-- 아이디 필드 -->
-          <p>아이디</p>
-          <button type="button" onclick="checkUserIdOnClick()" id="id-btn">중복 확인</button>
-           <input type="text" th:field="*{uid}" id="uid" placeholder="example@domain.com" onblur="validateUid()">
-           <p th:if="${#fields.hasErrors('uid')}" th:errors="*{uid}" 
-                 th:class="${#fields.hasErrors('uid')} ? 'error-message' : ''"></p>
-           <p id="result"></p>
-           
+        	class="join" th:object="${usersDTO}" onsubmit="return validateForm()">
+        
+    		<!-- 아이디 필드 -->
+    		<div id="id-input">
+    		<p>아이디</p>
+    			<button type="button" onclick="checkUserIdOnClick()" id="id-btn">중복 확인</button>
+	        <input type="text" th:field="*{uid}" id="uid" placeholder="example@domain.com" onblur="validateUid()">
+	      </div>
+	        <p th:if="${#fields.hasErrors('uid')}" th:errors="*{uid}" 
+	        		th:class="${#fields.hasErrors('uid')} ? 'error-message' : ''"></p>
+	        <div id="idcheck-message">
+	        	<p id="result"></p>
+	        </div>
+	        
+	        
             <!-- 비밀번호 필드 -->
+           <div id="pw-input">
+            <p>비밀번호</p>
             <input type="password" th:field="*{upassword}" id="upassword" name="upassword"
                placeholder="비밀번호(영문/대소문자,숫자,특수문자 포함 8~20자)" onblur="validateUpassword()">
-              <p th:if="${#fields.hasErrors('upassword')}" th:errors="*{upassword}" 
-                    th:class="${#fields.hasErrors('upassword')} ? 'error-message' : ''"></p>
-              <p id="result"></p>
+       	 		</div>
+       	 	<p th:if="${#fields.hasErrors('upassword')}" th:errors="*{upassword}" 
+       	 			th:class="${#fields.hasErrors('upassword')} ? 'error-message' : ''"></p>
+       	 	<div id="pwcheck-message">
+	        	<p id="result"></p>
+	        </div>
             
             <!-- 이름 필드 -->
+            <div id="name-input">
+            <p>이름</p>
             <input type="text" th:field="*{uname}" id="uname" name="uname" 
-                  placeholder="이름(한글만 가능)" onblur="validateUname()">
+            		placeholder="이름(한글만 가능)" onblur="validateUname()">
+            </div>
             <p th:if="${#fields.hasErrors('uname')}" 
-                  th:errors="*{uname}" th:class="${#fields.hasErrors('uname')} ? 'error-message' : ''"></p>
-            <p id="result"></p>
+            		th:errors="*{uname}" th:class="${#fields.hasErrors('uname')} ? 'error-message' : ''"></p>
+            <div id="namecheck-message">
+	        		<p id="result"></p>
+	        	</div>
             
             <!-- 닉네임 필드 -->
+            <div id="nickname-input">
+            <p>닉네임</p>
             <input type="text" th:field="*{unickname}" id="unickname" name="unickname" 
-                  placeholder="별명" onblur="validateUnickname()">
+            		placeholder="별명" onblur="validateUnickname()">
+            </div>
             <p th:if="${#fields.hasErrors('unickname')}" 
-                  th:errors="*{unickname}" th:class="${#fields.hasErrors('unickname')} ? 'error-message' : ''"></p>
-            <p id="result"></p>
+            		th:errors="*{unickname}" th:class="${#fields.hasErrors('unickname')} ? 'error-message' : ''"></p>
+            <div id="nicknamecheck-message">
+	        		<p id="result"></p>
+	        	</div>
             
             <!-- 주소 필드 -->
+            <div id="ad-input">
+            <p>주소</p>
             <div class="address-container">
                 <input type="text" th:field="*{uaddress}" id="uaddress" name="uaddress"
-                      placeholder="주소를 검색해 주세요">
+                		placeholder="주소를 검색해 주세요">
+            </div>
             <p th:if="${#fields.hasErrors('uaddress')}" 
-                 th:errors="*{uaddress}" th:class="${#fields.hasErrors('uaddress')} ? 'error-message' : ''"></p>
+        			th:errors="*{uaddress}" th:class="${#fields.hasErrors('uaddress')} ? 'error-message' : ''"></p>
                 <button type="button" onclick="sample3_execDaumPostcode()">우편번호 찾기</button>
             </div>
             
@@ -189,16 +219,24 @@ function validateUphone() {
             </div>
             
             <!-- 연락처 필드 -->
+            <div id="phone-input">
+            <p>연락처</p>
             <input type="text" th:field="*{uphone}" id="uphone" name="uphone" 
-                  placeholder="연락처('-'포함 11자리입력)" onblur="validateUphone()">
+            		placeholder="연락처('-'포함 11자리입력)" onblur="validateUphone()">
+            </div>
             <p th:if="${#fields.hasErrors('uphone')}" 
-                  th:errors="*{uphone}" th:class="${#fields.hasErrors('uphone')} ? 'error-message' : ''"></p>
-            <p id="result"></p>
+            		th:errors="*{uphone}" th:class="${#fields.hasErrors('uphone')} ? 'error-message' : ''"></p>
+            <div id="phonecheck-message">
+	        		<p id="result"></p>
+	        	</div>
             
             <!-- 생일 필드 -->
-               <input type="date" id="ubirth" name="ubirth">
-               <p th:if="${#fields.hasErrors('ubirth')}" 
-                  th:errors="*{ubirth}" th:class="${#fields.hasErrors('ubirth')} ? 'error-message' : ''"></p>
+            <div id="birth-input">
+            	<p>생년월일</p>
+            	<input type="date" id="ubirth" name="ubirth">
+            </div>
+            	<p th:if="${#fields.hasErrors('ubirth')}" 
+            		th:errors="*{ubirth}" th:class="${#fields.hasErrors('ubirth')} ? 'error-message' : ''"></p>
             
             <div class="terms">
                 <input type="checkbox" id="agree-terms" name="agree-terms">
@@ -207,6 +245,10 @@ function validateUphone() {
             <input type="submit" value="가입" class="submit-button">
         </form>
     </div>
+<!-- footer.html 연결 -->
+<div th:replace="~{footer}"></div>
+</div>
+</div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 

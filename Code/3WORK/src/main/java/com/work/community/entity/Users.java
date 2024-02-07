@@ -67,6 +67,7 @@ public class Users extends BaseEntity {
 				           .uaddress(usersDTO.getUaddress())
 				           .uphone(usersDTO.getUphone())
 				           .ubirth(usersDTO.getUbirth())
+				           .role(usersDTO.getRole())
 				           .build();
 		return users;      
    }

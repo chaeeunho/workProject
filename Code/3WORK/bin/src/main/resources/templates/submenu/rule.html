@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/submenu/submenu.css}">
+</head>
+<body>
+	<div id="privacy">
+		<div id="container">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="data">
+        <div class="data-title">
+           <div class="board">
+               <p>내부정보관리규정</p>
+           </div>
+	      </div>
+	    </section>
+	    
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+</body>
+</html>

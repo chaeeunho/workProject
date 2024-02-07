@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/user/update.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div id="update">
+     <div id="container">
+       <!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section id="update_body">
+         <div id="update_title">
+            <p>프로필 수정</p>
+         </div>
+         
+         <!-- 프로필 수정 폼 -->
+            <form th:action="@{/user/userupdate}" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="uno" th:value="${users.uno}">
+               
+               <!-- 프로필 이미지 -->
+            <div id="update_image">
+               <!-- 첨부한 이미지가 나오는 이미지 부분 -->
+               <img th:src="@{/images/Profile.png}" alt="프로필">
+               <!-- 자바스크립트로 버튼 누르면 파일 첨부 화면 뜨기 -->
+               <button type="button" id="edit_btn">EDIT</button>
+            </div>
+            
+            <!-- 프로필 정보 수정 -->
+            <table id="update_tbl">
+               <tr class="update_input">
+                  <td class="update_input_content">
+                     <label for="uname">
+                        이름<span>한글만 가능</span>
+                     </label>
+                     <br>
+                 <input type="text" name="uname" 
+                       id="uname" th:value="${users.uname}" readonly>
+                  </td>
+                  
+                  <td class="update_input_content2">
+                     <label for="unickname">
+                        닉네임<span>2~20자</span>
+                     </label>
+                     <br>
+                 <input type="text" name="unickname" 
+                       id="unickname" th:value="${users.unickname}">
+                  </td>
+               </tr>
+               
+               <tr class="update_input">
+                  <td class="update_input_content">
+                     <label for="uphone">
+                        연락처<span>'-'포함 11자</span>
+                     </label>
+                 <input type="text" name="uphone" 
+                       id="uphone" th:value="${users.uphone}"> 
+                  </td>
+                  
+                  <td class="update_input_content2">
+                     <label for="upassword">비밀번호 변경</label>
+                 <input type="text" name="upassword"
+                       id="upassword" th:value="${users.upassword}">
+                  </td>
+               </tr>
+               
+               <tr class="update_map">
+                  <td class="update_map_content">
+                     <label for="uaddress">주소</label>
+                     <br>
+                     <div class="update_map1">
+                        <input type="text" 
+                           id="uaddress" th:value="${users.uaddress}">
+                    <button type="button" class="map_btn" onclick="'#'">주소 검색</button>
+                     </div>
+                 <input type="text" id="#" placeholder="상세주소" class="map_detail">
+                  </td>
+               </tr>
+               
+               <tr class="update_area">
+                  <td class="update_area_content">
+                     <label for="#">
+                        한줄 소개명<span>50자 이내</span>
+                     </label> 
+                 <textarea rows="4" cols="30" maxlength="50" name="content" placeholder="자신을 마음껏 나타내 보세요."></textarea>
+                  </td>
+               </tr>
+               
+               <tr class="update_area">
+                  <td class="update_area_content">
+                  <label for="#">
+                     좋아하는 것<span>50자 이내</span>
+                  </label> 
+                  <textarea rows="4" cols="30" maxlength="50" name="content" placeholder="동료에게 자신의 취향을 공유해보세요."></textarea>
+                  </td>
+               </tr>
+               
+               <tr class="update_file">
+                  <td class="update_file_content">
+                     <label for="file" class="file_title">
+                        배경음악 설정<span>100MB 이내</span>
+                     </label>
+                     <div class="filebox">
+                         <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
+                         <label for="file" class="file_btn">파일 찾기</label> 
+                         <input type="file" id="file">
+                        </div>
+                  </td>
+               </tr>
+               
+               <tr>
+                  <td>
+                     <button type="submit" id="save_btn">저장</button>
+                  </td>
+               </tr>
+           </table>
+         </form>
+        </section>
+      
+      <!-- footer.html 연결 -->
+         <div th:replace="~{footer}"></div>
+    </div>
+  </div>
+  
+  <!-- 파일명 들어가기 -->
+  <script>
+     $("#file").on('change',function(){
+        var fileName = $("#file").val();
+        $(".upload-name").val(fileName);
+      });
+   </script>
+</body>
+</html>

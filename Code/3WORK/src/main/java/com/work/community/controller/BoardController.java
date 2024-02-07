@@ -61,4 +61,9 @@ public class BoardController {
 		return "board/news";
 	}
 	
+	@GetMapping("/board/map")
+	public String map(){
+		return "board/map";
+	}
+	
 }
