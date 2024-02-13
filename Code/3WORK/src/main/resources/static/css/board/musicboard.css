@@ -1,16 +1,21 @@
 @charset "UTF-8";
 
 #musicboard{
-      position: relative;
-      width: 100%;
-      height: 1900px;
+	position: relative;
+  height: 100%;
+}
+.msection{
+	width: 100%;
+	height: 1200px;
+	position: absolute;
+  top: 123px;
 }
 #mcontainer{
     width: 80%;
     height: 95%;
     position: relative;
     margin: 0 auto;
-    padding: 70px 50px 70px 50px;
+    padding: 0 50px 70px 50px;
 }
 .mbox{
     width: 100%;
@@ -33,9 +38,16 @@
 	color: black;
 }
 .tag{
+	text-align: left;
 	font-size: 30px;
 	padding-top: 10px; 
-	text-align: left; 
+	color: black;
+	font-family: 'SBAggroM';
+}
+#buttonAll{
+	font-size: 30px;
+	padding-top: 10px; 
+	color: black;
 	font-family: 'SBAggroM';
 }
 p span{
@@ -70,11 +82,60 @@ thead th{
 	border-bottom: 1px solid black;
 }
 #contentC tr{
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid rgb(0, 0, 0);
 }
 td{
     padding: 30px 20px;
 }
+#buttonMore{
+	background: #F1F3E1;
+	border: none;
+	border-radius: 5px;
+	padding: 13px 2%;
+	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+	font-size: 13px;
+	font-family: 'SBAggroM';
+	margin: 22px auto;
+	cursor: pointer;
+}
+
+/* 관리자에서 노래 정보 입력 버튼 CSS */
+.write2_btn{
+	background: #F1F3E1;
+	border: none;
+	border-radius: 5px;
+	padding: 13px 2%;
+	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+	font-size: 13px;
+	margin-top: 22px;
+	font-family: 'SBAggroM';
+	float: right;
+	cursor: pointer;
+}
+#contentA tr td a{
+	text-decoration: none;
+	color: black;
+}
 .pagination{
-text-align: center;
+	width: 100%;
+	margin: 30px auto;
+	display: flex;
+	justify-content: center;
+}
+.pagination a,
+.current_page{
+	text-decoration: none;
+	color: gray;
+	margin-left: 10px;
+}
+.current_page{
+	color: black; /* 여기에 원하는 색상을 지정하세요 */
+  font-weight: bold; /* 선택적으로 폰트 굵기를 조절할 수 있습니다. */
+}
+
+/* 관리자에서 음식 리스트 페이지 CSS */
+.foodp{
+   overflow: hidden; /* 너비를 넘어가면 안보이게 */
+   text-overflow: ellipsis; /* 글자가 넘어가면 말줄임(...) 표시 */
+   white-space: nowrap;
 }

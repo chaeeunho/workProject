@@ -3,10 +3,14 @@ package com.work.community.dto;
 import com.work.community.entity.Music;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor  // 모든 필드를 매개변수로 갖는 생성자
 @Data
 public class MusicDTO {
 	

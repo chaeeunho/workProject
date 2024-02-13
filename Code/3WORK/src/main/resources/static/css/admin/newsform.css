@@ -5,12 +5,13 @@
 /* 정보 입력 전체 사이즈 */
 #newsform{
   position: relative;
-  width: 100%;
-  height: 1450px;
+  height: 100%;
 }
 #newsform_body{
 	width: 100%;
 	height: 500px;
+	position: absolute;
+  top: 123px;
 }
 
 

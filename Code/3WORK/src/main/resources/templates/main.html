@@ -5,20 +5,64 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
 <link rel="stylesheet" th:href="@{/css/common.css}">
-<link rel="stylesheet" th:href="@{/css/main.css}">
+<link rel="stylesheet" th:href="@{/css/main.css}" media="screen and (min-width: 1000px) and (max-width: 2560px)">
+<link rel="stylesheet" th:href="@{/css/main_m.css}" media="screen and (min-width: 300px) and (max-width: 999px)">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="main">
-    <div id="container">
+	<div id="container">
+	  <div id="main">
     	<!-- header.html 연결 -->
       <div th:replace="~{header}"></div>
   
       <section id="main_body">
-  			<div id="search_box">
-  				<i class="fa-solid fa-magnifying-glass" style="color: #8B8989"></i>
-  				<input type="text" id="search_input" placeholder="찾고 싶은 친구의 이름 또는 닉네임을 입력해주세요.">
+      	<div id="mobile">
+      		<div id="m_menu">
+      			<ul id="topmenu">
+	            <li>
+	              <p><button onclick="showhide()" id="here"><i class='fa-solid fa-bars fa-2xl' style='color: #8B8989'></i></button></p>
+	               <div id="submenu-position">
+		              <ul id="submenu">
+		              	<li onclick="showhide1()">Recommend</li>
+		              	<div id="rec">
+		                  <a th:href="@{/board/musicboard}">노래</a>
+		                  <br>
+		                  <a th:href="@{/board/food}">건강 식품</a>
+		                  <br>
+		                  <a th:href="@{/board/item}">운동기구&운동복</a>
+	                  </div>
+	                  <li onclick="showhide2()">Information</li>
+	                  <div id="info">
+		                  <a th:href="@{/board/news}">건강 뉴스</a>
+		                  <br>
+		                  <a th:href="@{/board/map}">지도</a>
+		                  <br>
+		                  <a th:href="'#'">운동 꿀팁</a>
+	                  </div>
+	                  <li onclick="showhide3()">User</li>
+	                  <div id="user">
+		                  <th:block sec:authorize="isAnonymous()">
+			                  <li><a th:href="@{/login}">로그인</a></li>
+			                  <li><a th:href="@{/user/join}">회원가입</a></li>
+		                  </th:block>
+		                  <th:block sec:authorize="isAuthenticated()">
+		                  	<a th:href="@{/user/id_search}">장바구니</a>
+		                  	<br>
+			               		<a th:href="@{/user/userupdate}">회원정보 수정</a>
+			               		<br>
+			               	 	<a th:href="'#'">로그아웃</a>
+		                  </th:block>
+		                </div>
+		              </ul>
+                </div>
+	            </li>
+	          </ul>
+      		</div>
+	  			<div id="search_box">
+	  				<i class="fa-solid fa-magnifying-glass" style="color: #8B8989"></i>
+	  				<input type="text" id="search_input" placeholder="찾고 싶은 친구의 이름 또는 닉네임을 입력해주세요.">
+	  			</div>
   			</div>
   			
   			<div id="slide_box">
@@ -44,37 +88,37 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   					</div>
   				</div>
   			</div>
-  		<!-- 로그인 전 -->
-  		<th:block sec:authorize="isAnonymous()">
-  			<div id="login_box">
-  				<div id="login_box_middle">
-  					<a th:href="@{/login}">
-  						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</span></button>
-  					</a>
-	  				<div id="login_menu">
-	  					<a th:href="@{/user/id_search}">아이디 찾기</a>
-	  					<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-	  					<a th:href="@{/user/join}">회원가입</a>
+	  		<!-- 로그인 전 -->
+	  		<th:block sec:authorize="isAnonymous()">
+	  			<div id="login_box">
+	  				<div id="login_box_middle">
+	  					<a th:href="@{/login}">
+	  						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</span></button>
+	  					</a>
+		  				<div id="login_menu">
+		  					<a th:href="@{/user/id_search}">아이디 찾기</a>
+		  					<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
+		  					<a th:href="@{/user/join}">회원가입</a>
+		  				</div>
 	  				</div>
-  				</div>
-  			</div>
-  		</th:block>
-  		<!-- 로그인 후 -->
-  		<th:block sec:authorize="isAuthenticated()">
-	    <div id="login_box">
-	        <div id="login_box_middle">
-	            <!-- JavaScript 코드를 직접 포함하여 버튼 클릭 시 실행되도록 합니다 -->
-	            <button type="button" id="login_btn" onclick="handleLoginButtonClick()">
-	                My&nbsp;Home&nbsp;
-	            </button>
-	            <div id="login_menu">
-	                <a th:href="@{/user/id_search}">아이디 찾기</a>
-	                <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-	                <a th:href="'#'">로그아웃</a>
-	            </div>
-	        </div>
-	    </div>
-			</th:block>
+	  			</div>
+	  		</th:block>
+	  		<!-- 로그인 후 -->
+	  		<th:block sec:authorize="isAuthenticated()">
+		    <div id="login_box">
+		        <div id="login_box_middle">
+		            <!-- JavaScript 코드를 직접 포함하여 버튼 클릭 시 실행되도록 합니다 -->
+		            <button type="button" id="login_btn" onclick="handleLoginButtonClick()">
+		                My&nbsp;Home&nbsp;
+		            </button>
+		            <div id="login_menu">
+		                <a th:href="@{/user/id_search}">장바구니</a>
+		                <a th:href="@{/user/userupdate}">회원정보 수정</a>
+		                <a th:href="'#'">로그아웃</a>
+		            </div>
+		        </div>
+		    </div>
+				</th:block>
   			
   			<div id="weather_box">
   				<div id="weather_title">
@@ -194,24 +238,90 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <!-- 유저페이지 팝업 JS -->
   <script src="/js/main.js"></script>
   <script>
-  // 버튼 클릭 시 실행될 함수 정의
-  function handleLoginButtonClick() {
-      // 서버로부터 받은 인증 상태
-      let serverResponse = {
-          "isAuthenticated": true //권한 인증
-      };
-      // 서버에서 받은 인증 상태를 가져옴
-      let isAuthenticated = serverResponse.isAuthenticated;
-
-      // 인증 상태에 따라 동작 결정
-      if (isAuthenticated) {
-          let popOption = "width=1450, height=850";
-          let openUrl = '/user/userpage';
-          window.open(openUrl, '미니홈페이지', popOption);
-      } else {
-          window.location.href = '/login';
-      }
-  }
-</script>
+	  // 버튼 클릭 시 실행될 함수 정의
+	  function handleLoginButtonClick() {
+	      // 서버로부터 받은 인증 상태
+	      let serverResponse = {
+	          "isAuthenticated": true //권한 인증
+	      };
+	      // 서버에서 받은 인증 상태를 가져옴
+	      let isAuthenticated = serverResponse.isAuthenticated;
+	
+	      // 인증 상태에 따라 동작 결정
+	      if (isAuthenticated) {
+	          let popOption = "width=1450, height=850";
+	          let openUrl = '/user/userpage';
+	          window.open(openUrl, '미니홈페이지', popOption);
+	      } else {
+	          window.location.href = '/login';
+	      }
+	  }
+	</script>
+	<!-- 메인페이지 메뉴_모바일버전 -->
+	<script>
+		let sw = true;
+	
+		function showhide(){
+		    let x = document.getElementById("submenu-position");
+	
+		    if(sw == true){
+		        x.style.display = "block";
+		        x.style.zIndex = "100";
+		        sw = false;
+		        document.getElementById("here").innerHTML = "<i class='fa-solid fa-xmark fa-2xl' style='color: #8B8989'></i>";
+		        document.getElementById("here").style.cssText = "position: fixed; top: 17px; left: 10px;";
+		    } else{
+		        x.style.display = "none";
+		        sw = true;
+		        document.getElementById("here").innerHTML = "<i class='fa-solid fa-bars fa-2xl' style='color: #8B8989'></i>";
+		        document.getElementById("here").style.cssText = "";
+		    }   
+		}
+		
+		function showhide1(){
+		    let x = document.getElementById("rec");
+	
+		    if(sw == true){
+		        x.style.display = "block";
+		        x.style.zIndex = "100";
+		        
+		        sw = false;
+		    } else{
+		        x.style.display = "none";
+		        
+		        sw = true;
+		    }   
+		}
+		
+		function showhide2(){
+		    let y = document.getElementById("info");
+	
+		    if(sw == true){
+		        y.style.display = "block";
+		        y.style.zIndex = "100";
+		        
+		        sw = false;
+		    } else{
+		        y.style.display = "none";
+		        
+		        sw = true;
+		    }   
+		}
+		
+		function showhide3(){
+		    let z = document.getElementById("user");
+	
+		    if(sw == true){
+		        z.style.display = "block";
+		        z.style.zIndex = "100";
+		        
+		        sw = false;
+		    } else{
+		        z.style.display = "none";
+		        
+		        sw = true;
+		    }   
+		}
+	</script>
 </body>
 </html>

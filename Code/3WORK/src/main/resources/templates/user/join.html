@@ -6,7 +6,7 @@
 <meta name="_csrf" th:content="${_csrf.token}">
 <title>회원가입...</title>
 <link rel="stylesheet" th:href="@{/css/common.css}">
-<link rel="stylesheet" th:href="@{/css/join.css}">
+<link rel="stylesheet" th:href="@{/css/user/join.css}">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -145,10 +145,11 @@ function validateUphone() {
 </script>
 </head>
 <body>
-<div id="join">
-<div id="container"> 
+<div id="container" style="height: 1300px;">  
+	<div id="join">
+		<div th:replace="~{header}"></div>
+		<section id="join_body">
     <div class="container2">
-<div th:replace="~{header}"></div>
         <h2>회원가입</h2>
         <form th:action="@{/user/join}" method="post" 
         	class="join" th:object="${usersDTO}" onsubmit="return validateForm()">
@@ -170,7 +171,7 @@ function validateUphone() {
            <div id="pw-input">
             <p>비밀번호</p>
             <input type="password" th:field="*{upassword}" id="upassword" name="upassword"
-               placeholder="비밀번호(영문/대소문자,숫자,특수문자 포함 8~20자)" onblur="validateUpassword()">
+               placeholder="비밀번호 (영문/대소문자, 숫자, 특수문자 포함 8~20자)" onblur="validateUpassword()">
        	 		</div>
        	 	<p th:if="${#fields.hasErrors('upassword')}" th:errors="*{upassword}" 
        	 			th:class="${#fields.hasErrors('upassword')} ? 'error-message' : ''"></p>
@@ -182,7 +183,7 @@ function validateUphone() {
             <div id="name-input">
             <p>이름</p>
             <input type="text" th:field="*{uname}" id="uname" name="uname" 
-            		placeholder="이름(한글만 가능)" onblur="validateUname()">
+            		placeholder="이름 (한글만 가능)" onblur="validateUname()">
             </div>
             <p th:if="${#fields.hasErrors('uname')}" 
             		th:errors="*{uname}" th:class="${#fields.hasErrors('uname')} ? 'error-message' : ''"></p>
@@ -194,7 +195,7 @@ function validateUphone() {
             <div id="nickname-input">
             <p>닉네임</p>
             <input type="text" th:field="*{unickname}" id="unickname" name="unickname" 
-            		placeholder="별명" onblur="validateUnickname()">
+            		placeholder="닉네임 (2~10자)" onblur="validateUnickname()">
             </div>
             <p th:if="${#fields.hasErrors('unickname')}" 
             		th:errors="*{unickname}" th:class="${#fields.hasErrors('unickname')} ? 'error-message' : ''"></p>
@@ -222,7 +223,7 @@ function validateUphone() {
             <div id="phone-input">
             <p>연락처</p>
             <input type="text" th:field="*{uphone}" id="uphone" name="uphone" 
-            		placeholder="연락처('-'포함 11자리입력)" onblur="validateUphone()">
+            		placeholder="연락처 ('-'포함 13자리 입력)" onblur="validateUphone()">
             </div>
             <p th:if="${#fields.hasErrors('uphone')}" 
             		th:errors="*{uphone}" th:class="${#fields.hasErrors('uphone')} ? 'error-message' : ''"></p>
@@ -245,6 +246,7 @@ function validateUphone() {
             <input type="submit" value="가입" class="submit-button">
         </form>
     </div>
+    </section>
 <!-- footer.html 연결 -->
 <div th:replace="~{footer}"></div>
 </div>

@@ -27,15 +27,13 @@ body{
   background-color: #F1F3E1;
   font-family: 'SBAggroL';
 }
-#container {
+/* 기본 페이지 높이 = 1500px */
+#container{
+	margin: 40px;
   background-color: #ffffff;
-  width: 1318.59px;
-  height: 95%;
+  height: 1500px;
   border-radius: 20px;
-  position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }

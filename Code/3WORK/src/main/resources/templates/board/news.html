@@ -8,8 +8,8 @@
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="musicboard">
-		<div id="container">
+	<div id="container" style="height: 2700px;">
+		<div id="news">
 			<!-- header.html 연결 -->
       <div th:replace="~{header}"></div>
       
@@ -24,11 +24,11 @@
 	          	<div class="card" th:each="news : ${newsList}">
 	          		<ul>
 	          			<li>
-	          				<a th:href="'#">
+	          				<a th:href="@{|/board/news/${news.nno}|}">
+			                <img th:src="@{|/upload/news/${news.nfilename}|}" onerror="this.src='/images/default/default_image.png';" class="thumbnail-image">
 	          					<div class="newsbox">
-				                 <img th:src="@{${news.nfilepath}}" onerror="this.src='/images/default/default_image.png';" class="thumbnail-image">
-				                 <strong th:text="${news.ntitle}"></strong>
-				                 <br><br>
+				                 <strong><span th:text="${news.ntitle}"></span></strong>
+				                 <br>
 		                     <span class="newscon" th:text="${news.ncontent}"></span>
 		                     <br>
 		                     <span class="newscreatetime" th:text="${news.ndate}"></span>
@@ -41,8 +41,24 @@
             
             <!-- 페이지 영역 -->
             <div class="pagination">
-    
-         
+            	<!-- 이전 페이지 -->
+            	<!-- 2page 클릭하면 db 페이지는 1page -->
+            	<a th:href="${newsList.first}? '#' : @{/board/news(page=${newsList.number})}">
+            		<i class="fa-solid fa-caret-left fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
+            	<!-- 페이지 번호 블럭 -->
+            	<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+	            	<!-- 현재 페이지는 링크없이 숫자만 표시 -->
+	            	<span th:if="${page == newsList.number + 1}" th:text="${page}" class="current_page"></span>
+	            	<span th:if="${page != newsList.number + 1}">
+	            	<a th:href="@{/board/news(page=${page})}" th:text="${page}"></a>
+	            	</span>	
+            	</span>
+            	<!-- 다음 페이지 -->
+            	<!-- 현재 2page -> 3page  실제페이지는 1page-->
+            	<a th:href="${newsList.last} ? '#' : @{/board/news(page=${foodList.number+2})}">
+            		<i class="fa-solid fa-caret-right fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
             </div>
       		</div>
       	</div>

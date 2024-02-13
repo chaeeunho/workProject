@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board/musicboard.css}">
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="container" style="height: 1400px;">
+		<div id="musicboard">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="msection">
+      	<div id="mcontainer">
+      		<div class="mbox">
+      			<div class="t_box">
+      				<p class = "tag">건강식품 추천 리스트</p>
+            </div>   
+            
+            <table id="mtable" style="table-layout: fixed;">
+            	<!-- 테이블 사이즈 비율 맞추기 -->
+            	<colgroup>
+						     <col style="width:10%">
+						     <col style="width:30%">
+						     <col style="width:30%">
+						     <col style="width:20%">
+						     <col style="width:10%">
+						  </colgroup>
+						  
+            	<thead>
+            		<tr>
+            			<th class="td_box">번호</th>
+            			<th class="td_box">상춤명</th>
+            			<th class="td_box">상품설명</th>
+            			<th class="td_box">상품가격</th>
+            			<th class="td_box">삭제</th>
+            		</tr>
+            	</thead>
+            	
+							<tbody id="contentA">
+								<tr th:each="food : ${foodList}">
+									<td th:text="${food.fno}"></td>
+	            		<td th:text="${food.fname}" class="foodp"></td>
+	            		<td th:text="${food.fcontent}" class="foodp"></td>
+	            		<td data-th-text="${#numbers.formatInteger(food.fprice, 3, 'COMMA') + '원'}"></td>
+	            		<td>
+	            			<a th:href="@{|/admin/fooddelete/${food.fno}|}" onclick="return confirm('해당 식품을 삭제하시겠습니까?')">
+	            				<i class="fa-solid fa-trash" style="color: #6C7C58;"></i>
+	            			</a>
+	            		</td>
+								</tr>
+							</tbody>
+            </table> 
+            
+            <!-- 작성 버튼 -->
+            <div id="list_write">
+							<a th:href="@{/admin/foodform}"><button class="write2_btn">정보 등록</button></a>
+						</div>
+            
+            <!-- 페이지 영역 -->
+            <div class="pagination">
+            	<!-- 이전 페이지 -->
+            	<!-- 2page 클릭하면 db 페이지는 1page -->
+            	<a th:href="${foodList.first}? '#' : @{/admin/foodlist(page=${foodList.number})}">
+            		<i class="fa-solid fa-caret-left fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
+            	<!-- 페이지 번호 블럭 -->
+            	<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+	            	<!-- 현재 페이지는 링크없이 숫자만 표시 -->
+	            	<span th:if="${page == foodList.number + 1}" th:text="${page}" class="current_page"></span>
+	            	<span th:if="${page != foodList.number + 1}">
+	            	<a th:href="@{/admin/foodlist(page=${page})}" th:text="${page}"></a>
+	            	</span>	
+            	</span>
+            	<!-- 다음 페이지 -->
+            	<!-- 현재 2page -> 3page  실제페이지는 1page-->
+            	<a th:href="${foodList.last} ? '#' : @{/admin/foodlist(page=${foodList.number+2})}">
+            		<i class="fa-solid fa-caret-right fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
+            </div>
+      		</div>
+      	</div>
+      </section>
+      
+      
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+</body>
+</html>

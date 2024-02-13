@@ -3,12 +3,13 @@
 /* 노래 정보 입력 전체 사이즈 */
 #musicform{
   position: relative;
-  width: 100%;
-  height: 1150px;
+  height: 100%;
 }
 #musicform_body{
 	width: 100%;
 	height: 500px;
+	position: absolute;
+  top: 123px;
 }
 
 

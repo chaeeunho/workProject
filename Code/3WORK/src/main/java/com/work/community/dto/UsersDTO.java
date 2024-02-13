@@ -55,10 +55,12 @@ public class UsersDTO {
 						            .uno(users.getUno())
 						            .uid(users.getUid())
 						            .upassword(users.getUpassword())
+						            .uname(users.getUname())
 						            .unickname(users.getUnickname())
 						            .uaddress(users.getUaddress())
 						            .uphone(users.getUphone())
 						            .ubirth(users.getUbirth())
+						            .role(users.getRole())
 						            .createdDate(users.getCreatedDate())
 						            .updatedDate(users.getUpdatedDate())
 						            .build();

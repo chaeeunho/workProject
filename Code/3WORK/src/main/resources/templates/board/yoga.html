@@ -21,7 +21,7 @@
       					<button type="button" id="buttonAll" onclick="showAllContent()">금주의 BEST 노래 
       						<span style="font-size: 17px;">(TOP 100)</span></button> &nbsp;
       					<span>&nbsp; 
-      					<button type="button" id="buttonA" onclick="showContent('A')">요가</button>&nbsp;/
+      					<a th:href="@{|/board/musicboard/yoga|}"><button type="button" id="buttonA" onclick="showContent('A', '요가')">요가</button></a>&nbsp;/
       					<button type="button" id="buttonB" onclick="showContent('B')">헬스</button>&nbsp;/
       					<button type="button" id="buttonC" onclick="showContent('C')">수영</button>
       					</span>
@@ -31,7 +31,7 @@
             <table id="mtable">
             	<thead>
             		<tr>
-            			<th class="td_box">곡명</th>
+            			<th class="td_box">곡명<span th:utext="${yogaCount}"></span></th>
             			<th class="td_box">앨범명</th>
             			<th class="td_box">가수명</th>
             			<th class="td_box">카테고리</th>
@@ -43,7 +43,7 @@
 	            		<td th:text="${music.mname}"></td>
 	            		<td th:text="${music.malbum}"></td>
 	            		<td th:text="${music.msinger}"></td>
-	            		<td th:text="${music.mcategory}"></td>
+	            		<td>요가</td>
 								</tr>
 							</tbody>
 							
@@ -148,6 +148,27 @@
 		    // 페이지 번호를 1페이지로 설정
 		    // 여기서 "1"은 원하는 페이지 번호로 수정 가능
 		    window.location.href = "/board/musicboard";
+		}
+		
+		var currentShown = 10;  // 초기에는 10개의 아이템을 보여줌
+
+		function loadMoreContent() {
+		    var contentA = document.getElementById("contentA");
+		    
+		    
+		    // 현재까지 보여진 노래의 개수에 10을 더한 값이 전체 노래 리스트의 크기보다 작으면 10개씩 더 보여줌
+		    if (currentShown + 10 < yogaListSize) {
+		        currentShown += 10;
+		    } else {
+		        // 마지막에는 남은 만큼만 보여줌
+		        currentShown = yogaListSize;
+		        document.getElementById("buttonMore").style.display = "none";  // 더 이상 버튼을 숨김
+		    }
+
+		    // 현재까지 보여진 개수만큼 노래를 보여줌
+		    for (var i = 0; i < currentShown; i++) {
+		        contentA.rows[i].style.display = "table-row";
+		    }
 		}
 	</script>
 </body>

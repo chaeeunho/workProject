@@ -1,29 +1,18 @@
 @charset "UTF-8";
 
 #admin_main{
-  background-color: #ffffff;
-  width: 1318.59px;
-  height: 90%;
-  border-radius: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  position: relative;
+  height: 100%;
 }
 #admin_main_body{
   width: 100%;
 	height: 500px;
-	position: relative;
+	position: absolute;
+  top: 123px;
 }
 #admin_content{
-	width: 85%;
-	height: 300px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	display: flex;
+	justify-content: space-between;
 }
 .admin_content_title{
 	font-size: 30px;
@@ -32,34 +21,57 @@
 }
 
 
-/* 추천, 정보 CSS */
-#work_recommend{
-	float: left;
-  position: relative;
-  width: 46%;
-  height: 100px;
-  margin-top: 50px;
-  margin-left: 40px;
+/* 추천, 정보, 회원 CSS */
+#work_recommend,
+#work_info,
+#work_user{
+	width: 33%;
+	margin: 5%;
 }
-#work_info{
-	float: right;
-  position: relative;
-  width: 46%;
-  height: 100px;
-  margin-top: 50px;
-  margin-left: 40px;
+.work_menu{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.work_menu p{
+	margin: 0;
+}
+#music,
+#food,
+#item,
+#news,
+#exercise,
+#users{
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-content: center;
+	margin: 10px;
+	flex-wrap: wrap;
+}
+select{
+	outline: none;
+	width: 150px;
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 20px;
+	font-family: 'SBAggroL';
+	text-align: center;
 }
 .work_title{
 	background: #F1F3E1;
-	border-radius: 30px;
+	border-radius: 20px;
 	font-family: 'SBAggroM';
 	width: fit-content;
   padding: 1px 15px;
 	margin: 0 auto;
+	margin-bottom: 40px;
 }
 .work_menu{
 	text-align: center;
 	margin: 15px;
+	line-height: 2;
 }
 .work_menu a{
 	color: #8B8989;
