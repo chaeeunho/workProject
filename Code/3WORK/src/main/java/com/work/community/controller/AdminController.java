@@ -1,6 +1,9 @@
 package com.work.community.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,10 +12,12 @@ import com.work.community.dto.FoodDTO;
 import com.work.community.dto.ItemDTO;
 import com.work.community.dto.MusicDTO;
 import com.work.community.dto.NewsDTO;
+import com.work.community.dto.UsersDTO;
 import com.work.community.service.FoodService;
 import com.work.community.service.ItemService;
 import com.work.community.service.MusicService;
 import com.work.community.service.NewsService;
+import com.work.community.service.UsersService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +34,20 @@ public class AdminController {
 	
 	private final NewsService newsService;
 	
+	private final UsersService usersService;
+	
 	// 관리자 - 페이지 이동
 	@GetMapping("/admin/main")
 	public String main() {
 		return "admin/main";
 	}
-	
+
 	// 회원목록
-	@GetMapping("/admin/list")
-	public String list() {
-		return "admin/list";
+	@GetMapping("/admin/userlist")
+	public String getlist(Model model) {
+		List<UsersDTO> usersDTOList = usersService.findAll();
+		model.addAttribute("usersList", usersDTOList);
+		return "admin/userlist";
 	}
 	
 	// 노래 추천 - 페이지 이동

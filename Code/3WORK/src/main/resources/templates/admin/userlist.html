@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원목록...</title>
+<link rel="stylesheet" th:href="@{/css/admin/userlist.css}">
+</head>
+<body>
+<div th:replace="~{header}"></div>
+	<div id="container_wrap">
+	<div id="container">
+	
+	  <section id="usersList">
+		<h2>회원 목록</h2>
+		  <table class="tbl_list">
+		  	<thead>
+		  	  <tr>
+		  	    <th>번호</th>
+		  	    <th>아이디</th>
+		  	    <th>비밀번호</th>
+		  	    <th>이름</th>
+		  	    <th>닉네임</th>
+		  	    <th>주소</th>
+		  	    <th>번호</th>
+		  	    <th>생일</th>
+		  	    <th>권한</th>
+		  	    <th>가입일</th>
+		  	    <th>조회</th>
+		  	    <th>삭제</th>
+		  	  </tr>
+		  	</thead>
+		  	<tbody>
+		  	  <tr th:each="users: ${usersList}">
+		  	    <td th:text="${users.uno}"></td>
+		  	    <td th:text="${users.uid}"></td>
+		  	    <td th:text="${users.upassword}"></td>
+		  	    <td th:text="${users.uname}"></td>
+		  	    <td th:text="${users.unickname}"></td>
+		  	    <td th:text="${users.uaddress}"></td>
+		  	    <td th:text="${users.uphone}"></td>
+		  	    <td th:text="${users.ubirth}"></td>
+		  	    <td th:text="${users.role}"></td>
+		  	    <td th:text="${#dates.format(users.createdDate, 'yyyy-MM-dd')}"></td>
+		  	    <td><a th:href="@{|/users/${users.uno}|}">조회</a></td>
+		  	    <!-- 버티컬바(|)는 ${member.id}를 숫자로 유지시켜줌 -->
+		  	    <td><a th:href="@{|/users/delete/${users.uno}|}"
+		  	           onclick="return confirm('해당 회원을 삭제하시겠습니까?')">삭제</a></td>
+		  	  </tr>
+		  	</tbody>
+		  </table>
+		</section>
+		
+		
+	</div>
+	</div>
+	<div th:replace="~{footer}"></div>
+</body>
+</html>

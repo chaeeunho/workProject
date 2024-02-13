@@ -1,217 +1,313 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
 <link rel="stylesheet" th:href="@{/css/common.css}">
 <link rel="stylesheet" th:href="@{/css/main.css}">
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/aa24b12773.js"
+	crossorigin="anonymous"></script>
+<script type="module" src="/js/apikey.js"></script>
 </head>
 <body>
 	<div id="main">
-    <div id="container">
-    	<!-- header.html 연결 -->
-      <div th:replace="~{header}"></div>
-  
-      <section id="main_body">
-  			<div id="search_box">
-  				<i class="fa-solid fa-magnifying-glass" style="color: #8B8989"></i>
-  				<input type="text" id="search_input" placeholder="찾고 싶은 친구의 이름 또는 닉네임을 입력해주세요.">
-  			</div>
-  			
-  			<div id="slide_box">
-  				<div id="slide1" style="display: none;">
-  					<img th:src="@{/images/main_slide/main_slide_1.jpeg}" alt="main_slide_1">
-  					<div class="slide_content">
-  						<p><i>Health Solutions</i></p>
-  						<p><i>3WORK는<br>즐겁고 건강한 삶을 위해<br>운동과 올바른 식생활에 관련된<br>차별화된 솔루션을 제공합니다.</i></p>
-  					</div>
-  				</div>
-  				<div id="slide2" style="display: none;">
-  					<img th:src="@{/images/main_slide/main_slide_2.jpeg}" alt="main_slide_2">
-  					<div class="slide_content2">
-  						<p><i>Wellbeing Life</i></p>
-  						<p><i>3WORK와 함께 건강하고<br>행복한 일상을 만들어보세요 !</i></p>
-  					</div>
-  				</div>
-  				<div id="slide3" style="display: none;">
-  					<img th:src="@{/images/main_slide/main_slide_3.jpeg}" alt="main_slide_3">
-  					<div class="slide_content3">
-  						<p><i>With People</i></p>
-  						<p><i>나만의 미니 공간을 만들어 사람들과 소통하고,<br>운동도 함께하면 효과는 무려 두배 !<br>건강 가득한 공간을 만들어보세요.</i></p>
-  					</div>
-  				</div>
-  			</div>
-  		<!-- 로그인 전 -->
-  		<th:block sec:authorize="isAnonymous()">
-  			<div id="login_box">
-  				<div id="login_box_middle">
-  					<a th:href="@{/login}">
-  						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</span></button>
-  					</a>
-	  				<div id="login_menu">
-	  					<a th:href="@{/user/id_search}">아이디 찾기</a>
-	  					<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-	  					<a th:href="@{/user/join}">회원가입</a>
-	  				</div>
-  				</div>
-  			</div>
-  		</th:block>
-  		<!-- 로그인 후 -->
-  		<th:block sec:authorize="isAuthenticated()">
-	    <div id="login_box">
-	        <div id="login_box_middle">
-	            <!-- JavaScript 코드를 직접 포함하여 버튼 클릭 시 실행되도록 합니다 -->
-	            <button type="button" id="login_btn" onclick="handleLoginButtonClick()">
-	                My&nbsp;Home&nbsp;
-	            </button>
-	            <div id="login_menu">
-	                <a th:href="@{/user/id_search}">아이디 찾기</a>
-	                <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-	                <a th:href="'#'">로그아웃</a>
-	            </div>
-	        </div>
-	    </div>
-			</th:block>
-  			
-  			<div id="weather_box">
-  				<div id="weather_title">
-  					<p>날씨</p>
-  				</div>
-  				<div id="weather_info">
-  					
-  				</div>
-  				<div id="weather_etc">
-  					
-  				</div>
-  			</div>
-  			
-  			<div id="work_recommend">
-  				<!-- 추천 카데고리 제목  -->
-  				<div class="work_title">
-  					<p>3WORK RECOMMEND</p>
-  				</div>
-  				<!-- 추천 카데고리의 메뉴  -->
-  				<div class="work_menu">
-  					<a th:href="@{/board/musicboard}">노래 추천</a>
-  					&nbsp;/&nbsp;
-  					<a th:href="@{/board/food}">건강 식품</a>
-  					&nbsp;/&nbsp;
-  					<a th:href="@{/board/item}">운동기구&운동복</a>
-  				</div>
-  				<div id="work_recommend_link">
-	  				<!-- 노래 추천 링크 이동 이미지 -->
-	  				<div id="work_music">
-	  					<a th:href="@{/board/musicboard}">
-			  				<img th:src="@{/images/main_body/3work_recommend_1.png}" alt="3work_recommend_1">
-	  					</a>
-	  					<div id="work_music_content">
-		  					<p>2024 JAN<p>
-		  					<p>Healthy Playlist</p>
-		  					<p>의욕 뿜뿜 Playlist~ ♬ ♪<br>이거 들으면 3대 500 SSAP가능 !</p>
-	  					</div>
-  					</div>
-  					<!-- 식품 추천 링크 이동 이미지 -->
-  					<div id="work_food">
-	  					<a th:href="@{/board/food}">
-		  					<img th:src="@{/images/main_body/3work_recommend_2.png}" alt="3work_recommend_2">
-		  					<img th:src="@{/images/main_body/3work_recommend_2_1.png}" alt="3work_recommend_2_1">
-	  					</a>
-	  					<div id="work_food_content">
-		  					<p>Wellbeing Food</p>
-		  					<p>건강식품 알뜰하게 챙기기 !</p>
-	  					</div>
-	  				</div>
-	  				<div id="work_item">
-	  					<!-- 운동기구&운동복 링크 이동 이미지 -->
-	  					<a th:href="@{/board/item}">
-		  					<img th:src="@{/images/main_body/3work_recommend_3.png}" alt="3work_recommend_3">
-	  					</a>
-	  					<div id="work_item_content">
-		  					<p>Health Item</p>
-		  					<p>당신의 안전을 책임질 운동 아이템 추천 !</p>
-	  					</div>
-  					</div>
-  				</div>
-  			</div>
-  			
-  			<div id="work_info">
-  				<!-- 추천 카데고리 제목  -->
-  				<div class="work_title">
-  					<p>3WORK INFORMATION</p>
-  				</div>
-  				<!-- 추천 카데고리의 메뉴  -->
-  				<div class="work_menu">
-  					<a th:href="@{/board/news}">건강 뉴스</a>
-  					&nbsp;/&nbsp;
-  					<a th:href="@{/board/map}">지도</a>
-  					&nbsp;/&nbsp;
-  					<a th:href="'#'">운동 정보</a>
-  				</div>
-  				<div id="work_info_link">
-	  				<!-- 건강 뉴스 링크 이동 이미지 -->
-	  				<div id="work_news">
-	  					<a th:href="@{/board/news}">
-			  				<img th:src="@{/images/main_body/3work_info_1.png}" alt="3work_info_1">
-	  					</a>
-	  					<div id="work_news_content">
-		  					<p>2024 JAN<p>
-		  					<p>Healthy News</p>
-		  					<p>당신의 건강한 삶을 위한 뉴스 !</p>
-	  					</div>
-	  				</div>
-	  				<!-- 지도 링크 이동 이미지 -->
-	  				<div id="work_map">
-	  					<a th:href="@{/board/map}">
-		  					<img th:src="@{/images/main_body/3work_info_2.png}" alt="3work_info_2">
-	  					</a>
-	  					<div id="work_map_content">
-		  					<p>My Health Place</p>
-		  					<p>우리 동네 근처 헬스장 찾기</p>
-	  					</div>
-	  				</div>
-	  				<!-- 운동 꿀팁 링크 이동 이미지 -->
-	  				<div id="work_method">
-	  					<a th:href="'#'">
-		  					<img th:src="@{/images/main_body/3work_info_3.png}" alt="3work_info_3">
-	  					</a>
-	  					<div id="work_method_content">
-		  					<p>Good Exercise</p>
-		  					<p>건강하고 효과적인 운동 방법 !</p>
-	  					</div>
-	  				</div>
-  				</div>
-  			</div>
-      </section>
-      
-      <!-- footer.html 연결 -->
-   		<div th:replace="~{footer}"></div>
-    </div>
-  </div>
-  
-  <!-- 유저페이지 팝업 JS -->
-  <script src="/js/main.js"></script>
-  <script>
-  // 버튼 클릭 시 실행될 함수 정의
-  function handleLoginButtonClick() {
-      // 서버로부터 받은 인증 상태
-      let serverResponse = {
-          "isAuthenticated": true //권한 인증
-      };
-      // 서버에서 받은 인증 상태를 가져옴
-      let isAuthenticated = serverResponse.isAuthenticated;
+		<div id="container">
+			<!-- header.html 연결 -->
+			<div th:replace="~{header}"></div>
 
-      // 인증 상태에 따라 동작 결정
-      if (isAuthenticated) {
-          let popOption = "width=1450, height=850";
-          let openUrl = '/user/userpage';
-          window.open(openUrl, '미니홈페이지', popOption);
-      } else {
-          window.location.href = '/login';
-      }
-  }
-</script>
+			<section id="main_body">
+				<div id="search_box">
+					<form th:action="@{/user/search}" method="post">
+						<i class="fa-solid fa-magnifying-glass" style="color: #8B8989"></i>
+						<input type="text" id="search_input" name="uid"
+							placeholder="찾고 싶은 친구의 아이디를 입력해주세요.">
+						<button type="submit" id="search_btn">검색</button>
+					</form>
+				</div>
+
+				<div id="slide_box">
+					<div id="slide1" style="display: none;">
+						<img th:src="@{/images/main_slide/main_slide_1.jpeg}"
+							alt="main_slide_1">
+						<div class="slide_content">
+							<p>
+								<i>Health Solutions</i>
+							</p>
+							<p>
+								<i>3WORK는<br>즐겁고 건강한 삶을 위해<br>운동과 올바른 식생활에 관련된<br>차별화된
+									솔루션을 제공합니다.
+								</i>
+							</p>
+						</div>
+					</div>
+					<div id="slide2" style="display: none;">
+						<img th:src="@{/images/main_slide/main_slide_2.jpeg}"
+							alt="main_slide_2">
+						<div class="slide_content2">
+							<p>
+								<i>Wellbeing Life</i>
+							</p>
+							<p>
+								<i>3WORK와 함께 건강하고<br>행복한 일상을 만들어보세요 !
+								</i>
+							</p>
+						</div>
+					</div>
+					<div id="slide3" style="display: none;">
+						<img th:src="@{/images/main_slide/main_slide_3.jpeg}"
+							alt="main_slide_3">
+						<div class="slide_content3">
+							<p>
+								<i>With People</i>
+							</p>
+							<p>
+								<i>나만의 미니 공간을 만들어 사람들과 소통하고,<br>운동도 함께하면 효과는 무려 두배 !<br>건강
+									가득한 공간을 만들어보세요.
+								</i>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- 로그인 전 -->
+				<th:block sec:authorize="isAnonymous()">
+					<div id="login_box">
+						<div id="login_box_middle">
+							<a th:href="@{/login}">
+								<button type="button" id="login_btn">
+									3WORK&nbsp;:&nbsp;로그인</span>
+								</button>
+							</a>
+							<div id="login_menu">
+								<a th:href="@{/user/id_search}">아이디 찾기</a> <a
+									th:href="@{/user/pw_search}">비밀번호 찾기</a> <a
+									th:href="@{/user/join}">회원가입</a>
+							</div>
+						</div>
+					</div>
+				</th:block>
+				<!-- 로그인 후 -->
+				<th:block sec:authorize="isAuthenticated()">
+					<div id="login_box">
+						<div id="login_box_middle">
+							<!-- JavaScript 코드를 직접 포함하여 버튼 클릭 시 실행되도록 합니다 -->
+							<button type="button" id="login_btn"
+								onclick="handleLoginButtonClick()">My&nbsp;Home&nbsp;</button>
+							<div id="login_menu">
+								<a th:href="@{/user/id_search}">아이디 찾기</a> <a
+									th:href="@{/user/pw_search}">비밀번호 찾기</a> <a
+									th:href="@{/logout}">로그아웃</a>
+							</div>
+						</div>
+					</div>
+				</th:block>
+
+				<div id="weather_box">
+					<div id="weather_title">
+						<p>
+						<span class="nowtime"></span>
+						 <span>현재날씨</span>
+						</p>
+						
+					</div>
+					<div id="weather_info">
+						
+						 <h3>서울</h3>
+				         <h3 class="SeoulIcon"></h3>
+				         <h3 class="SeoulNowtemp">현재기온:</h3>
+				         <h3 class="SeoulLowtemp">최저기온:</h3>
+				         <h3 class="SeoulHightemp">최대기온:</h3>
+					</div>
+					<div id="weather_etc">
+					</div>
+				</div>
+
+				<div id="work_recommend">
+					<!-- 추천 카데고리 제목  -->
+					<div class="work_title">
+						<p>3WORK RECOMMEND</p>
+					</div>
+					<!-- 추천 카데고리의 메뉴  -->
+					<div class="work_menu">
+						<a th:href="@{/board/musicboard}">노래 추천</a> &nbsp;/&nbsp; <a
+							th:href="@{/board/food}">건강 식품</a> &nbsp;/&nbsp; <a
+							th:href="@{/board/item}">운동기구&운동복</a>
+					</div>
+					<div id="work_recommend_link">
+						<!-- 노래 추천 링크 이동 이미지 -->
+						<div id="work_music">
+							<a th:href="@{/board/musicboard}"> <img
+								th:src="@{/images/main_body/3work_recommend_1.png}"
+								alt="3work_recommend_1">
+							</a>
+							<div id="work_music_content">
+								<p>2024 JAN
+								<p>
+								<p>Healthy Playlist</p>
+								<p>
+									의욕 뿜뿜 Playlist~ ♬ ♪<br>이거 들으면 3대 500 SSAP가능 !
+								</p>
+							</div>
+						</div>
+						<!-- 식품 추천 링크 이동 이미지 -->
+						<div id="work_food">
+							<a th:href="@{/board/food}"> <img
+								th:src="@{/images/main_body/3work_recommend_2.png}"
+								alt="3work_recommend_2"> <img
+								th:src="@{/images/main_body/3work_recommend_2_1.png}"
+								alt="3work_recommend_2_1">
+							</a>
+							<div id="work_food_content">
+								<p>Wellbeing Food</p>
+								<p>건강식품 알뜰하게 챙기기 !</p>
+							</div>
+						</div>
+						<div id="work_item">
+							<!-- 운동기구&운동복 링크 이동 이미지 -->
+							<a th:href="@{/board/item}"> <img
+								th:src="@{/images/main_body/3work_recommend_3.png}"
+								alt="3work_recommend_3">
+							</a>
+							<div id="work_item_content">
+								<p>Health Item</p>
+								<p>당신의 안전을 책임질 운동 아이템 추천 !</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="work_info">
+					<!-- 추천 카데고리 제목  -->
+					<div class="work_title">
+						<p>3WORK INFORMATION</p>
+					</div>
+					<!-- 추천 카데고리의 메뉴  -->
+					<div class="work_menu">
+						<a th:href="@{/board/news}">건강 뉴스</a> &nbsp;/&nbsp; <a
+							th:href="@{/board/map}">지도</a> &nbsp;/&nbsp; <a th:href="'#'">운동
+							정보</a>
+					</div>
+					<div id="work_info_link">
+						<!-- 건강 뉴스 링크 이동 이미지 -->
+						<div id="work_news">
+							<a th:href="@{/board/news}"> <img
+								th:src="@{/images/main_body/3work_info_1.png}"
+								alt="3work_info_1">
+							</a>
+							<div id="work_news_content">
+								<p>2024 JAN
+								<p>
+								<p>Healthy News</p>
+								<p>당신의 건강한 삶을 위한 뉴스 !</p>
+							</div>
+						</div>
+						<!-- 지도 링크 이동 이미지 -->
+						<div id="work_map">
+							<a th:href="@{/board/map}"> <img
+								th:src="@{/images/main_body/3work_info_2.png}"
+								alt="3work_info_2">
+							</a>
+							<div id="work_map_content">
+								<p>My Health Place</p>
+								<p>우리 동네 근처 헬스장 찾기</p>
+							</div>
+						</div>
+						<!-- 운동 꿀팁 링크 이동 이미지 -->
+						<div id="work_method">
+							<a th:href="'#'"> <img
+								th:src="@{/images/main_body/3work_info_3.png}"
+								alt="3work_info_3">
+							</a>
+							<div id="work_method_content">
+								<p>Good Exercise</p>
+								<p>건강하고 효과적인 운동 방법 !</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- footer.html 연결 -->
+			<div th:replace="~{footer}"></div>
+		</div>
+	</div>
+
+	<!-- 유저페이지 팝업 JS -->
+	<script src="/js/main.js"></script>
+
+	<script>
+		// 버튼 클릭 시 실행될 함수 정의
+		function handleLoginButtonClick() {
+			// 서버로부터 받은 인증 상태
+			let serverResponse = {
+				"isAuthenticated" : true
+			//권한 인증
+			};
+			// 서버에서 받은 인증 상태를 가져옴
+			let isAuthenticated = serverResponse.isAuthenticated;
+
+			// 인증 상태에 따라 동작 결정
+			if (isAuthenticated) {
+				let popOption = "width=1450, height=850";
+				let openUrl = '/user/userpage';
+				window.open(openUrl, '미니홈페이지', popOption);
+			} else {
+				window.location.href = '/login';
+			}
+		}
+		
+		//오늘 날짜출력
+	    $(document).ready(function () {
+
+	        function convertTime() {
+	            var now = new Date();
+
+
+	            var month = now.getMonth() + 1;
+	            var date = now.getDate();
+
+	            return month + '월' + date + '일';
+	        }
+
+	        var currentTime = convertTime();
+	        $('.nowtime').append(currentTime);
+	    });
+
+
+	//제이쿼리사용
+	$.getJSON('https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=a8501159eb9e48f3bb16a140c20e9c6f&units=metric', function(WeatherResult) {
+    // 기온 출력을 위해 Math.round()를 사용하여 온도 값을 정수로 반올림
+    var nowTemp = Math.round(WeatherResult.main.temp);
+    var lowTemp = Math.round(WeatherResult.main.temp_min);
+    var highTemp = Math.round(WeatherResult.main.temp_max);
+
+    $('.SeoulNowtemp').html("현재기온: " + nowTemp + '°C');
+    $('.SeoulLowtemp').html("최저기온: " + lowTemp + '°C');
+    $('.SeoulHightemp').html("최대기온: " + highTemp + '°C');
+
+    // 날씨 아이콘 출력
+    var weathericonUrl =
+        '<img src= "http://openweathermap.org/img/wn/'
+        + WeatherResult.weather[0].icon +
+        '.png" alt="' + WeatherResult.weather[0].description + '"/>'
+    $('.SeoulIcon').html(weathericonUrl);
+
+    // 기온에 따른 이미지 표시
+    var temperature = WeatherResult.main.temp;
+    if (temperature <= 10) {
+        // 추운 날씨 이미지
+        $('.weatherExpression').html('<img src="#" alt="Cold">');
+    } else if (temperature >= 20) {
+        // 따듯한 날씨 이미지
+        $('.weatherExpression').html('<img src="#" alt="Warm">');
+    } else {
+        // 온화한 날씨 이미지 또는 표시하지 않음
+        $('.weatherExpression').html('<img src="#" alt="Cold">');
+    }
+});
+	</script>
 </body>
 </html>

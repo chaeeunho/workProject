@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+header {
+    width: 100%;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    padding: 10px 0;
+}
+
+/* 헤더 내 요소 중앙 정렬 (예: 로고, 네비게이션 등) */
+.header-content {
+    margin: 0 auto;
+    display: inline-block; /* 또는 flex 사용 */
+}
+/* 유저 리스트 컨테이너 설정 */
+#container_wrap {
+    width: 1200px;
+    position: relative;
+}
+
+#container {
+    max-width: 1200px; /* 최대 너비 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px;
+    min-height: 80vh; /* 뷰포트 높이의 80%를 최소 높이로 설정 */
+}
+
+/* 유저 리스트 제목 스타일 */
+#usersList h2 {
+    font-size: 30px;
+    text-align: left;
+    padding-bottom: 20px;
+    font-family: 'SBAggroM'; /* 필요에 따라 폰트 변경 */
+}
+
+/* 유저 리스트 테이블 스타일 */
+.tbl_list {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.tbl_list thead th {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 15px;
+    font-size: 17px;
+    color: gray;
+    font-weight: 100;
+}
+
+.tbl_list tbody tr {
+    border-bottom: 1px solid black;
+}
+
+.tbl_list td {
+    padding: 30px 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* 조회 및 삭제 링크 스타일 */
+.tbl_list a {
+    text-decoration: none;
+    color: gray;
+    font-family: 'SBAggroL';
+    font-size: 15px;
+}
+
+.tbl_list a:hover {
+    color: black;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}

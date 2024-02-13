@@ -4,6 +4,7 @@
 #privacy{
   position: relative;
   width: 100%;
+  min-height:1900px;
   height: 1900px;
 }
 .data{
@@ -24,6 +25,8 @@
 
 
 /* rule.html */
+
+
 
 
 

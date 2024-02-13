@@ -4,6 +4,7 @@ package com.work.community.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,14 @@ public class UsersService {
 			return null;
 		}
 		
+		
+	    // 아이디의 일부를 포함하는 사용자 검색
+	    public List<UsersDTO> searchUsersByUid(String uid) {
+	        List<Users> usersList = usersRepository.findByUidContaining(uid);
+	        return usersList.stream()
+	                        .map(UsersDTO::toSaveDTO)
+	                        .collect(Collectors.toList());
+	    }
 
 		public void deleteById(Integer uno) {
 			usersRepository.deleteById(uno);

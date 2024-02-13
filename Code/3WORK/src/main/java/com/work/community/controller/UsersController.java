@@ -1,6 +1,7 @@
 package com.work.community.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.work.community.dto.UsersDTO;
 import com.work.community.entity.Users;
+import com.work.community.repository.UsersRepository;
 import com.work.community.service.UsersService;
 
 import jakarta.servlet.http.HttpSession;
@@ -27,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class UsersController {
 	
 	private final UsersService usersService;
+	private final UsersRepository usersRepository;
 	//로그인 페이지 요청 :  /login
 	@GetMapping("/login")
 	public String loginForm() {
@@ -63,7 +66,11 @@ public class UsersController {
 	public String joinForm(UsersDTO usersDTO) {
 		return "user/join";
 	}
-	
+	//로그아웃
+	@GetMapping("/logout")
+	public String logout() {
+		return "redirect:/main";
+	}
 	//회원 가입 처리
 	//@Valid : 필드의 유효성 검사
 	//BindingResult: 에러 처리 클래스
@@ -116,12 +123,19 @@ public class UsersController {
 	    return "user/id_search"; // 아이디 찾기 폼 페이지 반환
 	}
 
-	// 아이디 찾기 처리 
+	//아이디 찾기 ( 이름과전화번호)
 	@PostMapping("/user/id_search")
-	public String idSearch(@RequestParam("uid") String email, Model model) {
-	    // uid를 사용하여 사용자 아이디 찾기 로직 구현
-	    // 찾은 아이디를 model에 추가하여 결과 페이지에 표시
-	    return "user/id_result"; // 결과 페이지 반환
+	public String idSearch(@RequestParam("uname") String name, @RequestParam("uphone") String phone, Model model) {
+	    Optional<Users> usersOptional = usersRepository.findByUnameAndUphone(name, phone);
+	    if(usersOptional.isPresent()) {
+	        Users users = usersOptional.get();
+	        model.addAttribute("uId", users.getUid());
+	        model.addAttribute("joinDate", users.getCreatedDate()); // 가입 날짜, BaseEntity에서 상속받은 createdAt 사용
+	        return "/user/id_result"; // 결과 페이지로 이동
+	    } else {
+	        model.addAttribute("message", "일치하는 사용자 정보가 없습니다.");
+	        return "/user/id_search"; // 정보가 없는 경우 다시 아이디 찾기 페이지로 이동
+	    }
 	}
 
 	// 비밀번호 찾기 페이지
@@ -137,6 +151,28 @@ public class UsersController {
 	    // 임시 비밀번호 발급 또는 비밀번호 재설정 링크를 이메일로 전송
 	    return "user/pw_result"; // 결과 페이지 반환
 	}
+	
+	//main 창에서 유저 검색 
+	@PostMapping("/user/search")
+	public String searchUsers(@RequestParam("uid") String uid, Model model) {
+	    List<UsersDTO> usersList = usersService.searchUsersByUid(uid);
+	    model.addAttribute("usersList", usersList);
+	    return "searchResult"; // 검색 결과를 표시할 페이지
+	}
+	
+	//유저검색후 미니홈페이방문 	
+	@GetMapping("/user/userpage/{uno}")
+	public String userPage(@PathVariable Integer uno, Model model) {
+	    Optional<Users> userOptional = usersRepository.findById(uno);
+	    if (userOptional.isPresent()) {
+	        model.addAttribute("user", userOptional.get());
+	        return "user/userpage"; // 사용자의 미니홈페이지를 반환하는 View의 이름
+	    } else {
+	        return "error/404"; // 사용자를 찾을 수 없는 경우의 에러 페이지
+	    }
+	}
+	
+
 	
 //		//회원 수정 페이지
 //		//@AuthenticationPrincipal - 회원을 인가하는 클래스

@@ -1,28 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>3WORK : WWW</title>
-<link rel="stylesheet" th:href="@{/css/common.css}">
-<link rel="stylesheet" th:href="@{/css/submenu/submenu.css}">
+    <meta charset="UTF-8">
+    <title>노래 추천</title>
+    <link rel="stylesheet" th:href="@{/css/board/map.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="privacy">
-		<div id="container">
-			<!-- header.html 연결 -->
-      <div th:replace="~{header}"></div>
-      
-      <section class="data">
-        <div class="data-title">
-           <div class="board">
-               <p>오시는 길</p>
-           </div>
-	      </div>
-	    </section>
-	    
-      <!-- footer.html 연결 -->
-      <div th:replace="~{footer}"></div>
-		</div>
-	</div>
+	<div id = "musicboard">
+	<div id ="container">
+	<div th:replace="~{header}"></div>
+    <section class="msection">
+        <div id="mcontainer">
+        <div class="t_box">
+                <p class = "tag">오시는 길..</p>
+        </div>
+   	<div class="map_wrap">
+	    <div id="map"></div> 
+	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47d2ab6b1a7997a385e59f8a61f10a46&libraries=services"></script>
+	    <!-- 지도타입 컨트롤 div 입니다 -->
+	    <div class="custom_typecontrol radius_border">
+	        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+	        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+	    </div>
+	    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+	    <div class="custom_zoomcontrol radius_border"> 
+	        <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
+	        <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+	    </div>
+</div>
+<script>
+//마커를 담을 배열입니다
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47d2ab6b1a7997a385e59f8a61f10a46&libraries=services"></script>
+<script>
+var markers = [];
+
+var mapContainer = document.getElementById('map'), 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.5172363, 126.9057849), // Updated coordinates
+        level: 3 
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+var markerPosition  = new kakao.maps.LatLng(37.5172363, 126.9057849); 
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+marker.setMap(map);
+
+// Keep the search input value as the address of 이레빌딩
+document.getElementById('keyword').value = "서울 영등포구 선유동2로 57 이레빌딩";
+
+// Define the rest of your functions as before
+function searchPlaces() {
+    // implementation remains the same
+}
+
+function placesSearchCB(data, status, pagination) {
+    // implementation remains the same
+}
+
+function displayPlaces(places) {
+    // implementation remains the same
+}
+</script>
+        </div>
+    </section> 
+    <div th:replace="~{footer}"></div>
+    </div>
+    </div>
 </body>
 </html>

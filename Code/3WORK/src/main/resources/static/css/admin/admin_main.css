@@ -41,6 +41,7 @@
   margin-top: 50px;
   margin-left: 40px;
 }
+
 #work_info{
 	float: right;
   position: relative;
@@ -49,6 +50,15 @@
   margin-top: 50px;
   margin-left: 40px;
 }
+#user_info{
+	float: left;
+  position: relative;
+  width: 46%;
+  height: 100px;
+  margin-top: 50px;
+  margin-left: 40px;
+}
+
 .work_title{
 	background: #F1F3E1;
 	border-radius: 30px;
@@ -62,6 +72,15 @@
 	margin: 15px;
 }
 .work_menu a{
+	color: #8B8989;
+	text-decoration: none;
+}
+
+.user_menu{
+	text-align: center;
+	margin: 15px;
+}
+.user_menu a{
 	color: #8B8989;
 	text-decoration: none;
 }

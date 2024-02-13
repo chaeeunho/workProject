@@ -111,6 +111,15 @@
 	line-height: 1.7;
 }
 
+#search_btn {
+    background: #F1F3E1;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 20px; /* 패딩 값을 줄여 버튼 크기 조절 */; 
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    font-family: 'SBAggroM';
+}
 #login_box{
 	width: 33.6%;
 	height: 150px;
@@ -157,7 +166,7 @@
 }
 #weather_title p{
 	font-size: 20px;
-	text-align: left;
+	text-align: center;
 	margin: 20px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #cccccc;

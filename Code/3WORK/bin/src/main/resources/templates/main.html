@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
@@ -44,38 +44,37 @@
   					</div>
   				</div>
   			</div>
-  			
-  			<!-- 로그인 전 -->
-        <th:block sec:authorize="isAnonymous()">
-           <div id="login_box">
-              <div id="login_box_middle">
-                 <a th:href="@{/login}">
-                    <button type="button" id="login_btn"><span>3WORK&nbsp;:&nbsp;로그인</span></button>
-                 </a>
-                 <div id="login_menu">
-                    <a th:href="@{/user/id_search}">아이디 찾기</a>
-                    <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-                    <a th:href="@{/user/join}">회원가입</a>
-                 </div>
-              </div>
-           </div>
-        </th:block>
-        <!-- 로그인 후 -->
-        <th:block sec:authorize="isAuthenticated()">
-           <div id="login_box">
-              <div id="login_box_middle">
-                 <a th:href="@{/user/userpage}">
-                    <button type="button" id="login_btn" onclick="openPopup()">
-                    My&nbsp;Home&nbsp;</button>
-                 </a>
-                 <div id="login_menu">
-                    <a th:href="@{/user/id_search}">아이디 찾기</a>
-                    <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-                    <a th:href="'#'">로그아웃</a>
-                 </div>
-              </div>
-           </div>
-        </th:block>
+  		<!-- 로그인 전 -->
+  		<th:block sec:authorize="isAnonymous()">
+  			<div id="login_box">
+  				<div id="login_box_middle">
+  					<a th:href="@{/login}">
+  						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</span></button>
+  					</a>
+	  				<div id="login_menu">
+	  					<a th:href="@{/user/id_search}">아이디 찾기</a>
+	  					<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
+	  					<a th:href="@{/user/join}">회원가입</a>
+	  				</div>
+  				</div>
+  			</div>
+  		</th:block>
+  		<!-- 로그인 후 -->
+  		<th:block sec:authorize="isAuthenticated()">
+	    <div id="login_box">
+	        <div id="login_box_middle">
+	            <!-- JavaScript 코드를 직접 포함하여 버튼 클릭 시 실행되도록 합니다 -->
+	            <button type="button" id="login_btn" onclick="handleLoginButtonClick()">
+	                My&nbsp;Home&nbsp;
+	            </button>
+	            <div id="login_menu">
+	                <a th:href="@{/user/id_search}">아이디 찾기</a>
+	                <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
+	                <a th:href="'#'">로그아웃</a>
+	            </div>
+	        </div>
+	    </div>
+			</th:block>
   			
   			<div id="weather_box">
   				<div id="weather_title">
@@ -147,7 +146,7 @@
   				<div class="work_menu">
   					<a th:href="@{/board/news}">건강 뉴스</a>
   					&nbsp;/&nbsp;
-  					<a th:href="'#'">지도</a>
+  					<a th:href="@{/board/map}">지도</a>
   					&nbsp;/&nbsp;
   					<a th:href="'#'">운동 정보</a>
   				</div>
@@ -165,7 +164,7 @@
 	  				</div>
 	  				<!-- 지도 링크 이동 이미지 -->
 	  				<div id="work_map">
-	  					<a th:href="'#'">
+	  					<a th:href="@{/board/map}">
 		  					<img th:src="@{/images/main_body/3work_info_2.png}" alt="3work_info_2">
 	  					</a>
 	  					<div id="work_map_content">
@@ -192,24 +191,27 @@
     </div>
   </div>
   
-  <!-- 스크립트 -->
+  <!-- 유저페이지 팝업 JS -->
   <script src="/js/main.js"></script>
-  <!-- 팝업창 -->
   <script>
-	  let popupbtn = document.querySelector('button');
-	
-	  popupbtn.onclick = function() {
-	    th:if = "${#authorization.expression('isAuthenticated()')}"
-	    {
-	      let popOption = "width=1400, height=850";
-	      let openUrl = '/user/userpage';
-	      window.open(openUrl, '미니홈페이지', popOption);
-	    }
-	    th:unless="${#authorization.expression('isAuthenticated()')}"
-	    {
-	      window.location.href = '/login';
-	    }
-	  };
-	</script>
+  // 버튼 클릭 시 실행될 함수 정의
+  function handleLoginButtonClick() {
+      // 서버로부터 받은 인증 상태
+      let serverResponse = {
+          "isAuthenticated": true //권한 인증
+      };
+      // 서버에서 받은 인증 상태를 가져옴
+      let isAuthenticated = serverResponse.isAuthenticated;
+
+      // 인증 상태에 따라 동작 결정
+      if (isAuthenticated) {
+          let popOption = "width=1450, height=850";
+          let openUrl = '/user/userpage';
+          window.open(openUrl, '미니홈페이지', popOption);
+      } else {
+          window.location.href = '/login';
+      }
+  }
+</script>
 </body>
 </html>

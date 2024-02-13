@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>검색 결과</title>
+    <style>
+        body {
+            font-family: 'SBAggroL', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        #searchResults {
+            width: 1200px;
+            margin: 70px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 30px;
+            font-family: 'SBAggroM', sans-serif;
+            margin-bottom: 20px;
+        }
+        .user {
+            border-bottom: 1px solid #ccc;
+            padding: 15px;
+            font-size: 17px;
+            color: gray;
+        }
+        .user:last-child {
+            border-bottom: none;
+        }
+        .user p {
+            margin: 5px 0;
+            font-weight: 100;
+        }
+        .user a {
+            text-decoration: none;
+            color: #000;
+            background-color: #f1f3e1;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+        .user a:hover {
+            background-color: #e2e6c1;
+        }
+        .pagination {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .pagination a {
+            text-decoration: none;
+            color: gray;
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        .pagination a:focus, .pagination a:hover {
+            border-color: black;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{header}"></div>
+<div id="searchResults">
+    <h2>검색 결과</h2>
+    <div th:each="user : ${usersList}" class="user">
+        <p>아이디: <span th:text="${user.uid}"></span></p>
+        <p>닉네임: <span th:text="${user.unickname}"></span></p>
+        <a th:href="@{'/user/userpage/' + ${user.uno}}">방문</a>
+    </div>
+    <div class="pagination">
+        <!-- Pagination links would go here -->
+    </div>
+</div>
+<div th:replace="~{footer}"></div>
+</body>
+</html>
