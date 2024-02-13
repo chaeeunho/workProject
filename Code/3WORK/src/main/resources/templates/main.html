@@ -49,7 +49,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   			<div id="login_box">
   				<div id="login_box_middle">
   					<a th:href="@{/login}">
-  						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</span></button>
+  						<button type="button" id="login_btn">3WORK&nbsp;:&nbsp;로그인</button>
   					</a>
 	  				<div id="login_menu">
 	  					<a th:href="@{/user/id_search}">아이디 찾기</a>
@@ -63,7 +63,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   		<th:block sec:authorize="isAuthenticated()">
 	    <div id="login_box">
 	        <div id="login_box_middle">
-	            <!-- JavaScript 코드를 직접 포함하여 버튼 클릭 시 실행되도록 합니다 -->
 	            <button type="button" id="login_btn" onclick="handleLoginButtonClick()">
 	                My&nbsp;Home&nbsp;
 	            </button>
@@ -193,25 +192,33 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   
   <!-- 유저페이지 팝업 JS -->
   <script src="/js/main.js"></script>
-  <script>
-  // 버튼 클릭 시 실행될 함수 정의
-  function handleLoginButtonClick() {
-      // 서버로부터 받은 인증 상태
-      let serverResponse = {
-          "isAuthenticated": true //권한 인증
-      };
-      // 서버에서 받은 인증 상태를 가져옴
-      let isAuthenticated = serverResponse.isAuthenticated;
+<script>
+//서버 응답 객체를 모의로 설정
+let serverResponse = {
+    "isAuthenticated": true, // 권한 인증
+    "userId": "1" // 현재 로그인한 사용자의 회원 번호
+};
 
-      // 인증 상태에 따라 동작 결정
-      if (isAuthenticated) {
-          let popOption = "width=1450, height=850";
-          let openUrl = '/user/userpage';
-          window.open(openUrl, '미니홈페이지', popOption);
-      } else {
-          window.location.href = '/login';
-      }
-  }
+// 버튼 클릭 시 실행될 함수 정의
+function handleLoginButtonClick() {
+    // 서버에서 받은 인증 상태와 사용자 ID 가져오기
+    let isAuthenticated = serverResponse.isAuthenticated;
+    let userId = serverResponse.userId;
+
+    // 인증 상태에 따라 동작 결정
+    if (isAuthenticated) {
+        // 회원 번호가 1번인 경우에만 미니홈페이지로 이동
+        if (userId === "1") {
+            let popOption = "width=1450, height=850";
+            let openUrl = '/user/userpage/1'; // 회원 번호가 1인 미니홈페이지 URL
+            window.open(openUrl, '미니홈페이지', popOption);
+        } else {
+            alert("회원 번호가 1번이 아닙니다.");
+        }
+    } else {
+        window.location.href = '/login';
+    }
+}
 </script>
 </body>
 </html>

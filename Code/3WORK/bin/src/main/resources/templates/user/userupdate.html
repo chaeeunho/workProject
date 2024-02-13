@@ -22,15 +22,15 @@
          <!-- 프로필 수정 폼 -->
             <form th:action="@{/user/userupdate}" method="post" enctype="multipart/form-data">
                <input type="hidden" name="uno" th:value="${users.uno}">
-               
+                              
                <!-- 프로필 이미지 -->
-            <div id="update_image">
-               <!-- 첨부한 이미지가 나오는 이미지 부분 -->
+            <!-- <div id="update_image">
+               첨부한 이미지가 나오는 이미지 부분
                <img th:src="@{/images/Profile.png}" alt="프로필">
-               <!-- 자바스크립트로 버튼 누르면 파일 첨부 화면 뜨기 -->
+               자바스크립트로 버튼 누르면 파일 첨부 화면 뜨기
                <button type="button" id="edit_btn">EDIT</button>
             </div>
-            
+             -->
             <!-- 프로필 정보 수정 -->
             <table id="update_tbl">
                <tr class="update_input">
@@ -49,7 +49,7 @@
                      </label>
                      <br>
                  <input type="text" name="unickname" 
-                       id="unickname" th:value="${users.unickname}">
+                       id="unickname" th:value="${users.unickname}" readonly>
                   </td>
                </tr>
                
@@ -69,6 +69,36 @@
                   </td>
                </tr>
                
+               <tr class="update_input">
+                  <td class="update_input_content">
+                     <label for="uid">
+                        아이디
+                     </label>
+                 <input type="text" name="uid" 
+                       id="uid" th:value="${users.uid}"> 
+                  </td>
+                <tr>
+                
+                <tr class="update_input">
+                  <td class="update_input_content">
+                     <label for="ubirth">
+                        생일
+                     </label>
+                 <input type="text" name="ubirth" 
+                       id="ubirth" th:value="${users.ubirth}"> 
+                  </td>
+                <tr>
+                
+                <tr class="update_input">
+                  <td class="update_input_content">
+                     <label for="ugender">
+                        성별
+                     </label>
+                 <input type="text" name="ugender" 
+                       id="ugender" th:value="${users.ugender}"> 
+                  </td>
+                <tr>
+               
                <tr class="update_map">
                   <td class="update_map_content">
                      <label for="uaddress">주소</label>
@@ -78,7 +108,8 @@
                            id="uaddress" th:value="${users.uaddress}">
                     <button type="button" class="map_btn" onclick="'#'">주소 검색</button>
                      </div>
-                 <input type="text" id="#" placeholder="상세주소" class="map_detail">
+                 <input type="text" id="detailuaddress" th:value="${users.detailuaddress}" 
+                 				placeholder="상세주소" class="map_detail">
                   </td>
                </tr>
                
@@ -123,7 +154,7 @@
         </section>
       
       <!-- footer.html 연결 -->
-         <div th:replace="~{footer}"></div>
+         <!-- <div th:replace="~{footer}"></div> -->
     </div>
   </div>
   

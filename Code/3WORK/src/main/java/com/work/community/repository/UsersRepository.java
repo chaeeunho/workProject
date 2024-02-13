@@ -10,5 +10,9 @@ public interface UsersRepository extends JpaRepository<Users,Integer>{
 
    //select * from member where member_id = ?;
    Optional<Users> findByUid(String string);
+   
+   Optional<Users> findByUnickname(String string);
+   
+   
 
 }
