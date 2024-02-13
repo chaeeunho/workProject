@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.work.community.config.SecurityUser;
 import com.work.community.dto.CommentsDTO;
+import com.work.community.dto.FoodDTO;
 import com.work.community.dto.UsersDTO;
 import com.work.community.entity.Comments;
 import com.work.community.entity.Users;
@@ -181,42 +182,12 @@ public class UsersController {
 		
 	//회원 수정 처리 - 상세보기로 이동
 	@PostMapping("/user/userupdate")
-	public String update(@ModelAttribute UsersDTO usersDTO) {
-		usersService.update(usersDTO);
-		return "redirect:/main";
+	public String update(@ModelAttribute UsersDTO usersDTO,
+			 MultipartFile uimage, Model model) throws Exception {
+		usersService.saveImage(usersDTO, uimage);
+		model.addAttribute("users", usersDTO);
+		return "redirect:/user/userpage/" + usersDTO.getUno();
 	}
-	
-	//회원 정보 수정 (프로필 이미지)처리
-	@PostMapping("/upload-profile-image")
-    public String uploadProfileImage(@RequestParam("profileImage") MultipartFile profileImage) {
-        try {
-            // 이미지를 저장할 디렉토리 경로 설정
-            String uploadDirectory = "C:/3workfiles/profile/";
 
-            // UUID를 사용하여 파일명 중복 방지
-            String fileName = UUID.randomUUID().toString() + "_" + profileImage.getOriginalFilename();
-            String filePath = uploadDirectory + fileName;
-
-            // 이미지를 서버에 저장
-            File destinationFile = new File(filePath);
-            profileImage.transferTo(destinationFile);
-
-            // 저장된 이미지의 URL 생성
-            String imageUrl = "http://192.168.20.72:8080/images/" + fileName;
-
-            // 이미지 URL 반환
-            return imageUrl;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Image upload failed!";
-        }
-    }
-
-
-	@GetMapping("/get-csrf-token")
-    @ResponseBody
-    public CsrfToken getCsrfToken(HttpServletRequest request) {
-        return (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-    }
 
 }

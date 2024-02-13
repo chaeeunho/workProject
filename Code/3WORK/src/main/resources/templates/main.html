@@ -61,19 +61,21 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   		</th:block>
   		<!-- 로그인 후 -->
   		<th:block sec:authorize="isAuthenticated()">
-	    <div id="login_box">
-	        <div id="login_box_middle">
-	            <button type="button" id="login_btn" onclick="handleLoginButtonClick()">
-	                My&nbsp;Home&nbsp;
-	            </button>
-	            <div id="login_menu">
-	                <a th:href="@{/user/id_search}">아이디 찾기</a>
-	                <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
-	                <a th:href="'#'">로그아웃</a>
-	            </div>
-	        </div>
-	    </div>
-			</th:block>
+		    <div id="login_box">
+		        <div id="login_box_middle">
+		            <th:block th:each="user : ${users}" th:if="${user.uid eq principal.username}">
+		                <a  th:href="@{|/user/userpage/${user.uno}|}">
+		                    <button type="button" id="login_btn">My&nbsp;Home&nbsp;</button>
+		                </a>
+		            </th:block>
+		            <div id="login_menu">
+		                <a th:href="@{/user/id_search}">아이디 찾기</a>
+		                <a th:href="@{/user/pw_search}">비밀번호 찾기</a>
+		                <a th:href="'#'">로그아웃</a>
+		            </div>
+		        </div>
+		    </div>
+		</th:block>
   			
   			<div id="weather_box">
   				<div id="weather_title">
@@ -194,7 +196,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <script src="/js/main.js"></script>
 <script>
 //서버 응답 객체를 모의로 설정
-let serverResponse = {
+/* let serverResponse = {
     "isAuthenticated": true, // 권한 인증
     "userId": "1" // 현재 로그인한 사용자의 회원 번호
 };
@@ -210,7 +212,7 @@ function handleLoginButtonClick() {
         // 회원 번호가 1번인 경우에만 미니홈페이지로 이동
         if (userId === "1") {
             let popOption = "width=1450, height=850";
-            let openUrl = '/user/userpage/1'; // 회원 번호가 1인 미니홈페이지 URL
+            let openUrl = '/user/userpage/'; // 회원 번호가 1인 미니홈페이지 URL
             window.open(openUrl, '미니홈페이지', popOption);
         } else {
             alert("회원 번호가 1번이 아닙니다.");
@@ -218,7 +220,7 @@ function handleLoginButtonClick() {
     } else {
         window.location.href = '/login';
     }
-}
+} */
 </script>
 </body>
 </html>

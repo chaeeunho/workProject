@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <section id="profile">
             <p>TODAY <span id="today-visits">100</span> | TOTAL 4,300</p>
             <div id="profile-pic">
-                <img th:src="@{/images/Profile.png}" alt="프로필">
+                <img th:src="@{|/upload/profile/${Userinfo.ufilename}|}" alt="프로필">
             </div>
             <p>USERNAME's HOME
                 <a th:href="@{/user/userupdate}" id="setting">
@@ -157,12 +157,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
             </p>
             <p>한줄 소개명</p>
-			<p th:text="${profile != null ? (profile.pintroduce != null ? 
-			profile.pintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
+			<p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
+			Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
 				
 			<p>좋아하는 것</p>
-			<p th:text="${profile != null ? (profile.plike != null ? 
-			profile.plike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
+			<p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
+			Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
             <div id='calendar'></div>
         </section>
 
@@ -188,9 +188,29 @@ document.addEventListener('DOMContentLoaded', function() {
 		            </div>
 		            	<p id="content" th:text="${comment.ccontent}"><p>
 		            </div>
-		            
 			    </div>
 			</div>
+		<!-- 페이지 영역 -->
+		<div class="pagination">
+		<!-- 이전 페이지 -->
+		<!-- 2페이지클릭 : db페이지는 1page -->
+		<a th:href="${commentList.first}?'#' :
+					 @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number})}">Prev</a>
+		<!-- 페이지 번호 영역 -->
+			<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+				<!-- <span th:text="${page}"></span> -->
+				<!-- 쿼리 스트링 방식 : /board/pagelist?page=1 -->
+				<!-- 현재 페이지는 링크없이 숫자만 표시 -->
+				<span class="current_page" th:if="${page == commentList.number + 1}" th:text="${page}"></span>
+				<span th:if="${page != commentList.number + 1}">
+					<a th:href="@{|/user/userpage/${Userinfo.uno}|(page=${page})}" th:text="${page}"></a>
+				</span>
+			</span>
+		<!-- 다음 페이지 -->
+		<!-- 현재 2페이지인데 3페이지로 가고싶다 : 실제 페이지는 1page -->
+		<a th:href="${commentList.last}? '#' : 
+					@{|/user/userpage/${Userinfo.uno}|(page=${commentList.number + 2})}">Next</a>
+		</div>
           </section>
            </div>
         </div>
