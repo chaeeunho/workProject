@@ -5,19 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.work.community.dto.UsersDTO;
+import com.work.community.dto.UsersDTO.KakaoUsersInfo;
 import com.work.community.entity.Role;
 import com.work.community.entity.Users;
 import com.work.community.repository.UsersRepository;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class UsersService {
 	
+	@Autowired
 	private final UsersRepository usersRepository;
 		
 	private final PasswordEncoder pwEncoder;
@@ -87,4 +91,13 @@ public class UsersService {
 			return "NO";
 		}
 	}
+		//카카오 정보 저장
+		public void saveKakaoUsers(UsersDTO usersDTO) {
+			Users users = new Users();
+	        users.setKakaoid(usersDTO.getKakaoid());
+	        users.setKakaonickname(usersDTO.getKakaonickname());
+	        users.setKakaoemail(usersDTO.getKakaoemail());
+	        usersRepository.save(users);
+		}	
+		
 }
