@@ -1,7 +1,10 @@
 package com.work.community.entity;
 
+import java.util.List;
+
 import com.work.community.dto.UsersDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +12,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,34 +47,83 @@ public class Users extends BaseEntity {
    
 	@Column(nullable = false, unique = true,length = 30)
 	private String unickname; // 닉네임
+	
+	@Column(nullable = false)
+	private String ugender; //성별
    
 	@Column(nullable = false)
 	private String uaddress; // 주소
+	
+	@Column(nullable = false)
+	private String detailuaddress; //상세주소
    
 	@Column(nullable = false, length = 30)
 	private String uphone; // 핸드폰 번호
    
 	@Column(nullable = false)
 	private String ubirth; // 생년월일
-   
+	
+	@Column(nullable = true)
+	private String uintroduce; //자기소개
+	
+	@Column(nullable = true)
+	private String ulike; //좋아하는 것
+	
+	@Column
+	private String ufilename;
+	
+	@Column
+	private String ufilepath;
+	
 	// @Column
 	// private String role;   // 권한
 	@Enumerated(EnumType.STRING) private Role role;
+	
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+	@OrderBy("cno desc")
+	private List<Comments> replyList;
     
-	// dto(view에 온 입력값) -> entity(db에 저장)
-    // 회원 가입(id(회원번호)가 자동생성되므로 명시하면 안됨)
+	// dto -> entity
 	public static Users toSaveEntity(UsersDTO usersDTO) {
 		Users users = Users.builder()
 				           .uid(usersDTO.getUid())
 				           .upassword(usersDTO.getUpassword())
 				           .uname(usersDTO.getUname())
 				           .unickname(usersDTO.getUnickname())
+				           .ugender(usersDTO.getUgender())
 				           .uaddress(usersDTO.getUaddress())
+				           .detailuaddress(usersDTO.getDetailuaddress())
 				           .uphone(usersDTO.getUphone())
 				           .ubirth(usersDTO.getUbirth())
+				           .uintroduce(usersDTO.getUintroduce())
+				           .ulike(usersDTO.getUlike())
+				           .ufilename(usersDTO.getUfilename())
+				           .ufilepath(usersDTO.getUfilepath())
 				           .role(usersDTO.getRole())
 				           .build();
 		return users;      
    }
+	//회원 정보 수정을 위해 형변환
+	public static Users toSaveUpdate(UsersDTO usersDTO) {
+		Users users = Users.builder()
+				.uno(usersDTO.getUno())
+				.uid(usersDTO.getUid())
+				.upassword(usersDTO.getUpassword())
+				.uname(usersDTO.getUname())
+				.unickname(usersDTO.getUnickname())
+				.ugender(usersDTO.getUgender())
+				.uaddress(usersDTO.getUaddress())
+				.detailuaddress(usersDTO.getDetailuaddress())
+				.uphone(usersDTO.getUphone())
+				.ubirth(usersDTO.getUbirth())
+				.uintroduce(usersDTO.getUintroduce())
+				.ulike(usersDTO.getUlike())
+				.ufilename(usersDTO.getUfilename())
+				.ufilepath(usersDTO.getUfilepath())
+				.role(usersDTO.getRole())
+				.build();
+		
+		return users;
+	}
 	
 }

@@ -20,6 +20,11 @@
   font-style: normal;
 }
 
+#join{
+  position: relative;
+  width: 100%;
+  height: 1450px;
+}
 
 body {
     background-color: #F1F3E1;
@@ -28,78 +33,217 @@ body {
     padding: 0;
 }
 
-.container {
-    background-color: #ffffff;
-    max-width: 1000px;
-    margin: 0 auto;
-    margin-top: 50px;
-    padding: 40px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex; /* Flexbox 레이아웃을 사용 */
-    flex-direction: column; /* 자식 요소들을 세로로 정렬 */
-    align-items: center; /* 가운데 정렬 */
+#input-id{
+	display: flex;
+}
+
+.container2 {
+	position: relative;
+  background-color: #ffffff;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex; /* Flexbox 레이아웃을 사용 */
+  flex-direction: column; /* 자식 요소들을 세로로 정렬 */
+  align-items: center; /* 가운데 정렬 */
 }
 
 h2 {
+	font-family: 'SBAggroB';
     text-align: center;
     margin-bottom: 40px;
 }
 
 form {
+	font-family: 'SBAggroM';
     display: flex;
     flex-direction: column;
-    width: 700px;
+    width: 600px;
+    margin-left: 111px;
 }
-#id-btn{float: right;
-   width: 200px;}
+#id-btn{
+	font-family: 'SBAggroL';
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #f1f3e1;
+    height: 40px;
+    width: 80px;
+    position: absolute;
+    right: 64px;
+    top: 255px;
+}
 
-.error-message {
-   font-family: 'SBAggroM';
-    color: blue;
-    font-size: 0.7em;
+#id-input,
+#pw-input,
+#pw-input2,
+#name-input,
+#nickname-input,
+#ad-input,
+#phone-input,
+#birth-input{
+	display: flex;
 }
+
+#id-input #uid{
+	margin-left: 64px;
+	margin-right: 0
+}
+#pw-input #upassword{
+	margin-left: 49px;
+	margin-right: 0
+}
+
+#pw-input2 #confirmPassword{
+	margin-left: 15px;
+	margin-right: 0
+}
+#name-input #uname{
+	margin-left: 79px;
+	margin-right: 0
+}
+#nickname-input #unickname{
+	margin-left: 62px;
+	margin-right: 0
+}
+#ad-input #uaddress{
+	margin-left: 5px;
+	margin-right: -22px;
+}
+
+#detailad-input #detailuaddress {
+  margin: 0 0 10px -58px;
+}
+
+#phone-input #uphone{
+	margin-left: 65px;
+	margin-right: 0
+}
+#birth-input #ubirth{
+	margin-left: 48px;
+	margin-right: 0
+}
+
+#idcheck-message,
+#pwcheck-message,
+#namecheck-message,
+#nicknamecheck-message,
+#phonecheck-message,
+#confirm-message{
+	width: 300px;
+	text-align: left;
+	margin: 3px 0 10px 110px;
+}
+
+#idcheck-message #result,
+#pwcheck-message #result,
+#namecheck-message #result,
+#nicknamecheck-message #nickname-result,
+#phonecheck-message #result,
+#confirm-message #pwconfirmResult
+{
+	width: 310px;
+	margin: 0
+}
+
+.error-message1, .error-message2, .error-message3,
+.error-message4, .error-message5, .error-message6,
+.error-message7, .error-message8{
+	font-family: 'SBAggroM';
+  color: red;
+  font-size: 0.9em;
+}
+
+.error-message1 {margin: 0 0 0 -169px}
+.error-message2 {margin: 0 0 0 -209px}
+.error-message3 {margin: 0 0 0 -236px}
+.error-message4 {margin: 0 0 0 -221px}
+.error-message5 {margin: 0 0 0 -209px}
+.error-message6 {margin: 0 0 0 -236px}
+.error-message7 {margin: 0 0 0 -193px}
+.error-message8 {margin: 0 0 0 -207px}
+
 input[type="email"],
 input[type="text"],
 input[type="password"],
-input[type="date"] {
+input[type="date"],
+.address-container input[type="text"] {
     padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #cccccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+#confirmPassword{
+	width: 300px;
+	margin: 0
+}
+
+#nickname-input button {
+		font-family: 'SBAggroL';
+	  height: 40px;
+    width: 100px;
+    background-color: #F1F3E1;
     border-radius: 4px;
-    width: 400px; /* 입력 필드 너비를 동일하게 설정 */
-    border:none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    margin-top: 3px;
+    margin-left: 11px;
 }
 
 
+#uaddress {
+	width: 300px;
+	margin-bottom: 10px;
+}
+
 .address-container {
-    display: flex;
-    justify-content: space-between; /* 요소들 사이에 공간을 균등하게 분배 */
+		margin-left: 75px;
+		display: flex;
+    align-items: center;
+    width: 305px;
 }
 
 .address-container input[type="text"] {
     flex-grow:1;
-    width: 60%; /* 입력 상자 너비를 전체의 70%로 설정 */
-    margin-right: 10px; /* 버튼과의 간격 설정 */
     padding: 10px;
     border-radius: 5px;
     height: 28px; /* 높이 조정하여 버튼과 일치시킴 */
     border: 1px solid #cccccc;
 }
 
-.address-container button {
-    width: 50%; /* 버튼 너비를 전체의 30%에서 약간 줄여 마진 고려 */
-    padding: 30px 30px 40px 50px; /* 상하 패딩만 지정하여 너비에 영향을 주지 않도록 함 */
+#ad-input button {
+	font-family: 'SBAggroL';
+	  height: 40px;
+    width: 100px;
     background-color: #F1F3E1;
     border-radius: 4px;
     border: none;
     cursor: pointer;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    height: 48px;
     white-space: nowrap;
+    margin-top: 3px;
+    margin-left: 33px;
+}
+input #uaddress{margin-bottom: 10px;}
+
+/* 성별 css */
+.gender_input_content{
+	display: flex;
 }
 
-.terms {
-    margin-bottom: 20px; /* 체크박스와 버튼 사이의 간격 */
+.gender_input_content select{
+	width: 322px;
+	font-family: 'SBAggroL';
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-left: 80px;
+  margin-right: 0;
+  margin-bottom: 12px;
 }
 
 .terms input[type="checkbox"] {
@@ -112,50 +256,20 @@ input[type="date"] {
 
 /* 체크박스 스타일 */
 .terms {
-    display: flex;
-    align-items: center; /* 체크박스와 라벨을 정렬 */
-    margin-bottom: 20px; /* 체크박스와 다음 요소 사이의 간격 */
+	font-family: 'SBAggroL';
+    margin: 10px 0;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
 }
 
-.terms input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-.terms label {
-    font-size: 14px; 
-}
-
-/* 입력 필드 스타일 */
-input[type="email"],
-input[type="text"],
-input[type="password"],
-input[type="date"],
-.address-container input[type="text"] {
-    padding: 10px;
-    margin: 0 auto 20px auto; /* 자동 마진으로 중앙 정렬 */
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    width: 90%; /* 너비를 80%로 설정 */
-}
 .submit-button{
+	font-family: 'SBAggroL';
     background-color: #f1f3e1;
     height: 48px;
-    width: 100%; /* 너비를 80%로 설정 */
+    width: 320px;
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     border-radius: 5px;
     border: none;
-    margin: 0 auto; /* 자동 마진으로 중앙 정렬 */
-}
-.address-container button{
-    font-size: 0.1em;
-    width: 30%; /* 너비를 80%로 설정, flex 사용 시 다른 방식으로 조정 필요 */
-    padding: 10px 20px;
-    background-color: #F1F3E1;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    height: 48px;
-    margin-left: 30px; /* 버튼을 왼쪽으로 정렬하려면 이를 조정 */
-    margin-right: 20px; /* 주소 입력 상자와의 간격 */
+    margin-left: 111px;
 }

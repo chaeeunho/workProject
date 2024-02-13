@@ -22,15 +22,30 @@
          <!-- 프로필 수정 폼 -->
             <form th:action="@{/user/userupdate}" method="post" enctype="multipart/form-data">
                <input type="hidden" name="uno" th:value="${users.uno}">
-               
-               <!-- 프로필 이미지 -->
-            <div id="update_image">
-               <!-- 첨부한 이미지가 나오는 이미지 부분 -->
-               <img th:src="@{/images/Profile.png}" alt="프로필">
-               <!-- 자바스크립트로 버튼 누르면 파일 첨부 화면 뜨기 -->
-               <button type="button" id="edit_btn">EDIT</button>
-            </div>
-            
+                <input type="hidden" name="uid" th:value="${users.uid}">
+                     
+			<!-- 프로필 이미지 -->
+			<div id="update_image">
+			    <img id="profile_image" src="/images/default/default_image.png" alt="프로필">
+			    <button type="button" id="edit_btn">EDIT</button>
+			</div>
+			
+			<!-- 이미지 선택 영역-->
+			<div id="image_modal" style="display: none;">
+			    <h3>프로필 사진 선택</h3>
+			    <div id="image_list">
+			        <img src="/images/profile/profile_pic1.png" alt="프로필 이미지 1">
+			        <img src="/images/profile/profile_pic2.png" alt="프로필 이미지 2">
+			        <img src="/images/profile/profile_pic3.png" alt="프로필 이미지 3">
+			        <img src="/images/profile/profile_pic4.png" alt="프로필 이미지 4">
+			        <img src="/images/profile/profile_pic5.png" alt="프로필 이미지 5">
+			        <img src="/images/profile/profile_pic6.png" alt="프로필 이미지 6">
+			    </div>
+			    <input type="file" id="image_upload" accept="image/*">
+			    <button type="button" onclick="uploadImage()">업로드</button>
+			    <button type="button" onclick="closeModal()">닫기</button>
+			</div>
+
             <!-- 프로필 정보 수정 -->
             <table id="update_tbl">
                <tr class="update_input">
@@ -49,7 +64,7 @@
                      </label>
                      <br>
                  <input type="text" name="unickname" 
-                       id="unickname" th:value="${users.unickname}">
+                       id="unickname" th:value="${users.unickname}" readonly>
                   </td>
                </tr>
                
@@ -69,34 +84,53 @@
                   </td>
                </tr>
                
+                
+                <tr class="update_input">
+                  <td class="update_input_content">
+                     <label for="ubirth">
+                        생일
+                     </label>
+                 <input type="text" name="ubirth" 
+                       id="ubirth" th:value="${users.ubirth}" readonly> 
+                  </td>
+                  <td class="update_input_content2">
+                     <label for="ugender">성별</label>
+                 <input type="text" name="ugender" 
+                       id="ugender" th:value="${users.ugender}" readonly> 
+                  </td>
+                </tr>
+               
                <tr class="update_map">
                   <td class="update_map_content">
                      <label for="uaddress">주소</label>
                      <br>
                      <div class="update_map1">
                         <input type="text" 
-                           id="uaddress" th:value="${users.uaddress}">
+                           id="uaddress" name="uaddress" th:value="${users.uaddress}">
                     <button type="button" class="map_btn" onclick="'#'">주소 검색</button>
                      </div>
-                 <input type="text" id="#" placeholder="상세주소" class="map_detail">
+                 <input type="text" id="detailuaddress" name="detailuaddress" th:value="${users.detailuaddress}" 
+                 				placeholder="상세주소" class="map_detail">
                   </td>
                </tr>
                
                <tr class="update_area">
                   <td class="update_area_content">
-                     <label for="#">
+                     <label for="uintroduce">
                         한줄 소개명<span>50자 이내</span>
                      </label> 
-                 <textarea rows="4" cols="30" maxlength="50" name="content" placeholder="자신을 마음껏 나타내 보세요."></textarea>
+                 <textarea rows="4" cols="30" maxlength="50" name="uintroduce" 
+                 			 id="uintroduce" th:value="${users.uintroduce}" placeholder="자신을 마음껏 나타내 보세요."></textarea>
                   </td>
                </tr>
                
                <tr class="update_area">
                   <td class="update_area_content">
-                  <label for="#">
+                  <label for="ulike">
                      좋아하는 것<span>50자 이내</span>
                   </label> 
-                  <textarea rows="4" cols="30" maxlength="50" name="content" placeholder="동료에게 자신의 취향을 공유해보세요."></textarea>
+                  <textarea rows="4" cols="30" maxlength="50" name="ulike" 
+                  			id="ulike" th:value="${users.ulike}" placeholder="동료에게 자신의 관심사를 공유해보세요."></textarea>
                   </td>
                </tr>
                
@@ -123,16 +157,84 @@
         </section>
       
       <!-- footer.html 연결 -->
-         <div th:replace="~{footer}"></div>
+         <!-- <div th:replace="~{footer}"></div> -->
     </div>
   </div>
   
-  <!-- 파일명 들어가기 -->
-  <script>
-     $("#file").on('change',function(){
-        var fileName = $("#file").val();
-        $(".upload-name").val(fileName);
-      });
-   </script>
+<!-- 파일명 들어가기 -->
+<script>
+   $("#file").on('change',function(){
+      var fileName = $("#file").val();
+      $(".upload-name").val(fileName);
+    });
+   
+// 서버로부터 CSRF 토큰을 받아서 저장하는 함수
+   function fetchCsrfToken() {
+       return fetch('/get-csrf-token')
+       .then(response => response.json())
+       .then(data => {
+           // 받은 CSRF 토큰을 저장
+           window.csrfToken = data.token;
+       })
+       .catch(error => {
+           console.error('CSRF 토큰을 가져오지 못했습니다:', error);
+       });
+   }
+
+   // EDIT 버튼 클릭시 캐릭터 선택창 열기
+   document.getElementById('edit_btn').addEventListener('click', function() {
+       document.getElementById('image_modal').style.display = 'block';
+       fetchCsrfToken().then(() => {
+           // CSRF 토큰을 가져온 후 이미지 업로드 창을 엽니다.
+           openImageModal();
+       });
+   });
+
+   // 이미지를 클릭했을 때 프로필 이미지 변경
+   var imageList = document.getElementById('image_list').getElementsByTagName('img');
+   for (var i = 0; i < imageList.length; i++) {
+       imageList[i].addEventListener('click', function() {
+           var imagePath = this.src;
+           document.getElementById('profile_image').src = imagePath;
+       });
+   }
+
+   // 이미지 업로드 함수 수정
+   function uploadImage() {
+       var fileInput = document.getElementById('image_upload');
+       var file = fileInput.files[0];
+       var formData = new FormData();
+       formData.append('profileImage', file);
+
+       // CSRF 토큰을 요청 헤더에 포함하여 서버로 이미지 업로드 요청
+       fetch('/upload-profile-image', {
+           method: 'POST',
+           headers: {
+               'X-CSRF-TOKEN': window.csrfToken // CSRF 토큰을 요청 헤더에 포함
+           },
+           body: formData
+       })
+       .then(response => response.json())
+       .then(data => {
+           // 이미지 업로드 성공 시 메시지 표시 또는 다른 동작 수행
+           console.log('이미지 업로드 완료:', data);
+           closeModal();
+       })
+       .catch(error => {
+           console.error('이미지 업로드 실패:', error);
+           closeModal();
+       });
+   }
+
+   // 이미지창 닫기
+   function closeModal() {
+       document.getElementById('image_modal').style.display = 'none';
+   }
+
+   // 이미지 모달 열기
+   function openImageModal() {
+       document.getElementById('image_modal').style.display = 'block';
+   }
+</script>
 </body>
 </html>

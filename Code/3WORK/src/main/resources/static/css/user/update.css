@@ -91,6 +91,14 @@
 	padding: 5px;
   border-bottom: 1px solid #5E5E5E;
 }
+.update_input_content2 select{
+	width: 220px;
+	margin: 10px 0;
+	border: none;
+	outline: none;
+	padding: 5px;
+  border-bottom: 1px solid #5E5E5E;
+}
 
 /* 업데이트 입력 폼 - 왼쪽 영역 */
 .update_input_content{
