@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board/musicboard.css}">
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="container" style="height: 1450px;">
+		<div id="musicboard">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="msection">
+      	<div id="mcontainer">
+      		<div class="mbox">
+      			<div class="t_box">
+      				<p class = "tag">노래 추천 리스트</p>
+            </div>   
+            
+            <table id="mtable">
+            	<thead>
+            		<tr>
+            			<th class="td_box">번호</th>
+            			<th class="td_box">곡명</th>
+            			<th class="td_box">앨범명</th>
+            			<th class="td_box">가수명</th>
+            			<th class="td_box">삭제</th>
+            		</tr>
+            	</thead>
+            	
+							<tbody id="contentA">
+								<tr th:each="music : ${musicList}">
+									<td th:text="${music.mno}"></td>
+	            		<td th:text="${music.mname}"></td>
+	            		<td th:text="${music.malbum}"></td>
+	            		<td th:text="${music.msinger}"></td>
+	            		<td>
+	            			<a th:href="@{|/admin/musicdelete/${music.mno}|}" onclick="return confirm('해당 노래를 삭제하시겠습니까?')">
+	            				<i class="fa-solid fa-trash" style="color: #6C7C58;"></i>
+	            			</a>
+	            		</td>
+								</tr>
+							</tbody>
+            </table> 
+            
+            <!-- 작성 버튼 -->
+            <div id="list_write">
+							<a th:href="@{/admin/musicform}"><button class="write2_btn">정보 등록</button></a>
+						</div>
+            
+            <!-- 페이지 영역 -->
+            <div class="pagination">
+            	<!-- 이전 페이지 -->
+            	<!-- 2page 클릭하면 db 페이지는 1page -->
+            	<a th:href="${musicList.first}? '#' : @{/admin/musiclist(page=${musicList.number})}">
+            		<i class="fa-solid fa-caret-left fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
+            	<!-- 페이지 번호 블럭 -->
+            	<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+	            	<!-- 현재 페이지는 링크없이 숫자만 표시 -->
+	            	<span th:if="${page == musicList.number + 1}" th:text="${page}" class="current_page"></span>
+	            	<span th:if="${page != musicList.number + 1}">
+	            	<a th:href="@{/admin/musiclist(page=${page})}" th:text="${page}"></a>
+	            	</span>	
+            	</span>
+            	<!-- 다음 페이지 -->
+            	<!-- 현재 2page -> 3page  실제페이지는 1page-->
+            	<a th:href="${musicList.last} ? '#' : @{/admin/musiclist(page=${musicList.number+2})}">
+            		<i class="fa-solid fa-caret-right fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
+            </div>
+      		</div>
+      	</div>
+      </section>
+      
+      
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+</body>
+</html>

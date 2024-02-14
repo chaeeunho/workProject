@@ -28,76 +28,118 @@
 #all-container {
   margin-top: 30px;
 }
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #F1F3E1;
+  font-family: 'SBAggroL';
+}
+#container {
+  background-color: #ffffff;
+  width: 1318.59px;
+  height: 850px;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  margin-top: 50px;
+}
 
 #diary {
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-	width: 100px;
-	height: 40px;
-	position: absolute;
-	top: 18.5%;
-	right: -4%;
-	background-color: #667788;
-	border-radius: 5px;
+   border: none;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   width: 100px;
+   height: 40px;
+   position: absolute;
+   top: 18.5%;
+   right: -4%;
+   background-color: #667788;
+   border-radius: 5px;
 }
 #diary_btn {
-	margin-top: 10px;
+   margin-top: 10px;
+   font-size:1em;
 }
 #diary a{
-	font-family: 'SBAggroM';
-	font-size: 0.8em;
-	text-decoration: none;
-	color: black;
+   font-family: 'SBAggroM';
+   font-size: 0.8em;
+   text-decoration: none;
+   color: black;
 }
 
  /* BGM 바와 버튼 스타일 */
- #bgm-bar {
-  font-family: 'SBAggroM';
-  font-size: 0.7em;
-  position: absolute;
-  top: 8%;
-  right: -10%;
-  transform: translate(-50%, 50%);
-  width: 280px;
-  height: 10px;
-  border-radius: 20px;
-  background-color: #F1F3E1;
-  color: #838383;
-  padding: 10px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-#bgm-bar span{
-  padding: 5px;
-}
-#bgm-buttons {
-  display: flex;
-  gap: 10px;
+ /* BGM 바와 버튼 스타일 */
+.bgm-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 390px;
+    height: 10px; /* Increase height for better visibility */
+    font-size: 0.8em;
+    position: absolute;
+    top: 3%;
+    right: 1%;
 }
 
-#bgm-buttons button {
-  color: #838383;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
+.bgm-title-container {
+    flex-grow: 1;
+    margin-right: 10px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
 }
 
+.bgm-title {
+    white-space: nowrap; /* Prevent line breaks */
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.play-pause-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#bg-color-picker {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
 /* 프로필 스타일 */
-#profile{
-  padding: 20px;
-}
 #profile {
   font-family: 'SBAggroL';
   text-align: left;
   width: 300px;
   height: 190px;
+  padding: 33px;
+  margin-top: 42px;
 }
+
+#profile-pic #pimage-text{
+  position: absolute;
+  bottom: 71%;
+  right: 85.5%;
+  text-align: center;
+}
+
 #profile p {
   margin-bottom: 5px;
   font-size: 0.8em;
-  margin-left: 10px;
 }
 #profile p:nth-of-type(1){
   margin-top: 0px;
@@ -118,8 +160,8 @@
   margin-top: 20px;
   font-size: 1.3em;
 }
-#profile p:nth-child(4),
-#profile p:nth-child(6) {
+#profile p:nth-child(5),
+#profile p:nth-child(7) {
   font-family: 'SBAggroM';
   margin-top: 10px;
   font-size: 1.1em;
@@ -128,16 +170,25 @@
 #setting {
   color: #ccc;
   margin-top: 5px;
+  position: absolute;
+  top: 44.3%;
+  right: 76%;
+
 }
 #calendar{
-	position: absolute; bottom: 29%; right: 10%;
-	width: 735px; height: 400px;
-	font-size: 0.9em;
+  position: absolute;
+  bottom: 44%;
+  right: 18%;
+  width: 735px;
+  height: 400px;
+  font-size: 0.9em;
 }
 
 /* 방명록 스타일 */
 #comments {
-  position: absolute; bottom: -3%; right: 10%;
+  position: absolute;
+  bottom: 15%;
+  right: 18%;
   font-family: 'SBAggroL';
   font-size: 1em;
   width: 735px;
@@ -150,31 +201,46 @@
 #comment-list {
   padding: 0;
 }
-#comment-list ul{padding-left: 10px;}
-#comment-list li {
-  list-style: none;
-  margin-bottom: 10px;
+#comment-list{
+   padding-left: 10px;
+}
+#comment-list p {
+  margin: 0;
   font-size: 0.8em;
 }
-#comment-list li #replyid{
-	color: #27a900;
-	font-weight: bold;
+#comment-list #replyid{
+   color: #27a900;
+   font-weight: bold;
+   margin: 5px 0 5px 0;
 }
-#comment-list li #reply_time {
-	color: #ccc;
-	font-size: 0.2em;
+#no-comments{
+   text-align: center;
 }
+#ccontent-body{
+   border-bottom: 1.5px dotted #ccc;
+   width: 100%;
+}
+.comment-body{
+   display: flex;
+}
+
+#comment-list .comment-body #reply_time {
+   color: #ccc;
+   font-size: 0.2em;
+   margin: 5px 0 0 5px;
+}
+
 #comment-list li #replywrite{
-	float: right;
-	position: absolute; bottom: 27%; right: 0%;
-	color: #ccc;
+   float: right;
+   position: absolute; bottom: 27%; right: 0%;
+   color: #ccc;
 }
 #reply_update{
-	float: right;
-	position: absolute; bottom: 19%; right: 0%;
+   float: right;
+   position: absolute; bottom: 19%; right: 0%;
 }
 #comment-container{
-	border: 1px solid #ccc;
+   border: 1px solid #ccc;
     border-radius: 10px;
     padding: 3px 10px 10px 10px;
     width: 715px;
@@ -189,13 +255,13 @@
   outline: none;
 }
 #comment-list li:nth-child(2){
-	border-bottom: 1.5px dotted #ccc;
-	width: 100%;
-	}
+   border-bottom: 1.5px dotted #ccc;
+   width: 100%;
+   }
 #comment-list li:nth-child(3){
-	border-bottom: 1.5px solid #ccc;
-	width: 100%;
-	}
+   border-bottom: 1.5px solid #ccc;
+   width: 100%;
+   }
 #comment-list li{padding:3px;}
 #btns{
   background-color: #f1f3e1;
@@ -206,7 +272,37 @@
   font-size: 13px;
   position: absolute; bottom: 62.5%; right: 2%;
 }
-
+/* 페이지 영역 스타일 */
+.pagination{
+   text-align : center;
+   margin-top : 10px;
+}
+.pagination a{
+   text-decoration: none;
+   color: #818080;
+   font-size: 1em;
+   margin: 0 2px 0 2px;
+}
+.pagination .current_page{
+   color: #818080;
+   font-weight: bold;
+   color: navy;
+   margin: 0 2px 0 2px;
+}
+#page, current_page {
+    display: inline-block; 
+    font-size: 1em;
+    margin: 0 2px 0 2px;
+    width: 7px;
+}
+.pagination #page{
+   width: 10px;
+   font-size: 1em;
+}
+.pagination #another_page{
+   font-size: 1em;
+    margin: 0 2px 0 2px;
+}
 
 
 

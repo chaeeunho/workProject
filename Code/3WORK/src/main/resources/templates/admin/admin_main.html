@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW | ADMIN</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/admin/admin_main.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="container" style="height: 900px;">
+		<div id="admin_main">
+		   	<!-- header.html 연결 -->
+		    <div th:replace="~{header}"></div>
+		
+		    <section id="admin_main_body">
+		    	<p class="admin_content_title">관리자</p>
+					<div id="admin_content">
+			 			<div id="work_recommend">
+			 				<!-- 추천 카데고리 제목  -->
+			 				<div class="work_title">
+			 					<p>RECOMMEND</p>
+			 				</div>
+			 				<!-- 추천 카데고리의 메뉴  -->
+			 				<div class="work_menu">
+			 					<div id="music">
+			 					<p>노래관리</p>
+				 					<select onchange="window.open(value,'_self');">
+	   								<option selected>-- 선택 --</option>
+	   								<option value="/admin/musiclist">리스트</option>
+	   								<option value="/admin/musicform">등록</option>
+	   							</select>
+   							</div>
+			 					<div id="food">
+			 					<p>식품관리</p>
+				 					<select onchange="window.open(value,'_self');">
+	   								<option selected>-- 선택 --</option>
+	   								<option value="/admin/foodlist">리스트</option>
+	   								<option value="/admin/foodform">등록</option>
+	   							</select>
+   							</div>
+			 					<div id="item">
+			 					<p>아이템관리</p>
+				 					<select onchange="window.open(value,'_self');">
+	   								<option selected>-- 선택 --</option>
+	   								<option value="/admin/itemlist">리스트</option>
+	   								<option value="/admin/itemform">등록</option>
+	   							</select>
+   							</div>
+			 				</div>
+			 			</div>
+			 			
+			 			<div id="work_info">
+			 				<!-- 추천 카데고리 제목  -->
+			 				<div class="work_title">
+			 					<p>INFORMATION</p>
+			 				</div>
+			 				<!-- 추천 카데고리의 메뉴  -->
+			 				<div class="work_menu">
+			 					<div id="news">
+			 					<p>뉴스관리</p>
+			 					<select onchange="window.open(value,'_self');">
+   								<option selected>-- 선택 --</option>
+   								<option value="/admin/newslist">리스트</option>
+   								<option value="/admin/newsform">등록</option>
+   							</select>
+   							</div>
+			 					<div id="exercise">
+			 					<p>꿀팁관리</p>
+			 					<select onchange="window.open(value,'_self');">
+   								<option selected>-- 선택 --</option>
+   								<option value="#">리스트</option>
+   								<option value="#">등록</option>
+   							</select>
+   							</div>
+			 				</div>
+			 			</div>
+			 			
+			 			<div id="work_user">
+			 				<!-- 회원 카데고리 제목  -->
+			 				<div class="work_title">
+			 					<p>USERS</p>
+			 				</div>
+			 				<!-- 회원 카데고리의 메뉴  -->
+			 				<div class="work_menu">
+			 					<div id="users">
+			 					<p>회원관리</p>
+			 					<select onchange="window.open(value,'_self');">
+   								<option selected>-- 선택 --</option>
+   								<option value="/admin/usermanage">리스트</option>
+   							</select>
+   							</div>
+			 				</div>
+			 			</div>
+			 		</div>
+		    </section>
+		    
+		    <!-- footer.html 연결 -->
+		 	<div th:replace="~{footer}"></div>
+		 </div>
+  </div>
+  
+  <!-- 스크립트 -->
+  <script src="/js/main.js"></script>
+</body>
+</html>

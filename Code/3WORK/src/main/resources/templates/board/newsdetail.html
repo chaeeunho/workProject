@@ -4,34 +4,39 @@
     <meta charset="UTF-8">
     <title>뉴스</title>
   <link rel="stylesheet" th:href="@{/css/common.css}">
-  <link rel="stylesheet" th:href="@{/css/newsdetail.css}">
+  <link rel="stylesheet" th:href="@{/css/board/newsdetail.css}">
   <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id = "musicboard">
-	<div id ="container">
-	<div th:replace="~{header}"></div>
-    <section class="msection">
-    <div id = "mcontainer">
-    	<div class="t_box">
-                <p class = "tag">건강 관련 뉴스 정보</p>
-        </div>
-        <div class ="newsimg">
-        	<img alt="사진" th:src="@{/images/main_logo_bgX.png}">
-        </div>
-        <div class ="">
-        	<p class = "newscontent"><span>나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 나는 잘 자는 </span></p>
-        </div>
-        <div class = "newsbuttonbox">
-       	 <span class= "nbutton">
-       		<button class ="nbt">ଘ❣ଓ</button>
-       		<a th:href = "@{#}"><button class = "nbt">목록</button></a>
-        	</span>
-        </div>
+	<div id="container" style="height: 2500px;">
+		<div id ="newsdetail">
+			<div th:replace="~{header}"></div>
+			
+	    <section class="msection">
+	    	<div id = "mcontainer">
+	    		<div class="t_box">
+	    			<p class = "tag">
+	    				<span th:text="${news.ntitle}"></span>
+	    			</p>
+			    </div>
+			    <div class ="newsimg">
+			    	<img th:src="@{|/upload/news/${news.nfilename}|}" onerror="this.src='/images/default/default_image.png';" class="thumbnail-image">
+			    </div>
+			    <div class ="newscontent_box">
+			    	<p class = "newscontent">
+			    		<span th:text="${news.ncontent}"></span>
+			    	</p>
+			    </div>
+			    <div class = "newsbuttonbox">
+			    	<span class= "nbutton">
+			    		<a th:href = "@{/board/news}"><button class = "nbt">목록</button></a>
+			    	</span>
+			    </div>
+				</div>
+			</section> 
+			
+			<div th:replace="~{footer}"></div>
+		</div>
 	</div>
-</section> 
-<div th:replace="~{footer}"></div>
-</div>
-</div>
 </body>
 </html>

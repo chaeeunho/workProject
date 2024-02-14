@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+#mybag{
+  position: relative;
+  height: 100%;
+}
+.msection{
+	width: 100%;
+	height: 1200px;
+	position: absolute;
+  top: 123px;
+}
+#mcontainer{
+  width: 80%;
+  /* height: 95%; */
+  position: relative;
+  margin: 0 auto;
+  padding: 70px 30px; /* 좌우 여백 조정 */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+
+/* ------------------------------------------- */
+
+
+
+.t_box{
+  width: 100%;
+  height: 70px;
+  padding-bottom: 10px;
+}
+.tag{
+	font-size: 30px;
+	padding-bottom: 20px; 
+	text-align: left; 
+	border-bottom: 1px solid black;
+	font-family: 'SBAggroM';
+}
+.card {
+  width: calc(50% - 20px); /*3개의 카드가 한 행에 나타나도록 설정 (20px는 마진 고려)*/
+  height: fit-content;
+  box-sizing: border-box;
+  margin: 30px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.card-content {
+	width: 60%;
+  position: relative;
+  background-color: #fafaf5;
+}
+.card img {
+  width: 40%;
+  height: 160px;
+  object-fit: cover;
+    
+}
+.content-container {
+  display: flex;
+  flex-direction: row; /* 내부 요소를 가로로 정렬 */
+  /* align-items: center; 가운데 정렬 */
+  justify-content: space-between;
+}
+
+.content-container h3,
+.content-container p {
+  margin: 0; /* 기본 마진 제거 */
+}
+.bagh3{
+	display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 15px;
+  font-size: 20px;
+  padding-bottom: 7px;
+}
+.bagh3_p{
+	width: 85%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bagh3_p a{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+.bagbottom{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.bagp{
+  font-size: 14px;
+  padding: 0 15px;
+	text-align: left;
+	color: #666633;
+}
+.bagbt {
+   width: 110px;
+   position: absolute;
+   bottom: 20px; /* 아래에 위치하도록 설정 */
+   left: 15px;
+   font-size: 1rem;
+   letter-spacing: 1px;
+   color: black; 
+   /* background: linear-gradient(linear-gradient(180deg, #c1c1c1, #ffffff) border-box,
+      #0c121c); */
+   background: #F1F3E1;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   border-radius: 8px;
+   border: none;
+   padding: 0.25rem 0.5rem;
+   cursor: pointer;
+   z-index: 1;
+   will-change: transform;
+   transition: all 0.25s ease-in-out;
+   font-family: 'SBAggroL';
+}
+.bagbt::before {
+  position: absolute;
+  content: " ";
+  inset: 0;
+  /* background: linear-gradient(180deg, #ffffff30, #ffffff00); */
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0;
+  border-radius: 7px;
+  z-index: -1;
+}
+.bagbt:hover::before {
+  opacity: 1;
+}
+.bagbt:hover {
+  transform: scale(1.05);
+}
+.bagprice{
+ 	padding-top: 15px;
+  position: absolute;
+  right: 15px;
+  font-size: 25px;
+ }
+ 
+ 
+ 
+ /* ------------------------------------------- */
+ 
+ 
+ 
+@media (max-width: 1450px) {
+	.bagp{
+		width: 85%;
+		padding: 0 15px;
+		overflow: hidden;
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	}
+}

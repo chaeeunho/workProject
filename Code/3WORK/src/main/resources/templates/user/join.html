@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <meta name="_csrf" th:content="${_csrf.token}">
-<title>회원가입...</title>
+<title>3WORK : WWW</title>
 <link rel="stylesheet" th:href="@{/css/common.css}">
-<link rel="stylesheet" th:href="@{/css/join.css}">
+<link rel="stylesheet" th:href="@{/css/user/join.css}">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -47,6 +47,44 @@ if(uid != "") {
 		checkResult.innerHTML = "";
 	}
 };
+
+//닉네임 중복 검사
+const checkNicknameOnClick = () => {
+    let inputNickname = document.getElementById("unickname").value;
+    let nicCheckResult = document.getElementById("nickname-result");
+    
+    let header = $("meta[name='_csrf_header']").attr('content');
+    let token = $("meta[name='_csrf']").attr('content');
+    
+if(inputNickname !== "") {
+    $.ajax({
+        type: "POST",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader(header, token);
+        },
+        url: "/user/check-nickname",
+        data: {unickname: inputNickname},
+        success: function(res) {
+        	console.log(res);
+            if (res == "OK") {
+            	nicCheckResult.innerHTML = "사용 가능한 닉네임입니다."
+            	nicCheckResult.style.color = "blue"
+            	nicCheckResult.style.fontFamily = "SBAggroM";
+            } else {
+            	nicCheckResult.innerHTML = "이미 등록된 닉네임입니다."
+            	nicCheckResult.style.color = "red"
+              nicCheckResult.style.fontFamily = "SBAggroM";
+            }
+            nicCheckResult.style.fontSize = "0.9em";
+        },
+        error: function(err) {
+            console.log("실패: ", err);
+        }
+    });
+	}else{
+		nicCheckResult.innerHTML = "";
+	}
+};
 //유효성 검사
 //이메일 유효성 검사
 function validateUid() {
@@ -81,6 +119,23 @@ function validateUpassword() {
         passwordError.innerHTML = "";
     }
  };
+ 
+//비밀번호 확인
+function checkPasswordMatch() {
+    var password = document.getElementById('upassword').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+    var message = document.getElementById('pwconfirmResult');
+
+    if (password === confirmPassword) {
+        message.innerHTML = '비밀번호가 일치합니다.';
+        message.style.color = "blue";
+    } else {
+        message.innerHTML = '비밀번호가 일치하지 않습니다.';
+        message.style.color = "red";
+    }
+    message.style.fontSize = "0.9em";
+    message.style.fontFamily = "SBAggroM";
+}
 
 // 이름 유효성 검사
 function validateUname() {
@@ -115,6 +170,7 @@ function validateUnickname() {
         nicknameError.innerHTML = "";
     }
  };
+ 
 
 //연락처 유효성 검사
 function validateUphone() {
@@ -145,171 +201,182 @@ function validateUphone() {
 </script>
 </head>
 <body>
-<div id="join">
-<div id="container"> 
-    <div class="container2">
-<div th:replace="~{header}"></div>
-        <h2>회원가입</h2>
-        <form th:action="@{/user/join}" method="post" 
-        	class="join" th:object="${usersDTO}" onsubmit="return validateForm()">
-        
-    		<!-- 아이디 필드 -->
-    		<div id="id-input">
-    		<p>아이디</p>
-    			<button type="button" onclick="checkUserIdOnClick()" id="id-btn">중복 확인</button>
-	        <input type="text" th:field="*{uid}" id="uid" placeholder="example@domain.com" onblur="validateUid()">
-	      </div>
-	        <p th:if="${#fields.hasErrors('uid')}" th:errors="*{uid}" 
-	        		th:class="${#fields.hasErrors('uid')} ? 'error-message' : ''"></p>
-	        <div id="idcheck-message">
-	        	<p id="result"></p>
-	        </div>
-	        
-	        
-            <!-- 비밀번호 필드 -->
-           <div id="pw-input">
-            <p>비밀번호</p>
-            <input type="password" th:field="*{upassword}" id="upassword" name="upassword"
-               placeholder="비밀번호(영문/대소문자,숫자,특수문자 포함 8~20자)" onblur="validateUpassword()">
-       	 		</div>
-       	 	<p th:if="${#fields.hasErrors('upassword')}" th:errors="*{upassword}" 
-       	 			th:class="${#fields.hasErrors('upassword')} ? 'error-message' : ''"></p>
-       	 	<div id="pwcheck-message">
-	        	<p id="result"></p>
-	        </div>
-            
-            <!-- 이름 필드 -->
-            <div id="name-input">
-            <p>이름</p>
-            <input type="text" th:field="*{uname}" id="uname" name="uname" 
-            		placeholder="이름(한글만 가능)" onblur="validateUname()">
-            </div>
-            <p th:if="${#fields.hasErrors('uname')}" 
-            		th:errors="*{uname}" th:class="${#fields.hasErrors('uname')} ? 'error-message' : ''"></p>
-            <div id="namecheck-message">
-	        		<p id="result"></p>
-	        	</div>
-            
-            <!-- 닉네임 필드 -->
-            <div id="nickname-input">
-            <p>닉네임</p>
-            <input type="text" th:field="*{unickname}" id="unickname" name="unickname" 
-            		placeholder="별명" onblur="validateUnickname()">
-            </div>
-            <p th:if="${#fields.hasErrors('unickname')}" 
-            		th:errors="*{unickname}" th:class="${#fields.hasErrors('unickname')} ? 'error-message' : ''"></p>
-            <div id="nicknamecheck-message">
-	        		<p id="result"></p>
-	        	</div>
-            
-            <!-- 주소 필드 -->
-            <div id="ad-input">
-            <p>주소</p>
-            <div class="address-container">
-                <input type="text" th:field="*{uaddress}" id="uaddress" name="uaddress"
-                		placeholder="주소를 검색해 주세요">
-            </div>
-            <p th:if="${#fields.hasErrors('uaddress')}" 
-        			th:errors="*{uaddress}" th:class="${#fields.hasErrors('uaddress')} ? 'error-message' : ''"></p>
-                <button type="button" onclick="sample3_execDaumPostcode()">우편번호 찾기</button>
-            </div>
-            
-            <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
-                <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-            </div>
-            
-            <!-- 연락처 필드 -->
-            <div id="phone-input">
-            <p>연락처</p>
-            <input type="text" th:field="*{uphone}" id="uphone" name="uphone" 
-            		placeholder="연락처('-'포함 11자리입력)" onblur="validateUphone()">
-            </div>
-            <p th:if="${#fields.hasErrors('uphone')}" 
-            		th:errors="*{uphone}" th:class="${#fields.hasErrors('uphone')} ? 'error-message' : ''"></p>
-            <div id="phonecheck-message">
-	        		<p id="result"></p>
-	        	</div>
-            
-            <!-- 생일 필드 -->
-            <div id="birth-input">
-            	<p>생년월일</p>
-            	<input type="date" id="ubirth" name="ubirth">
-            </div>
-            	<p th:if="${#fields.hasErrors('ubirth')}" 
-            		th:errors="*{ubirth}" th:class="${#fields.hasErrors('ubirth')} ? 'error-message' : ''"></p>
-            
-            <div class="terms">
-                <input type="checkbox" id="agree-terms" name="agree-terms">
-                <label for="agree-terms">이용약관과 개인정보 수집 및 활용에 동의합니다.</label>
-            </div>
-            <input type="submit" value="가입" class="submit-button">
-        </form>
-    </div>
-<!-- footer.html 연결 -->
-<div th:replace="~{footer}"></div>
-</div>
-</div>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<div id="join">
+		<div id="container">
+			<div class="container2">
+				<div th:replace="~{header}"></div>
+				<h2>회원가입</h2>
+				<form th:action="@{/user/join}" method="post" class="join"
+						  th:object="${usersDTO}" onsubmit="return validateForm()">
+
+					<!-- 아이디 필드 -->
+					<div id="id-input">
+						<p>아이디</p>
+						<button type="button" onclick="checkUserIdOnClick()" id="id-btn">중복확인</button>
+						<input type="text" th:field="*{uid}" id="uid"
+							placeholder="example@domain.com" onblur="validateUid()">
+					</div>
+						<p th:if="${#fields.hasErrors('uid')}" th:errors="*{uid}"
+							 th:class="${#fields.hasErrors('uid')} ? 'error-message1' : ''"></p>
+					<div id="idcheck-message">
+						<p id="result"></p>
+					</div>
+
+					<!-- 비밀번호 필드 -->
+					<div id="pw-input">
+					    <p>비밀번호</p>
+					    <input type="password" th:field="*{upassword}" id="upassword" name="upassword"
+					           placeholder="비밀번호(영문/대소문자,숫자,특수문자 포함 8~20자)"
+					           onblur="validateUpassword()">
+					</div>
+					<p th:if="${#fields.hasErrors('upassword')}" th:errors="*{upassword}"
+					   th:class="${#fields.hasErrors('upassword')} ? 'error-message2' : ''"></p>
+					<div id="pwcheck-message">
+					    <p id="result"></p>
+					</div>
+					
+					<div id="pw-input2">
+					    <p>비밀번호 확인</p>
+					    <input type="password" id="confirmPassword" name="confirmPassword"
+					           placeholder="비밀번호를 한번 더 입력해주세요" onblur="checkPasswordMatch()">
+					</div>
+					<div id="confirm-message">
+					    <p id="pwconfirmResult"></p>
+					</div>
+
+					<!-- 이름 필드 -->
+					<div id="name-input">
+						<p>이름</p>
+						<input type="text" th:field="*{uname}" id="uname" name="uname"
+							placeholder="이름(한글만 가능)" onblur="validateUname()">
+					</div>
+					<p th:if="${#fields.hasErrors('uname')}" th:errors="*{uname}"
+						 th:class="${#fields.hasErrors('uname')} ? 'error-message3' : ''"></p>
+					<div id="namecheck-message">
+						<p id="result"></p>
+					</div>
+
+					<!-- 닉네임 필드 -->
+					<div id="nickname-input">
+						<p>닉네임</p>
+						<input type="text" th:field="*{unickname}" id="unickname"
+							name="unickname" placeholder="별명" onblur="validateUnickname()">
+						<button type="button" onclick="checkNicknameOnClick()" id="nick-btn">중복확인</button>	
+					</div>
+					<p th:if="${#fields.hasErrors('unickname')}"
+						 th:errors="*{unickname}"
+						 th:class="${#fields.hasErrors('unickname')} ? 'error-message4' : ''"></p>
+					<div id="nicknamecheck-message">
+						<p id="nickname-result"></p>
+					</div>
+					
+					<!-- 성별 필드 -->
+					<div class="gender_input_content">
+						<p>성별</p>
+						<select name="gender" th:field="*{ugender}" id="ugender">
+							<option value="select">---</option>
+							<option value="남">남</option>
+							<option value="여">여</option>
+						</select>
+					<p th:if="${#fields.hasErrors('ugender')}"
+						 th:errors="*{ugender}"
+						 th:class="${#fields.hasErrors('ugender')} ? 'error-message5' : ''"></p>
+					</div>
+
+					<!-- 주소 필드 -->
+					<div id="ad-input">
+						<p>주소</p>
+						<div class="address-container">
+							<input type="text" th:field="*{uaddress}" id="uaddress"
+								name="uaddress" placeholder="주소를 검색해 주세요">
+						</div>
+						<button type="button" onclick="openDaumPostcode()">우편번호 찾기</button>
+					</div>
+					<div id="detailad-input">
+						<input type="text" th:field="*{detailuaddress}" id="detailuaddress"
+							name="detailuaddress" placeholder="상세주소를 입력해주세요">
+					</div>
+					<p th:if="${#fields.hasErrors('uaddress')}"
+							 th:errors="*{uaddress}"
+							 th:class="${#fields.hasErrors('uaddress')} ? 'error-message6' : ''"></p>
+
+					<div id="wrap"
+						style="display: none; border: 1px solid; width: 300px; height: 300px; margin: 5px 0; position: relative">
+						<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap"
+								 style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+								 onclick="foldDaumPostcode()" alt="접기 버튼">
+					</div>
+
+					<!-- 연락처 필드 -->
+					<div id="phone-input">
+						<p>연락처</p>
+						<input type="text" th:field="*{uphone}" id="uphone" name="uphone"
+							placeholder="연락처('-'포함 11자리입력)" onblur="validateUphone()">
+					</div>
+					<p th:if="${#fields.hasErrors('uphone')}" th:errors="*{uphone}"
+						 th:class="${#fields.hasErrors('uphone')} ? 'error-message7' : ''"></p>
+					<div id="phonecheck-message">
+						<p id="result"></p>
+					</div>
+
+					<!-- 생일 필드 -->
+					<div id="birth-input">
+						<p>생년월일</p>
+						<input type="date" id="ubirth" name="ubirth">
+					</div>
+					<p th:if="${#fields.hasErrors('ubirth')}" th:errors="*{ubirth}"
+						 th:class="${#fields.hasErrors('ubirth')} ? 'error-message8' : ''"></p>
+
+					<div class="terms">
+						<input type="checkbox" id="agree-terms" name="agree-terms">
+						<label for="agree-terms">이용약관과 개인정보 수집 및 활용에 동의합니다.</label>
+					</div>
+					<input type="submit" value="가입" class="submit-button">
+				</form>
+			</div>
+			<!-- footer.html 연결 -->
+			<div th:replace="~{footer}"></div>
+		</div>
+	</div>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-
-// 우편번호 찾기 화면을 넣을 element
-var element_wrap = document.getElementById('wrap');
-
-function foldDaumPostcode() {
-    // iframe을 넣은 element를 안보이게 한다.
-    element_wrap.style.display = 'none';
-}
-
-function sample3_execDaumPostcode() {
+//우편번호 검색 팝업 열기
+function openDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
-            // 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분.
-
-            // 주소 변수와 참고항목 변수
             var addr = ''; // 주소 변수
             var extraAddr = ''; // 참고항목 변수
 
-            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+            // 사용자가 도로명 주소를 선택했을 경우
+            if (data.userSelectedType === 'R') {
                 addr = data.roadAddress;
-            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+            } else { // 사용자가 지번 주소를 선택했을 경우
                 addr = data.jibunAddress;
             }
 
-            // 사용자가 도로명 주소를 선택했고, 참고항목을 선택했을 경우
-            if(data.userSelectedType === 'R'){
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+            // 참고항목이 있을 경우
+            if (data.userSelectedType === 'R') {
+                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
                     extraAddr += data.bname;
                 }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
+                if (data.buildingName !== '' && data.apartment === 'Y') {
                     extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraAddr !== ''){
+                if (extraAddr !== '') {
                     extraAddr = ' (' + extraAddr + ')';
                 }
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            var fullAddress = '[' + data.zonecode + '] ' + addr;
-            if(extraAddr !== '') fullAddress += extraAddr;
-            
-            document.getElementById('uaddress').value = fullAddress; // 결과값을 'uaddress' 입력 필드에 설정
-            
-            // iframe을 넣은 element를 안보이게 한다.
-            element_wrap.style.display = 'none';
-            
-            // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
-            document.body.scrollTop = document.documentElement.scrollTop = currentScroll;
-        },
-        width : '100%',
-        height : '100%'
-    }).embed(element_wrap);
+            var fullAddress = '[' + data.zonecode + '] ' + addr + extraAddr;
+            document.getElementById('uaddress').value = fullAddress;
 
-    // iframe을 넣은 element를 보이게 한다.
-    element_wrap.style.display = 'block';
+            // 팝업 닫기
+            document.getElementById('wrap').style.display = 'none';
+        },
+        width: '100%',
+        height: '100%'
+    }).open();
 }
 </script>
 </body>

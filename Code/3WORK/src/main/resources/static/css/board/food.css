@@ -2,12 +2,16 @@
 
 /* food.html & item.html의 CSS */
 
-#musicboard{
+#food_item{
   position: relative;
-  width: 100%;
-  height: 2550px;
+  height: 100%;
 }
-
+.msection{
+	width: 100%;
+	height: 500px;
+	position: absolute;
+  top: 123px;
+}
 #mcontainer{
    width: 80%;
    height: 1150px;
@@ -17,6 +21,13 @@
    display: flex;
    flex-wrap: wrap;
 }
+ 
+ 
+ 
+/* ------------------------------------------------- */
+ 
+ 
+ 
 .mbox{
 	width: 100%;
 	height: 100%;
@@ -32,6 +43,12 @@
 	text-align: left; 
 	border-bottom: 1px solid black;
 	font-family: 'SBAggroM';
+}
+.tag_mini{
+	font-size: 13px; 
+	color: gray;
+	margin-left: 10px;
+	font-family: 'SBAggroL';
 }
 
 /* 카드 스타일링 */
@@ -64,7 +81,7 @@
 
 .card img {
     width: 100%;
-    height: 300px;
+    aspect-ratio: 1.2;
     object-fit: cover;
     padding: 20px 0;
 }
@@ -73,17 +90,20 @@
     position: relative;
     padding: 15px 15px 0 15px;
     height: 165px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
 }
     
 .foodh3{
    font-size: 20px;
    overflow: hidden;  		
    text-overflow: ellipsis;  
-   white-space: nowrap; 		
-   word-break: break-all;
-   width: 330px;
+   white-space: nowrap; 	
    height: 20px;
    text-align: left;
+   font-weight: normal;
+   font-family: 'SBAggroM';
 }
 
 .foodp{
@@ -91,25 +111,47 @@
    color: #8B8989;
    overflow: hidden;  		
    text-overflow: ellipsis;  
-   white-space: nowrap; 		
-   word-break: break-all;
-   width: 330px;
+   white-space: nowrap; 	
    height: 20px;
    text-align: left;
 }
 
 .foodprice{
-	width: 330px;
   height: 40px;
   line-height: 40px;
-	font-size: 35px;
 	color: #5EA601;
 	padding: 10px 0;
 }
 .foodprice p{
 	float: left;
 	margin: 0;
+	font-size: 30px;
+	overflow: hidden;  		
+  text-overflow: ellipsis;  
+  white-space: nowrap; 	
+  max-width: calc(100% - 80px);
 }
+.foodprice i{
+	float: right;
+	height: 35px;
+	line-height: 35px;
+}
+
+/* 페이지 */
 .pagination{
- text-align: center;
+	width: 100%;
+	margin: 30px auto;
+	padding: 30px 0;
+	display: flex;
+	justify-content: center;
+}
+.pagination a,
+.current_page{
+	text-decoration: none;
+	color: #999999;
+	margin-left: 10px;
+}
+.current_page{
+	color: #000000; /* 여기에 원하는 색상을 지정하세요 */
+	font-family: 'SBAggroM';
 }

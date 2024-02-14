@@ -1,11 +1,15 @@
 @charset "UTF-8";
 
-#musicboard{
+#news{
   position: relative;
-  width: 100%;
-  height: 2850px;
+  height: 100%;
 }
-  
+.msection{
+	width: 100%;
+	height: 500px;
+	position: absolute;
+  top: 123px;
+}
 #mcontainer{
 	width: 80%;
   height: 95%;
@@ -14,10 +18,15 @@
   padding: 70px 30px; /* 좌우 여백 조정 */
 }
  
+ 
+ 
+/* ------------------------------------------------- */
+ 
+ 
+ 
 .t_box{
 	width: 100%;
 	height: 70px;
-	padding-bottom: 40px;
 }
 .tag{
 	font-size: 30px;
@@ -26,11 +35,19 @@
   border-bottom: 1px solid black;
   font-family: 'SBAggroM';
 }
+.tag_mini{
+	font-size: 13px; 
+	color: gray;
+	margin-left: 10px;
+	font-family: 'SBAggroL';
+}
 a{
 	text-decoration: none; 
 	color: black;
 }
-
+.card ul{
+	padding: 0;
+}
 li{
 	list-style: none;
 	padding: 30px 20px;
@@ -38,36 +55,76 @@ li{
 	border-radius: 10px;
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* 그림자 효과를 적용 */
 	margin-bottom: 30px;
+	padding-right: 0;
 	text-align: left;
 	min-height: 110px;
-} 
-    
- strong{
- 	font-size: 20px;
- }
-
- .newsbox:hover strong{
+}
+.card{
+	position: relative;
+}
+.ntitle{
+	font-size: 20px;
+	margin-bottom: 5px;
+	overflow: hidden;
+ 	text-overflow: ellipsis;
+ 	white-space: nowrap;
+ 	display: inline-block; /* inline-block 추가 */
+  max-width: 100%; /* 최대 너비를 부모 요소에 맞추도록 수정 */
+  font-family: 'SBAggroM';
+}
+ .newsbox:hover strong span{
  	border-bottom: 1px solid #b7b7b7;
  }
+.newsbox {
+		width: auto;
+    height: 100px;
+    max-width: calc(100% - 190px);
+}
  .newscon{
 	font-size: 15px;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: block;
 	-webkit-line-clamp: 2; /* 미래를 위한 호환성을 위해 WebKit 접두사 사용 */
  }
  .thumbnail-image {
-	width: 120px; /* 이미지 폭 조절 */
-	height: 95px; /* 이미지 높이 조절 */
-	margin-right: 10px; /* 이미지 간격 설정 */
+	width: 150px; /* 이미지 폭 조절 */
+	height: 120px; /* 이미지 높이 조절 */
 	float: right;
+	margin: 10px;
+	position: absolute;
+	top: 18px;
+	right: 10px;
 }
 .newscreatetime{
 	font-size: 12px;
 	color: gray;
 	float: right;
 }
+
+
+
+/* ------------------------------------------------- */
+
+
+
+/* 페이지 처리 */
 .pagination{
-	text-align: center;
+	width: 100%;
+	margin: 30px auto;
+	display: flex;
+	justify-content: center;
 }
-  
+.pagination a,
+.current_page{
+	text-decoration: none;
+	color: #999999;
+	margin-left: 10px;
+}
+.current_page{
+	color: black; /* 여기에 원하는 색상을 지정하세요 */
+	font-family: 'SBAggroM';
+}

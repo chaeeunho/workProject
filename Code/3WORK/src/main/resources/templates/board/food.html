@@ -8,8 +8,8 @@
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="musicboard">
-		<div id="container">
+	<div id="container" style="height: 2550px">
+		<div id="food_item">
 			<!-- header.html 연결 -->
       <div th:replace="~{header}"></div>
       
@@ -17,7 +17,9 @@
       	<div id="mcontainer">
       		<div class="mbox">
       			<div class="t_box">
-      				<p class = "tag">건강 관련 식품</p>
+      				<p class = "tag">건강식품
+      					<span class="tag_mini">※ 구매는 링크를 통해 하시길 바라며, 장바구니 담기는 가능합니다.</span>
+      				</p>
             </div>   
           	
           	<div class="parent">
@@ -35,11 +37,11 @@
 	          			<p class="foodp" th:text="${food.fcontent}"><br></p>
 	          			<div class="foodprice">
 		          			<p data-th-text="${#numbers.formatInteger(food.fprice, 3, 'COMMA') + '원'}"></p>
-		 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		          			<i class="fa-solid fa-cart-plus" style = "color: #5EA601; font-size : 20px; padding-right : 10px;"></i>
+		          			<i class="fa-solid fa-cart-plus" style = "color: #5EA601; font-size : 20px;"></i>
+	          				&nbsp;&nbsp;&nbsp;
 	          				<span th:with="foodLink=${food.flink}">
 		          				<a th:href="@{${foodLink}}" target="_blank">
-		          					<i class="fa-solid fa-link" style = "color: #5EA601; font-size : 20px"></i>
+		          					<i class="fa-solid fa-link" style = "color: #5EA601; font-size : 20px; margin-right: 10px;"></i>
 		          				</a>
 	          				</span>
 	          			</div>
@@ -49,10 +51,25 @@
             
             <!-- 페이지 영역 -->
             <div class="pagination">
-    
-         
+            	<!-- 이전 페이지 -->
+            	<!-- 2page 클릭하면 db 페이지는 1page -->
+            	<a th:href="${foodList.first}? '#' : @{/board/food(page=${foodList.number})}">
+            		<i class="fa-solid fa-caret-left fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
+            	<!-- 페이지 번호 블럭 -->
+            	<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+	            	<!-- 현재 페이지는 링크없이 숫자만 표시 -->
+	            	<span th:if="${page == foodList.number + 1}" th:text="${page}" class="current_page"></span>
+	            	<span th:if="${page != foodList.number + 1}">
+	            	<a th:href="@{/board/food(page=${page})}" th:text="${page}"></a>
+	            	</span>	
+            	</span>
+            	<!-- 다음 페이지 -->
+            	<!-- 현재 2page -> 3page  실제페이지는 1page-->
+            	<a th:href="${foodList.last} ? '#' : @{/board/food(page=${foodList.number+2})}">
+            		<i class="fa-solid fa-caret-right fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+            	</a>
             </div>
-            
       		</div>
       	</div>
       </section>

@@ -1,16 +1,43 @@
 @charset "UTF-8";
 
+/*  10px = 1rem, 12px = 1.2rem 등 맞쳐주기 위해 변환 */
+html {
+	font-size: 62.5%;
+}
+#container{
+	/* 메인 페이지 높이 = 2500px */
+	/* 각 페이지마다 최대 높이 설정하면 됨 */
+  height: 1900px;
+}
+
+
+
+/* ------------------------------------------- */
+
+
+
 /* main.html */
 #main{
-  position: relative;
-  width: 100%;
-  height: 2250px;
+	position: relative;
+	height: 100%;
 }
 
 #main_body{
   width: 100%;
   height: 1350px;
+  position: absolute;
+  top: 123px;
 }
+
+
+
+/* ------------------------------------------- */
+
+
+#m_menu{
+  display: none;
+}
+/* 검색창 */
 #search_box{
 	width: 800px;
 	border-radius: 10px;
@@ -25,9 +52,18 @@
 	outline: none;
 	margin-left: 5px;
 }
+
+
+
+/* ------------------------------------------- */
+
+
+
 #slide_box{
-	width: 57%;
+	width: 50vw;
+	aspect-ratio: 1.25;
 	margin: 40px;
+	margin-right: 0;
 	float: left;
 }
 #slide1, 
@@ -39,7 +75,8 @@
 #slide2 img, 
 #slide3 img{
 	width: 100%;
-	height: 550px;
+	aspect-ratio: 1.25;
+	/* height: 550px; */
 	border: 1px solid #8B8989;
 	border-radius: 10px;
 }
@@ -61,13 +98,13 @@
 	color: #CDCDCD;
 }
 .slide_content p:nth-of-type(1){
-	font-size: 50px;
+	font-size: 3vw;
 	text-align: left;
 	margin-left: 33%;
 	margin-bottom: 0;
 }
 .slide_content p:nth-of-type(2){
-	font-size: 20px;
+	font-size: 1.5vw;
 	text-align: left;
 	margin-left: 33%;
 	line-height: 1.7;
@@ -81,13 +118,13 @@
 	padding: 5%;
 }
 .slide_content2 p:nth-of-type(1){
-	font-size: 50px;
+	font-size: 3vw;
 	text-align: left;
 	margin-left: 42%;
 	margin-bottom: 0;
 }
 .slide_content2 p:nth-of-type(2){
-	font-size: 20px;
+	font-size: 1.5vw;
 	text-align: left;
 	margin-left: 42%;
 	line-height: 1.7;
@@ -101,23 +138,24 @@
 	padding: 5%;
 }
 .slide_content3 p:nth-of-type(1){
-	font-size: 50px;
+	font-size: 3vw;
 	text-align: left;
 	margin-bottom: 0;
 }
 .slide_content3 p:nth-of-type(2){
-	font-size: 20px;
+	font-size: 1.5vw;
 	text-align: left;
 	line-height: 1.7;
 }
 
 #login_box{
-	width: 33.6%;
-	height: 150px;
+	width: 28.3vw;
+	aspect-ratio: 2.2;
+	/* height: 150px; */
 	border: 1px solid #8B8989;
 	border-radius: 10px;
 	margin: 40px;
-	margin-left: 0;
+	margin-left: 40px;
 	margin-bottom: 0;
 	float: right;
 }
@@ -126,29 +164,30 @@
 	border: none;
 	border-radius: 10px;
 	cursor: pointer;
-	padding: 20px 32%;
+	padding: 6.5% 25%;
 	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-	font-size: 15px;
+	font-size: 1.5vw;
 	margin-top: 22px;
 	font-family: 'SBAggroM';
 }
 #login_menu{
-	margin: 22px 0;
+	margin: 6% 0;
 }
 #login_menu a{
 	color: black;
   padding: 0 20px;
   text-decoration: none;
   border-right: 1px solid black;
-  font-size: 12px;
+  font-size: 1vw;
 }
 #login_menu a:nth-of-type(3){
 	border: none;
 }
 
 #weather_box{
-	width: 33.6%;
-	height: 355px;
+	width: 28.3vw;
+	aspect-ratio: 1.25;
+	/* height: 355px; */
 	border: 1px solid #8B8989;
 	border-radius: 10px;
 	margin: 40px;
@@ -156,7 +195,7 @@
 	float: right;
 }
 #weather_title p{
-	font-size: 20px;
+	font-size: 1.7vw;
 	text-align: left;
 	margin: 20px;
 	padding-bottom: 10px;
@@ -177,10 +216,12 @@
 	font-family: 'SBAggroM';
 	width: fit-content;
   padding: 1px 15px;
+  font-size: 1.4vw;
 }
 .work_menu{
 	text-align: left;
 	margin: 15px;
+	font-size: 1.2vw;
 }
 .work_menu a{
 	color: #8B8989;
@@ -200,12 +241,10 @@
 #work_recommend{
 	clear: both;
   position: relative;
-  width: 94%;
-  height: 502px;
+  height: 31%;
   margin: 40px;
 }
 #work_recommend img{
-	height: 400px;
 	margin: 0 16px 10px 0;
 }
 #work_recommend_link a{
@@ -224,21 +263,21 @@
 #work_music_content{
 	position: absolute;
 	bottom: 0;
-	left: 15px;
+	left: 5px;
 	text-align: left;
 	line-height: 0.5;
 }
 #work_music_content p:nth-of-type(1){
 	color: #A09D9D;
-	font-size: 13px;
+	font-size: 1vw;
 }
 #work_music_content p:nth-of-type(3){
 	color: #8B8989;
-	font-size: 15px;
+	font-size: 1.2vw;
 }
 #work_music_content p:nth-of-type(4){
 	color: #000000;
-	font-size: 17px;
+	font-size: 1.3vw;
 	line-height: 1.4;
 }
 /* 음식 추천 CSS */
@@ -249,29 +288,28 @@
 }
 #work_food a img{
 	width: 100%;
-	z-index: -1;
 }
 #work_food a img:nth-of-type(2){
-	width: 19%;
-	height: 18%;
+	width: 21%;
+	height: 19%;
 	position: absolute;
 	top: 8px;
-	right: -16px;
+	right: -23px;
 }
 #work_food_content{
 	position: absolute;
 	top: 10px;
-	left: 25px;
+	left: 20px;
 	text-align: left;
 	line-height: 1;
 }
 #work_food_content p:nth-of-type(1){
 	color: #cccccc;
-	font-size: 15px;
+	font-size: 1.2vw;
 }
 #work_food_content p:nth-of-type(2){
 	color: #ffffff;
-	font-size: 17px;
+	font-size: 1.3vw;
 }
 /* 아이템 추천 CSS */
 #work_item{
@@ -287,17 +325,17 @@
 #work_item_content{
 	position: absolute;
 	top: 10px;
-	left: 25px;
+	left: 17px;
 	text-align: left;
 	line-height: 1;
 }
 #work_item_content p:nth-of-type(1){
 	color: #cccccc;
-	font-size: 15px;
+	font-size: 1.2vw;
 }
 #work_item_content p:nth-of-type(2){
 	color: #000000;
-	font-size: 17px;
+	font-size: 1.3vw;
 }
 
 
@@ -310,8 +348,7 @@
 #work_info{
 	clear: both;
   position: relative;
-  width: 94%;
-  height: 502px;
+  height: 37%;
   margin: 40px;
 }
 #work_info img{
@@ -333,21 +370,21 @@
 #work_news_content{
 	position: absolute;
 	top: 10px;
-	left: 25px;
+	left: 20px;
 	text-align: left;
 	line-height: 1;
 }
 #work_news_content p:nth-of-type(1){
 	color: #A09D9D;
-	font-size: 13px;
+	font-size: 1vw;
 }
 #work_news_content p:nth-of-type(3){
 	color: #8B8989;
-	font-size: 15px;
+	font-size: 1.2vw;
 }
 #work_news_content p:nth-of-type(4){
 	color: #000000;
-	font-size: 17px;
+	font-size: 1.3vw;
 }
 /* 지도 CSS */
 #work_map{
@@ -362,17 +399,17 @@
 #work_map_content{
 	position: absolute;
 	top: 10px;
-	left: 25px;
+	left: 20px;
 	text-align: left;
 	line-height: 1;
 }
 #work_map_content p:nth-of-type(1){
 	color: #cccccc;
-	font-size: 15px;
+	font-size: 1.2vw;
 }
 #work_map_content p:nth-of-type(2){
 	color: #000000;
-	font-size: 17px;
+	font-size: 1.3vw;
 }
 /* 운동 꿅팁 CSS */
 #work_method{
@@ -388,15 +425,211 @@
 #work_method_content{
 	position: absolute;
 	top: 10px;
-	left: 25px;
+	left: 17px;
 	text-align: left;
 	line-height: 1;
 }
 #work_method_content p:nth-of-type(1){
 	color: #cccccc;
-	font-size: 15px;
+	font-size: 1.2vw;
 }
 #work_method_content p:nth-of-type(2){
 	color: #000000;
-	font-size: 17px;
+	font-size: 1.3vw;
 }
+
+
+
+/* --------------------------------------------------------- */
+
+
+
+/* 미디어쿼리 */
+@media (min-width: 1024px){
+	#login_box,
+	#weather_box{
+		width: 28.6vw;
+	}
+}
+
+@media (min-width: 1070px) {
+	#container{
+  	height: 2000px;
+	}
+	#slide_box img{
+		aspect-ratio: 1.2;
+	}
+	#login_box,
+	#weather_box{
+		width: 29.7vw;
+	}
+	#work_recommend{
+		height: 34%;
+	}
+	#work_info{
+		height: 38%;
+	}
+}
+
+@media (min-width: 1190px) {
+	#container{
+  	height: 2100px;
+	}
+	#slide_box img{
+		aspect-ratio: 1.2;
+	}
+	#login_box,
+	#weather_box{
+		width: 31.7vw;
+	}
+	#login_box{
+		aspect-ratio: 3.2;	
+	}
+	#work_recommend{
+		height: 37%;
+	}
+}
+
+@media (min-width: 1280px){
+	#container{
+  	height: 2200px;
+	}
+	#slide_box img{
+		aspect-ratio: 1.17;
+	}
+	#login_box,
+	#weather_box{
+		width: 33vw;
+	}
+	#login_box{
+		aspect-ratio: 3.2;	
+	}
+	#work_recommend{
+		height: 40%;
+	}
+}
+
+@media (min-width: 1300px) {
+	#container{
+  	height: 2250px;
+	}
+	#slide_box img{
+		aspect-ratio: 1.17;
+	}
+	#login_box,
+	#weather_box{
+		width: 33vw;
+	}
+	#login_box{
+		aspect-ratio: 3.2;	
+	}
+	#work_recommend{
+		height: 41%;
+	}
+	#work_info{
+		height: 38%;
+	}
+}
+
+@media (min-width: 1400px) {
+	#container{
+  	height: 2350px;
+	}
+	#work_recommend{
+		height: 45%;
+	}
+}
+
+@media (min-width: 1440px){
+	#container{
+  	height: 2450px;
+	}
+	#slide_box img{
+		aspect-ratio: 1.14;
+	}
+	#login_box,
+	#weather_box{
+		width: 34.8vw;
+	}
+	#login_box{
+		aspect-ratio: 3.2;	
+	}
+	#work_recommend{
+		height: 47%;
+	}
+}
+
+@media (min-width: 1540px) {
+	#container{
+  	height: 2600px;
+	}
+	#slide_box img{
+		aspect-ratio: 1.11;
+	}
+	#login_box,
+	#weather_box{
+		width: 35.9vw;
+	}
+	#work_recommend{
+		height: 50%;
+	}
+	#work_info{
+		height: 40%;
+	}
+}
+
+@media (min-width: 1700px) {
+	#container{
+  	height: 2700px;
+	}
+	#work_info img{
+	height: 450px;
+	}
+	#work_recommend{
+		height: 54%;
+	}
+}
+
+@media (min-width: 1820px) {
+	#container{
+  	height: 2800px;
+	}
+	#slide_box img{
+		aspect-ratio: 1.08;
+	}
+	#work_info img{
+	height: 480px;
+	}
+	#login_box,
+	#weather_box{
+		width: 37.9vw;
+	}
+	#work_recommend{
+		height: 58%;
+	}
+}
+
+@media (min-width: 1920px) {
+	#container{
+  	height: 2950px;
+	}
+	#work_info img{
+	height: 500px;
+	}
+	#work_recommend{
+		height: 63%;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

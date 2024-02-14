@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/user/mybag.css}">
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="container" style="height: 2700px;">
+		<div id ="mybag">
+			<!-- header.html 연결 -->
+			<div th:replace="~{header}"></div>
+			
+    	<section class="msection">
+    		<div id="mcontainer">
+    			<div class="t_box">
+    				<p class = "tag">나의 가방</p>
+    			</div>
+    			
+    			<div class="card">
+    				<div class="content-container">
+    					<img src="https://placekitten.com/300/150" alt="Card Image 1">
+    					<div class="card-content">
+    						<h3 class = "bagh3">
+    							<span class="bagh3_p"><a th:href="'#'">이고진 짐볼 + 발 점프</a></span>
+    						</h3>
+    						<p class = "bagp">근력, 지구력, 군형력, 유연성을 키울 때 좋은 도구</p>
+    						<button type = "submit" class = "bagbt">
+    							삭제<i class="fa-solid fa-trash" style="padding-left: 40px;"></i>
+    						</button>
+    						<p class = "bagprice">12,400원</p>
+    					</div>
+    				</div>
+    			</div>
+    			
+    			
+    			
+    			
+    		</div>
+    	</section>
+    	
+			<!-- header.html 연결 -->
+			<div th:replace="~{footer}"></div>
+    </div>
+	</div>
+</body>
+</html>

@@ -3,10 +3,12 @@
    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta name="_csrf" th:content="${_csrf.token}">
 <title>3WORK</title>
-<link rel="stylesheet" href="/css/common.css">
 <link rel="stylesheet" href="/css/UserpageCss.css">
 <script src="https://kit.fontawesome.com/7c6041109a.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <link href='/css/cal.css' rel='stylesheet' />
 <script src='/js/cal.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/common@5.11.2/main.min.js"></script>
@@ -14,6 +16,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.11.2/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.2/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@5.11.2/main.min.js"></script>
+<script src='/js/comments.js'></script>
 <script type='text/javascript'>
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
@@ -120,76 +123,142 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>
 <div id="userMain">
     <div id="container">
-<div th:replace="~{header}"></div>
         <!-- BGM bar 영역 -->
-        <div id="bgm-bar">
-            <span>Love Wins All - 아이유(IU)</span>
-            <div id="bgm-buttons">
-                <button onclick="playPause()">
-                    <i class="fa-solid fa-play"></i>
-                </button>
-                <button onclick="stop()">
-                    <i class="fa-solid fa-pause"></i>
-                </button>
-                <button onclick="next()">
-                    <i class="fa-solid fa-forward"></i>
-                </button>
-            </div>
-        </div>
+      <div id="bgm-controls" class="bgm-bar">
+          <div class="bgm-title-container">
+              <div id="bgm-title" class="bgm-title">BGM을 설정해주세요.</div>
+          </div>
+          <button id="play-pause-btn" class="play-pause-btn"><i class="fa-solid fa-play"></i></button>
+          <div class="volume-control">
+              <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+          </div>
+          <input type="color" id="bg-color-picker" value="#f0f0f0">
+      </div>
+      <audio id="bgm-audio" th:src="@{|/upload/mp3/${Userinfo.bgmname}|}" autoplay loop></audio>
         <!-- 사이드 메뉴 영역 -->
         <div id="diary">
          <div id="diary_btn">
             <a th:href="'#'">나의 건강일지</a>
          </div>
       </div>
-        <!-- 프로필, 캘린더 영역 -->
-        <section id="profile">
-            <p>TODAY <span id="today-visits">100</span> | TOTAL 4,300</p>
-            <div id="profile-pic">
-                <img th:src="@{/images/Profile.png}" alt="프로필">
-            </div>
-            <p>USERNAME's HOME
-                <a th:href="@{/user/userupdate}" id="setting">
-                    <i class="fa-solid fa-gear"></i>
-                </a>
-            </p>
-            <p>한줄 소개명</p>
-            <p>나 운동 중독남...<br> 나랑 같이 운동하실분! :)</p>
-            <p>좋아하는 것</p>
-            <p>#무게 증량에서 오는 희열감<br>
-                #달리기&nbsp;&nbsp;#탄단지가 가득한 완전식품</p>
-            <div id='calendar'></div>
-        </section>
+      <!-- 프로필, 캘린더 영역 -->
+      <section id="profile">
+          <p>TODAY <span id="today-visits" th:text="${Userinfo.hits}"></span> | TOTAL 4,300</p>
+          <div id="profile-pic">
+       <img th:if="${Userinfo.ufilename != null}" th:src="@{|/upload/profile/${Userinfo.ufilename}|}" 
+          style="width: 200px; height: 250px; border-radius: 17px;" alt="프로필">
+       <span th:unless="${Userinfo.ufilename != null}" id="pimage-text">프로필 이미지를<br> 설정해주세요</span>
+   </div>
+          <p th:text="${Userinfo.unickname} + '의 Health Place'"></p>
+              <a th:href="@{/user/userupdate}" id="setting">
+                  <i class="fa-solid fa-gear"></i>
+              </a>
+         
+          <p>한줄 소개명</p>
+   <p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
+   Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
+      
+   <p>좋아하는 것</p>
+   <p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
+   Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
+          <div id='calendar'></div>
+      </section>
 
-        <section id="comments">
-            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                방명록<img th:src="@{/images/pen.png}" alt="방명록">
-            </h2>
-            <!-- 방명록 작성 영역 -->
-            <form id="comment-form">
-                <div id="comment-container">
-                    <input type="text" id="comment" name="comment"
-                           placeholder="자유롭게 방명록을 작성해주세요.">
-                    <button type="submit" id="btns">작성</button>
-                </div>
-            </form>
-            
-            <div id="comment-list">  
-               <ul>
-               <li><span id="replyid">닭가슴살킬러</span> 
-                  <span id="reply_time">2024.01.29 22:28</span> [1]</li> 
-                <li>2월 19일 오후 2시에 같이 운동해요!<p id="replywrite">댓글쓰기</p></li>
-                <li><i class="fa-solid fa-caret-right"></i>&nbsp;
-                   <span id="replyid">주인장</span>: 어키!! 시간 맞춰 갈게요!
-                   <div id="reply_update">
-                      <a th:href="'#'">수정</a> |
-                      <a th:href="'#'">삭제</a>
-                   </div>
-                </li>
-                </ul>
-             </div>
-        </section>
+      <section id="comments">
+          <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              방명록<img th:src="@{/images/pen.png}" alt="방명록">
+          </h2>
+          <!-- 방명록 작성 영역 -->
+          <form id="comment-form">
+              <div id="comment-container">
+                  <input type="text" id="comment" name="ccontent"
+                         placeholder="자유롭게 방명록을 작성해주세요.">
+                  <button id="btns">작성</button>
+              </div>
+          </form>
+        <!-- 방명록 목록 영역 -->
+        <div id="comment-list"> 
+       <div th:each="comment : ${commentList}">
+            <div id="ccontent-body">
+            <div class="comment-body">
+                <p id="replyid" th:text="${comment.users.unickname}"></p>
+                <p id="reply_time" th:text="${#dates.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></p>
+                <a href="#" th:onclick="deleteComment([[${Userinfo.uno}]], [[${comment.cno}]])">삭제</a>
+            </div>
+               <p id="content" th:text="${comment.ccontent}"><p>
+            </div>
+       </div>
+      </div>
+      <!-- 페이지 영역 -->
+      <div class="pagination" th:if="${commentList.totalElements > 0}">
+          <!-- 이전 페이지 -->
+          <!-- 2페이지클릭 : db페이지는 1page -->
+          <a id="page" th:href="${commentList.first} ? '#' : @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number})}">
+             <i class="fa-solid fa-caret-left"></i></a>
+          <!-- 페이지 번호 영역 -->
+          <span class="current_page" th:each="page: ${#numbers.sequence(startPage, endPage)}">
+              <!-- <span th:text="${page}"></span> -->
+              <!-- 쿼리 스트링 방식 : /board/pagelist?page=1 -->
+              <!-- 현재 페이지는 링크없이 숫자만 표시 -->
+              <span class="current_page" th:if="${page == commentList.number + 1}" th:text="${page}"></span>
+              <span th:if="${page != commentList.number + 1}">
+                  <a class="another_page" th:href="@{|/user/userpage/${Userinfo.uno}|(page=${page})}" th:text="${page}"></a>
+              </span>
+          </span>
+          <!-- 다음 페이지 -->
+          <!-- 현재 2페이지인데 3페이지로 가고싶다 : 실제 페이지는 1page -->
+          <a id="page" th:href="${commentList.last} ? '#' : @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number + 2})}">
+             <i class="fa-solid fa-caret-right"></i></a>
+      </div>
+      <div id="no-comments" th:unless="${commentList.totalElements > 0}">
+          <p>댓글이 없습니다.</p>
+      </div>
+    </section>
     </div>
-  </div>
+</div>
+<script>
+//Get audio element and controls
+const audio = document.getElementById('bgm-audio');
+const playPauseBtn = document.getElementById('play-pause-btn');
+const bgmTitle = document.getElementById('bgm-title');
+const bgmControls = document.getElementById('bgm-controls');
+const bgColorPicker = document.getElementById('bg-color-picker');
+const volumeSlider = document.getElementById('volume-slider'); // 추가: 볼륨 슬라이더 요소
+
+// Play/pause toggle
+playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        audio.pause();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+});
+
+// Change background color
+bgColorPicker.addEventListener('input', () => {
+    bgmControls.style.backgroundColor = bgColorPicker.value;
+});
+
+// Update song title
+audio.addEventListener('loadedmetadata', () => {
+    const songTitle = '아이유(IU) - Love Wins All';
+    bgmTitle.textContent = songTitle;
+    bgmTitle.title = songTitle; // 오른쪽에서 왼쪽으로 움직일 때 전체 제목을 표시하기 위해 title 속성 설정
+
+    // 자동 재생 상태에 따라 재생/일시 정지 버튼 업데이트
+    if (!audio.paused) {
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+});
+
+// Volume control
+volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+});
+</script>
 </body>
 </html>

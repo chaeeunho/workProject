@@ -2,13 +2,16 @@
 
 /* privacy.html */
 #privacy{
-  position: relative;
-  width: 100%;
-  height: 1900px;
+	position: relative;
+	height: 100%;
 }
 .data{
 	text-align: left;
 	padding: 50px;
+	width: 100%;
+  height: 750px;
+	position: absolute;
+  top: 123px;
 }
 .board p{
 	font-size: 30px;
@@ -31,15 +34,105 @@
 
 
 
+/* faq.html */
+section .question{
+  width: 100%;
+}
+#question_container{
+	width: 100%;
+    margin: 120px 1% 10% 1%
+}
+
+.question-title {
+  font-size: 25px;
+}
+
+#question_container .board{
+  width: 100%;
+}
+
+.fao-user,
+.fao-travel,
+.fao-other{
+    margin-top: 50px;
+}
+
+.fao-section1 label,
+.fao-section2 label,
+.fao-section3 label{
+    text-decoration: none;
+    display: inline-block;
+    width: 90%;
+    border-bottom: 1px dashed #999999;
+    padding: 10px 0;
+    color: #999999;
+}
+
+.fao-section1 label:hover,
+.fao-section2 label:hover,
+.fao-section3 label:hover{
+	color: #336633;
+}
+
+.fao-section1 #check-btn1:checked + label,
+.fao-section1 #check-btn2:checked + label,
+.fao-section1 #check-btn3:checked + label,
+.fao-section2 #check-btn4:checked + label,
+.fao-section2 #check-btn5:checked + label,
+.fao-section2 #check-btn6:checked + label,
+.fao-section3 #check-btn7:checked + label,
+.fao-section3 #check-btn8:checked + label,
+.fao-section3 #check-btn9:checked + label {
+  color: #336633;
+}
+
+.menubars { 
+  display: none; 
+  color: rgb(114, 110, 110);
+  list-style: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* 체크되면 메뉴를 표시하기 */
+#check-btn1:checked ~ .menubars,
+#check-btn2:checked ~ .menubars,
+#check-btn3:checked ~ .menubars,
+#check-btn4:checked ~ .menubars,
+#check-btn5:checked ~ .menubars,
+#check-btn6:checked ~ .menubars,
+#check-btn7:checked ~ .menubars,
+#check-btn8:checked ~ .menubars,
+#check-btn9:checked ~ .menubars { 
+  display: block; 
+}
+
+/* 체크박스는 화면에서 감추기 */
+#check-btn1, #check-btn2, #check-btn3, 
+#check-btn4, #check-btn5, #check-btn6, 
+#check-btn7, #check-btn8, #check-btn9
+ { 
+  display: none; 
+}
+
+
+/* ------------------------------------------- */
+
+
+
 /* contact.html */
 #contact{
-  position: relative;
-  width: 100%;
-  height: 1000px;
+	position: relative;
+	height: 100%;
 }
 .service{
 	text-align: left;
 	padding: 50px;
+	width: 90%;
+  height: 500px;
+	position: absolute;
+  top: 123px;
 }
 .service-member p:nth-of-type(1){
 	margin-bottom: 30px;

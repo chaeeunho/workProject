@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/submenu/submenu.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="container" style="height: 1150px;">
+		<div id="privacy">
+			<!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      
+      <section class="data">
+        <div class="data-title">
+           <div class="board">
+               <p>자주하는질문</p>
+           </div>
+	      </div>
+	      
+	      <div class="fao-travel">
+	      	<div class="fao-section1">
+	      		<div class="fao-menu1">
+	      			<input id="check-btn1" type="radio" name="cs_biz_form" onclick="deselect()"/>
+	      			<label for="check-btn1">3WORK:WWW의 의미는 무엇인가요?</label>
+	      			<ul class="menubars">
+	      				<li>
+	      					여권 분실 시 순서로는
+	      					<br>1. 여권 분실 신고
+	      					<br>2. 현지 관광 경찰서 방문 - 분실 확인증 발급
+	      					<br>3. 현지 한국 대사관 방문으로 이뤄지며
+	      					<br>발급을 위해 신분증, 여권용 사진 2매, 
+	      					<br>여권 발급시 수수료등이 필요합니다.
+	      				</li>
+	      			</ul>
+		      	</div>
+		      	
+		      	<div class="fao-menu2">
+		      		<input id="check-btn2" type="radio" name="cs_biz_form"/>
+	      			<label for="check-btn2">3WORK:WWW는 언제 탄생했나요?</label>
+	      			<ul class="menubars">
+	      				<li>
+	      					2024년 2월 20일, 탄생했습니다.
+	      				</li>
+	      			</ul>
+		      	</div>
+		      	
+		      	<div class="fao-menu3">
+		      		<input id="check-btn3" type="radio" name="cs_biz_form"/>
+	      			<label for="check-btn3">3WORK:WWW는 누가 만들었나요?</label>
+	      			<ul class="menubars">
+	      				<li>
+	      					Leader : 최은호
+	      					<br>
+	      					Member : 고병진, 김정수, 임예은
+	      				</li>
+	      			</ul>
+		      	</div>
+	      	</div>
+	      </div>
+	      
+	      <div class="fao-user">
+	      	<div class="fao-section2">
+	      		<div class="fao-menu4">
+	      			 <input id="check-btn4" type="radio" name="cs_biz_form"/>
+	             <label for="check-btn4">회원 탈퇴를 하고 싶습니다.</label>
+	             <ul class="menubars">
+	             	<li>[메인페이지 > 회원정보 수정> 회원탈퇴]
+	             		<br>수정 페이지에서 탈퇴를 선택하시고 확인 버튼을 클릭하시면 탈퇴가 가능합니다.
+	             		<br>정보통신망법(정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 29조)에
+	             		<br>따라서, 수집목적이 완료된 회원의 정보는 파기하도록 되어 있습니다.
+	             	</li>
+	             </ul>
+	      		</div>
+	      		
+	      		<div class="fao-menu5">
+	      			<input id="check-btn5" type="radio" name="cs_biz_form"/>
+	            <label for="check-btn5">미니홈피를 꾸미고 싶어요 !</label>
+	            <ul class="menubars">
+	             	<li>[메인페이지 > My Home > 회원정보 수정]
+	             		<br>한줄 소개/좋아하는 것/배경음악 등 다양하게 설정이 가능합니다.
+	             		<br>설정한 내용은 다른 회원들에게도 공개됩니다.
+	             		<br>따라서, 자신을 표현할 수 있도록 자유롭게 설정해주세요.
+	             	</li>
+	             </ul>
+	      		</div>
+	      		
+	      		<div class="fao-menu6">
+	      			<input id="check-btn6" type="radio" name="cs_biz_form"/>
+	            <label for="check-btn6">아이디/비밀번호가 기억나지 않아요...</label>
+	            <ul class="menubars">
+	             	<li>[메인페이지 > 아이디/비밀번호 찾기]
+	             		<br>아이디 찾기는 이름, 연락처를 통해 가능합니다. 
+	             		<br>비밀번호 찾기는 아이디, 이름, 연락처를 통해 가능합니다.
+	             		<br>그리고 임시 비밀번호가 발급되므로 로그인 후 수정해주시기 바랍니다.
+	             	</li>
+	             </ul>
+	      		</div>
+	      	</div>
+	      </div>
+	      
+	      <div class="fao-other">
+	      	<div class="fao-section3">
+	      		<div class="fao-menu7">
+	      			<input id="check-btn7" type="radio" name="cs_biz_form"/>
+	            <label for="check-btn7">3WORK RECOMMEND는 무엇인가요?</label>
+	            <ul class="menubars">
+              	<li>
+									3WORK:WWW에서 건강&운동과 관련해 추천하는 노래, 식품, 아이템입니다.
+									<br>노래는 운동할 때 함께 들으면 좋은 노래를 확인할 수 있습니다.
+									<br>식품은 건강에 좋은 식품들을 확인할 수 있습니다.
+									<br>아이템은 운동에 필요한 보조기구와 운동할 때 입으면 좋은 옷들을 확인할 수 있습니다.
+									<br>식품과 아이템은 장바구니에 저장하여 보관할 수 있습니다.
+									<br>또한 링크로 이동하게 식품과 아이템을 구매할 수 있습니다.
+              	</li>
+              </ul>   
+	      		</div>
+	      		
+	      		<div class="fao-menu8">
+	      			<input id="check-btn8" type="radio" name="cs_biz_form"/>
+	            <label for="check-btn8">3WORK INFORMATION는 무엇인가요?</label>
+	            <ul class="menubars">
+              	<li>
+              		3WORK:WWW에서 건강과 관련해 추천하는 뉴스, 힐스장 찾기, 꿀팁입니다.
+									<br>뉴스는 건강과 관련되 다양한 기사들을 확인할 수 있습니다.
+									<br>또한 뉴스 제목을 선택해 상세한 기사 내용을 확인할 수 있습니다.
+									<br>헬스장 찾기는 회원님 주변에 헬스장 등을 찾을 수 있습니다.
+									<br>꿀팁은 운동과 관련된 알아두면 좋은 정보들을 확인할 수 있습니다.
+              	</li>
+              </ul>
+	      		</div>
+	      	</div>
+	      </div>
+	    </section>
+		
+			<!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+		</div>
+	</div>
+	
+	<!-- 라디오버튼 체크해제 --> 
+	<script>
+		$("input[type=radio]").each(function(){
+	
+		    var chk = $(this).is(":checked");
+		    var name = $(this).attr('cs_biz_form');
+		    if(chk == true) $("input[name='"+name+"']").data("previous",$(this).val());
+	
+		});
+	
+		$("input[type=radio]").click(function(){
+	
+		    var pre = $(this).data("previous");
+		    var chk = $(this).is(":checked");
+		    var name = $(this).attr('name');
+	
+		    if(chk == true && pre == $(this).val()){
+		        $(this).prop('checked',false);
+		        $("input[name='"+name+"']").data("previous",'');
+	
+		    }else{
+		        if(chk == true) $("input[name='"+name+"']").data("previous",$(this).val());
+		    }
+	
+		});
+	</script>
+</body>
+</html>
