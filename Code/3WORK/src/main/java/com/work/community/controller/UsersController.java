@@ -3,6 +3,11 @@ package com.work.community.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +16,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.work.community.config.SecurityUser;
+import com.work.community.dto.CommentsDTO;
 import com.work.community.dto.UsersDTO;
 import com.work.community.entity.Users;
 import com.work.community.repository.UsersRepository;
+import com.work.community.service.CommentsService;
 import com.work.community.service.UsersService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,13 +40,30 @@ import lombok.RequiredArgsConstructor;
 public class UsersController {
 	
 	private final UsersService usersService;
+	
 	private final UsersRepository usersRepository;
+	
+	private final CommentsService commentsService;
+	
 	//로그인 페이지 요청 :  /login
 	@GetMapping("/login")
 	public String loginForm() {
 		return "login";  //login.html
 	}
 	
+//	@RestController
+//	public class KakaoLoginController {
+//
+//	    @Autowired
+//	    private UsersService usersService;
+//
+//	    @PostMapping("/login")
+//	    public ResponseEntity<?> handleKakaoLogin(@RequestBody UsersDTO usersDTO) {
+//	        // 받아온 카카오 사용자 정보를 UserService를 통해 처리하고 데이터베이스에 저장
+//	        usersService.saveKakaoUsers(usersDTO);
+//	        return ResponseEntity.ok().build();
+//	    }
+//	}
 //	//로그인 처리
 //	@PostMapping("/login")
 //	public String login(@ModelAttribute Users users, HttpSession session) {
@@ -50,49 +78,70 @@ public class UsersController {
 //		}
 //	}
 	
-	//유저 페이지
-	@GetMapping("/user/userpage")
-	public String userPage() {
-		return "user/userpage";
-	}
-	//유저 수정페이지
-	@GetMapping("/user/userupdate")
-	public String userUpdateForm() {
-		return "user/userupdate";
-	}
-
+	
+	//유저 홈페이지
+		@GetMapping("/user/userpage/{uno}")
+	    public String userPage(@PathVariable Integer uno,
+			@PageableDefault(page = 1) Pageable pageable,
+		                    Model model) {
+			Page<CommentsDTO> commentList = commentsService.findListAll(pageable);
+		    Users users = usersService.findById(uno);
+	//하단에 페이지 영역 만들기
+				int blockLimit = 10; //하단에 보여줄 페이지 개수
+				//시작 페이지 1, 11, 21 / ex)12를 10으로 나누면 1.2가 나오니 반올림후 실수로 변경하면 2
+				//1을 빼주고 x 10 + 1 = 11
+				int startPage = ((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit)) - 1)* blockLimit + 1;
+				//마지막 페이지 10, 20, 30 // 만약 12페이지가 마지막페이지면
+				int endPage = (startPage + blockLimit - 1) > commentList.getTotalPages() ?
+						commentList.getTotalPages() : startPage + blockLimit - 1;
+	        
+	        model.addAttribute("commentList", commentList);
+	        model.addAttribute("Userinfo", users);
+	        model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+	        return "user/userpage";
+	    }
+		
 	//회원 가입 페이지
 	@GetMapping("/user/join")
 	public String joinForm(UsersDTO usersDTO) {
 		return "user/join";
 	}
-	//로그아웃
-	@GetMapping("/logout")
-	public String logout() {
-		return "redirect:/main";
-	}
-	//회원 가입 처리
-	//@Valid : 필드의 유효성 검사
-	//BindingResult: 에러 처리 클래스
+	// 회원 가입 처리
+	// @Valid : 필드의 유효성 검사
+	// BindingResult: 에러 처리 클래스
 	@PostMapping("/user/join")
-	public String join(@Valid UsersDTO usersDTO,
-			BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			//에러가 있으면 회원 가입 페이지에 머무름
+	public String join(@Valid UsersDTO usersDTO, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			// 에러가 있으면 회원 가입 페이지에 머무름
 			return "user/join";
 		}
 		usersService.save(usersDTO);
 		return "user/join_wel";
 	}
 	
-	//이메일 중복 검사
-		@PostMapping("/user/check-email")
-		public @ResponseBody String checkId(@RequestParam("uid")
-				String uid) {
-			String resultText = usersService.checkId(uid);
-			return resultText; //res
-		}
 	
+	// 이메일 중복 검사
+		@PostMapping("/user/check-email")
+		public @ResponseBody String checkId(@RequestParam("uid") String uid) {
+			String resultText = usersService.checkId(uid);
+			return resultText; // res
+		}
+
+		// 닉네임 중복 검사
+		@PostMapping("/user/check-nickname")
+		public @ResponseBody String checkNickname(@RequestParam("unickname") String unickname) {
+			String result = usersService.checkNickname(unickname);
+			return result;
+		}
+			
+		//로그아웃
+		@GetMapping("/logout")
+		public String logout() {
+			return "redirect:/main";
+		}
+		
+
 	//회원 목록
 	@GetMapping("/user/list")
 	public String getList(Model model) {
@@ -101,14 +150,14 @@ public class UsersController {
 		return "user/list";
 	}
 	
-	//회원 상세 보기
-	@GetMapping("/user/{uno}")
-	public String getMember(@PathVariable Integer uno,
-			Model model) {
-		UsersDTO usersDTO = usersService.findById(uno);
-		model.addAttribute("users",usersDTO);
-		return "user/detail";
-	}
+//	//회원 상세 보기
+//	@GetMapping("/user/{uno}")
+//	public String getMember(@PathVariable Integer uno,
+//			Model model) {
+//		UsersDTO usersDTO = usersService.findById(uno);
+//		model.addAttribute("users",usersDTO);
+//		return "user/detail";
+//	}
 
 	//회원 삭제
 	@GetMapping("/user/delete/{uno}")
@@ -160,37 +209,28 @@ public class UsersController {
 	    return "searchResult"; // 검색 결과를 표시할 페이지
 	}
 	
-	//유저검색후 미니홈페이방문 	
-	@GetMapping("/user/userpage/{uno}")
-	public String userPage(@PathVariable Integer uno, Model model) {
-	    Optional<Users> userOptional = usersRepository.findById(uno);
-	    if (userOptional.isPresent()) {
-	        model.addAttribute("user", userOptional.get());
-	        return "user/userpage"; // 사용자의 미니홈페이지를 반환하는 View의 이름
-	    } else {
-	        return "error/404"; // 사용자를 찾을 수 없는 경우의 에러 페이지
-	    }
-	}
-	
 
-	
-//		//회원 수정 페이지
-//		//@AuthenticationPrincipal - 회원을 인가하는 클래스
-//		@GetMapping("/user/update")
-//		public String updateMemberForm(
-//				@AuthenticationPrincipal SecurityUser principal,
-//				Model model) {
-//			UsersDTO usersDTO = usersService.findByUid(principal);
-//			model.addAttribute("users", usersDTO);
-//			return "user/update";
-//		}
-//		
-//		//회원 수정 처리 - 상세보기로 이동
-//		@PostMapping("/user/update")
-//		public String update(@ModelAttribute UsersDTO usersDTO) {
-//			usersService.update(usersDTO);
-//			return "redirect:/users/" + usersDTO.getUid();
-//		}
+	//회원 수정 페이지
+	//@AuthenticationPrincipal - 회원을 인가하는 클래스
+	@GetMapping("/user/userupdate")
+	public String updateUserForm(
+			@AuthenticationPrincipal SecurityUser principal,
+			Model model) {
+		UsersDTO usersDTO = usersService.findByUid(principal);
+		model.addAttribute("users", usersDTO);
+		return "user/userupdate";
+	}
 		
+	//회원 수정 처리 - 상세보기로 이동
+	@PostMapping("/user/userupdate")
+	public String update(@ModelAttribute UsersDTO usersDTO,
+			 MultipartFile uimage, Model model) throws Exception {
+		usersService.saveImage(usersDTO, uimage);
+		model.addAttribute("users", usersDTO);
+		return "redirect:/user/userpage/" + usersDTO.getUno();
+	}
+
+
+
 		
 }

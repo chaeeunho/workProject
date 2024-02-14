@@ -12,6 +12,9 @@ public interface UsersRepository extends JpaRepository<Users,Integer>{
    //select * from member where member_id = ?;
    Optional<Users> findByUid(String string);
    
+   
+   Optional<Users> findByUnickname(String string);
+   
    //main 검색창에서 친구 검색
    List<Users> findByUidContaining(String uid); // Like 검색을 위한 메서드 추가
    

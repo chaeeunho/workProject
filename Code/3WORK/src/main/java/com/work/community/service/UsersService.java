@@ -1,17 +1,22 @@
 package com.work.community.service;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.work.community.config.SecurityUser;
 import com.work.community.dto.UsersDTO;
 import com.work.community.entity.Role;
 import com.work.community.entity.Users;
+import com.work.community.exception.BootBoardException;
 import com.work.community.repository.UsersRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -61,18 +66,22 @@ public class UsersService {
 			}
 			return usersDTOList;
 		}
-
-		public UsersDTO findById(Integer uno) {
-			//db에서 member 엔티티를 꺼내옴
-			Optional<Users> findUsers = usersRepository.findById(uno);
-			if(findUsers.isPresent()) { //회원 정보가 있으면 
-				//entity -> dto 변환
-				UsersDTO usersDTO = UsersDTO.toSaveDTO(findUsers.get());
-				return usersDTO; //정보를 가져와서 반환
-			}
-			return null;
-		}
 		
+
+		public Users findById(Integer uno) {
+			// db에서 member 엔티티를 꺼내옴
+			Optional<Users> findUsers = usersRepository.findById(uno);
+			if (findUsers.isPresent()) { // 회원 정보가 있으면
+				// entity -> dto 변환
+				return findUsers.get(); // 정보를 가져와서 반환
+			}else {
+				throw new BootBoardException("회원 페이지를 찾을 수 없습니다.");
+			}
+			
+		}
+		public void deleteById(Integer uno) {
+			usersRepository.deleteById(uno);
+		}
 		
 	    // 아이디의 일부를 포함하는 사용자 검색
 	    public List<UsersDTO> searchUsersByUid(String uid) {
@@ -82,9 +91,7 @@ public class UsersService {
 	                        .collect(Collectors.toList());
 	    }
 
-		public void deleteById(Integer uno) {
-			usersRepository.deleteById(uno);
-		}
+		
 		
 		//아이디 중복검사
 		public String checkId(String uid) {
@@ -96,4 +103,57 @@ public class UsersService {
 			return "NO";
 		}
 	}
+		// 닉네임 중복검사
+		public String checkNickname(String unickname) {
+			Optional<Users> checkNickname = usersRepository.findByUnickname(unickname);
+			if (checkNickname.isEmpty()) {
+				return "OK";
+			}else {
+				return "NO";
+			}
+		}
+		//회원 수정페이지
+		public UsersDTO findByUid(SecurityUser principal) {
+			Optional<Users> user =  
+					usersRepository.findByUid(principal.getUsername());
+			UsersDTO usersDTO = UsersDTO.toSaveDTO(user.get());
+			return usersDTO;
+		}
+		//회원 수정 처리
+		/* public void update(UsersDTO usersDTO) {
+			String encPW = pwEncoder.encode(usersDTO.getUpassword());
+			usersDTO.setUpassword(encPW);
+			usersDTO.setRole(Role.MEMBER);
+			
+			Users users = Users.toSaveUpdate(usersDTO);
+			usersRepository.save(users);
+		} */
+		//수정처리
+		public void saveImage(UsersDTO usersDTO, MultipartFile uimage) throws Exception {
+			String encPW = pwEncoder.encode(usersDTO.getUpassword());
+			usersDTO.setUpassword(encPW);
+			usersDTO.setRole(Role.MEMBER);
+			
+			Users users;
+			if(!uimage.isEmpty()) {
+				
+				UUID uuid = UUID.randomUUID();
+				
+				String filename = uuid + "_" + uimage.getOriginalFilename();
+				String filepath = "C:\\3workfiles\\profile\\" + filename;	
+				File savedFile = new File(filepath);
+				uimage.transferTo(savedFile);
+				
+				usersDTO.setUfilename(filename);
+				usersDTO.setUfilepath(filepath);
+				users = Users.toSaveUpdate(usersDTO);
+				
+			}else {
+				usersDTO.setUfilename(findById(usersDTO.getUno()).getUfilename());
+				usersDTO.setUfilepath(findById(usersDTO.getUno()).getUfilepath());
+				users = Users.toSaveUpdate(usersDTO);
+			}
+			usersRepository.save(users);
+		}
+
 }
