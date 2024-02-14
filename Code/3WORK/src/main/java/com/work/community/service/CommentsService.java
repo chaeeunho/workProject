@@ -34,7 +34,7 @@ public class CommentsService {
 	//방명록 목록 + 페이지처리
 	public Page<CommentsDTO> findListAll(Pageable pageable) {
 		int page = pageable.getPageNumber() - 1; //db는 현재 페이지보다 1 작음
-		int pageSize = 10;
+		int pageSize = 4;
 		pageable = PageRequest.of(page, pageSize, Sort.Direction.DESC, "cno");
 		
 		Page<Comments> commentsList = commentsRepository.findAll(pageable);

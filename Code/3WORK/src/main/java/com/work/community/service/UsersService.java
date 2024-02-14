@@ -13,12 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.work.community.config.SecurityUser;
 import com.work.community.dto.UsersDTO;
+import com.work.community.entity.News;
 import com.work.community.entity.Role;
 import com.work.community.entity.Users;
 import com.work.community.exception.BootBoardException;
 import com.work.community.repository.ProfileRepository;
 import com.work.community.repository.UsersRepository;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -110,12 +112,39 @@ public class UsersService {
 		return usersDTO;
 	}
 	//회원 수정 처리
-	public void update(UsersDTO usersDTO) {
+	/* public void update(UsersDTO usersDTO) {
 		String encPW = pwEncoder.encode(usersDTO.getUpassword());
 		usersDTO.setUpassword(encPW);
 		usersDTO.setRole(Role.MEMBER);
 		
 		Users users = Users.toSaveUpdate(usersDTO);
+		usersRepository.save(users);
+	} */
+	//수정처리
+	public void saveImage(UsersDTO usersDTO, MultipartFile uimage) throws Exception {
+		String encPW = pwEncoder.encode(usersDTO.getUpassword());
+		usersDTO.setUpassword(encPW);
+		usersDTO.setRole(Role.MEMBER);
+		
+		Users users;
+		if(!uimage.isEmpty()) {
+			
+			UUID uuid = UUID.randomUUID();
+			
+			String filename = uuid + "_" + uimage.getOriginalFilename();
+			String filepath = "C:\\3workfiles\\profile\\" + filename;	
+			File savedFile = new File(filepath);
+			uimage.transferTo(savedFile);
+			
+			usersDTO.setUfilename(filename);
+			usersDTO.setUfilepath(filepath);
+			users = Users.toSaveUpdate(usersDTO);
+			
+		}else {
+			usersDTO.setUfilename(findById(usersDTO.getUno()).getUfilename());
+			usersDTO.setUfilepath(findById(usersDTO.getUno()).getUfilepath());
+			users = Users.toSaveUpdate(usersDTO);
+		}
 		usersRepository.save(users);
 	}
 

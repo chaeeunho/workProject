@@ -26,7 +26,7 @@
                      
 			<!-- 프로필 이미지 -->
 			<div id="update_image">
-			    <img id="profile_image" src="/images/default/default_image.png" alt="프로필">
+			    <img id="profile_image" th:src="@{|/upload/profile/${users.ufilename}|}" alt="프로필">
 			    <button type="button" id="edit_btn">EDIT</button>
 			</div>
 			
@@ -41,8 +41,8 @@
 			        <img src="/images/profile/profile_pic5.png" alt="프로필 이미지 5">
 			        <img src="/images/profile/profile_pic6.png" alt="프로필 이미지 6">
 			    </div>
-			    <input type="file" id="image_upload" accept="image/*">
-			    <button type="button" onclick="uploadImage()">업로드</button>
+			    
+			    <input type="file" id="image_upload" name="uimage">
 			    <button type="button" onclick="closeModal()">닫기</button>
 			</div>
 
@@ -120,7 +120,7 @@
                         한줄 소개명<span>50자 이내</span>
                      </label> 
                  <textarea rows="4" cols="30" maxlength="50" name="uintroduce" 
-                 			 id="uintroduce" th:value="${users.uintroduce}" placeholder="자신을 마음껏 나타내 보세요."></textarea>
+                 			 id="uintroduce" th:text="${users.uintroduce}" placeholder="자신을 마음껏 나타내 보세요."></textarea>
                   </td>
                </tr>
                
@@ -130,7 +130,7 @@
                      좋아하는 것<span>50자 이내</span>
                   </label> 
                   <textarea rows="4" cols="30" maxlength="50" name="ulike" 
-                  			id="ulike" th:value="${users.ulike}" placeholder="동료에게 자신의 관심사를 공유해보세요."></textarea>
+                  			id="ulike" th:text="${users.ulike}" placeholder="동료에게 자신의 관심사를 공유해보세요."></textarea>
                   </td>
                </tr>
                
@@ -168,73 +168,49 @@
       $(".upload-name").val(fileName);
     });
    
-// 서버로부터 CSRF 토큰을 받아서 저장하는 함수
-   function fetchCsrfToken() {
-       return fetch('/get-csrf-token')
-       .then(response => response.json())
-       .then(data => {
-           // 받은 CSRF 토큰을 저장
-           window.csrfToken = data.token;
-       })
-       .catch(error => {
-           console.error('CSRF 토큰을 가져오지 못했습니다:', error);
-       });
-   }
-
-   // EDIT 버튼 클릭시 캐릭터 선택창 열기
+   $("#image_upload").on('change', function() {
+	    var input = $(this)[0];
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            $('#profile_image').attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    } else {
+	        // 파일이 선택되지 않은 경우, 기존 이미지를 유지
+	        var currentImageSrc = $('#profile_image').attr('src');
+	        $('#profile_image').attr('src', currentImageSrc);
+	    }
+	});
+   
+   $("#image_upload").on('change', function() {
+	    var input = $(this)[0];
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            $('#profile_image').attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	});
+   
    document.getElementById('edit_btn').addEventListener('click', function() {
-       document.getElementById('image_modal').style.display = 'block';
-       fetchCsrfToken().then(() => {
-           // CSRF 토큰을 가져온 후 이미지 업로드 창을 엽니다.
-           openImageModal();
-       });
-   });
+	    document.getElementById('image_modal').style.display = 'block';
+	});
 
-   // 이미지를 클릭했을 때 프로필 이미지 변경
-   var imageList = document.getElementById('image_list').getElementsByTagName('img');
-   for (var i = 0; i < imageList.length; i++) {
-       imageList[i].addEventListener('click', function() {
-           var imagePath = this.src;
-           document.getElementById('profile_image').src = imagePath;
-       });
-   }
+	// 이미지를 클릭했을 때 프로필 이미지 변경
+	var imageList = document.getElementById('image_list').getElementsByTagName('img');
+	for (var i = 0; i < imageList.length; i++) {
+	    imageList[i].addEventListener('click', function() {
+	        var imagePath = this.src;
+	        document.getElementById('profile_image').src = imagePath;
+	    });
+	}
 
-   // 이미지 업로드 함수 수정
-   function uploadImage() {
-       var fileInput = document.getElementById('image_upload');
-       var file = fileInput.files[0];
-       var formData = new FormData();
-       formData.append('profileImage', file);
-
-       // CSRF 토큰을 요청 헤더에 포함하여 서버로 이미지 업로드 요청
-       fetch('/upload-profile-image', {
-           method: 'POST',
-           headers: {
-               'X-CSRF-TOKEN': window.csrfToken // CSRF 토큰을 요청 헤더에 포함
-           },
-           body: formData
-       })
-       .then(response => response.json())
-       .then(data => {
-           // 이미지 업로드 성공 시 메시지 표시 또는 다른 동작 수행
-           console.log('이미지 업로드 완료:', data);
-           closeModal();
-       })
-       .catch(error => {
-           console.error('이미지 업로드 실패:', error);
-           closeModal();
-       });
-   }
-
-   // 이미지창 닫기
-   function closeModal() {
-       document.getElementById('image_modal').style.display = 'none';
-   }
-
-   // 이미지 모달 열기
-   function openImageModal() {
-       document.getElementById('image_modal').style.display = 'block';
-   }
+	// 이미지창 닫기
+	function closeModal() {
+	    document.getElementById('image_modal').style.display = 'none';
+	}
 </script>
 </body>
 </html>
