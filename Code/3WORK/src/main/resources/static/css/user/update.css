@@ -3,12 +3,13 @@
 /* 프로필 수정 전체 사이즈 */
 #update{
   position: relative;
-  width: 100%;
-  height: 1700px;
+  height: 100%;
 }
 #update_body{
 	width: 100%;
-	height: 1000px;
+	height: 1200px;
+	position: absolute;
+  top: 123px;
 }
 
 

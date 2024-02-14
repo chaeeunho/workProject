@@ -9,23 +9,25 @@
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="pw_search">
-  	<!-- header.html 연결 -->
-    <div th:replace="~{header}"></div>
-    
-    <section id="pw_search_body">
-    	<div id="pw_search_title">
-     	<p>비밀번호 찾기</p>
-     	<p>비밀번호는 가입 시 입력한 이메일, 이름, 전화번호를 통해 찾을 수 있습니다.</p>
-     	<input type="text" id="search_input" placeholder="이메일 주소">
-     	<input type="text" id="search_input" placeholder="이름 (한글만 가능)">
-     	<input type="text" id="search_input" placeholder="연락처 ('-' 포함해 11자리 입력)">
-     	<button type="button" id="search_btn">비밀번호 찾기</span></button>
-    	</div>
-    </section>
-    
-  	<!-- footer.html 연결 -->
-    <div th:replace="~{footer}"></div>
+	<div id="container" style="height: 900px;">
+		<div id="pw_search">
+	  	<!-- header.html 연결 -->
+	    <div th:replace="~{header}"></div>
+	    
+	    <section id="pw_search_body">
+	    	<div id="pw_search_title">
+	     	<p>비밀번호 찾기</p>
+	     	<p>비밀번호는 가입 시 입력한 이메일, 이름, 전화번호를 통해 찾을 수 있습니다.</p>
+	     	<input type="text" id="search_input" placeholder="이메일 주소">
+	     	<input type="text" id="search_input" placeholder="이름 (한글만 가능)">
+	     	<input type="text" id="search_input" placeholder="연락처 ('-' 포함해 13자리 입력)">
+	     	<button type="button" id="search_btn">비밀번호 찾기</span></button>
+	    	</div>
+	    </section>
+	    
+	  	<!-- footer.html 연결 -->
+	    <div th:replace="~{footer}"></div>
+    </div>
   </div>
 </body>
 </html>

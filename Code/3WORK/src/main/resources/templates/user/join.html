@@ -201,10 +201,11 @@ function validateUphone() {
 </script>
 </head>
 <body>
-	<div id="join">
-		<div id="container">
-			<div class="container2">
+	<div id="container" style="height: 1400px;">  
+		<div id="join">
 				<div th:replace="~{header}"></div>
+				<section id="join_body">
+			<div class="container2">
 				<h2>회원가입</h2>
 				<form th:action="@{/user/join}" method="post" class="join"
 						  th:object="${usersDTO}" onsubmit="return validateForm()">
@@ -334,6 +335,7 @@ function validateUphone() {
 					<input type="submit" value="가입" class="submit-button">
 				</form>
 			</div>
+			</section>
 			<!-- footer.html 연결 -->
 			<div th:replace="~{footer}"></div>
 		</div>

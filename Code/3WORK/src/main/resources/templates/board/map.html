@@ -8,41 +8,43 @@
     <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id = "musicboard">
-	<div id ="container">
-	<div th:replace="~{header}"></div>
-    <section class="msection">
-        <div id="mcontainer">
-        <div class="t_box">
-                <p class = "tag">근처 운동할 수 있는 곳 찾기</p>
-        </div>
-   	<div class="map_wrap">
-	    <div id="map"></div> 
-	    <div id="menu_wrap" class="bg_white">
-	        <div class="option">
-	            <div>
-	                <form onsubmit="searchPlaces(); return false;">
-	                    <input type="text" value="상암 헬스장" id="keyword" size="15"> 
-	                    <button type="submit">검색하기</button> 
-	                </form>
-	            </div>
+	<div id="container" style="height: 1450px;">
+		<div id ="map_container">
+			<div th:replace="~{header}"></div>
+			
+	    <section class="msection">
+	        <div id="mcontainer">
+	        <div class="t_box">
+	        	<p class = "tag">근처 운동할 수 있는 곳 찾기</p>
 	        </div>
-	        <hr>
-	        <ul id="placesList"></ul>
-	        <div id="pagination"></div>
-	    </div>
-	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47d2ab6b1a7997a385e59f8a61f10a46&libraries=services"></script>
-	    <!-- 지도타입 컨트롤 div 입니다 -->
-	    <div class="custom_typecontrol radius_border">
-	        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
-	        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
-	    </div>
-	    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-	    <div class="custom_zoomcontrol radius_border"> 
-	        <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
-	        <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
-	    </div>
-</div>
+	   	<div class="map_wrap">
+		    <div id="map"></div> 
+		    <div id="menu_wrap" class="bg_white">
+		        <div class="option">
+		            <div>
+		                <form onsubmit="searchPlaces(); return false;">
+		                    <input type="text" value="상암 헬스장" id="keyword" size="15"> 
+		                    <button type="submit">검색하기</button> 
+		                </form>
+		            </div>
+		        </div>
+		        <hr>
+		        <ul id="placesList"></ul>
+		        <div id="pagination"></div>
+		    </div>
+		    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47d2ab6b1a7997a385e59f8a61f10a46&libraries=services"></script>
+		    <!-- 지도타입 컨트롤 div 입니다 -->
+		    <div class="custom_typecontrol radius_border">
+		        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+		        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+		    </div>
+		    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+		    <div class="custom_zoomcontrol radius_border"> 
+		        <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
+		        <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+		    </div>
+		</div>
+
 <script>
 //마커를 담을 배열입니다
 var markers = [];

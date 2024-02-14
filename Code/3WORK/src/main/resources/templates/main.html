@@ -5,7 +5,8 @@
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
 <link rel="stylesheet" th:href="@{/css/common.css}">
-<link rel="stylesheet" th:href="@{/css/main.css}">
+<link rel="stylesheet" th:href="@{/css/main.css}" media="screen and (min-width: 1000px) and (max-width: 2560px)">
+<link rel="stylesheet" th:href="@{/css/main_m.css}" media="screen and (min-width: 300px) and (max-width: 999px)">
 <script src="https://code.jquery.com/jquery-3.7.1.js"
 	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 	crossorigin="anonymous"></script>
@@ -13,8 +14,8 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="main">
-		<div id="container">
+	<div id="container">
+		<div id="main">
 			<!-- header.html 연결 -->
 			<div th:replace="~{header}"></div>
 
