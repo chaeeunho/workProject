@@ -582,6 +582,9 @@ html {
 	#container{
   	height: 2700px;
 	}
+	#work_info img{
+	height: 450px;
+	}
 	#work_recommend{
 		height: 54%;
 	}
@@ -594,6 +597,9 @@ html {
 	#slide_box img{
 		aspect-ratio: 1.08;
 	}
+	#work_info img{
+	height: 480px;
+	}
 	#login_box,
 	#weather_box{
 		width: 37.9vw;
@@ -603,7 +609,17 @@ html {
 	}
 }
 
-
+@media (min-width: 1920px) {
+	#container{
+  	height: 2950px;
+	}
+	#work_info img{
+	height: 500px;
+	}
+	#work_recommend{
+		height: 63%;
+	}
+}
 
 
 

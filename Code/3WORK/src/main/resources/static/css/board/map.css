@@ -1,38 +1,73 @@
 @charset "UTF-8";
-*{margin: 0; padding: 0;
-          }
-      #musicboard{
-        position: relative;
-        width: 100%;
-        height: 1500px;
-      }
-        
-        #mcontainer{
-            width: 80%;
-            height: 95%;
-            position: relative;
-            margin: 0 auto;
-            padding: 70px 50px 70px 50px;
-        }
-        .mbox{
-            width: 100%;
-            height: 100%;
-            margin: 0 auto;
-        }
-        .t_box{
-            width: 100%;
-            height: 70px;
-            border-bottom: 2px solid black;
-        }
-        a{text-decoration: none;}
-        .tag{font-size: 40px;padding-top: 10px; text-align: left; font-weight: 700; }
-        /* 지도 스타일 */
-        .map_wrap {position:relative;overflow:hidden;width:100%;height:700px;}
-        #map{
-           position:relative;overflow:hidden;width:100%;height:800px;
-        }
-       /* 지도타입, 확대축소 css */
-       .custom_typecontrol {
+
+#map_container{
+	position: relative;
+  height: 100%;
+}
+.msection{
+	width: 100%;
+	height: 1200px;
+	position: absolute;
+ 	top: 123px;
+}
+#mcontainer{
+  width: 80%;
+  height: 95%;
+  position: relative;
+  margin: 0 auto;
+  padding: 70px 30px; /* 좌우 여백 조정 */
+}
+
+
+
+/* ------------------------------------------- */
+
+
+
+.t_box{
+  width: 100%;
+	height: 70px;
+}
+.tag{
+	font-size: 30px;
+	padding-bottom: 20px; 
+  text-align: left; 
+  border-bottom: 1px solid black;
+  font-family: 'SBAggroM';
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+
+
+
+/* ------------------------------------------- */
+
+
+
+/* 지도 스타일 */
+.map_wrap {
+	position:relative;
+	overflow:hidden;
+	width:100%;
+	height:700px;
+}
+#map{
+   position:relative;
+   overflow:hidden;
+   width:100%;
+   height:800px;
+}
+
+
+
+/* ------------------------------------------- */
+
+
+
+/* 지도타입, 확대축소 css */
+.custom_typecontrol {
    position: absolute;
    top: 10px;
    right: 10px;
@@ -43,7 +78,7 @@
    padding: 0;
    z-index: 1;
    font-size: 12px;
-   font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+ 	 font-family: 'SBAggroL';
 }
 
 .custom_typecontrol span {
@@ -117,7 +152,7 @@
    top: 0;
    left: 0;
    bottom: 0;
-   width: 250px;
+   width: 280px;
    margin: 10px 0 30px 10px;
    padding: 5px;
    overflow-y: auto;
@@ -126,7 +161,11 @@
    font-size: 12px;
    border-radius: 10px;
 }
-
+#keyword{
+	width: 185px;
+	padding: 5px;
+	font-family: 'SBAggroL';
+}
 .bg_white {
    background: #fff;
 }
@@ -148,7 +187,14 @@
 }
 
 #menu_wrap .option button {
+	padding: 5px;
    margin-left: 5px;
+   margin-top: 5px;
+   font-family: 'SBAggroL';
+}
+
+#placesList{
+	padding-left: 20px;
 }
 
 #placesList li {
@@ -168,10 +214,20 @@
    margin-top: 4px;
 }
 
-#placesList .item h5, #placesList .item .info {
+#placesList .item h5, 
+#placesList .item .info {
    text-overflow: ellipsis;
    overflow: hidden;
    white-space: nowrap;
+   font-weight: normal;
+   margin-top: 0;
+   font-family: 'SBAggroL';
+}
+
+#placesList .item h5:nth-of-type(1){
+	font-family: 'SBAggroM';
+	font-size: 16px;
+	margin-bottom: 20px;
 }
 
 #placesList .item .info {
@@ -265,19 +321,25 @@
 }
 
 #pagination {
-   margin: 10px auto;
-   text-align: center;
+   /* margin: 10px auto;
+   text-align: center; */
+   width: 100%;
+	margin: 30px auto;
+	display: flex;
+	justify-content: center;
 }
 
 #pagination a {
-   display: inline-block;
-   margin-right: 10px;
+   /* display: inline-block;
+   margin-right: 10px; */
+   text-decoration: none;
+	color: #999999;
+	margin-left: 10px;
 }
 
 #pagination .on {
-   font-weight: bold;
-   cursor: default;
-   color: #777;
+   color: black; /* 여기에 원하는 색상을 지정하세요 */
+	font-family: 'SBAggroM';
 }
 
 /* 페이지네이션 스타일 */

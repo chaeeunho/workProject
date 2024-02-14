@@ -21,6 +21,11 @@ public class MainController {
 		return "submenu/rule";
 	}
 	
+	@GetMapping("/submenu/faq")
+	public String faq() {
+		return "submenu/faq";
+	}
+	
 	@GetMapping("/submenu/contact")
 	public String contact() {
 		return "submenu/contact";

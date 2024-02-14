@@ -17,7 +17,9 @@
       	<div id="mcontainer">
       		<div class="mbox">
       			<div class="t_box">
-      				<p class = "tag">건강 관련 뉴스 정보</p>
+      				<p class = "tag">건강뉴스
+      					<span class="tag_mini">※ 건강에 관한 뉴스 정보를 전달해주는 공간입니다.</span>
+      				</p>
             </div>   
           	
           	<div class="parent">
@@ -27,7 +29,7 @@
 	          				<a th:href="@{|/board/news/${news.nno}|}">
 			                <img th:src="@{|/upload/news/${news.nfilename}|}" onerror="this.src='/images/default/default_image.png';" class="thumbnail-image">
 	          					<div class="newsbox">
-				                 <strong><span th:text="${news.ntitle}"></span></strong>
+				                 <span th:text="${news.ntitle}" class="ntitle"></span>
 				                 <br>
 		                     <span class="newscon" th:text="${news.ncontent}"></span>
 		                     <br>
@@ -55,8 +57,8 @@
 	            	</span>	
             	</span>
             	<!-- 다음 페이지 -->
+            	<a th:href="${newsList.last} ? '#' : @{/board/news(page=${newsList.number+2})}">
             	<!-- 현재 2page -> 3page  실제페이지는 1page-->
-            	<a th:href="${newsList.last} ? '#' : @{/board/news(page=${foodList.number+2})}">
             		<i class="fa-solid fa-caret-right fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
             	</a>
             </div>

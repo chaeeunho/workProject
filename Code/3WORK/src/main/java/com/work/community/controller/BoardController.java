@@ -122,4 +122,13 @@ public class BoardController {
 		return "board/map";
 	}
 	
+	// 꿀팁 페이지 이동
+	
+	
+	// 장바구니 이동
+	@GetMapping("/board/mybag")
+	public String myBag() {
+		return "board/mybag";
+	}
+	
 }

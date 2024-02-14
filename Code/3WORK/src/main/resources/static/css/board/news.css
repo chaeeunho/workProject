@@ -27,7 +27,6 @@
 .t_box{
 	width: 100%;
 	height: 70px;
-	padding-bottom: 40px;
 }
 .tag{
 	font-size: 30px;
@@ -35,6 +34,12 @@
   text-align: left; 
   border-bottom: 1px solid black;
   font-family: 'SBAggroM';
+}
+.tag_mini{
+	font-size: 13px; 
+	color: gray;
+	margin-left: 10px;
+	font-family: 'SBAggroL';
 }
 a{
 	text-decoration: none; 
@@ -57,7 +62,7 @@ li{
 .card{
 	position: relative;
 }
-strong span{
+.ntitle{
 	font-size: 20px;
 	margin-bottom: 5px;
 	overflow: hidden;
@@ -65,6 +70,7 @@ strong span{
  	white-space: nowrap;
  	display: inline-block; /* inline-block 추가 */
   max-width: 100%; /* 최대 너비를 부모 요소에 맞추도록 수정 */
+  font-family: 'SBAggroM';
 }
  .newsbox:hover strong span{
  	border-bottom: 1px solid #b7b7b7;
@@ -115,6 +121,10 @@ strong span{
 .pagination a,
 .current_page{
 	text-decoration: none;
-	color: gray;
+	color: #999999;
 	margin-left: 10px;
+}
+.current_page{
+	color: black; /* 여기에 원하는 색상을 지정하세요 */
+	font-family: 'SBAggroM';
 }
