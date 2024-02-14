@@ -111,17 +111,9 @@ public class UsersService {
 		UsersDTO usersDTO = UsersDTO.toSaveDTO(user.get());
 		return usersDTO;
 	}
-	//회원 수정 처리
-	/* public void update(UsersDTO usersDTO) {
-		String encPW = pwEncoder.encode(usersDTO.getUpassword());
-		usersDTO.setUpassword(encPW);
-		usersDTO.setRole(Role.MEMBER);
-		
-		Users users = Users.toSaveUpdate(usersDTO);
-		usersRepository.save(users);
-	} */
-	//수정처리
-	public void saveImage(UsersDTO usersDTO, MultipartFile uimage) throws Exception {
+	
+	//회원 수정처리 (첨부파일 포함)
+	/* public void saveImage(UsersDTO usersDTO, MultipartFile uimage) throws Exception {
 		String encPW = pwEncoder.encode(usersDTO.getUpassword());
 		usersDTO.setUpassword(encPW);
 		usersDTO.setRole(Role.MEMBER);
@@ -146,6 +138,47 @@ public class UsersService {
 			users = Users.toSaveUpdate(usersDTO);
 		}
 		usersRepository.save(users);
+	} */
+	//회원 정보 수정(첨부파일 포함)
+	public void saveFiles(UsersDTO usersDTO, MultipartFile uimage, MultipartFile bgmFile) throws Exception {
+	    String encPW = pwEncoder.encode(usersDTO.getUpassword());
+	    usersDTO.setUpassword(encPW);
+	    usersDTO.setRole(Role.MEMBER);
+	    
+	    Users users;
+	    if (!uimage.isEmpty()) {
+	        // 이미지 파일이 업로드된 경우 처리
+	        UUID uuid = UUID.randomUUID();
+	        String imageFilename = uuid + "_" + uimage.getOriginalFilename();
+	        String imageFilepath = "C:\\3workfiles\\profile\\" + imageFilename;
+	        File savedImageFile = new File(imageFilepath);
+	        uimage.transferTo(savedImageFile);
+	        
+	        usersDTO.setUfilename(imageFilename);
+	        usersDTO.setUfilepath(imageFilepath);
+	    } else {
+	        // 이미지 파일이 업로드되지 않은 경우 기존의 파일 정보를 유지
+	        usersDTO.setUfilename(findById(usersDTO.getUno()).getUfilename());
+	        usersDTO.setUfilepath(findById(usersDTO.getUno()).getUfilepath());
+	    }
+	    
+	    if (!bgmFile.isEmpty()) {
+	        // mp3 파일이 업로드된 경우 처리
+	        UUID uuid = UUID.randomUUID();
+	        String mp3Filename = uuid + "_" + bgmFile.getOriginalFilename();
+	        String mp3Filepath = "C:\\3workfiles\\mp3\\" + mp3Filename;
+	        File savedMp3File = new File(mp3Filepath);
+	        bgmFile.transferTo(savedMp3File);
+	        
+	        usersDTO.setBgmname(mp3Filename);
+	        usersDTO.setBgmpath(mp3Filepath);
+	    } else {
+	        // mp3 파일이 업로드되지 않은 경우 기존의 파일 정보를 유지
+	        usersDTO.setBgmname(findById(usersDTO.getUno()).getBgmname());
+	        usersDTO.setBgmpath(findById(usersDTO.getUno()).getBgmpath());
+	    }
+	    
+	    users = Users.toSaveUpdate(usersDTO);
+	    usersRepository.save(users);
 	}
-
 }

@@ -75,13 +75,19 @@ public class Users extends BaseEntity {
 	@Column
 	private String ufilepath;
 	
+	@Column
+	private String bgmname;
+	
+	@Column
+	private String bgmpath;
+	
 	// @Column
 	// private String role;   // 권한
 	@Enumerated(EnumType.STRING) private Role role;
 	
 	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 	@OrderBy("cno desc")
-	private List<Comments> replyList;
+	private List<Comments> commentsList;
     
 	// dto -> entity
 	public static Users toSaveEntity(UsersDTO usersDTO) {
@@ -99,6 +105,8 @@ public class Users extends BaseEntity {
 				           .ulike(usersDTO.getUlike())
 				           .ufilename(usersDTO.getUfilename())
 				           .ufilepath(usersDTO.getUfilepath())
+				           .bgmname(usersDTO.getBgmname())
+				           .bgmpath(usersDTO.getBgmpath())
 				           .role(usersDTO.getRole())
 				           .build();
 		return users;      
@@ -120,6 +128,8 @@ public class Users extends BaseEntity {
 				.ulike(usersDTO.getUlike())
 				.ufilename(usersDTO.getUfilename())
 				.ufilepath(usersDTO.getUfilepath())
+				.bgmname(usersDTO.getBgmname())
+				.bgmpath(usersDTO.getBgmpath())
 				.role(usersDTO.getRole())
 				.build();
 		

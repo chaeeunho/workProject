@@ -6,7 +6,6 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <meta name="_csrf" th:content="${_csrf.token}">
 <title>3WORK</title>
-<link rel="stylesheet" href="/css/common.css">
 <link rel="stylesheet" href="/css/UserpageCss.css">
 <script src="https://kit.fontawesome.com/7c6041109a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -125,20 +124,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="userMain">
     <div id="container">
         <!-- BGM bar 영역 -->
-        <div id="bgm-bar">
-            <span>Love Wins All - 아이유(IU)</span>
-            <div id="bgm-buttons">
-                <button onclick="playPause()">
-                    <i class="fa-solid fa-play"></i>
-                </button>
-                <button onclick="stop()">
-                    <i class="fa-solid fa-pause"></i>
-                </button>
-                <button onclick="next()">
-                    <i class="fa-solid fa-forward"></i>
-                </button>
-            </div>
-        </div>
+		<div id="bgm-controls" class="bgm-bar">
+		    <div class="bgm-title-container">
+		        <div id="bgm-title" class="bgm-title">BGM</div>
+		    </div>
+		    <button id="play-pause-btn" class="play-pause-btn"><i class="fa-solid fa-play"></i></button>
+		    <div class="volume-control">
+		        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+		    </div>
+		    <input type="color" id="bg-color-picker" value="#f0f0f0">
+		</div>
+		<audio id="bgm-audio" th:src="@{|/upload/mp3/${Userinfo.bgmname}|}" autoplay loop></audio>
         <!-- 사이드 메뉴 영역 -->
         <div id="diary">
          <div id="diary_btn">
@@ -149,13 +145,13 @@ document.addEventListener('DOMContentLoaded', function() {
         <section id="profile">
             <p>TODAY <span id="today-visits">100</span> | TOTAL 4,300</p>
             <div id="profile-pic">
-                <img th:src="@{|/upload/profile/${Userinfo.ufilename}|}" alt="프로필">
+                <img th:src="@{|/upload/profile/${Userinfo.ufilename}|}" style="width: 200px; height: 250px; border-radius: 20px;" alt="프로필">
             </div>
-            <p>USERNAME's HOME
+            <p th:text="${Userinfo.unickname} + '의 Health Place'"></p>
                 <a th:href="@{/user/userupdate}" id="setting">
                     <i class="fa-solid fa-gear"></i>
                 </a>
-            </p>
+           
             <p>한줄 소개명</p>
 			<p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
 			Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
@@ -194,39 +190,62 @@ document.addEventListener('DOMContentLoaded', function() {
 		<div class="pagination">
 		<!-- 이전 페이지 -->
 		<!-- 2페이지클릭 : db페이지는 1page -->
-		<a th:href="${commentList.first}?'#' :
-					 @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number})}">Prev</a>
+		<a id="page" th:href="${commentList.first}?'#' :
+					 @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number})}"><i class="fa-solid fa-caret-left"></i></a>
 		<!-- 페이지 번호 영역 -->
-			<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+			<span class="current_page" th:each="page: ${#numbers.sequence(startPage, endPage)}">
 				<!-- <span th:text="${page}"></span> -->
 				<!-- 쿼리 스트링 방식 : /board/pagelist?page=1 -->
 				<!-- 현재 페이지는 링크없이 숫자만 표시 -->
 				<span class="current_page" th:if="${page == commentList.number + 1}" th:text="${page}"></span>
 				<span th:if="${page != commentList.number + 1}">
-					<a th:href="@{|/user/userpage/${Userinfo.uno}|(page=${page})}" th:text="${page}"></a>
+					<a class="another_page" th:href="@{|/user/userpage/${Userinfo.uno}|(page=${page})}" th:text="${page}"></a>
 				</span>
 			</span>
 		<!-- 다음 페이지 -->
 		<!-- 현재 2페이지인데 3페이지로 가고싶다 : 실제 페이지는 1page -->
-		<a th:href="${commentList.last}? '#' : 
-					@{|/user/userpage/${Userinfo.uno}|(page=${commentList.number + 2})}">Next</a>
+		<a id="page" th:href="${commentList.last}? '#' : 
+					@{|/user/userpage/${Userinfo.uno}|(page=${commentList.number + 2})}"><i class="fa-solid fa-caret-right"></i></a>
 		</div>
           </section>
            </div>
         </div>
-               <!-- <ul>
-               <li><span id="replyid">닭가슴살킬러</span> 
-                  <span id="reply_time">2024.01.29 22:28</span> [1]</li> 
-                <li>2월 19일 오후 2시에 같이 운동해요!<p id="replywrite">댓글쓰기</p></li>
-                <li><i class="fa-solid fa-caret-right"></i>&nbsp;
-                   <span id="replyid">주인장</span>: 어키!! 시간 맞춰 갈게요!
-                   <div id="reply_update">
-                      <a th:href="'#'">수정</a> |
-                      <a th:href="'#'">삭제</a>
-                   </div>
-                </li>
-                </ul> -->
-         
-    
+<script>
+//Get audio element and controls
+const audio = document.getElementById('bgm-audio');
+const playPauseBtn = document.getElementById('play-pause-btn');
+const bgmTitle = document.getElementById('bgm-title');
+const bgmControls = document.getElementById('bgm-controls');
+const bgColorPicker = document.getElementById('bg-color-picker');
+const volumeSlider = document.getElementById('volume-slider'); // 추가: 볼륨 슬라이더 요소
+
+// Play/pause toggle
+playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        audio.pause();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+});
+
+// Change background color
+bgColorPicker.addEventListener('input', () => {
+    bgmControls.style.backgroundColor = bgColorPicker.value;
+});
+
+//Update song title
+audio.addEventListener('loadedmetadata', () => {
+    const songTitle = 'Peder Elias - Loving You Girl (ft. Hkeem)';
+    bgmTitle.textContent = songTitle;
+    bgmTitle.title = songTitle; // 오른쪽에서 왼쪽으로 움직일 때 전체 제목을 표시하기 위해 title 속성 설정
+});
+
+// Volume control
+volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+});
+</script>
 </body>
 </html>

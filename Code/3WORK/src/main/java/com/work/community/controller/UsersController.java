@@ -183,10 +183,10 @@ public class UsersController {
 	//회원 수정 처리 - 상세보기로 이동
 	@PostMapping("/user/userupdate")
 	public String update(@ModelAttribute UsersDTO usersDTO,
-			 MultipartFile uimage, Model model) throws Exception {
-		usersService.saveImage(usersDTO, uimage);
-		model.addAttribute("users", usersDTO);
-		return "redirect:/user/userpage/" + usersDTO.getUno();
+	            MultipartFile uimage, MultipartFile bgmFile, Model model) throws Exception {
+	    usersService.saveFiles(usersDTO, uimage, bgmFile);
+	    model.addAttribute("users", usersDTO);
+	    return "redirect:/user/userpage/" + usersDTO.getUno();
 	}
 
 

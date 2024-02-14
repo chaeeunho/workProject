@@ -28,6 +28,25 @@
 #all-container {
   margin-top: 30px;
 }
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #F1F3E1;
+  font-family: 'SBAggroL';
+}
+#container {
+  background-color: #ffffff;
+  width: 1318.59px;
+  height: 850px;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  margin-top: 50px;
+}
 
 #diary {
 	border: none;
@@ -42,6 +61,7 @@
 }
 #diary_btn {
 	margin-top: 10px;
+	font-size:1em;
 }
 #diary a{
 	font-family: 'SBAggroM';
@@ -51,39 +71,55 @@
 }
 
  /* BGM 바와 버튼 스타일 */
- #bgm-bar {
-  font-family: 'SBAggroM';
-  font-size: 0.7em;
-  position: absolute;
-  top: 0%;
-  right: -10%;
-  transform: translate(-50%, 50%);
-  width: 280px;
-  height: 10px;
-  border-radius: 20px;
-  background-color: #F1F3E1;
-  color: #838383;
-  padding: 10px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-#bgm-bar span{
-  padding: 5px;
-}
-#bgm-buttons {
-  display: flex;
-  gap: 10px;
+ /* BGM 바와 버튼 스타일 */
+.bgm-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 390px;
+    height: 10px; /* Increase height for better visibility */
+    font-size: 0.8em;
+    position: absolute;
+    top: 4%;
+    right: 1%;
 }
 
-#bgm-buttons button {
-  color: #838383;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
+.bgm-title-container {
+    flex-grow: 1;
+    margin-right: 10px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
 }
 
+.bgm-title {
+    white-space: nowrap; /* Prevent line breaks */
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.play-pause-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#bg-color-picker {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
 /* 프로필 스타일 */
 #profile {
   font-family: 'SBAggroL';
@@ -91,12 +127,11 @@
   width: 300px;
   height: 190px;
   padding: 33px;
-  margin-top: 38px;
+  margin-top: 42px;
 }
 #profile p {
   margin-bottom: 5px;
   font-size: 0.8em;
-  margin-left: 10px;
 }
 #profile p:nth-of-type(1){
   margin-top: 0px;
@@ -117,8 +152,8 @@
   margin-top: 20px;
   font-size: 1.3em;
 }
-#profile p:nth-child(4),
-#profile p:nth-child(6) {
+#profile p:nth-child(5),
+#profile p:nth-child(7) {
   font-family: 'SBAggroM';
   margin-top: 10px;
   font-size: 1.1em;
@@ -127,10 +162,14 @@
 #setting {
   color: #ccc;
   margin-top: 5px;
+  position: absolute;
+  top: 44.3%;
+  right: 76%;
+
 }
 #calendar{
   position: absolute;
-  bottom: 38%;
+  bottom: 44%;
   right: 18%;
   width: 735px;
   height: 400px;
@@ -140,7 +179,7 @@
 /* 방명록 스타일 */
 #comments {
   position: absolute;
-  bottom: 6%;
+  bottom: 15%;
   right: 18%;
   font-family: 'SBAggroL';
   font-size: 1em;
@@ -221,6 +260,37 @@
   border-radius: 20%;
   font-size: 13px;
   position: absolute; bottom: 62.5%; right: 2%;
+}
+/* 페이지 영역 스타일 */
+.pagination{
+	text-align : center;
+	margin-top : 10px;
+}
+.pagination a{
+	text-decoration: none;
+	color: #818080;
+	font-size: 1em;
+	margin: 0 2px 0 2px;
+}
+.pagination .current_page{
+	color: #818080;
+	font-weight: bold;
+	color: navy;
+	margin: 0 2px 0 2px;
+}
+#page, current_page {
+    display: inline-block; 
+    font-size: 1em;
+    margin: 0 2px 0 2px;
+    width: 7px;
+}
+.pagination #page{
+	width: 10px;
+	font-size: 1em;
+}
+.pagination #another_page{
+	font-size: 1em;
+    margin: 0 2px 0 2px;
 }
 
 

@@ -55,6 +55,8 @@ public class UsersDTO {
     
     private String ufilename;
 	private String ufilepath;
+	private String bgmname;
+	private String bgmpath;
    
     private Role role;
    
@@ -78,6 +80,8 @@ public class UsersDTO {
 						            .ulike(users.getUlike())
 						            .ufilename(users.getUfilename())
 						            .ufilepath(users.getUfilepath())
+						            .bgmname(users.getBgmname())
+						            .bgmpath(users.getBgmpath())
 						            .role(users.getRole())
 						            .createdDate(users.getCreatedDate())
 						            .updatedDate(users.getUpdatedDate())

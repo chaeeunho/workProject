@@ -13,7 +13,6 @@
      <div id="container">
        <!-- header.html 연결 -->
       <div th:replace="~{header}"></div>
-      
       <section id="update_body">
          <div id="update_title">
             <p>프로필 수정</p>
@@ -135,17 +134,17 @@
                </tr>
                
                <tr class="update_file">
-                  <td class="update_file_content">
-                     <label for="file" class="file_title">
-                        배경음악 설정<span>100MB 이내</span>
-                     </label>
-                     <div class="filebox">
-                         <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
-                         <label for="file" class="file_btn">파일 찾기</label> 
-                         <input type="file" id="file">
-                        </div>
-                  </td>
-               </tr>
+				   <td class="update_file_content">
+				       <label for="bgmFile" class="file_title">
+				            배경음악 설정<span>100MB 이내</span>
+				       </label>
+				       <div class="filebox">
+				           <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
+				           <label for="bgmFile" class="file_btn">파일 찾기</label> 
+				           <input type="file" id="bgmFile" name="bgmFile">
+				       </div>
+				   </td>
+			   </tr>
                
                <tr>
                   <td>
@@ -163,11 +162,12 @@
   
 <!-- 파일명 들어가기 -->
 <script>
-   $("#file").on('change',function(){
-      var fileName = $("#file").val();
+   $("#bgmFile").on('change',function(){
+      var fileName = $("#bgmFile").val();
       $(".upload-name").val(fileName);
     });
    
+/* edit 누를시 선택 가능한 이미지 출력 */   
    $("#image_upload").on('change', function() {
 	    var input = $(this)[0];
 	    if (input.files && input.files[0]) {
