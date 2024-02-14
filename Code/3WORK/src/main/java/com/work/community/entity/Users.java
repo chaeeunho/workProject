@@ -31,7 +31,7 @@ public class Users extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer uno;  // 회원번호
 	
-	@Column(nullable = false,unique = true)
+	@Column(nullable = false, unique = true)
 	private String uid;  // 아이디
    
 	@Column(nullable = false)

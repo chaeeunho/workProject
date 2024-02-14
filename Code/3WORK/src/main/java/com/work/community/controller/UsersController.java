@@ -152,5 +152,11 @@ public class UsersController {
 //			return "redirect:/users/" + usersDTO.getUid();
 //		}
 		
+
+	// 장바구니 이동
+	@GetMapping("/user/mybag")
+	public String myBag() {
+		return "user/mybag";
+	}
 		
 }

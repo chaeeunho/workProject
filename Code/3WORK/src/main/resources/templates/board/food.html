@@ -37,7 +37,12 @@
 	          			<p class="foodp" th:text="${food.fcontent}"><br></p>
 	          			<div class="foodprice">
 		          			<p data-th-text="${#numbers.formatInteger(food.fprice, 3, 'COMMA') + '원'}"></p>
-		          			<i class="fa-solid fa-cart-plus" style = "color: #5EA601; font-size : 20px;"></i>
+		          			<!-- 장바구니에 담기 -->
+		          			<form class="d-flex" th:action="@{/user/cart/{uno}/{fno}(cno=${users.uno}, fno=${food.fno})}" method="post">
+			          			<button type="submit">
+				          			<i class="fa-solid fa-cart-plus" style = "color: #5EA601; font-size : 20px;"></i>
+			          			</button>
+		          			</form>
 	          				&nbsp;&nbsp;&nbsp;
 	          				<span th:with="foodLink=${food.flink}">
 		          				<a th:href="@{${foodLink}}" target="_blank">
