@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.work.community.dto.UsersDTO;
-import com.work.community.dto.UsersDTO.KakaoUsersInfo;
 import com.work.community.entity.Users;
 import com.work.community.service.UsersService;
 
@@ -38,19 +37,7 @@ public class UsersController {
 		return "login";  //login.html
 	}
 	
-	@RestController
-	public class KakaoLoginController {
-
-	    @Autowired
-	    private UsersService usersService;
-
-	    @PostMapping("/login")
-	    public ResponseEntity<?> handleKakaoLogin(@RequestBody UsersDTO usersDTO) {
-	        // 받아온 카카오 사용자 정보를 UserService를 통해 처리하고 데이터베이스에 저장
-	        usersService.saveKakaoUsers(usersDTO);
-	        return ResponseEntity.ok().build();
-	    }
-	}
+	
 	
 //	//로그인 처리
 //	@PostMapping("/login")
@@ -175,5 +162,6 @@ public class UsersController {
 //			return "redirect:/users/" + usersDTO.getUid();
 //		}
 		
+	
 		
 }

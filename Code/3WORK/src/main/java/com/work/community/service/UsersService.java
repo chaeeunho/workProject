@@ -10,15 +10,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.work.community.dto.UsersDTO;
-import com.work.community.dto.UsersDTO.KakaoUsersInfo;
 import com.work.community.entity.Role;
 import com.work.community.entity.Users;
 import com.work.community.repository.UsersRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+@Data
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class UsersService {
 	
 	@Autowired
@@ -91,13 +93,6 @@ public class UsersService {
 			return "NO";
 		}
 	}
-		//카카오 정보 저장
-		public void saveKakaoUsers(UsersDTO usersDTO) {
-			Users users = new Users();
-	        users.setKakaoid(usersDTO.getKakaoid());
-	        users.setKakaonickname(usersDTO.getKakaonickname());
-	        users.setKakaoemail(usersDTO.getKakaoemail());
-	        usersRepository.save(users);
-		}	
+		
 		
 }

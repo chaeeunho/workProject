@@ -1,7 +1,6 @@
 package com.work.community.entity;
 
 import com.work.community.dto.UsersDTO;
-import com.work.community.dto.UsersDTO.KakaoUsersInfo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,14 +57,7 @@ public class Users extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@Column(nullable = false)
-    private String kakaoid;
 	
-	@Column(nullable = false)
-    private String kakaonickname;
-    
-    @Column(nullable = false, unique = true)
-    private String kakaoemail;
 
 	// dto(view에 온 입력값) -> entity(db에 저장)
 	// 회원 가입(id(회원번호)가 자동생성되므로 명시하면 안됨)
@@ -79,9 +71,6 @@ public class Users extends BaseEntity {
 				.uphone(usersDTO.getUphone())
 				.ubirth(usersDTO.getUbirth())
 				.role(usersDTO.getRole())
-				.kakaoid(usersDTO.getKakaoid())
-				.kakaonickname(usersDTO.getKakaonickname())
-				.kakaoemail(usersDTO.getKakaoemail())
 				.build();
 		return users;
 	}

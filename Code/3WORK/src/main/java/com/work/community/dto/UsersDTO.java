@@ -50,12 +50,6 @@ public class UsersDTO {
    
     private Timestamp updatedDate;
     
-    private String kakaoid;
-    
-    private String kakaonickname;
-    
-    private String kakaoemail;
-   
     public static UsersDTO toSaveDTO(Users users) {
     	UsersDTO usersDTO = UsersDTO.builder()
 						            .uno(users.getUno())
@@ -67,20 +61,11 @@ public class UsersDTO {
 						            .ubirth(users.getUbirth())
 						            .createdDate(users.getCreatedDate())
 						            .updatedDate(users.getUpdatedDate())
-						            .kakaoid(users.getKakaoid())
-						            .kakaonickname(users.getKakaonickname())
-						            .kakaoemail(users.getKakaoemail())
 						            .build();
     	return usersDTO;
     }
     
-    @Data
-    public class KakaoUsersInfo {
-    	
-        
-        
-       
-    }
+    
     
 }
 

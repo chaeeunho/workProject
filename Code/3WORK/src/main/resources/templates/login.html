@@ -7,13 +7,6 @@
 <link rel="stylesheet" th:href="@{/css/login.css}">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
-  integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('fedc8baac63fa22cc5e3a5ff92bff3f0'); // 사용하려는 앱의 JavaScript 키 입력
-console.log( Kakao.isInitialized() ); // 초기화 판단여부
-</script>
 </head>
 <body>
 	<div id="login">
@@ -28,12 +21,6 @@ console.log( Kakao.isInitialized() ); // 초기화 판단여부
 	      	<input type="text" id="search_input" name="username" placeholder="이메일 주소">
 	      	<input type="text" id="search_input" name="password" placeholder="비밀번호">
 	      	<input type="submit" id="login_btn" value="로그인"></input>
-	      	<a id="kakao-login-btn" href="javascript:loginWithKakao()">
-			  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-			    alt="카카오 로그인 버튼" />
-			</a>
-			<p id="token-result"></p>
-			<button class="api-btn" onclick="kakaoLogOut()">로그아웃</button>
 	      	<p>회원가입을 하지 않으셨나요 ?
 	      		<a th:href="@{/user/join}">회원가입</a>
 	      	</p>
@@ -49,62 +36,5 @@ console.log( Kakao.isInitialized() ); // 초기화 판단여부
       <div th:replace="~{footer}"></div>
   	</div>
   </div>
-  <!--1. 카카오 SDK 로드-->
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
-    <script type="text/javascript" src="/js/apikey.js"></script>
-    <script>
-      const KaApiKey = fedc8baac63fa22cc5e3a5ff92bff3f0;
-      //2. 카카오 초기화
-      Kakao.init(KaApiKey);
-      Kakao.isInitialized();
-      //3. 카카오로그인 코드 확인
-      function loginWithKakao() {
-        Kakao.Auth.login({
-       	scope: 'account_email',
-          success: function (authObj) {
-            console.log(authObj); //access토큰 값
-            Kakao.Auth.setAccessToken(authObj.access_token); //access 토큰 값 저장
-            getInfo();
-          },
-          fail: function (err) {
-            console.log(err);
-          },
-        });
-      }
-      //4. 엑세스 토큰을 발급받고, 아래 함수를 호출시켜 사용자 정보 받아옴.
-      function getInfo() {
-        Kakao.API.request({
-          url: "/v2/user/me",
-          success: function (res) {
-            console.log(res);
-            var id = res.id;
-            var profile_nickname = res.kakao_account.profile.nickname;
-            var account_email = res.kakao_account.account_email
-            localStorage.setItem("nickname", profile_nickname);
-            localStorage.setItem("id", id);
-            localStorage.setItem("account_email", account_email);
-            console.log("닉네임 : " + profile_nickname);
-            console.log("아이디 : " + id);
-            console.log("이멜 : " + account_email);
-          },
-          fail: function (error) {
-            alert("카카오 로그인 실패" + JSON.stringify(error));
-          },
-        });
-      }
-
-      //5.로그아웃 기능 - 카카오 서버에 접속하는 액세스 토큰을 만료 시킨다.
-      function kakaoLogOut() {
-        if (!Kakao.Auth.getAccessToken()) {
-          alert("로그인을 먼저 하세요.");
-          return;
-        }
-        Kakao.Auth.logout(function () {
-          alert("로그아웃" + Kakao.Auth.getAccessToken());
-        });
-      }
-    </script>
-  
 </body>
 </html>
