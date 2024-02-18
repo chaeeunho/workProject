@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/user/diary.css}">
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div id="container" style="height: 1700px;">
+      <div id="news">
+         <!-- header.html 연결 -->
+      <div th:replace="~{header}"></div>
+      <section class="msection">
+         <div id="mcontainer">
+            <div class="mbox">
+               <div class="t_box">
+                  <p class = "tag">나의 건강일지
+                     <span class="tag_mini">※당신의 건강계획을 위한 자유로운 게시판.</span>
+                  </p>
+            </div>   
+             
+             <div class="parent">
+                <div class="card" th:each="diary: ${diary}">
+                   <ul>
+                      <li>
+                         <a th:href="@{|/userdiary/${diary.dno}|}">
+                         <img th:src="'#'" class="thumbnail-image">
+                            <div class="diarybox">
+                             <span th:text="${diary.dtitle}" class="dtitle"></span>
+                             <br>
+                           <span class="diarycon" th:text="${diary.dcontent}"></span>
+                           <br>
+                           <span class="diarycreatetime" th:text="${#dates.format(diary.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                            </div>
+                         </a>
+                      </li>
+                   </ul>
+                </div>
+             </div>
+             <div class="btn_write">
+            <a th:href="@{/user/diarywrite}">
+               <button>글쓰기</button>
+            </a>
+            <a th:href="@{|/user/userpage/${uno}|}">
+               <button>홈으로</button>
+            </a>
+           </div>
+            
+                <!-- 페이지 영역 -->
+            <div class="pagination" th:if="${diary.totalElements > 0}">
+                <!-- 이전 페이지 -->
+                <a id="page" th:href="${diary.first} ? '#' : @{|/user/userdiary/${diary.dno}|(page=${diary.number})}">
+                   <i class="fa-solid fa-caret-left"></i></a>
+                <!-- 페이지 번호 영역 -->
+                <span class="current_page" th:each="page: ${#numbers.sequence(startPage, endPage)}">
+                    <!-- 현재 페이지는 링크없이 숫자만 표시 -->
+                    <span class="current_page" th:if="${page == diary.number + 1}" th:text="${page}"></span>
+                    <span th:if="${page != diary.number + 1}">
+                        <a class="another_page" th:href="@{|/user/userdiary/${diary.dno}|(page=${page})}" th:text="${page}"></a>
+                    </span>
+                </span>
+                <!-- 다음 페이지 -->
+                <a id="page" th:href="${diary.last} ? '#' : @{|/user/userdiary/${diary.dno}|(page=${diary.number + 2})}">
+                   <i class="fa-solid fa-caret-right"></i></a>
+            </div>
+            </div>
+         </div>
+      </section>
+      
+      <!-- footer.html 연결 -->
+      <div th:replace="~{footer}"></div>
+      </div>
+   </div>
+</body>
+</html>

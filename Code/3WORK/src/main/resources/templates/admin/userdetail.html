@@ -9,7 +9,7 @@
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-   <div id="container" style="height: 1300px;">
+   <div id="container" style="height: 1400px;">
 		<div id="detail">
        <!-- header.html 연결 -->
       <div th:replace="~{header}"></div>
@@ -44,16 +44,18 @@
          			<input type="text" th:value="${users.unickname}" readonly>
          		</td>
          	</tr>
-         		<!-- <td>
-         			<label>성별</label>
-         			<input type="text" th:value="${users.ugender}" readonly>
-         		</td> -->
+         	<tr>
+        		<td>
+        			<label>성별</label>
+        			<input type="text" th:value="${users.ugender}" readonly>
+        		</td> 
+        	</tr>
          	<tr>
          		<td>
          			<label>주소</label>
          			<input type="text" th:value="${users.uaddress}" readonly>
          			<!-- 상세주소 -->
-         			<input type="text" th:value="${users.uaddress}" readonly>
+         			<input type="text" th:value="${users.detailuaddress}" readonly>
          		</td>
          	</tr>
          	<tr>

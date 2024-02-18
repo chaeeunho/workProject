@@ -14,7 +14,6 @@ public interface UsersRepository extends JpaRepository<Users,Integer>{
    //select * from member where member_id = ?;
    Optional<Users> findByUid(String string);
    
-   
    Optional<Users> findByUnickname(String string);
    
    //main 검색창에서 친구 검색
@@ -26,4 +25,10 @@ public interface UsersRepository extends JpaRepository<Users,Integer>{
    @Modifying
    @Query("UPDATE Users u SET u.hits = u.hits + 1 WHERE u.uno = :uno")
    public void updateHits(Integer uno);
+   
+   Users findByuid(String uid);
+   
+   Users findByUidAndUnameAndUphone(String uid, String uphone , String uname);
+   
+   List<Users> findAllByOrderByHitsDesc();
 }

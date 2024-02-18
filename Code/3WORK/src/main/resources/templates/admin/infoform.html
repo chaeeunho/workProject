@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW | ADMIN</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/admin/infoform.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div id="container" style="height: 1400px;">
+      <div id="infoform">
+         <!-- header.html 연결 -->
+         <div th:replace="~{header}"></div>
+         
+         <section id="infoform_body">
+            <div id="infoform_title">
+            <p>운동정보 정보 입력</p>
+         </div>
+         
+            <!-- 건강뉴스 정보 입력 폼 -->
+            <form th:action="@{/admin/infoform}" method="post" enctype="multipart/form-data">
+               <table id="infoform_tbl">
+                  <tr class="infoform_input">
+                     <td class="infoform_input_content">
+                        <label for="intitle">글제목</label>
+                        <input type="text" name="intitle" id="intitle">
+                     </td>
+                  </tr> 
+                  
+                  <tr class="infoform_input">
+                     <td class="infoform_input_content">
+                        <label for="incontent">글내용</label>
+                        <textarea rows="20" cols="35" name="incontent"></textarea>
+                     </td>
+                  </tr> 
+                  
+                  <tr class="infoform_input">
+                     <td class="infoform_input_content">
+                        <label for="indate">작성일 ('yyyy-mm-dd' 형식)</label>
+                        <input type="text" name="indate" id="indate">
+                     </td>
+                  </tr> 
+                  
+                  <tr class="update_file">
+                     <td class="update_file_content">
+                        <label for="infilename" class="file_title">사진</label>
+                        <div class="filebox">
+                         <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
+                         <label for="file" class="file_btn">파일 찾기</label> 
+                         <input type="file" id="file" name="inimage">
+                        </div>
+                     </td>
+                  </tr>
+                  
+                  <tr>
+                  <td>
+                     <button type="submit" id="save_btn">등록하기</button>
+                  </td>
+               </tr>
+               </table>
+            </form>
+         </section>
+         
+         <!-- footer.html 연결 -->
+         <div th:replace="~{footer}"></div>
+      </div>
+   </div>
+   
+   <!-- 파일명 들어가기 -->
+  <script>
+     $("#file").on('change',function(){
+        var fileName = $("#file").val();
+        $(".upload-name").val(fileName);
+      });
+   </script>
+</body>
+</html>

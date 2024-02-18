@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>운동 정보</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/board/infodetail.css}">
+  <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div id="container" style="height: 2500px;">
+      <div id ="infodetail">
+         <div th:replace="~{header}"></div>
+         
+       <section class="msection">
+          <div id = "mcontainer">
+             <div class="t_box">
+                <p class = "tag">
+                   <span th:text="${info.intitle}"></span>
+                </p>
+             </div>
+             <div class ="infoimg">
+                <img th:src="@{|/upload/info/${info.infilename}|}" onerror="this.src='/images/default/default_image.png';" class="thumbnail-image">
+             </div>
+             <div class ="infocontent_box">
+                <p class = "infocontent">
+                   <span th:text="${info.incontent}"></span>
+                </p>
+             </div>
+             <div class = "infobuttonbox">
+                <span class= "inbutton">
+                   <a th:href = "@{/board/info}"><button class = "inbt">목록</button></a>
+                </span>
+             </div>
+            </div>
+         </section> 
+         
+         <div th:replace="~{footer}"></div>
+      </div>
+   </div>
+</body>
+</html>

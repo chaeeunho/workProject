@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.work.community.dto.FoodDTO;
+import com.work.community.dto.InfoDTO;
 import com.work.community.dto.ItemDTO;
 import com.work.community.dto.MusicDTO;
 import com.work.community.dto.NewsDTO;
 import com.work.community.dto.UsersDTO;
 import com.work.community.entity.Users;
 import com.work.community.service.FoodService;
+import com.work.community.service.InfoService;
 import com.work.community.service.ItemService;
 import com.work.community.service.MusicService;
 import com.work.community.service.NewsService;
@@ -40,6 +42,8 @@ public class AdminController {
 	private final ItemService itemService;
 	
 	private final NewsService newsService;
+	
+	private final InfoService infoService;
 	
 	// 관리자 - 페이지 이동
 	@GetMapping("/admin/admin_main")
@@ -253,9 +257,44 @@ public class AdminController {
 	
 	
 	
-	// 효과 - 페이지 이동
-	
-	
-	// 효과 - 처리
+	// 정보 - 페이지 이동
+   @GetMapping("/admin/infolist")
+   public String infoList(@PageableDefault(page = 1) Pageable pageable, Model model) {
+      Page<InfoDTO> infoDTOList = infoService.findListAll(pageable);
+      
+      //하단의 페이지 블럭 만들기
+      int blockLimit = 10;  //하단에 보여줄 페이지 개수
+      //시작 페이지 1, 11, 21    12/10 = 1.2 -> 2.2 -> 2-1, 1*10+1 =11
+      int startPage = ((int)(Math.ceil((double)pageable.getPageNumber()/blockLimit))-1)*blockLimit+1;
+      //마지막 페이지 10, 20, 30 //12page -> 12 마지막
+      int endPage = (startPage+blockLimit-1) > infoDTOList.getTotalPages() ?
+            infoDTOList.getTotalPages() : startPage+blockLimit-1;
+      
+      model.addAttribute("startPage", startPage);
+      model.addAttribute("endPage", endPage);
+      model.addAttribute("infoList", infoDTOList);
+      
+      return "admin/infolist";
+   }
+   
+   // 정보 - 페이지 이동
+  @GetMapping("/admin/infoform")
+  public String infoForm() {
+     return "admin/infoform";
+  }
+  
+  // 정보 - 처리
+  @PostMapping("/admin/infoform")
+  public String info(@Valid InfoDTO infoDTO, MultipartFile inimage) throws Exception {
+     infoService.save(infoDTO, inimage);
+     return "redirect:/admin/infolist";
+  }
+  
+  // 정보 - 삭제
+  @GetMapping("/admin/infodelete/{inno}")
+  public String infoDelete(@PathVariable Integer inno) {
+     infoService.deleteById(inno);
+     return "redirect:/admin/infolist";
+  }
 	
 }

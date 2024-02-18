@@ -8,62 +8,57 @@
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="container" style="height: 1400px;">
-		<div id="musicboard">
-			<!-- header.html 연결 -->
-      <div th:replace="~{header}"></div>
-      
-      <section class="msection">
-      	<div id="mcontainer">
-      		<div class="mbox">
-      			<div class="t_box">
-      				<p class = "tag">회원 정보</p>
-            </div>   
-            
-            <table id="mtable">
-            	<thead>
-            		<tr>
-            			<th class="td_box">아이디</th>
-            			<th class="td_box">이름</th>
-            			<th class="td_box">닉네임</th>
-            			<th class="td_box">가입일</th>
-            			<th class="td_box">삭제</th>
-            		</tr>
-            	</thead>
-            	
-							<tbody id="contentA">
-								<!-- th:if="${users.role eq 'ADMIN'}" -->
-								<tr th:each="users : ${usersList}">
-									<td th:text="${users.uno}" style="display: none;"></td>
-									<td>
-										<a th:text="${users.uid}" th:href="@{|/admin/userdetail/${users.uno}|}"></a>
-									</td>
-	            		<td th:text="${users.uname}"></td>
-	            		<td th:text="${users.unickname}"></td>
-	            		<td th:text="${#dates.format(users.createdDate, 'yyyy-MM-dd')}"></td>
-	            		<td>
-	            			<a th:href="@{|/admin/userdelete/${users.uno}|}" onclick="return confirm('해당 회원을 삭제하시겠습니까?')">
-	            				<i class="fa-solid fa-trash" style="color: #6C7C58;"></i>
-	            			</a>
-	            		</td>
-								</tr>
-							</tbody>
-            </table> 
-            
-            <!-- 페이지 영역 -->
-            <div class="pagination">
-    
-         
+   <div id="container" style="height: 1400px;">
+      <div id="musicboard">
+         <!-- header.html 연결 -->
+         <div th:replace="~{header}"></div>
+
+         <section class="msection">
+            <div id="mcontainer">
+               <div class="mbox">
+                  <div class="t_box">
+                     <p class="tag">회원 정보</p>
+                  </div>
+
+                  <table id="mtable">
+                     <thead>
+                        <tr>
+                           <th class="td_box">아이디</th>
+                           <th class="td_box">이름</th>
+                           <th class="td_box">닉네임</th>
+                           <th class="td_box">가입일</th>
+                           <th class="td_box">삭제</th>
+                        </tr>
+                     </thead>
+
+                     <tbody id="contentA">
+                        <!-- th:if="${users.role eq 'ADMIN'}" -->
+                        <tr th:each="users : ${usersList}">
+                           <td th:text="${users.uno}" style="display: none;"></td>
+                           <td><a th:text="${users.uid}"
+                              th:href="@{|/admin/userdetail/${users.uno}|}"></a></td>
+                           <td th:text="${users.uname}"></td>
+                           <td th:text="${users.unickname}"></td>
+                           <td th:text="${#dates.format(users.createdDate, 'yyyy-MM-dd')}"></td>
+                           <td><a th:href="@{|/admin/userdelete/${users.uno}|}"
+                              onclick="return confirm('해당 회원을 삭제하시겠습니까?')"> <i
+                                 class="fa-solid fa-trash" style="color: #6C7C58;"></i>
+                           </a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+
+                  <!-- 페이지 영역 -->
+                  <div class="pagination"></div>
+
+               </div>
             </div>
-            
-      		</div>
-      	</div>
-      </section>
-      
-      
-      <!-- footer.html 연결 -->
-      <div th:replace="~{footer}"></div>
-		</div>
-	</div>
+         </section>
+
+
+         <!-- footer.html 연결 -->
+         <div th:replace="~{footer}"></div>
+      </div>
+   </div>
 </body>
 </html>

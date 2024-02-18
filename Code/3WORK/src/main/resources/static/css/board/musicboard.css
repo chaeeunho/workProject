@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
 #musicboard{
-	position: relative;
+   position: relative;
   height: 100%;
 }
 .msection{
-	width: 100%;
-	height: 1200px;
-	position: absolute;
+   width: 100%;
+   height: 1200px;
+   position: absolute;
   top: 123px;
 }
 #mcontainer{
@@ -19,6 +19,31 @@
 }
 
 
+/* ------------------------------------------- */
+/* 이미지 크기 및 정렬 스타일 */
+.rank-image {
+    width: 24px; /* 이미지의 너비 */
+    height: 24px; /* 이미지의 높이 */
+    vertical-align: middle; /* 텍스트와 수직 정렬을 중앙으로 설정 */
+    margin-right: 5px; /* 이미지와 텍스트 사이의 여백 */
+}
+
+.visit-button {
+    background: #F1F3E1;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px; /* 내부 여백을 글씨 크기에 맞게 조정 */
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    font-size: 14px; /* 글씨 크기를 고정값으로 설정 */
+    font-family: 'SBAggroM';
+    display: inline-block; /* 버튼을 인라인 블록 요소로 만들어 텍스트 크기에 맞춤 */
+    transition: background-color 0.3s; /* 호버 효과 */
+}
+
+.visit-button:hover {
+    background-color: #e2e6c1; /* 호버 시 배경 색상 변경 */
+}
 
 /* ------------------------------------------- */
 
@@ -34,32 +59,32 @@
     height: 70px;
 }
 .tag button{
-	text-decoration: none;
-	color: gray;
-	border: none;
-	background: none;
-	font-family: 'SBAggroL';
-	font-size: 15px;
+   text-decoration: none;
+   color: gray;
+   border: none;
+   background: none;
+   font-family: 'SBAggroL';
+   font-size: 15px;
 }
 .tag button:focus{
-	color: black;
+   color: black;
 }
 .tag{
-	text-align: left;
-	font-size: 30px;
-	padding-top: 10px; 
-	color: black;
-	font-family: 'SBAggroM';
+   text-align: left;
+   font-size: 30px;
+   padding-top: 10px; 
+   color: black;
+   font-family: 'SBAggroM';
 }
 #buttonAll{
-	font-size: 30px;
-	padding-top: 10px; 
-	color: black;
-	font-family: 'SBAggroM';
+   font-size: 30px;
+   padding-top: 10px; 
+   color: black;
+   font-family: 'SBAggroM';
 }
 p span{
-	font-size: 15px; 
-	font-weight: 100;
+   font-size: 15px; 
+   font-weight: 100;
 }
 #mtable{
     text-align: center;
@@ -82,60 +107,60 @@ thead th{
     display: none !important;
 }
 #contentA tr{
-	border-bottom: 1px solid black;
+   border-bottom: 1px solid black;
 }
 #contentB tr{
-	border-bottom: 1px solid black;
+   border-bottom: 1px solid black;
 }
 #contentC tr{
-	border-bottom: 1px solid rgb(0, 0, 0);
+   border-bottom: 1px solid rgb(0, 0, 0);
 }
 td{
     padding: 30px 20px;
 }
 #buttonMore{
-	background: #F1F3E1;
-	border: none;
-	border-radius: 5px;
-	padding: 13px 2%;
-	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-	font-size: 13px;
-	font-family: 'SBAggroM';
-	margin: 22px auto;
-	cursor: pointer;
+   background: #F1F3E1;
+   border: none;
+   border-radius: 5px;
+   padding: 13px 2%;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   font-size: 13px;
+   font-family: 'SBAggroM';
+   margin: 22px auto;
+   cursor: pointer;
 }
 
 /* 관리자에서 노래 정보 입력 버튼 CSS */
 .write2_btn{
-	background: #F1F3E1;
-	border: none;
-	border-radius: 5px;
-	padding: 13px 2%;
-	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-	font-size: 13px;
-	margin-top: 22px;
-	font-family: 'SBAggroM';
-	float: right;
-	cursor: pointer;
+   background: #F1F3E1;
+   border: none;
+   border-radius: 5px;
+   padding: 13px 2%;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   font-size: 13px;
+   margin-top: 22px;
+   font-family: 'SBAggroM';
+   float: right;
+   cursor: pointer;
 }
 #contentA tr td a{
-	text-decoration: none;
-	color: black;
+   text-decoration: none;
+   color: black;
 }
 .pagination{
-	width: 100%;
-	margin: 30px auto;
-	display: flex;
-	justify-content: center;
+   width: 100%;
+   margin: 30px auto;
+   display: flex;
+   justify-content: center;
 }
 .pagination a,
 .current_page{
-	text-decoration: none;
-	color: gray;
-	margin-left: 10px;
+   text-decoration: none;
+   color: gray;
+   margin-left: 10px;
 }
 .current_page{
-	color: black; /* 여기에 원하는 색상을 지정하세요 */
+   color: black; /* 여기에 원하는 색상을 지정하세요 */
   font-family: 'SBAggroM';
 }
 

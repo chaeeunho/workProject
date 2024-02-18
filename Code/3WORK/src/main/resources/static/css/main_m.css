@@ -140,6 +140,7 @@ html {
 	border: 1px solid #8B8989;
 	text-align: left;
 	margin: 10px;
+	position: relative;
 }
 #search_input{
 	width: 60%;
@@ -147,6 +148,18 @@ html {
 	outline: none;
 	margin-left: 5px;
 	font-size: 1.4vw;
+}
+#search_btn{
+	background: none;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-family: 'SBAggroM';
+  font-size: 11px;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+ 	cursor: pointer;
 }
 
 

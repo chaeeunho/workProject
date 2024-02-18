@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
 <link rel="stylesheet" th:href="@{/css/common.css}">
 <link rel="stylesheet" th:href="@{/css/user/mybag.css}">
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div id="container" style="height: 2700px;">
@@ -16,28 +18,68 @@
     	<section class="msection">
     		<div id="mcontainer">
     			<div class="t_box">
-    				<p class = "tag">나의 가방</p>
+    				<p class = "tag"><span th:text="${Userinfo.unickname}"></span>님의 위시리스트</p>
     			</div>
     			
-    			<div class="card">
-    				<div class="content-container">
-    					<img src="https://placekitten.com/300/150" alt="Card Image 1">
-    					<div class="card-content">
-    						<h3 class = "bagh3">
-    							<span class="bagh3_p"><a th:href="'#'">이고진 짐볼 + 발 점프</a></span>
-    						</h3>
-    						<p class = "bagp">근력, 지구력, 군형력, 유연성을 키울 때 좋은 도구</p>
-    						<button type = "submit" class = "bagbt">
-    							삭제<i class="fa-solid fa-trash" style="padding-left: 40px;"></i>
-    						</button>
-    						<p class = "bagprice">12,400원</p>
-    					</div>
-    				</div>
+    			<div class="card" th:each="cart : ${cartList}" th:if="${cart.cart.users.uid == principal.username}">
+    					<div>
+							  <!-- Cart에 item이 존재하는 경우 -->
+						    <div th:if="${cart.item != null}" class="content-container">
+						        <img th:src="@{|/upload/item/${cart.item.ifilename}|}" onerror="this.src='/images/default/default_image.png';">
+						        <div class="card-content">
+						            <h3 class="bagh3">
+						                <span class="bagh3_p" th:text="${cart.item.iname}"></span>
+						            </h3>
+						            <p class="bagp" th:text="${cart.item.icontent}"></p>
+						            <a th:href="@{|/user/mybag/{uno}/{ino}/{cino}|(uno=${cart.cart.users.uno}, ino=${cart.item.ino}, cino=${cart.cino})}" onclick="return confirm('해당 상품을 삭제하시겠습니까?')">
+						                <button type="button" class="bagbt">
+						                    삭제<i class="fa-solid fa-trash" style="padding-left: 40px;"></i>
+						                </button>
+						            </a>
+						            <p class="bagprice" data-th-text="${#numbers.formatInteger(cart.item.iprice, 3, 'COMMA') + '원'}"></p>
+						        </div>
+						    </div>
+						    
+						    <!-- Cart에 food가 존재하는 경우 -->
+						    <div th:if="${cart.food != null}" class="content-container">
+						        <img th:src="@{|/upload/food/${cart.food.ffilename}|}" onerror="this.src='/images/default/default_image.png';">
+						        <div class="card-content">
+						            <h3 class="bagh3">
+						                <span class="bagh3_p" th:text="${cart.food.fname}"></span>
+						            </h3>
+						            <p class="bagp" th:text="${cart.food.fcontent}"></p>
+						            <a th:href="@{|/user/mybag/{uno}/{fno}/{cino}|(uno=${cart.cart.users.uno}, fno=${cart.food.fno}, cino=${cart.cino})}" onclick="return confirm('해당 상품을 삭제하시겠습니까?')">
+						                <button type="button" class="bagbt">
+						                    삭제<i class="fa-solid fa-trash" style="padding-left: 40px;"></i>
+						                </button>
+						            </a>
+						            <p class="bagprice" data-th-text="${#numbers.formatInteger(cart.food.fprice, 3, 'COMMA') + '원'}"></p>
+						        </div>
+						    </div>
+						</div>
     			</div>
     			
-    			
-    			
-    			
+    			<!-- 페이지 영역 -->
+          <div class="pagination">
+          	<!-- 이전 페이지 -->
+          	<!-- 2page 클릭하면 db 페이지는 1page -->
+          	<a th:href="${cartList.first}? '#' : @{/user/mybag/{Userinfo.uno}(page=${cartList.number})}">
+          		<i class="fa-solid fa-caret-left fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+          	</a>
+          	<!-- 페이지 번호 블럭 -->
+          	<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+           	<!-- 현재 페이지는 링크없이 숫자만 표시 -->
+           	<span th:if="${page == cartList.number + 1}" th:text="${page}" class="current_page"></span>
+           	<span th:if="${page != cartList.number + 1}">
+           	<a th:href="@{/user/mybag/{Userinfo.uno}(page=${page})}" th:text="${page}"></a>
+           	</span>	
+          	</span>
+          	<!-- 다음 페이지 -->
+          	<!-- 현재 2page -> 3page  실제페이지는 1page-->
+          	<a th:href="${cartList.last} ? '#' : @{/user/mybag/{Userinfo.uno}(page=${cartList.number+2})}">
+          		<i class="fa-solid fa-caret-right fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
+          	</a>
+          </div>
     		</div>
     	</section>
     	

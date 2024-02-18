@@ -5,9 +5,9 @@
   height: 100%;
 }
 #join_body{
-	width: 100%;
-	height: 500px;
-	position: absolute;
+   width: 100%;
+   height: 500px;
+   position: absolute;
   top: 123px;
 }
 
@@ -19,11 +19,11 @@ body {
 }
 
 #input-id{
-	display: flex;
+   display: flex;
 }
 
 .container2 {
-	position: relative;
+   position: relative;
     background-color: #ffffff;
     max-width: 600px;
     margin: 0 auto;
@@ -35,95 +35,119 @@ body {
 }
 
 h2 {
-	font-family: 'SBAggroB';
+   font-family: 'SBAggroB';
     text-align: center;
     margin-bottom: 40px;
 }
 
 form {
-	font-family: 'SBAggroM';
+   font-family: 'SBAggroM';
     display: flex;
     flex-direction: column;
     width: 600px;
     margin-left: 111px;
 }
 #id-btn{
-	font-family: 'SBAggroL';
+   font-family: 'SBAggroL';
     border: none;
     border-radius: 5px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background-color: #f1f3e1;
     height: 40px;
-    width: 80px;
+    width: 102px;
     position: absolute;
-    right: 80px;
-    top: 255px;
+    right: 41px;
+    top: 132px;
 }
 
 #id-input,
 #pw-input,
+#pw-input2,
 #name-input,
 #nickname-input,
 #ad-input,
 #phone-input,
 #birth-input{
-	display: flex;
+   display: flex;
 }
 
 #id-input #uid{
-	margin-left: 44px;
-	margin-right: 0
+   margin-left: 64px;
+   margin-right: 0
 }
 #pw-input #upassword{
-	margin-left: 29px;
-	margin-right: 0
+   margin-left: 49px;
+   margin-right: 0
+}
+
+#pw-input2 #confirmPassword{
+   margin-left: 15px;
+   margin-right: 0
 }
 #name-input #uname{
-	margin-left: 59px;
-	margin-right: 0
+  margin-left: 79px;
+  margin-right: 0
 }
 #nickname-input #unickname{
-	margin-left: 43px;
-	margin-right: 0
+  margin-left: 62px;
+  margin-right: 0
 }
 #ad-input #uaddress{
-	margin-left: -16px;
-	margin-right: 0
+  margin-left: 5px;
+  margin-right: -22px;
 }
+
+#detailad-input #detailuaddress {
+  margin: 0 0 10px -58px;
+}
+
 #phone-input #uphone{
-	margin-left: 43px;
-	margin-right: 0
+  margin-left: 65px;
+  margin-right: 0
 }
 #birth-input #ubirth{
-	margin-left: 27px;
-	margin-right: 0
+  margin-left: 48px;
+  margin-right: 0
 }
 
 #idcheck-message,
 #pwcheck-message,
 #namecheck-message,
 #nicknamecheck-message,
-#phonecheck-message{
-	width: 300px;
-	text-align: left;
-	margin: 3px 0 10px 90px;
+#phonecheck-message,
+#confirm-message{
+  width: 300px;
+  text-align: left;
+  margin: 3px 0 10px 110px;
 }
 
 #idcheck-message #result,
 #pwcheck-message #result,
 #namecheck-message #result,
-#nicknamecheck-message #result,
-#phonecheck-message #result
+#nicknamecheck-message #nickname-result,
+#phonecheck-message #result,
+#confirm-message #pwconfirmResult
 {
-	margin: 0
+  width: 310px;
+  margin: 0
 }
 
-.error-message {
-    font-family: 'SBAggroM';
-    color: red; /* 에러 메시지 색상을 빨간색으로 지정 */
-    font-size: 0.9em; /* 에러 메시지 폰트 크기를 조금 더 크게 설정 */
-    margin-top: 5px; /* 에러 메시지 위 여백 추가 */
+.error-message1, .error-message2, .error-message3,
+.error-message4, .error-message5, .error-message6,
+.error-message7, .error-message8{
+  font-family: 'SBAggroM';
+  color: red;
+  font-size: 0.9em;
 }
+
+.error-message1 {margin: 0 0 0 -169px}
+.error-message2 {margin: 0 0 0 -209px}
+.error-message3 {margin: 0 0 0 -236px}
+.error-message4 {margin: 0 0 0 -221px}
+.error-message5 {margin: 0 0 0 -209px}
+.error-message6 {margin: 0 0 0 -236px}
+.error-message7 {margin: 0 0 0 -193px}
+.error-message8 {margin: 0 0 0 -207px}
 
 input[type="email"],
 input[type="text"],
@@ -137,14 +161,33 @@ input[type="date"],
     margin: 0 auto;
 }
 
+#confirmPassword{
+   width: 300px;
+   margin: 0
+}
+
+#nickname-input button {
+   font-family: 'SBAggroL';
+   height: 40px;
+    width: 100px;
+    background-color: #F1F3E1;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    margin-top: 3px;
+    margin-left: 11px;
+}
+
 #uaddress {
-	width: 300px;
-	margin-bottom: 10px;
+   width: 300px;
+   margin-bottom: 10px;
 }
 
 .address-container {
-		margin-left: 75px;
-		display: flex;
+      margin-left: 75px;
+      display: flex;
     align-items: center;
     width: 305px;
 }
@@ -158,8 +201,8 @@ input[type="date"],
 }
 
 #ad-input button {
-	font-family: 'SBAggroL';
-	  height: 40px;
+   font-family: 'SBAggroL';
+   height: 40px;
     width: 100px;
     background-color: #F1F3E1;
     border-radius: 4px;
@@ -168,10 +211,25 @@ input[type="date"],
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     white-space: nowrap;
     margin-top: 3px;
-    margin-left: 15px;
+    margin-left: 33px;
 }
 input #uaddress{margin-bottom: 10px;}
 
+/* 성별 css */
+.gender_input_content{
+   display: flex;
+}
+
+.gender_input_content select{
+  width: 322px;
+  font-family: 'SBAggroL';
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 80px;
+  margin-right: 0;
+  margin-bottom: 12px;
+}
 
 .terms input[type="checkbox"] {
     margin-right: 10px; /* 체크박스와 텍스트 사이의 간격 */
@@ -183,7 +241,7 @@ input #uaddress{margin-bottom: 10px;}
 
 /* 체크박스 스타일 */
 .terms {
-	font-family: 'SBAggroL';
+   font-family: 'SBAggroL';
     margin: 10px 0;
     text-align: left;
     justify-content: center;
@@ -191,12 +249,12 @@ input #uaddress{margin-bottom: 10px;}
 }
 
 .submit-button{
-	font-family: 'SBAggroL';
+   font-family: 'SBAggroL';
     background-color: #f1f3e1;
     height: 48px;
     width: 320px;
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     border-radius: 5px;
     border: none;
-    padding: 0 206px;
+    margin-left: 111px;
 }

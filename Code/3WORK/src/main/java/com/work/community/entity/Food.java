@@ -1,12 +1,16 @@
 package com.work.community.entity;
 
+import java.util.List;
+
 import com.work.community.dto.FoodDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,7 +44,12 @@ public class Food {
 	private String ffilename;                               // 식품 사진명
 	
 	private String ffilepath;                               // 식품 사진 경로
-
+	
+	// 하나의 식품에 여러 카트 아이템이 존재 (일대다 관계)
+	// 식품이 삭제되면 카트 아이템에서도 삭제
+	@OneToMany(mappedBy = "food", cascade = CascadeType.ALL)
+	private List<CartItem> cartItems;
+	
 	// dto -> entity 변환
 	public static Food toSaveEntity(FoodDTO foodDTO) {
 		Food food = Food.builder()

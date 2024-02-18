@@ -10,7 +10,7 @@
 </head>
 <body>
    <div id="container" style="height: 1700px;">
-	   <div id="update">
+      <div id="update">
        <!-- header.html 연결 -->
       <div th:replace="~{header}"></div>
       <section id="update_body">
@@ -22,6 +22,7 @@
             <form th:action="@{/user/userupdate}" method="post" enctype="multipart/form-data">
                <input type="hidden" name="uno" th:value="${users.uno}">
                 <input type="hidden" name="uid" th:value="${users.uid}">
+                <input type="hidden" name="hits" th:value="${users.hits}">
                      
          <!-- 프로필 이미지 -->
          <div id="update_image">
@@ -155,8 +156,8 @@
          </form>
         </section>
       
-      <!-- footer.html 연결 -->
-         <!-- <div th:replace="~{footer}"></div> -->
+     <!--  <!-- footer.html 연결 -->
+        <!--  <div th:replace="~{footer}"></div> -->
     </div>
   </div>
   

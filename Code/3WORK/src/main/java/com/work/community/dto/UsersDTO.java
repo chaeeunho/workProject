@@ -55,13 +55,13 @@ public class UsersDTO {
     
     private String ufilename;
     
-   private String ufilepath;
+    private String ufilepath;
    
-   private String bgmname;
+    private String bgmname;
    
-   private String bgmpath;
+    private String bgmpath;
    
-   private Integer hits;
+    private Integer hits;
    
     private Role role;
    

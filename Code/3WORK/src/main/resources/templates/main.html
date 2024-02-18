@@ -27,7 +27,7 @@
 	              <p><button onclick="showhide()" id="here"><i class='fa-solid fa-bars fa-2xl' style='color: #8B8989'></i></button></p>
 	               <div id="submenu-position">
 		              <ul id="submenu">
-		              	<li onclick="showhide1()">Recommend</li>
+		              	<li onclick="showhide1()">Recommend
 		              	<div id="rec">
 		                  <a th:href="@{/board/musicboard}">노래</a>
 		                  <br>
@@ -35,26 +35,40 @@
 		                  <br>
 		                  <a th:href="@{/board/item}">운동기구&운동복</a>
 	                  </div>
+	                  </li>
 	                  <li onclick="showhide2()">Information</li>
 	                  <div id="info">
 		                  <a th:href="@{/board/news}">건강 뉴스</a>
 		                  <br>
 		                  <a th:href="@{/board/map}">지도</a>
 		                  <br>
-		                  <a th:href="'#'">운동 꿀팁</a>
+		                  <a th:href="@{/board/info}">운동 꿀팁</a>
 	                  </div>
+	                  
 	                  <li onclick="showhide3()">User</li>
 	                  <div id="user">
+		                  <!-- 로그인 전 -->
 		                  <th:block sec:authorize="isAnonymous()">
 			                  <li><a th:href="@{/login}">로그인</a></li>
 			                  <li><a th:href="@{/user/join}">회원가입</a></li>
 		                  </th:block>
 		                  <th:block sec:authorize="isAuthenticated()">
-		                  	<a th:href="@{/user/mybag}">장바구니</a>
-		                  	<br>
-			               		<a th:href="@{/user/userupdate}">회원정보 수정</a>
-			               		<br>
-			               	 	<a th:href="'#'">로그아웃</a>
+		                  	<th:block th:each="user : ${users}" th:if="${user.uid == principal.username}">
+						                <a th:href="@{|/user/userpage/${user.uno}|}">
+						                    <!-- 회원번호를 data-uno 속성에 저장 -->
+						                    <button type="button" class="login_btn"  th:onclick="popUp([[${user.uno}]])" 
+						                    		style="border: none; background: none; color: dimgray; text-align: left; padding: 0; font-family: 'SBAggroL'; font-size: 1.5vw;">
+						                  		미니홈피
+						                  	</button>
+						                </a>
+							            <div id="login_menu">
+							                <a th:href="@{|/user/mybag/${user.uno}|}">장바구니</a>
+							                <br>
+							                <a th:href="@{/user/userupdate}">회원정보 수정</a>
+							                <br>
+							                <a th:href="@{/logout}">로그아웃</a>
+							            </div>
+						            </th:block>
 		                  </th:block>
 		                </div>
 		              </ul>
@@ -63,21 +77,14 @@
 	          </ul>
       		</div>
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 				<div id="search_box">
 					<form th:action="@{/user/search}" method="post">
 						<i class="fa-solid fa-magnifying-glass" style="color: #8B8989"></i>
 						<input type="text" id="search_input" name="uid"
 							placeholder="찾고 싶은 친구의 아이디를 입력해주세요.">
-						<button type="submit" id="search_btn">검색</button>
+						<button type="submit" id="search_btn">
+							<i class="fa-solid fa-users fa-xl" style='color: #8B8989'></i>
+						</button>
 					</form>
 				</div>
 			</div>
@@ -135,7 +142,7 @@
 							</a>
 							<div id="login_menu">
 								<a th:href="@{/user/id_search}">아이디 찾기</a> <a
-									th:href="@{/user/pw_search}">비밀번호 찾기</a> <a
+									th:href="@{/user/resetpassword}">비밀번호 찾기</a> <a
 									th:href="@{/user/join}">회원가입</a>
 							</div>
 						</div>
@@ -148,14 +155,14 @@
 		            <th:block th:each="user : ${users}" th:if="${user.uid == principal.username}">
 		                <a th:href="@{|/user/userpage/${user.uno}|}">
 		                    <!-- 회원번호를 data-uno 속성에 저장 -->
-		                    <button type="button" class="login_btn"  th:onclick="popUp([[${user.uno}]])">My&nbsp;Home&nbsp;</button>
+		                    <button type="button" id="login_btn" th:onclick="popUp([[${user.uno}]])"><span th:text="${user.unickname}"></span>&nbsp;:&nbsp;미니홈피</button>
 		                </a>
+			            <div id="login_menu">
+			                <a th:href="@{|/user/mybag/${user.uno}|}">위시리스트</a>
+			                <a th:href="@{/user/userupdate}">회원정보 수정</a>
+			                <a th:href="@{/logout}">로그아웃</a>
+			            </div>
 		            </th:block>
-		            <div id="login_menu">
-		                <a th:href="@{/user/mybag}">장바구니</a>
-		                <a th:href="@{/user/userupdate}">회원정보 수정</a>
-		                <a th:href="'#'">로그아웃</a>
-		            </div>
 		        </div>
 		    </div>
 		</th:block>
@@ -164,21 +171,27 @@
 				<div id="weather_box">
 					<div id="weather_title">
 						<p>
-						<span class="nowtime"></span>
-						 <span>현재날씨</span>
+						<!-- <span class="nowtime"></span> -->
+						 <span>날씨</span>
 						</p>
-						
 					</div>
 					<div id="weather_info">
-						
-						 <h3>서울</h3>
-				         <h3 class="SeoulIcon"></h3>
-				         <h3 class="SeoulNowtemp">현재기온:</h3>
-				         <h3 class="SeoulLowtemp">최저기온:</h3>
-				         <h3 class="SeoulHightemp">최대기온:</h3>
+		         <h3 class="SeoulIcon"></h3>
+		         <div id="weather_info_right">
+			         <h3 class="SeoulNowtemp"></h3>
+							 <h3 class="Seoul">서울특별시</h3>
+			         <h3>
+			         	<span class="SeoulLowtemp"></span>
+			         	<span class="tempslice">&nbsp;/&nbsp;</span>
+			         	<span class="SeoulHightemp"></span>
+			         	</h3>
+		         </div>
 					</div>
-					<div id="weather_etc">
-					</div>
+         <div id="weather_info_bottom">
+         	<h3 class="pressure"></h3>
+         	<h3 class="humidity"></h3>
+         	<h3 class="wind"></h3>
+         </div>
 				</div>
 
 				<div id="work_recommend">
@@ -243,7 +256,7 @@
 					<!-- 추천 카데고리의 메뉴  -->
 					<div class="work_menu">
 						<a th:href="@{/board/news}">건강 뉴스</a> &nbsp;/&nbsp; <a
-							th:href="@{/board/map}">지도</a> &nbsp;/&nbsp; <a th:href="'#'">운동
+							th:href="@{/board/map}">지도</a> &nbsp;/&nbsp; <a th:href="@{/board/info}">운동
 							정보</a>
 					</div>
 					<div id="work_info_link">
@@ -273,7 +286,7 @@
 						</div>
 						<!-- 운동 꿀팁 링크 이동 이미지 -->
 						<div id="work_method">
-							<a th:href="'#'"> <img
+							<a th:href="@{/board/info}"> <img
 								th:src="@{/images/main_body/3work_info_3.png}"
 								alt="3work_info_3">
 							</a>
@@ -344,17 +357,56 @@
     var nowTemp = Math.round(WeatherResult.main.temp);
     var lowTemp = Math.round(WeatherResult.main.temp_min);
     var highTemp = Math.round(WeatherResult.main.temp_max);
+    var pressure = Math.round(WeatherResult.main.pressure);
+    var humidity = Math.round(WeatherResult.main.humidity);
+    var wind = Math.round(WeatherResult.wind.speed);
 
-    $('.SeoulNowtemp').html("현재기온: " + nowTemp + '°C');
-    $('.SeoulLowtemp').html("최저기온: " + lowTemp + '°C');
-    $('.SeoulHightemp').html("최대기온: " + highTemp + '°C');
+    $('.SeoulNowtemp').html(nowTemp + ' °C');
+    $('.SeoulLowtemp').html(lowTemp + '°C');
+    $('.SeoulHightemp').html(highTemp + '°C');
+    $('.pressure').html('<span class="texts">기압</span> &nbsp;&nbsp;' + pressure + ' Pa');
+    $('.humidity').html('<span class="texts">습도</span> &nbsp;&nbsp;' + humidity + ' %');
+    $('.wind').html('<span class="texts">풍속</span> &nbsp;&nbsp;' + wind + ' m/s');
 
     // 날씨 아이콘 출력
-    var weathericonUrl =
-        '<img src= "http://openweathermap.org/img/wn/'
-        + WeatherResult.weather[0].icon +
-        '.png" alt="' + WeatherResult.weather[0].description + '"/>'
-    $('.SeoulIcon').html(weathericonUrl);
+    // 날씨 상황에 따른 아이콘 추가하기
+		var iconPath = "/images/weather_icon/"; //아이콘 파일경로
+	
+		var customWeatherIcons = {
+			// 맑은날	
+			"01d": iconPath + "clearSky_d.png",
+			"01n": iconPath + "clearSky_n.png",
+			// 약간 구름낀 날
+			"02d": iconPath + "fewClouds_d.png",
+			"02n": iconPath + "fewClouds_n.png",
+			// 구름이 많은 날(맑은 흐림)
+			"03d": iconPath + "scattered_dn.png",
+			"03n": iconPath + "scattered_dn.png",
+			// 구름이 많은 날(흐림)
+			"04d": iconPath + "brokenClouds-dn.png",
+			"04n": iconPath + "brokenClouds-dn.png",
+			// 소나기가 오는 날
+			"09d": iconPath + "showerRain_dn.png",
+			"09n": iconPath + "showerRain_dn.png",
+			// 비가 오는 날
+			"10d": iconPath + "rain_d.png",
+			"10n": iconPath + "rain_n.png",
+			// 천둥번개 치는 날
+			"11d": iconPath + "thunderstorm_dn.png",
+			"11n": iconPath + "thunderstorm_dn.png",
+			// 눈 
+			"13d": iconPath + "snow_dn.png",
+			"13n": iconPath + "snow_dn.png",
+			// 안개
+			"50d": iconPath + "mist_dn.png",
+			"50n": iconPath + "mist_dn.png",
+		};
+		
+		var weatherIconCode = WeatherResult.weather[0].icon;
+		var weatherIconAlt = WeatherResult.weather[0].description;
+		var weatherIconUrl = '<img class="weather-icons" src="' + customWeatherIcons[weatherIconCode] + '" alt="' + weatherIconAlt + '"/>';
+				
+		$('.SeoulIcon').html(weatherIconUrl);
 
     // 기온에 따른 이미지 표시
     var temperature = WeatherResult.main.temp;

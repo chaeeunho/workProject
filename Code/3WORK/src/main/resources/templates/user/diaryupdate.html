@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>3WORK : WWW</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/user/diarydetail.css}">
+  <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div id="container" style="height: 700px;">
+   <div id ="newsdetail">
+   <div th:replace="~{header}"></div>
+      <section id="writeform">
+      <h2>My Health Diary <br>Update</h2>
+      <form th:action="@{/user/diaryupdate}" method="post">
+      <input type="hidden" name="dno" th:value="${diary.dno}">
+         <table class="tbl_list">
+            <tbody>
+               <tr>
+                  <td>
+                     <input type="text" name="dtitle"
+                        th:value="${diary.dtitle}">
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <textarea rows="5" cols="50" name="dcontent"
+                           th:value="${diary.dcontent}"></textarea>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <a th:href = "@{|/userdiary/${dno}|}">
+                        <button type="button" class = "nbt">취소</button>
+                     </a>
+                     <input type="submit" value="등록" class = "nbt">
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </form>
+      </section>
+       <div th:replace="~{footer}"></div>
+   </div>
+</div>
+</body>
+</html>

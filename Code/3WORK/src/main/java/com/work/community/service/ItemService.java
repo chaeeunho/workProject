@@ -1,6 +1,7 @@
 package com.work.community.service;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -49,18 +50,7 @@ public class ItemService {
 		// entity를 db에 저장
 		itemRepository.save(item);
 	}
-
-	// 페이지 처리 전, 아이템 전체 목록 가져오기
-	/* public List<ItemDTO> findAll() {
-		List<Item> itemList = itemRepository.findAll();
-		List<ItemDTO> itemDTOList = new ArrayList<>();
-		for(Item item : itemList) {
-			ItemDTO itemDTO = ItemDTO.toSaveDTO(item);
-			itemDTOList.add(itemDTO);
-		}
-		return itemDTOList;
-	} */
-
+	
 	// 아이템 삭제
 	public void deleteById(Integer ino) {
 		itemRepository.deleteById(ino);
@@ -83,6 +73,14 @@ public class ItemService {
 		new ItemDTO(item.getIno(), item.getIname(), item.getIcontent(), item.getIprice(), item.getIlink(), item.getIfilename(), item.getIfilepath()));
 		
 		return itemDTOList;
+	}
+
+	// 장바구니에서 사용
+	public Item findById(Integer ino) {
+		Optional<Item> findItem = itemRepository.findById(ino);
+		ItemDTO itemDTO = ItemDTO.toSaveDTO(findItem.get());
+		Item item = Item.toSaveEntity(itemDTO);
+		return item;
 	}
 	
 }

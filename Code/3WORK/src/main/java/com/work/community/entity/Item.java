@@ -1,12 +1,16 @@
 package com.work.community.entity;
 
+import java.util.List;
+
 import com.work.community.dto.ItemDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,6 +45,11 @@ public class Item {
 	
 	private String ifilepath; 
 	
+	// 하나의 아이템에 여러 카트 아이템이 존재(일대다 관계)
+	// 아이템이 삭제되면 카트 아이템에서도 삭제
+	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+	private List<CartItem> cartItems;
+	   
 	// dto -> entity 변환
 	public static Item toSaveEntity(ItemDTO itemDTO) {
 		Item item = Item.builder()

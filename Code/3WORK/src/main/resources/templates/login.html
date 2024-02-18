@@ -16,8 +16,8 @@ console.log( Kakao.isInitialized() ); // 초기화 판단여부
 </script>
 </head>
 <body>
-	<div id="login">
-		<div id="container">
+	<div id="container" style="height: 1200px;">
+		<div id="login">
     	<!-- header.html 연결 -->
       <div th:replace="~{header}"></div>
       
@@ -28,12 +28,6 @@ console.log( Kakao.isInitialized() ); // 초기화 판단여부
 	      	<input type="text" id="search_input" name="username" placeholder="이메일 주소">
 	      	<input type="text" id="search_input" name="password" placeholder="비밀번호">
 	      	<input type="submit" id="login_btn" value="로그인"></input>
-	      	<a id="kakao-login-btn" href="javascript:loginWithKakao()">
-			  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-			    alt="카카오 로그인 버튼" />
-			</a>
-			<p id="token-result"></p>
-			<button class="api-btn" onclick="kakaoLogOut()">로그아웃</button>
 	      	<p>회원가입을 하지 않으셨나요 ?
 	      		<a th:href="@{/user/join}">회원가입</a>
 	      	</p>
@@ -41,6 +35,19 @@ console.log( Kakao.isInitialized() ); // 초기화 판단여부
 	      		<a th:href="@{/user/id_search}">아이디 찾기</a>&nbsp;/&nbsp;
 	      		<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
 	      	</p>
+	      	<p>OR<p>
+	      	<p>SNS 간편 로그인</p>
+	      	<p>
+		      	<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+				  	<img src="/images/login/kakao.png" alt="카카오 로그인 버튼" />
+						</a>
+						<img src="/images/login/naver.png" alt="네이버 로그인 버튼" />
+						<img src="/images/login/Facebook.png" alt="페이스북 로그인 버튼" />
+						<img src="/images/login/Google.png" alt="구글 로그인 버튼" />
+						<img src="/images/login/apple.png" alt="애플 로그인 버튼" />
+	      	</p>
+			<p id="token-result"></p>
+			<button class="api-btn" onclick="kakaoLogOut()">로그아웃</button>
 	    </form>
       	</div>
       </section>

@@ -34,10 +34,8 @@ public class News {
 	@Column(nullable = false)                               // not null
 	private String ndate;                                   // 기사 작성일
 	
-	@Column(nullable = false)                               // not null
 	private String nfilename;                               // 기사 사진명
 	
-	@Column(nullable = false)                               // not null
 	private String nfilepath;                               // 기사 사진 경로
 
 	// dto -> entity 변환

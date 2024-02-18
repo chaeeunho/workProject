@@ -45,6 +45,7 @@ html {
 	border: 1px solid #8B8989;
 	text-align: left;
 	margin: 0 auto;
+	position: relative;
 }
 #search_input{
 	width: 700px;
@@ -52,7 +53,18 @@ html {
 	outline: none;
 	margin-left: 5px;
 }
-
+#search_btn{
+	background: none;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-family: 'SBAggroM';
+  font-size: 11px;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+ 	cursor: pointer;
+}
 
 
 /* ------------------------------------------- */
@@ -184,6 +196,12 @@ html {
 	border: none;
 }
 
+
+
+/* ------------------------------------------- */
+
+
+
 #weather_box{
 	width: 28.3vw;
 	aspect-ratio: 1.25;
@@ -193,6 +211,7 @@ html {
 	margin: 40px;
 	margin-left: 0;
 	float: right;
+	position: relative;
 }
 #weather_title p{
 	font-size: 1.7vw;
@@ -202,7 +221,72 @@ html {
 	border-bottom: 1px solid #cccccc;
 	font-family: 'SBAggroM';
 }
-
+#weather_info{
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 0;
+  padding-top: 70px;
+}
+.SeoulIcon{
+	width: 40%;
+	display: flex;
+  align-items: center;
+}
+.weather-icons{
+	 width: 100%;
+   height: 70%;
+}
+#weather_info_right{
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.SeoulNowtemp{
+	font-size: 3vw;
+	margin: 0;
+	margin-bottom: 10%;
+}
+.Seoul{
+  font-size: 1vw;
+  margin: 0;
+  margin-bottom: 10%;
+}
+.SeoulLowtemp{
+	font-size: 1.2vw;
+	color: blue;
+	margin: 0;
+}
+.SeoulHightemp{
+	font-size: 1.2vw;
+	color: red;
+	margin: 0;
+}
+.tempslice{
+	font-size: 1.2vw;
+}
+#weather_info_bottom{
+	display: flex;
+  width: 100%;
+  height: 20%;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1vw;
+  position: absolute;
+  bottom: 0;
+}
+.texts{
+	font-size: 1vw;
+	color: gray;
+}
+.pressure,
+.humidity,
+.wind{
+	font-size: 1vw;
+}
 
 
 /* --------------------------------------------------------- */
@@ -487,6 +571,12 @@ html {
 	}
 	#work_recommend{
 		height: 37%;
+	}
+}
+
+@media (max-width: 1230px){
+	#weather_info{
+  	padding-top: 55px;
 	}
 }
 

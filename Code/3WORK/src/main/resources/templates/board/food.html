@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
 <link rel="stylesheet" th:href="@{/css/common.css}">
 <link rel="stylesheet" th:href="@{/css/board/food.css}">
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div id="container" style="height: 2550px">
@@ -18,7 +20,7 @@
       		<div class="mbox">
       			<div class="t_box">
       				<p class = "tag">건강식품
-      					<span class="tag_mini">※ 구매는 링크를 통해 하시길 바라며, 장바구니 담기는 가능합니다.</span>
+      					<span class="tag_mini">※ 구매는 링크를 통해 하시길 바라며, 장바구니 담기는 로그인 후 가능합니다.</span>
       				</p>
             </div>   
           	
@@ -37,7 +39,17 @@
 	          			<p class="foodp" th:text="${food.fcontent}"><br></p>
 	          			<div class="foodprice">
 		          			<p data-th-text="${#numbers.formatInteger(food.fprice, 3, 'COMMA') + '원'}"></p>
-		          			<i class="fa-solid fa-cart-plus" style = "color: #5EA601; font-size : 20px;"></i>
+		          			<!-- 장바구니에 담기 -->
+		          			<th:block sec:authorize="isAuthenticated()">
+			          			<th:block th:each="user : ${users}" th:if="${user.uid == principal.username}">
+				          			<form th:action="@{|/user/mybagfood/{uno}/{fno}|(uno=${user.uno}, fno=${food.fno})}" method="post">
+					          			<!-- 장바구니에 담기 -->
+														<button type="submit" class="cartBtn" onclick="alert('장바구니에 상품을 담으시겠습니까?')">
+														    <i class="fa-solid fa-cart-plus" style="color: #5EA601; font-size: 20px;"></i>
+														</button>
+				          			</form>
+				          		</th:block> 
+			          		</th:block>
 	          				&nbsp;&nbsp;&nbsp;
 	          				<span th:with="foodLink=${food.flink}">
 		          				<a th:href="@{${foodLink}}" target="_blank">

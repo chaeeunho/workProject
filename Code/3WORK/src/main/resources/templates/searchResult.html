@@ -3,81 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <title>검색 결과</title>
-    <style>
-        body {
-            font-family: 'SBAggroL', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        #searchResults {
-            width: 1200px;
-            margin: 70px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            font-size: 30px;
-            font-family: 'SBAggroM', sans-serif;
-            margin-bottom: 20px;
-        }
-        .user {
-            border-bottom: 1px solid #ccc;
-            padding: 15px;
-            font-size: 17px;
-            color: gray;
-        }
-        .user:last-child {
-            border-bottom: none;
-        }
-        .user p {
-            margin: 5px 0;
-            font-weight: 100;
-        }
-        .user a {
-            text-decoration: none;
-            color: #000;
-            background-color: #f1f3e1;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 15px;
-        }
-        .user a:hover {
-            background-color: #e2e6c1;
-        }
-        .pagination {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .pagination a {
-            text-decoration: none;
-            color: gray;
-            margin: 0 5px;
-            padding: 5px 10px;
-            border: 1px solid gray;
-            border-radius: 5px;
-        }
-        .pagination a:focus, .pagination a:hover {
-            border-color: black;
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/board/musicboard.css}">
+    <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<div th:replace="~{header}"></div>
-<div id="searchResults">
-    <h2>검색 결과</h2>
-    <div th:each="user : ${usersList}" class="user">
-        <p>아이디: <span th:text="${user.uid}"></span></p>
-        <p>닉네임: <span th:text="${user.unickname}"></span></p>
-        <a th:href="@{'/user/userpage/' + ${user.uno}}">방문</a>
-    </div>
-    <div class="pagination">
-        <!-- Pagination links would go here -->
+<div id="container" style="height: 1400px;">
+    <div id="musicboard">
+        <!-- header.html 연결 -->
+        <div th:replace="~{header}"></div> 
+        <section class="msection">
+            <div id="mcontainer">
+                <div class="mbox">
+                    <div class="t_box">
+                        <p class="tag">검색 결과</p>
+                    </div>
+
+                  <table id="mtable">
+                     <thead>
+                        <tr>
+                           <th class="td_box">인기 순위</th>
+                           <th class="td_box">아이디</th>
+                           <th class="td_box">닉네임</th>
+                           <th class="td_box">홈페이지</th>
+                        </tr>
+                     </thead>
+
+                     <tbody id="contentA">
+                        <tr th:each="user, iterStat : ${usersList}">
+                           <td><span th:text="${user.hits}"></span></td>
+                           <td><span th:text="${user.uid}"></span>
+                            <!-- 랭킹 이미지 표시 -->
+                              <img th:if="${iterStat.index} == 0" th:src="@{/images/rank/1st.jpeg}" alt="1등" class="rank-image"  /> 
+                              <img th:if="${iterStat.index} == 1" th:src="@{/images/rank/2nd.jpeg}" alt="2등" class="rank-image" />
+                              <img th:if="${iterStat.index} == 2" th:src="@{/images/rank/3rd.jpeg}" alt="3등" class="rank-image" />
+                              
+                              <td th:text="${user.unickname}"></td>
+                           <td><a href="@{|/user/userpage/${user.uno}|}"
+                              th:onclick="popUp([[${user.uno}]])" class="visit-button">방문</a></td>
+                        </tr>
+                     </tbody>
+
+                  </table>
+
+               </div>
+                <div class="pagination">
+                </div>
+            </div>
+        </section>
+        <!-- footer.html 연결 -->
+        <div th:replace="~{footer}"></div>
     </div>
 </div>
-<div th:replace="~{footer}"></div>
+<!-- 유저페이지 팝업 JS -->
+   <script src="/js/main.js"></script>
+
+   <script>
+   //
+   const popUp = (uno) => {
+      event.preventDefault();
+      window.open('/user/userpage/' + uno, '_blank', 'width=1450,height=900');
+   }
+      // 버튼 클릭 시 실행될 함수 정의
+      function handleLoginButtonClick() {
+         // 서버로부터 받은 인증 상태
+         let serverResponse = {
+            "isAuthenticated" : true
+         //권한 인증
+         };
+         // 서버에서 받은 인증 상태를 가져옴
+         let isAuthenticated = serverResponse.isAuthenticated;
+
+         // 인증 상태에 따라 동작 결정
+         if (isAuthenticated) {
+            let popOption = "width=1450, height=850";
+            let openUrl = '/user/userpage';
+            window.open(openUrl, '미니홈페이지', popOption);
+         } else {
+            window.location.href = '/login';
+         }
+      }
+      
+      document.addEventListener("DOMContentLoaded", function() {
+          // 페이지가 로드될 때 실행되는 함수
+          calculateAndSortRank();
+      });
+
+      function calculateAndSortRank() {
+          // 방문자 수를 가져와서 순위를 계산
+          let rows = document.querySelectorAll("#contentA tr");
+          let ranks = [];
+          rows.forEach(function(row) {
+              let hits = parseInt(row.querySelector("td:nth-child(1) span").innerText);
+              ranks.push({row: row, hits: hits});
+          });
+
+          // 순위에 따라 테이블을 정렬
+          ranks.sort(function(a, b) {
+              return b.hits - a.hits;
+          });
+
+          // 테이블을 재배치
+          let tbody = document.getElementById("contentA");
+          tbody.innerHTML = "";
+          ranks.forEach(function(item, index) {
+              let rank = index + 1;
+              let row = item.row;
+              row.querySelector("td:nth-child(1) span").innerText = rank;
+              tbody.appendChild(row);
+          });
+      }
+
+      </script>
 </body>
 </html>

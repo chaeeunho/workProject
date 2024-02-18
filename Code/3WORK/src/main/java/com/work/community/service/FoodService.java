@@ -1,6 +1,7 @@
 package com.work.community.service;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.work.community.dto.FoodDTO;
 import com.work.community.entity.Food;
+import com.work.community.exception.BootBoardException;
 import com.work.community.repository.FoodRepository;
 
 import jakarta.validation.Valid;
@@ -84,5 +86,15 @@ public class FoodService {
 		
 		return foodDTOList;
 	}
-	
+
+	public Food findById(Integer fno) {
+		// db에서 Food 엔티티를 꺼내옴
+		Optional<Food> findFood = foodRepository.findById(fno);
+		if(findFood.isPresent()) {
+			return findFood.get();
+		} else {
+			throw new BootBoardException("식품 정보를 찾을 수 없습니다.");
+		}
+	}
+
 }

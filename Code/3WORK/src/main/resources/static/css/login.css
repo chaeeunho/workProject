@@ -15,7 +15,7 @@
 #login_title{
 	width: 550px;
 	position: absolute;
-	top: 46%;
+	top: 80%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -51,7 +51,49 @@
 	color: black;
 	text-decoration: none;
 }
-
+#login_title p:nth-of-type(4) {
+    font-size: 15px;
+    color: #A09D9D;
+    text-align: center;
+		display: flex;
+		flex-basis: 100%;
+   	margin: 80px 0px;
+   	align-items: center;
+}
+#login_title p:nth-of-type(4):before,
+#login_title p:nth-of-type(4):after{
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    line-height: 0px;
+    font-size: 0px;
+    background: #A09D9D;
+    margin: 0px 16px;
+}
+#login_title p:nth-of-type(5) {
+    font-size: 12px;
+    color: #A09D9D;
+    text-align: left;
+    padding-left: 15px;
+}
+#login_title p:nth-of-type(6) {
+    font-size: 15px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+#login_title p:nth-of-type(7){
+	display: flex;
+	justify-content: center;
+}
+#login_title p:nth-of-type(7) a{
+	text-decoration: none;
+}
+#login_title p:nth-of-type(7) img{
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    float: left;
+}
 
 #search_input{
 	width: 500px;

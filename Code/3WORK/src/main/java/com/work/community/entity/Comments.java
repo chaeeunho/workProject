@@ -24,16 +24,16 @@ import lombok.Setter;
 @Table(name = "comments")
 @Entity
 public class Comments extends BaseEntity{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cno; //방명록 번호
-	
-	@Column(length = 200, nullable = false)
-	private String ccontent; //방명록 내용
-	
-	//외래키 설정
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Users users; //외래키 설정
-	
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Integer cno; //방명록 번호
+   
+   @Column(length = 200, nullable = false)
+   private String ccontent; //방명록 내용
+   
+   //회원 한명이 여러 방명록 작성
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "uno") // 외래키 설정 및 nullable 설정
+   private Users users; // 외래키 설정
+
 }

@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    initialDate: '2020-09-12',
-    navLinks: true, // can click day/week names to navigate views
+    initialDate: '2024-02-18',
+    navLinks: true,
     selectable: true,
     selectMirror: true,
     select: function(arg) {
@@ -51,61 +51,61 @@ document.addEventListener('DOMContentLoaded', function() {
     dayMaxEvents: true, // allow "more" link when too many events
     events: [
       {
-        title: 'All Day Event',
-        start: '2020-09-01'
+        title: '건강 식단 알아보기',
+        start: '2024-02-01'
       },
       {
-        title: 'Long Event',
-        start: '2020-09-07',
-        end: '2020-09-10'
-      },
-      {
-        groupId: 999,
-        title: 'Repeating Event',
-        start: '2020-09-09T16:00:00'
+        title: '금주 일주일 도전!',
+        start: '2024-02-07',
+        end: '2020-02-10'
       },
       {
         groupId: 999,
-        title: 'Repeating Event',
-        start: '2020-09-16T16:00:00'
+        title: '오후 점심 약속',
+        start: '2024-02-09T16:00:00'
       },
       {
-        title: 'Conference',
-        start: '2020-09-11',
-        end: '2020-09-13'
+        groupId: 999,
+        title: 'PT 수업',
+        start: '2024-02-16T16:00:00'
       },
       {
-        title: 'Meeting',
-        start: '2020-09-12T10:30:00',
-        end: '2020-09-12T12:30:00'
+        title: '전주 맛집 여행',
+        start: '2024-02-11',
+        end: '2024-02-13'
       },
       {
-        title: 'Lunch',
-        start: '2020-09-12T12:00:00'
+        title: '건강 세미나 참석',
+        start: '2024-02-20T10:30:00',
+        end: '2024-02-20T12:30:00'
       },
       {
-        title: 'Meeting',
-        start: '2020-09-12T14:30:00'
+        title: '영양제 챙겨먹기',
+        start: '2024-02-20T12:00:00'
       },
       {
-        title: 'Happy Hour',
-        start: '2020-09-12T17:30:00'
+        title: 'PT 수업',
+        start: '2024-02-20T14:30:00'
       },
       {
-        title: 'Dinner',
-        start: '2020-09-12T20:00:00'
+        title: '런닝 뛰기',
+        start: '2024-02-20T17:30:00'
       },
       {
-        title: 'Birthday Party',
-        start: '2020-09-13T07:00:00'
+        title: '저녁 산책',
+        start: '2024-02-20T20:00:00'
       },
       {
-        title: 'Click for Google',
+        title: '친구놈 생일',
+        start: '2024-02-13T07:00:00'
+      },
+      {
+        title: '운동기구 사기',
         url: 'http://google.com/',
-        start: '2020-09-28'
+        start: '2024-02-28'
       }
     ],
- // 추가된 부분: Google Calendar 이벤트 소스
+ //Google Calendar 이벤트 소스
     eventSources: [
         {
             googleCalendarApiKey: 'AIzaSyCndw5HkzItEmGRP2mPMPOPKPsRKeIZCDc',
@@ -135,70 +135,111 @@ document.addEventListener('DOMContentLoaded', function() {
           <input type="color" id="bg-color-picker" value="#f0f0f0">
       </div>
       <audio id="bgm-audio" th:src="@{|/upload/mp3/${Userinfo.bgmname}|}" autoplay loop></audio>
-        <!-- 사이드 메뉴 영역 -->
-        <div id="diary">
-         <div id="diary_btn">
-            <a th:href="'#'">나의 건강일지</a>
+      <!-- 사이드 메뉴 영역 -->
+      <div id="side_image">
+         <div id="image1">
+            <p>10Kg 감량중!</p>
+            <img th:src="@{/images/userpage/side_image.png}" alt="side-image">
          </div>
       </div>
+      <div id="side_image2">
+       <div id="image2">
+         <p>
+         <a th:href="@{|/user/userdiary/${Userinfo.uno}|}">나의 건강일지</a>
+         </p>
+            <img th:src="@{/images/userpage/health_diary.png}" alt="side-image">
+         
+       </div>
+      </div>
+      <!-- 사이드 메뉴 영역 -->
+      <!-- <div id="diary">
+       <div id="diary_btn">
+          <a th:href="'#'">나의 건강일지</a>
+       </div>
+      </div> -->
       <!-- 프로필, 캘린더 영역 -->
       <section id="profile">
-          <p>TODAY <span id="today-visits" th:text="${Userinfo.hits}"></span> | TOTAL 4,300</p>
+          <p>TODAY <span id="today-visits" th:text="${Userinfo.hits}"></span> | 
+             TOTAL <span id="total-visits" th:text="${Userinfo.hits}"></span></p>
           <div id="profile-pic">
        <img th:if="${Userinfo.ufilename != null}" th:src="@{|/upload/profile/${Userinfo.ufilename}|}" 
-          style="width: 200px; height: 250px; border-radius: 17px;" alt="프로필">
+          style="width: 100%; height: 100%; border-radius: 17px;" alt="프로필">
        <span th:unless="${Userinfo.ufilename != null}" id="pimage-text">프로필 이미지를<br> 설정해주세요</span>
-   </div>
+          </div>
           <p th:text="${Userinfo.unickname} + '의 Health Place'"></p>
               <a th:href="@{/user/userupdate}" id="setting">
                   <i class="fa-solid fa-gear"></i>
               </a>
          
           <p>한줄 소개명</p>
-   <p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
-   Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
-      
-   <p>좋아하는 것</p>
-   <p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
-   Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
-          <div id='calendar'></div>
+         <p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
+         Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
+         <div id="line"></div> 
+         
+         <p>좋아하는 것</p>
+         <p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
+         Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
+         <div id="line"></div>
+         <div id='calendar'></div>
       </section>
 
       <section id="comments">
-          <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              방명록<img th:src="@{/images/pen.png}" alt="방명록">
+          <h2 id="commenth2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              방명록<img th:src="@{/images/comment.png}" alt="방명록">
           </h2>
-          <!-- 방명록 작성 영역 -->
-          <form id="comment-form">
-              <div id="comment-container">
-                  <input type="text" id="comment" name="ccontent"
-                         placeholder="자유롭게 방명록을 작성해주세요.">
-                  <button id="btns">작성</button>
-              </div>
-          </form>
-        <!-- 방명록 목록 영역 -->
-        <div id="comment-list"> 
-       <div th:each="comment : ${commentList}">
-            <div id="ccontent-body">
+           <!-- 방명록 작성 영역 -->
+<form id="comment-form">
+    <div id="comment-container">
+        <input type="hidden" id="uno" th:value="${Userinfo.uno}">
+        <input type="text" id="comment" name="ccontent" placeholder="자유롭게 방명록을 작성해주세요.">
+        <button id="btns">작성</button>
+    </div>
+</form>
+
+<!-- 방명록 목록 영역 -->
+<div id="comment-list">
+    <div th:each="comment : ${commentList}">
+        <div id="ccontent-body">
             <div class="comment-body">
-                <p id="replyid" th:text="${comment.users.unickname}"></p>
-                <p id="reply_time" th:text="${#dates.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></p>
-                <a href="#" th:onclick="deleteComment([[${Userinfo.uno}]], [[${comment.cno}]])">삭제</a>
+                <p>
+                    <span id="replyid" th:text="${comment.users.unickname}"></span>
+                    <span id="reply_time" th:text="${#dates.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                </p>
+                <div id="comment_update">
+                    <!-- 삭제 버튼은 작성자와 로그인 회원이 같을 때만 보이도록 설정 -->
+                    <a href="#" th:if="${comment.users.uno == Userinfo.uno}" 
+                        id="comment_del" th:onclick="deleteComment([[${Userinfo.uno}]], [[${comment.cno}]])">삭제&nbsp;|&nbsp;</a>
+                    <!-- 수정 버튼 -->
+                    <a href="#" th:if="${comment.users.uno == Userinfo.uno}" 
+                        id="comment_up" th:onclick="commentObject.UpdateComment([[${Userinfo.uno}]], [[${comment.cno}]])">수정</a>
+                </div>
             </div>
-               <p id="content" th:text="${comment.ccontent}"><p>
+            <p id="content" th:text="${comment.ccontent}"></p>
+            <!-- 댓글 수정 -->
+            <div th:id="'replyModal' + ${comment.cno}" class="modal" style="display: none ;">
+                <div class="modal_content">
+                    <div style="display: none;" th:id="'originalContent' + ${comment.cno}" th:text="${comment.ccontent}"></div>
+                    <textarea class="upcomment_content" th:id="'commentContent' + ${comment.cno}" rows="1" cols="50"></textarea>
+                </div>
+                <div class="reply_update_confirm_box">
+                    <button th:id="'updateReplyBtn_confirm' + ${comment.cno}" 
+                          class="updateReplyBtn_confirm">저장</button>
+                    <button th:id="'updateReplyBtn_cancel' + ${comment.cno}" 
+                          class="updateReplyBtn_cancel" type="reset">취소</button>
+                </div>
             </div>
-       </div>
-      </div>
+        </div>
+    </div>
+</div>
+         
+         
       <!-- 페이지 영역 -->
       <div class="pagination" th:if="${commentList.totalElements > 0}">
           <!-- 이전 페이지 -->
-          <!-- 2페이지클릭 : db페이지는 1page -->
           <a id="page" th:href="${commentList.first} ? '#' : @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number})}">
              <i class="fa-solid fa-caret-left"></i></a>
           <!-- 페이지 번호 영역 -->
           <span class="current_page" th:each="page: ${#numbers.sequence(startPage, endPage)}">
-              <!-- <span th:text="${page}"></span> -->
-              <!-- 쿼리 스트링 방식 : /board/pagelist?page=1 -->
               <!-- 현재 페이지는 링크없이 숫자만 표시 -->
               <span class="current_page" th:if="${page == commentList.number + 1}" th:text="${page}"></span>
               <span th:if="${page != commentList.number + 1}">
@@ -206,18 +247,17 @@ document.addEventListener('DOMContentLoaded', function() {
               </span>
           </span>
           <!-- 다음 페이지 -->
-          <!-- 현재 2페이지인데 3페이지로 가고싶다 : 실제 페이지는 1page -->
           <a id="page" th:href="${commentList.last} ? '#' : @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number + 2})}">
              <i class="fa-solid fa-caret-right"></i></a>
       </div>
       <div id="no-comments" th:unless="${commentList.totalElements > 0}">
-          <p>댓글이 없습니다.</p>
+          <p>방명록이 없습니다.</p>
       </div>
     </section>
     </div>
 </div>
 <script>
-//Get audio element and controls
+//BGM 재생
 const audio = document.getElementById('bgm-audio');
 const playPauseBtn = document.getElementById('play-pause-btn');
 const bgmTitle = document.getElementById('bgm-title');
@@ -225,7 +265,7 @@ const bgmControls = document.getElementById('bgm-controls');
 const bgColorPicker = document.getElementById('bg-color-picker');
 const volumeSlider = document.getElementById('volume-slider'); // 추가: 볼륨 슬라이더 요소
 
-// Play/pause toggle
+// 재생/일시정지 버튼
 playPauseBtn.addEventListener('click', () => {
     if (audio.paused) {
         audio.play();
@@ -236,12 +276,12 @@ playPauseBtn.addEventListener('click', () => {
     }
 });
 
-// Change background color
+// BGM Bar 배경화면 변경 기능
 bgColorPicker.addEventListener('input', () => {
     bgmControls.style.backgroundColor = bgColorPicker.value;
 });
 
-// Update song title
+// 노래 제목 관련
 audio.addEventListener('loadedmetadata', () => {
     const songTitle = '아이유(IU) - Love Wins All';
     bgmTitle.textContent = songTitle;
