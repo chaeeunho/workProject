@@ -46,31 +46,31 @@ public class UsersController {
       return "login";  //login.html
    }
    
-   //유저 홈페이지
-    @GetMapping("/user/userpage/{uno}")
-     public String userPage(@PathVariable Integer uno,
-       @PageableDefault(page = 1) Pageable pageable,
-                       Model model) {
-       Page<CommentsDTO> commentList = commentsService.findByUno(pageable, uno);
-       //방문자 수
-       usersService.updateHits(uno);
-       Users users = usersService.findById(uno);
-       
-       //하단에 페이지 영역 만들기
-       int blockLimit = 10; //하단에 보여줄 페이지 개수
-       //시작페이지
-       int startPage = ((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit)) - 1)* blockLimit + 1;
-       //마지막 페이지
-       int endPage = (startPage + blockLimit - 1) > commentList.getTotalPages() ?
-            commentList.getTotalPages() : startPage + blockLimit - 1;
-    
-         model.addAttribute("commentList", commentList);
-         System.out.println(commentList.toString());
-         model.addAttribute("Userinfo", users);
-         model.addAttribute("startPage", startPage);
-         model.addAttribute("endPage", endPage);
-       return "user/userpage";
-    }
+ //유저 홈페이지
+   @GetMapping("/user/userpage/{uno}")
+    public String userPage(@PathVariable Integer uno,
+      @PageableDefault(page = 1) Pageable pageable,
+                      Model model) {
+      Page<CommentsDTO> commentList = commentsService.findListAll(pageable);
+      //방문자 수
+      usersService.updateHits(uno);
+      Users users = usersService.findById(uno);
+      
+      //하단에 페이지 영역 만들기
+      int blockLimit = 10; //하단에 보여줄 페이지 개수
+      //시작페이지
+      int startPage = ((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit)) - 1)* blockLimit + 1;
+      //마지막 페이지
+      int endPage = (startPage + blockLimit - 1) > commentList.getTotalPages() ?
+           commentList.getTotalPages() : startPage + blockLimit - 1;
+   
+        model.addAttribute("commentList", commentList);
+        System.out.println(commentList.toString());
+        model.addAttribute("Userinfo", users);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+      return "user/userpage";
+   }
     
    //회원 가입 페이지
    @GetMapping("/user/join")

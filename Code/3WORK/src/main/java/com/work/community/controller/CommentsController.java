@@ -3,6 +3,7 @@ package com.work.community.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,11 +26,10 @@ public class CommentsController {
    //방명록 쓰기
    @PostMapping("/comments/{uno}")
    @ResponseBody
-   public String insertComment(@PathVariable Integer uno,
-         @RequestBody Comments comments,
+   public String insertComment(@RequestBody Comments comments,
          @AuthenticationPrincipal SecurityUser principal) {
       comments.setUsers(principal.getUsers());
-      commentsService.insertComment(comments, uno);
+      commentsService.insertComment(comments);
       return "방명록 등록 성공!";
    }
    

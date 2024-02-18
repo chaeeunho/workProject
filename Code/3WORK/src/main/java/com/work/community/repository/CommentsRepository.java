@@ -9,6 +9,6 @@ import com.work.community.entity.Users;
 
 public interface CommentsRepository extends JpaRepository<Comments, Integer>{
 
-   Page<Comments> findByUsers(Pageable pageable, Users users);
+//   Page<Comments> findByUsers(Pageable pageable);
 
 }

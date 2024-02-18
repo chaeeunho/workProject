@@ -1,8 +1,5 @@
 package com.work.community.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,11 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.work.community.dto.CommentsDTO;
 import com.work.community.entity.Comments;
-import com.work.community.entity.Users;
 import com.work.community.repository.CommentsRepository;
-import com.work.community.repository.UsersRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,12 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 public class CommentsService {
 
    private final CommentsRepository commentsRepository;
-   private final UsersRepository usersRepository;
    
    //방명록 쓰기 
-   public void insertComment(Comments comments, Integer uno) {
-      Users users = usersRepository.findById(uno).get();
-      comments.setUsers(users);
+   public void insertComment(Comments comments) {
       commentsRepository.save(comments);
    }
    //방명록 목록
@@ -40,13 +31,12 @@ public class CommentsService {
    
    
    //방명록 목록 + 페이지처리
-   public Page<CommentsDTO> findByUno(Pageable pageable, Integer uno) {
+   public Page<CommentsDTO> findListAll(Pageable pageable) {
       int page = pageable.getPageNumber() - 1; //db는 현재 페이지보다 1 작음
       int pageSize = 5;
       pageable = PageRequest.of(page, pageSize, Sort.Direction.DESC, "cno");
       
-      Optional<Users> users = usersRepository.findById(uno);
-      Page<Comments> commentsList = commentsRepository.findByUsers(pageable, users.get());
+      Page<Comments> commentsList = commentsRepository.findAll(pageable);
       
       log.info("boardList.isFirst()=" + commentsList.isFirst());
       log.info("boardList.isLast()=" + commentsList.isLast());

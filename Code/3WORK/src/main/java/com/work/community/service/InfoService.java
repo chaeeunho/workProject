@@ -34,7 +34,7 @@ public class InfoService {
          String filename = uuid + "_" + inimage.getOriginalFilename();
          // 1. 윈도우 : C:/3workfiles/news/
          // 2. 맥 : /Users/rim-yeeun/3workfiles/news/
-         String filepath = "C:\\3workfiles\\info" + filename;
+         String filepath = "C:\\3workfiles\\info\\" + filename;
                
          File savedFile = new File(filepath);
          inimage.transferTo(savedFile);
