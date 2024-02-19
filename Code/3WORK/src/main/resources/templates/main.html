@@ -159,7 +159,7 @@
 		                </a>
 			            <div id="login_menu">
 			                <a th:href="@{|/user/mybag/${user.uno}|}">위시리스트</a>
-			                <a th:href="@{/user/userupdate}">회원정보 수정</a>
+			                <a th:href="@{/user/userupdate_m}">회원정보 수정</a>
 			                <a th:href="@{/logout}">로그아웃</a>
 			            </div>
 		            </th:block>
@@ -311,7 +311,7 @@
 	//
 	const popUp = (uno) => {
 		event.preventDefault();
-		window.open('/user/userpage/' + uno, '_blank', 'width=1450,height=900');
+		window.open('/user/userpage/' + uno, '_blank', 'width=1400,height=920');
 	}
 		// 버튼 클릭 시 실행될 함수 정의
 		function handleLoginButtonClick() {
@@ -325,7 +325,7 @@
 
 			// 인증 상태에 따라 동작 결정
 			if (isAuthenticated) {
-				let popOption = "width=1450, height=850";
+				let popOption = "width=1450, height=920";
 				let openUrl = '/user/userpage';
 				window.open(openUrl, '미니홈페이지', popOption);
 			} else {

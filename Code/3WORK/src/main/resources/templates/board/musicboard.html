@@ -69,6 +69,7 @@
             <button type="button" id="buttonMore" style="display: none;" onclick="loadMoreContent()">MORE</button>
             
             <!-- 페이지 영역 -->
+            <div th:if="${musicList.totalElements > 0}">
             <div class="pagination" id="pagination" style="display: block;" th:if="${content != 'A' && content != 'MORE'}">
             	<!-- 이전 페이지 -->
             	<!-- 2page 클릭하면 db 페이지는 1page -->
@@ -90,6 +91,7 @@
             	</a>
             </div>
       		</div>
+      	</div>
       	</div>
       </section>
       

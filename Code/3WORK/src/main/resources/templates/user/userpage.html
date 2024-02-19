@@ -5,7 +5,8 @@
 <meta charset="UTF-8">
 <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <meta name="_csrf" th:content="${_csrf.token}">
-<title>3WORK</title>
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
 <link rel="stylesheet" href="/css/UserpageCss.css">
 <script src="https://kit.fontawesome.com/7c6041109a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -121,8 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </head>
 <body>
-<div id="userMain">
-    <div id="container">
+<div id="container" style="height: 800px;">
+    <div id="userMain">
         <!-- BGM bar 영역 -->
       <div id="bgm-controls" class="bgm-bar">
           <div class="bgm-title-container">
@@ -136,6 +137,10 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <audio id="bgm-audio" th:src="@{|/upload/mp3/${Userinfo.bgmname}|}" autoplay loop></audio>
       <!-- 사이드 메뉴 영역 -->
+      <div id="side_title">
+      	<img th:src="@{/images/userpage/board.png}" alt="board" width="30px">
+      	<h2>자유게시판</h2>
+      </div>
       <div id="side_image">
          <div id="image1">
             <p>10Kg 감량중!</p>
@@ -159,27 +164,33 @@ document.addEventListener('DOMContentLoaded', function() {
       </div> -->
       <!-- 프로필, 캘린더 영역 -->
       <section id="profile">
-          <p>TODAY <span id="today-visits" th:text="${Userinfo.hits}"></span> | 
+          <p id="today">TODAY <span id="today-visits" th:text="${Userinfo.hits}"></span> | 
              TOTAL <span id="total-visits" th:text="${Userinfo.hits}"></span></p>
           <div id="profile-pic">
        <img th:if="${Userinfo.ufilename != null}" th:src="@{|/upload/profile/${Userinfo.ufilename}|}" 
-          style="width: 100%; height: 100%; border-radius: 17px;" alt="프로필">
-       <span th:unless="${Userinfo.ufilename != null}" id="pimage-text">프로필 이미지를<br> 설정해주세요</span>
+          style="width: 100%; height: 100%; border-radius: 17px;" onerror="this.src='/images/default/default_profile.png';">
+       	<img th:unless="${Userinfo.ufilename != null}" th:src="@{/images/default/default_profile.png}" style="width: 100%; height: 100%; border-radius: 17px;">
           </div>
-          <p th:text="${Userinfo.unickname} + '의 Health Place'"></p>
-              <a th:href="@{/user/userupdate}" id="setting">
-                  <i class="fa-solid fa-gear"></i>
-              </a>
+         <div id="userinfo">
+         	<div id="userinfo_line">
+	          <p>한줄 소개명</p>
+		        <p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
+			         Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>         	
+         	</div>
+					<div id="userinfo_like">
+						<p>좋아하는 것</p>
+		        <p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
+		         Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
+					</div>
+         </div>
          
-          <p>한줄 소개명</p>
-         <p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
-         Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
-         <div id="line"></div> 
-         
-         <p>좋아하는 것</p>
-         <p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
-         Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
-         <div id="line"></div>
+         <p th:text="${Userinfo.unickname} + '의 공간'" id="profile_title" style="font-size: 1.3em"></p>
+         <a th:href="@{/user/userupdate}">
+             <i class="fa-solid fa-gear" style="color: #ccc;" id="setting1"></i>
+         </a>
+         <a th:href="@{/main}">
+             <i class="fa-solid fa-house" style="color: #ccc;" id="setting2"></i>
+         </a>    
          <div id='calendar'></div>
       </section>
 

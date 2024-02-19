@@ -60,10 +60,11 @@ public class DiaryController {
      @PostMapping("/user/diarywrite/{uno}")
      public String write(@ModelAttribute UserDiaryDTO userDiaryDTO, 
            @PathVariable Integer uno,
-           MultipartFile boardFile,
+           MultipartFile boardFile, Model model,
            @AuthenticationPrincipal SecurityUser principal) throws Exception {
         userDiaryDTO.setUsers(principal.getUsers());
         diaryService.save(userDiaryDTO, boardFile);
+        model.addAttribute("diary", boardFile);
         return "redirect:/user/userdiary/" + uno;
      }
      
@@ -98,11 +99,12 @@ public class DiaryController {
    
    //글 수정처리
    @PostMapping("/user/diaryupdate")
-   public String update(@ModelAttribute UserDiary userDiary,
-         @AuthenticationPrincipal SecurityUser principal) {
-      userDiary.setUsers(principal.getUsers());
-      diaryService.update(userDiary);
-      return "redirect:/user/userdiary/" + userDiary.getDno();
+   public String update(@ModelAttribute UserDiaryDTO userDiaryDTO,
+         MultipartFile dimage,
+         @AuthenticationPrincipal SecurityUser principal) throws Exception {
+      userDiaryDTO.setUsers(principal.getUsers());
+      diaryService.update(userDiaryDTO, dimage);
+      return "redirect:/user/userdiary/" + userDiaryDTO.getDno();
    }
      
 }

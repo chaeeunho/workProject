@@ -160,9 +160,9 @@ function validateUnickname() {
     let checkMessageDiv = document.getElementById("nicknamecheck-message");
     let nicknameError = checkMessageDiv.querySelector("p"); // 'check-message' div 안의 p 태그 선택
 
-    let nicknameRegex = /^.{2,6}$/;
+    let nicknameRegex = /^.{2,20}$/;
     if (!nicknameRegex.test(nicknameInput.value)) {
-        nicknameError.innerHTML = "2자 이상 6자 이하이어야 합니다.";
+        nicknameError.innerHTML = "2자 이상 20자 이하이어야 합니다.";
         nicknameError.style.color = "blue";
         nicknameError.style.fontFamily = "SBAggroM";
         nicknameError.style.fontSize = "0.9em";
@@ -180,7 +180,7 @@ function validateUphone() {
 
     let phoneRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
     if (!phoneRegex.test(phoneInput.value)) {
-        phoneError.innerHTML = "'-'포함 11자리로 입력해주세요.";
+        phoneError.innerHTML = "'-'포함 13자리로 입력해주세요.";
         phoneError.style.color = "blue";
         phoneError.style.fontFamily = "SBAggroM";
         phoneError.style.fontSize = "0.9em";
@@ -227,7 +227,7 @@ function validateUphone() {
 					<div id="pw-input">
 					    <p>비밀번호</p>
 					    <input type="password" th:field="*{upassword}" id="upassword" name="upassword"
-					           placeholder="비밀번호(영문/대소문자,숫자,특수문자 포함 8~20자)"
+					           placeholder="비밀번호 (영문/대소문자, 숫자, 특수문자 포함 8~20자)"
 					           onblur="validateUpassword()">
 					</div>
 					<p th:if="${#fields.hasErrors('upassword')}" th:errors="*{upassword}"
@@ -249,7 +249,7 @@ function validateUphone() {
 					<div id="name-input">
 						<p>이름</p>
 						<input type="text" th:field="*{uname}" id="uname" name="uname"
-							placeholder="이름(한글만 가능)" onblur="validateUname()">
+							placeholder="이름 (한글만 가능)" onblur="validateUname()">
 					</div>
 					<p th:if="${#fields.hasErrors('uname')}" th:errors="*{uname}"
 						 th:class="${#fields.hasErrors('uname')} ? 'error-message3' : ''"></p>
@@ -261,7 +261,7 @@ function validateUphone() {
 					<div id="nickname-input">
 						<p>닉네임</p>
 						<input type="text" th:field="*{unickname}" id="unickname"
-							name="unickname" placeholder="별명" onblur="validateUnickname()">
+							name="unickname" placeholder="닉네임 (2~20자)" onblur="validateUnickname()">
 						<button type="button" onclick="checkNicknameOnClick()" id="nick-btn">중복확인</button>	
 					</div>
 					<p th:if="${#fields.hasErrors('unickname')}"
@@ -312,7 +312,7 @@ function validateUphone() {
 					<div id="phone-input">
 						<p>연락처</p>
 						<input type="text" th:field="*{uphone}" id="uphone" name="uphone"
-							placeholder="연락처('-'포함 11자리입력)" onblur="validateUphone()">
+							placeholder="연락처 ('-' 포함 13자리입력)" onblur="validateUphone()">
 					</div>
 					<p th:if="${#fields.hasErrors('uphone')}" th:errors="*{uphone}"
 						 th:class="${#fields.hasErrors('uphone')} ? 'error-message7' : ''"></p>

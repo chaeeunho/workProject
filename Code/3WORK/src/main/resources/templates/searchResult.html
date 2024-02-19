@@ -1,65 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>검색 결과</title>
-    <link rel="stylesheet" th:href="@{/css/common.css}">
-    <link rel="stylesheet" th:href="@{/css/board/musicboard.css}">
-    <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board/musicboard.css}">
+<script src="https://kit.fontawesome.com/aa24b12773.js"
+	crossorigin="anonymous"></script>
 </head>
 
 <body>
-<div id="container" style="height: 1400px;">
-    <div id="musicboard">
-        <!-- header.html 연결 -->
-        <div th:replace="~{header}"></div> 
-        <section class="msection">
-            <div id="mcontainer">
-                <div class="mbox">
-                    <div class="t_box">
-                        <p class="tag">검색 결과</p>
-                    </div>
+	<div id="container" style="height: 1400px;">
+		<div id="musicboard">
+			<!-- header.html 연결 -->
+			<div th:replace="~{header}"></div>
+			<section class="msection">
+				<div id="mcontainer">
+					<div class="mbox">
+						<div class="t_box">
+							<p class="tag">검색 결과</p>
+						</div>
 
-                  <table id="mtable">
-                     <thead>
-                        <tr>
-                           <th class="td_box">인기 순위</th>
-                           <th class="td_box">아이디</th>
-                           <th class="td_box">닉네임</th>
-                           <th class="td_box">홈페이지</th>
-                        </tr>
-                     </thead>
+						<table id="mtable">
+							<thead>
+								<tr>
+									<th class="td_box">인기 순위</th>
+									<th class="td_box">아이디</th>
+									<th class="td_box">닉네임</th>
+									<th class="td_box">홈페이지</th>
+								</tr>
+							</thead>
+							<tbody id="contentA">
+								<tr th:each="user, iterStat : ${usersList}">
+									<td>
+										<div th:if="${iterStat.count <= 3}">
+											<img th:if="${iterStat.count == 1}"
+												th:src="@{/images/rank/1st.jpeg}" alt="1등"
+												class="rank-image" /> <img th:if="${iterStat.count == 2}"
+												th:src="@{/images/rank/2nd.jpeg}" alt="2등"
+												class="rank-image" /> <img th:if="${iterStat.count == 3}"
+												th:src="@{/images/rank/3rd.jpeg}" alt="3등"
+												class="rank-image" />
+										</div> <span th:if="${iterStat.count > 3}"
+										th:text="${iterStat.count}"></span>
+									</td>
+									<td th:text="${user.uid}"></td>
+									<td th:text="${user.unickname}"></td>
+									<td><a th:href="@{/user/userpage/${user.uno}}"
+										th:onclick="popUp([[${user.uno}]])" class="visit-button">방문</a>
+									</td>
+								</tr>
+							</tbody>
 
-                     <tbody id="contentA">
-                        <tr th:each="user, iterStat : ${usersList}">
-                           <td><span th:text="${user.hits}"></span></td>
-                           <td><span th:text="${user.uid}"></span>
-                            <!-- 랭킹 이미지 표시 -->
-                              <img th:if="${iterStat.index} == 0" th:src="@{/images/rank/1st.jpeg}" alt="1등" class="rank-image"  /> 
-                              <img th:if="${iterStat.index} == 1" th:src="@{/images/rank/2nd.jpeg}" alt="2등" class="rank-image" />
-                              <img th:if="${iterStat.index} == 2" th:src="@{/images/rank/3rd.jpeg}" alt="3등" class="rank-image" />
-                              
-                              <td th:text="${user.unickname}"></td>
-                           <td><a href="@{|/user/userpage/${user.uno}|}"
-                              th:onclick="popUp([[${user.uno}]])" class="visit-button">방문</a></td>
-                        </tr>
-                     </tbody>
 
-                  </table>
+						</table>
 
-               </div>
-                <div class="pagination">
-                </div>
-            </div>
-        </section>
-        <!-- footer.html 연결 -->
-        <div th:replace="~{footer}"></div>
-    </div>
-</div>
-<!-- 유저페이지 팝업 JS -->
-   <script src="/js/main.js"></script>
+					</div>
+					<div class="pagination">
+					
 
-   <script>
+					</div>
+
+				</div>
+			</section>
+			<!-- footer.html 연결 -->
+			<div th:replace="~{footer}"></div>
+		</div>
+	</div>
+	<!-- 유저페이지 팝업 JS -->
+	<script src="/js/main.js"></script>
+
+	<script>
    //
    const popUp = (uno) => {
       event.preventDefault();
@@ -90,30 +101,6 @@
           calculateAndSortRank();
       });
 
-      function calculateAndSortRank() {
-          // 방문자 수를 가져와서 순위를 계산
-          let rows = document.querySelectorAll("#contentA tr");
-          let ranks = [];
-          rows.forEach(function(row) {
-              let hits = parseInt(row.querySelector("td:nth-child(1) span").innerText);
-              ranks.push({row: row, hits: hits});
-          });
-
-          // 순위에 따라 테이블을 정렬
-          ranks.sort(function(a, b) {
-              return b.hits - a.hits;
-          });
-
-          // 테이블을 재배치
-          let tbody = document.getElementById("contentA");
-          tbody.innerHTML = "";
-          ranks.forEach(function(item, index) {
-              let rank = index + 1;
-              let row = item.row;
-              row.querySelector("td:nth-child(1) span").innerText = rank;
-              tbody.appendChild(row);
-          });
-      }
 
       </script>
 </body>

@@ -140,6 +140,7 @@ public class Users extends BaseEntity {
             .ulike(usersDTO.getUlike())
             .ufilename(usersDTO.getUfilename())
             .ufilepath(usersDTO.getUfilepath())
+            .hits(usersDTO.getHits())
             .bgmname(usersDTO.getBgmname())
             .bgmpath(usersDTO.getBgmpath())
             .role(usersDTO.getRole())

@@ -46,7 +46,7 @@ public class UsersController {
       return "login";  //login.html
    }
    
- //유저 홈페이지
+   //유저 홈페이지
    @GetMapping("/user/userpage/{uno}")
     public String userPage(@PathVariable Integer uno,
       @PageableDefault(page = 1) Pageable pageable,
@@ -78,19 +78,19 @@ public class UsersController {
       return "user/join";
    }
    // 회원 가입 처리
-      // @Valid : 필드의 유효성 검사
-      // BindingResult: 에러 처리 클래스
-      @PostMapping("/user/join")
-      public String join(@Valid UsersDTO usersDTO, BindingResult bindingResult) {
-         if (bindingResult.hasErrors()) {
-            // 에러가 있으면 회원 가입 페이지에 머무름
-            return "user/join";
-         }
-         //방문자수 0으로 설정
-         usersDTO.setHits(0);
-         usersService.save(usersDTO);
-         return "user/join_wel";
-      }
+  // @Valid : 필드의 유효성 검사
+  // BindingResult: 에러 처리 클래스
+  @PostMapping("/user/join")
+  public String join(@Valid UsersDTO usersDTO, BindingResult bindingResult) {
+     if (bindingResult.hasErrors()) {
+        // 에러가 있으면 회원 가입 페이지에 머무름
+        return "user/join";
+     }
+     //방문자수 0으로 설정
+     usersDTO.setHits(0);
+     usersService.save(usersDTO);
+     return "user/join_wel";
+  }
    
    // 이메일 중복 검사
    @PostMapping("/user/check-email")
@@ -152,10 +152,21 @@ public class UsersController {
    //main 창에서 유저 검색 
    @PostMapping("/user/search")
    public String searchUsers(@RequestParam("uid") String uid, Model model) {
-       List<UsersDTO> usersList = usersService.searchUsersByUid(uid);
+       List<UsersDTO> usersList;
+       
+       // 사용자가 검색어를 입력한 경우
+       if (uid != null && !uid.isEmpty()) {
+           // 검색어를 포함하는 사용자 검색
+           usersList = usersService.searchUsersByUid(uid);
+       } else {
+           // 검색어가 없는 경우, 모든 사용자를 방문자 수에 따라 정렬하여 반환
+           usersList = usersService.findAllUsersOrderByHitsDesc();
+       }
+       // 결과 목록을 모델에 추가
        model.addAttribute("usersList", usersList);
        return "searchResult"; // 검색 결과를 표시할 페이지
    }
+
    
    // 비밀번호 찾기 요청 페이지
    @GetMapping("/user/resetpassword")
@@ -197,6 +208,15 @@ public class UsersController {
       model.addAttribute("users", usersDTO);
       return "user/userupdate";
    }
+   
+   @GetMapping("/user/userupdate_m")
+   public String updateUserForm_m(
+		   @AuthenticationPrincipal SecurityUser principal,
+		   Model model) {
+	   UsersDTO usersDTO = usersService.findByUid(principal);
+	   model.addAttribute("users", usersDTO);
+	   return "user/userupdate_m";
+   }
       
    
    //회원 수정 처리 - 상세보기로 이동
@@ -206,6 +226,15 @@ public class UsersController {
        usersService.saveFiles(usersDTO, uimage, bgmFile);
        model.addAttribute("users", usersDTO);
        return "redirect:/user/userpage/" + usersDTO.getUno();
+   }
+   
+   //회원 수정 처리 - 상세보기로 이동
+   @PostMapping("/user/userupdate_m")
+   public String update_m(@ModelAttribute UsersDTO usersDTO,
+               MultipartFile uimage, MultipartFile bgmFile, Model model) throws Exception {
+       usersService.saveFiles(usersDTO, uimage, bgmFile);
+       model.addAttribute("users", usersDTO);
+       return "redirect:/main";
    }
 
    // 장바구니 이동

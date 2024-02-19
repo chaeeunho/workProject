@@ -50,11 +50,6 @@ public class AdminController {
 	public String main() {
 		return "admin/admin_main";
 	}
-	@GetMapping("/test")
-	public String test() {
-		return "test";
-	}
-	
 	
 	
 	// 회원 관리 페이지 이동 & 목록 불러오기

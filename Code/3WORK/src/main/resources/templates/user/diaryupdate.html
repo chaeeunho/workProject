@@ -4,45 +4,72 @@
     <meta charset="UTF-8">
     <title>3WORK : WWW</title>
   <link rel="stylesheet" th:href="@{/css/common.css}">
-  <link rel="stylesheet" th:href="@{/css/user/diarydetail.css}">
+  <link rel="stylesheet" th:href="@{/css/user/diaryupdate.css}">
   <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-   <div id="container" style="height: 700px;">
-   <div id ="newsdetail">
-   <div th:replace="~{header}"></div>
-      <section id="writeform">
-      <h2>My Health Diary <br>Update</h2>
-      <form th:action="@{/user/diaryupdate}" method="post">
-      <input type="hidden" name="dno" th:value="${diary.dno}">
-         <table class="tbl_list">
-            <tbody>
-               <tr>
-                  <td>
-                     <input type="text" name="dtitle"
-                        th:value="${diary.dtitle}">
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <textarea rows="5" cols="50" name="dcontent"
-                           th:value="${diary.dcontent}"></textarea>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <a th:href = "@{|/userdiary/${dno}|}">
-                        <button type="button" class = "nbt">취소</button>
+   <div id="container" style="height: 1300px;">
+      <div id="newsdetail">
+         <div th:replace="~{header}"></div>
+         <section id="writeform">
+            <div id="mcontainer">
+               <form th:action="@{/user/diaryupdate}" method="post" id="upform" enctype="multipart/form-data">
+                  <input type="hidden" name="dno" th:value="${diary.dno}">
+                  <div class="tbl_box">
+                     <h2>
+                        <span sec:authentication="principal.users.unickname"></span>
+                        의<br>DiaryUpdate
+                     </h2>
+                     <table class="tbl_list">
+                        <tbody>
+                           <tr>
+                              <td>
+                              <input type="text" name="dtitle"
+                                 th:value="${diary.dtitle}" class="update_in">
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                              <textarea rows="5" cols="50" name="dcontent"
+                              th:text="${diary.dcontent}" class="update_in2" style = "white-space: pre-line;"></textarea>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div class="filebox">
+                                    <div id="update_image">
+                                         <img id="profile_image" th:src="@{|/upload/diary/${diary.dfilename}|}" alt="사진">
+                                       </div>
+                                     <input class="upload-name" 
+                                            value="첨부파일" 
+                                            placeholder="첨부파일" 
+                                            readonly> 
+                                     <label for="diaryFile" class="file_btn">파일 찾기</label> 
+                                     <input type="file" id="diaryFile" name="dimage">
+                                 </div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div id="btn_box">
+                     <input type="submit" value="등록" id="save_btn1"> 
+                     <a th:href="@{|/userdiary/${dno}|}">
+                        <button type="button" id="save_btn1">취소</button>
                      </a>
-                     <input type="submit" value="등록" class = "nbt">
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </form>
-      </section>
-       <div th:replace="~{footer}"></div>
+                  </div>
+               </form>
+            </div>
+         </section>
+         <div th:replace="~{footer}"></div>
+      </div>
    </div>
-</div>
+<script type="text/javascript">
+// 파일 선택 시 파일명 표시
+document.getElementById('diaryFile').addEventListener('change', function() {
+    var fileName = this.files[0].name;
+    document.querySelector('.upload-name').value = fileName;
+});
+</script>
 </body>
 </html>

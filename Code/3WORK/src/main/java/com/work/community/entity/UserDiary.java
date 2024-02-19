@@ -53,5 +53,18 @@ public class UserDiary extends BaseEntity{
 
        return userDiary;
    }
+
+   public static UserDiary saveToUpdate(UserDiaryDTO userDiaryDTO) {
+      UserDiary userDiary = UserDiary.builder()
+            .dno(userDiaryDTO.getDno())
+               .dtitle(userDiaryDTO.getDtitle())
+               .dcontent(userDiaryDTO.getDcontent())
+               .dfilename(userDiaryDTO.getDfilename())
+               .dfilepath(userDiaryDTO.getDfilepath())
+               .users(userDiaryDTO.getUsers())
+               .build();
+      
+      return userDiary;
+}
    
 }

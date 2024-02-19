@@ -1,52 +1,20 @@
 /* Userpage CSS */
-/* 글씨체 */
-@font-face {
-  font-family: 'SBAggroL';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SBAggroM';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SBAggroB';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
 
+body{
+	position: relative;
+  top: -20px;
+}
 /* 유저 페이지 메인 css */
 #userMain {
   position: relative;
-  width: 1400px;
-  height: 800px;
+	height: 800px;
 }
-#all-container {
-  margin-top: 30px;
-}
-body{
-  margin: 0;
-  padding: 0;
-  background-color: #F1F3E1;
-  font-family: 'SBAggroL';
-}
-#container {
-  background-color: #ffffff;
-  width: 1318.59px;
-  height: 850px;
-  border-radius: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-  margin-top: 50px;
-}
+
+
+
+/* -------------------------------------------- */
+
+
 
 #diary {
    border: none;
@@ -122,12 +90,32 @@ body{
 }
 
 /* 사이지 뱃지 스타일 */
+#side_title{
+  font-family: 'SBAggroL';
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  right: 25px;
+  top: 73px;
+  line-height: 50px;
+}
+#side_title img{
+	position: absolute;
+    right: 155px;
+    top: 5px;
+}
+#side_title h2{
+	position: absolute;
+    right: 30px;
+    top: 0px;
+    margin: 0;
+}
 #side_image{
   width: 200px;
   border: 3px dotted black;
   border-radius: 15px;
   position: absolute;
-  top: 9%;
+  top: 16%;
   right: 1%;
   background-color: rgb(102, 119, 135);
   box-shadow: 0px 10px 10px rgba(0,0,0,0.28);
@@ -150,7 +138,7 @@ body{
   border: none;
   border-radius: 5%;
   position: absolute;
-  top: 45%;
+  bottom: 58px;
   right: 1.5%;
   box-shadow: 0px 10px 10px rgba(0,0,0,0.28);
 }
@@ -167,17 +155,18 @@ body{
   margin: 8px 0 0 0px;
   border-radius: 5%;
 }
+#image2 a{
+	text-decoration: none;
+	color: black;
+}
 
 /* 프로필 스타일 */
 #profile {
-  font-family: 'SBAggroL';
-  text-align: left;
-  width: 300px;
-  height: 300px;
-  margin: 76px 0 0 27px
-}
-#line{
-  border-bottom: 1px solid #ccc;
+    font-family: 'SBAggroL';
+    text-align: left;
+    width: 300px;
+    height: 800px;
+    margin: 76px 0 0 27px;
 }
 
 #profile-pic #pimage-text{
@@ -191,11 +180,14 @@ body{
   margin-bottom: 5px;
   font-size: 0.8em;
 }
-#profile p:nth-of-type(1){
+#today {
   margin-top: 0px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
 }
 #today-visits {
-  font-family: 'SBAggroL';
+ font-family: 'SBAggroL';
   color: red;
 }
 #total-visits {
@@ -204,33 +196,56 @@ body{
 }
 #profile-pic {
   width: 286px;
-  height: 295px;
+  height: 340px;
   border: 3px solid #ccc;
   border-radius: 20px;
   margin: 10px 0;
+  position: absolute;
+  top: 60px;
 }
-#profile p:nth-child(3) {
+#profile_title {
   font-family: 'SBAggroB';
-  margin-top: 20px;
-  font-size: 1.3em;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 15px;
 }
-#profile p:nth-child(5),
-#profile p:nth-child(8) {
+#userinfo{
+   position: absolute;
+   bottom: 55px;
+   width: 280px;
+   padding: 0 10px;
+}
+#userinfo_line,
+#userinfo_like{
+	width: 280px;
+	height: 150px;
+}
+#userinfo p:nth-child(1),
+#userinfo p:nth-child(3) {
   font-family: 'SBAggroM';
   margin-top: 10px;
   font-size: 1.1em;
   color: #838383;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
 }
-#setting {
-  color: #ccc;
+#setting1 {
   margin-top: 5px;
   position: absolute;
-  top: 49.5%;
-  right: 76%
+  bottom: 23px;
+  left: 21.5%;
+  font-size: 20px;
+}
+#setting2 {
+  margin-top: 5px;
+  position: absolute;
+  bottom: 23px;
+  left: 23.5%;
+  font-size: 20px;
 }
 #calendar{
   position: absolute;
-  bottom: 44%;
+  bottom: 41%;
   right: 18%;
   width: 735px;
   height: 400px;
@@ -240,18 +255,20 @@ body{
 /* 방명록 스타일 */
 #comments {
   position: absolute;
-  bottom: 15%;
+  bottom: -10px;
   right: 18%;
   font-family: 'SBAggroL';
   font-size: 1em;
   width: 735px;
-  height: 250px;
+  height: 340px;
   text-align: left;
 }
-#commenth2{margin: 23px 0 0 0;}
+#commenth2{
+	margin: 22px 0 15px 3px;
+}
 #comments img {
   position: absolute; 
-  bottom: 73%;
+  bottom: 79%;
   right: 93%;
 }
 #comment-form {margin-bottom: 15px;}
@@ -333,10 +350,13 @@ body{
   background-color: #f1f3e1;
   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
   border: none;
-  padding: 3px 5px;
+  padding: 5px 10px;
   border-radius: 20%;
-  font-size: 13px;
-  position: absolute; bottom: 67.5%; right: 2%;
+  font-size: 10px;
+  position: absolute;
+  bottom: 72%;
+  right: 1%;
+  font-family: 'SBAggroM';
 }
 .upcomment_content{
    border: 1px solid #ccc;
@@ -380,7 +400,7 @@ body{
 .pagination .current_page{
    color: #818080;
    font-weight: bold;
-   color: navy;
+   color: black;
    margin: 0 2px 0 2px;
 }
 #page, current_page {

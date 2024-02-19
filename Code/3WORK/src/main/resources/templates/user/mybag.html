@@ -60,7 +60,7 @@
     			</div>
     			
     			<!-- 페이지 영역 -->
-          <div class="pagination">
+          <div class="pagination" th:if="${cartList.totalElements > 0}">
           	<!-- 이전 페이지 -->
           	<!-- 2page 클릭하면 db 페이지는 1page -->
           	<a th:href="${cartList.first}? '#' : @{/user/mybag/{Userinfo.uno}(page=${cartList.number})}">
@@ -71,7 +71,7 @@
            	<!-- 현재 페이지는 링크없이 숫자만 표시 -->
            	<span th:if="${page == cartList.number + 1}" th:text="${page}" class="current_page"></span>
            	<span th:if="${page != cartList.number + 1}">
-           	<a th:href="@{/user/mybag/{Userinfo.uno}(page=${page})}" th:text="${page}"></a>
+           		<a th:href="@{/user/mybag/{Userinfo.uno}(page=${page})}" th:text="${page}"></a>
            	</span>	
           	</span>
           	<!-- 다음 페이지 -->
@@ -80,6 +80,9 @@
           		<i class="fa-solid fa-caret-right fa-xl" style="color: #6C7C58; font-size: 20px;"></i>
           	</a>
           </div>
+          <div id="no-comments" th:unless="${cartList.totalElements > 0}">
+          	<p>위시리스트가 비어있습니다.</p>
+      		</div>
     		</div>
     	</section>
     	

@@ -147,6 +147,32 @@
  
  
  
+  /* ------------------------------------------- */
+ 
+ 
+ 
+ .pagination{
+   width: 100%;
+   margin: 30px auto;
+   display: flex;
+   justify-content: center;
+}
+.pagination a,
+.current_page{
+   text-decoration: none;
+   color: gray;
+   margin-left: 10px;
+}
+.current_page{
+   color: black; /* 여기에 원하는 색상을 지정하세요 */
+  font-family: 'SBAggroM';
+}
+#no-comments{
+   margin: 50px auto;
+   font-size: 2vw;
+}
+ 
+ 
  /* ------------------------------------------- */
  
  

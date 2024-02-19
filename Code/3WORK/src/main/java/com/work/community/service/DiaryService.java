@@ -1,9 +1,6 @@
 package com.work.community.service;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -13,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.work.community.dto.ItemDTO;
 import com.work.community.dto.UserDiaryDTO;
 import com.work.community.entity.UserDiary;
 import com.work.community.repository.DiaryRepository;
@@ -84,9 +80,26 @@ public class DiaryService {
       diaryRepository.deleteById(dno);
    }
    
-   //글 수정 
-   public void update(UserDiary userDiary) {
-      diaryRepository.save(userDiary);
+   //글 수정 (파일 저장 포함)
+   public void update(UserDiaryDTO userDiaryDTO, MultipartFile dimage) throws Exception {
+      UserDiary userdiary;
+      if (!dimage.isEmpty()) {
+           // 이미지 파일이 업로드된 경우 처리
+           UUID uuid = UUID.randomUUID();
+           String imageFilename = uuid + "_" + dimage.getOriginalFilename();
+           String imageFilepath = "C:\\3workfiles\\diary\\" + imageFilename;
+           File savedImageFile = new File(imageFilepath);
+           dimage.transferTo(savedImageFile);
+           
+           userDiaryDTO.setDfilename(imageFilename);
+           userDiaryDTO.setDfilepath(imageFilepath);
+       } else {
+           // 이미지 파일이 업로드되지 않은 경우 기존의 파일 정보를 유지
+          userDiaryDTO.setDfilename(findById(userDiaryDTO.getDno()).getDfilename());
+          userDiaryDTO.setDfilepath(findById(userDiaryDTO.getDno()).getDfilepath());
+       }
+      userdiary = UserDiary.saveToUpdate(userDiaryDTO);
+      diaryRepository.save(userdiary);
    }
 
    public UserDiary findByDno(Integer dno) {

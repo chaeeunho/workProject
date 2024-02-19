@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+#newsdetail{
+  position: relative;
+  height: 100%;
+}
+.msection{
+   width: 100%;
+   height: 700px;
+   position: absolute;
+  top: 123px;
+}
+#mcontainer{
+   width: 80%;
+  height: 95%;
+  position: relative;
+  margin: 0 auto;
+  padding: 70px 30px; /* 좌우 여백 조정 */
+}
+ 
+ 
+ 
+/* ------------------------------------------------- */
+ 
+#upform{
+   position: absolute;
+    width: 100%;
+    top: 117%;
+    left: 21%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+}
+.tbl_box{
+   position: absolute;
+   top: 30%;
+   left: 30%;
+   width: 100%;
+   height: 100%;
+   
+}
+/* .tbl_list{
+   display: flex;
+    justify-content: center; 수평 가운데 정렬
+    align-items: center; 수직 가운데 정렬
+} */
+.update_ti{
+   font-size : 30px;
+}
+.update_in{
+   width: 98%;
+   padding: 10px;
+   margin: 10px 0 10px 0;
+   border-radius: 15px;
+   border: 2px solid #ccc;
+   margin-top: 40px;
+}
+.update_in2{
+   width: 1100px;
+   height: 300px;
+   padding: 10px;
+   margin: 10px 0 10px 0;
+   border-radius: 15px;
+   border: 2px solid #ccc;
+}
+.t_box{
+   width: 100%;
+   margin-bottom: 20px;
+}
+.tag{
+   font-size: 30px;
+   padding-bottom: 20px; 
+  text-align: left; 
+  border-bottom: 1px solid black;
+  font-family: 'SBAggroM';
+}
+a{
+   text-decoration: none; 
+   color: black;
+}
+
+ .thumbnail-image {
+    width: 670px;
+    height: 470px;
+   float: left;
+}
+
+/* 파일 첨부 스타일 */
+.filebox{   
+    margin-top: 15px;}
+.filebox .upload-name{
+    border: none;
+    border-bottom: 2px solid #ccc;
+    margin-left: -36px;
+    color: #ccc;
+    width: 70%;
+}
+
+.filebox input[type="file"]{
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  border: 0;
+}
+
+.file_btn{
+   background: #F1F3E1;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   color: black;
+   padding: 5px 15px;
+   font-size: 12px;
+   margin-left: 10px;
+   border: none;
+   font-family: 'SBAggroL';
+}
+
+#btn-box{
+   position: absolute;
+   left: 84.5%;
+   width: 100px;
+   display: flex;
+   padding: 5px 15px;
+   
+}
+#save_btn1{
+   background: #F1F3E1;
+   border: none;
+   border-radius: 5px;
+   padding: 10px;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   font-size: 13px;
+   margin-top: 22px;
+   font-family: 'SBAggroM';
+   margin-right: 10px;
+}
+
+#save_btn2{
+   background: #F1F3E1;
+   border: none;
+   border-radius: 5px;
+   padding: 10px;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   font-size: 13px;
+   margin-top: 22px;
+   font-family: 'SBAggroM';
+}
+
+
+/* ------------------------------------------------- */
+#btn_box{
+   position: absolute;
+    left: 119%;
+    width: 100px;
+    display: flex;
+    padding: 5px 15px;
+    top: 77%;
+}
+
+#save_btn1{
+   background: #F1F3E1;
+   border: none;
+   border-radius: 5px;
+   padding: 10px;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   font-size: 13px;
+   margin-top: 22px;
+   font-family: 'SBAggroM';
+   margin-right: 5px;
+}
+
+#save_btn2{
+   background: #F1F3E1;
+   border: none;
+   border-radius: 5px;
+   padding: 10px;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   font-size: 13px;
+   margin-top: 22px;
+   font-family: 'SBAggroM';
+   margin-right: 5px;
+}

@@ -33,7 +33,7 @@ console.log( Kakao.isInitialized() ); // 초기화 판단여부
 	      	</p>
 	      	<p>아이디나 비밀번호가 기억나지 않으신가요 ?
 	      		<a th:href="@{/user/id_search}">아이디 찾기</a>&nbsp;/&nbsp;
-	      		<a th:href="@{/user/pw_search}">비밀번호 찾기</a>
+	      		<a th:href="@{/user/resetpassword}">비밀번호 찾기</a>
 	      	</p>
 	      	<p>OR<p>
 	      	<p>SNS 간편 로그인</p>
@@ -47,7 +47,7 @@ console.log( Kakao.isInitialized() ); // 초기화 판단여부
 						<img src="/images/login/apple.png" alt="애플 로그인 버튼" />
 	      	</p>
 			<p id="token-result"></p>
-			<button class="api-btn" onclick="kakaoLogOut()">로그아웃</button>
+			<!-- <button class="api-btn" onclick="kakaoLogOut()">로그아웃</button> -->
 	    </form>
       	</div>
       </section>

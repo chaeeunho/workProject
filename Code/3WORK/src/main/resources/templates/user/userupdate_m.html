@@ -19,7 +19,7 @@
          </div>
          
          <!-- 프로필 수정 폼 -->
-            <form th:action="@{/user/userupdate}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/user/userupdate_m}" method="post" enctype="multipart/form-data">
                <input type="hidden" name="uno" th:value="${users.uno}">
                 <input type="hidden" name="uid" th:value="${users.uid}">
                 <input type="hidden" name="hits" th:value="${users.hits}">
@@ -151,8 +151,8 @@
                <tr>
                   <td>
                      <button type="submit" id="save_btn">저장</button>
-                     <a th:href="@{|/user/userpage/${users.uno}|}" id="btbtns">
-                     	<button type="button" id="save_btn3">미니홈피로 돌아가기</button>
+                     <a th:href="@{/main}" id="btbtns">
+                     	<button type="button" id="save_btn2">메인화면으로 돌아가기</button>
                      </a>
                   </td>
                </tr>

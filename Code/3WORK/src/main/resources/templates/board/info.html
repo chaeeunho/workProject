@@ -43,7 +43,7 @@
              </div>
             
             <!-- 페이지 영역 -->
-            <div class="pagination">
+            <div class="pagination" th:if="${infoList.totalElements > 0}">
                <!-- 이전 페이지 -->
                <!-- 2page 클릭하면 db 페이지는 1page -->
                <a th:href="${infoList.first}? '#' : @{/board/info(page=${infoList.number})}">

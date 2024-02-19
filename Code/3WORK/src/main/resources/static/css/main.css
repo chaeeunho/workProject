@@ -682,7 +682,7 @@ html {
 
 @media (min-width: 1820px) {
 	#container{
-  	height: 2800px;
+  	height: 2850px;
 	}
 	#slide_box img{
 		aspect-ratio: 1.08;
@@ -701,7 +701,7 @@ html {
 
 @media (min-width: 1920px) {
 	#container{
-  	height: 2950px;
+  	height: 3000px;
 	}
 	#work_info img{
 	height: 500px;
