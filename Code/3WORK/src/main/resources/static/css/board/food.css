@@ -84,6 +84,7 @@
     aspect-ratio: 1.2;
     object-fit: cover;
     padding: 20px 0;
+    padding-top: 0;
 }
 
 .card-content {

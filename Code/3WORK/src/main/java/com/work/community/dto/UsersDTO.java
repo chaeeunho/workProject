@@ -24,7 +24,7 @@ public class UsersDTO {
     private String uid;
 
     @NotEmpty(message = "비밀번호는 필수 항목입니다.")
-    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*[0-9]).{8,10}$", message = "")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*[0-9]).{8,20}$", message = "")
     private String upassword;
 
     @NotEmpty(message = "이름은 필수 항목입니다.")

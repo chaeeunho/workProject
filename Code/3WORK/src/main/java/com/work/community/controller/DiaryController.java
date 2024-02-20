@@ -44,7 +44,7 @@ public class DiaryController {
       model.addAttribute("diary", diaryList);
       model.addAttribute("startPage", startPage);
       model.addAttribute("endPage", endPage);
-       return "/user/userdiary";
+       return "user/userdiary";
     }
     
     //유저 건강일지 글쓰기페이지

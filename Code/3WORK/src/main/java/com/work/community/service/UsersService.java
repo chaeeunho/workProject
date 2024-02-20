@@ -154,8 +154,7 @@ public class UsersService {
           
           if (!bgmFile.isEmpty()) {
               // mp3 파일이 업로드된 경우 처리
-              UUID uuid = UUID.randomUUID();
-              String mp3Filename = uuid + "_" + bgmFile.getOriginalFilename();
+              String mp3Filename = bgmFile.getOriginalFilename();
               String mp3Filepath = "C:\\3workfiles\\mp3\\" + mp3Filename;
               File savedMp3File = new File(mp3Filepath);
               bgmFile.transferTo(savedMp3File);

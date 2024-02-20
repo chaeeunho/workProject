@@ -38,7 +38,7 @@ public class Item {
 	@Column(nullable = false)                               // not null
 	private String iprice;                                  // 아이템 가격
 	
-	@Column(nullable = false)                               // not null
+	@Column(length = 5000, nullable = false)                               // not null
 	private String ilink;                                   // 아이템 판매 링크
 	
 	private String ifilename;                               // 아이템 사진명
