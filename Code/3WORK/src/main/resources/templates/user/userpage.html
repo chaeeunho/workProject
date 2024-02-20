@@ -175,12 +175,12 @@ document.addEventListener('DOMContentLoaded', function() {
          	<div id="userinfo_line">
 	          <p>한줄 소개명</p>
 		        <p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
-			         Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>         	
+			         Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}" style = "white-space: pre-line;"></p>         	
          	</div>
 					<div id="userinfo_like">
 						<p>좋아하는 것</p>
 		        <p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
-		         Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
+		         Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}" style = "white-space: pre-line;"></p>
 					</div>
          </div>
          

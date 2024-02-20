@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>3WORK : WWW</title>
@@ -8,17 +9,15 @@
   <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-   <div id="container" style="height: 1300px;">
+   <div id="container" style="height: 1000px;">
       <div id="newsdetail">
-         <div th:replace="~{header}"></div>
          <section id="writeform">
             <div id="mcontainer">
                <form th:action="@{/user/diaryupdate}" method="post" id="upform" enctype="multipart/form-data">
                   <input type="hidden" name="dno" th:value="${diary.dno}">
                   <div class="tbl_box">
-                     <h2>
-                        <span sec:authentication="principal.users.unickname"></span>
-                        의<br>DiaryUpdate
+                     <h2 id="diaryupdate_title">
+                        <span sec:authentication="principal.users.unickname"></span>의 다이어리 수정
                      </h2>
                      <table class="tbl_list">
                         <tbody>

@@ -1,84 +1,58 @@
 @charset "UTF-8";
 
-/* 전체 스타일 */
-@charset "UTF-8";
-
-/* 폰트 */
-@font-face {
-  font-family: 'SBAggroL';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SBAggroM';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SBAggroB';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
-
-body{
-  margin: 0;
-  padding: 0;
-  background-color: #F1F3E1;
-  font-family: 'SBAggroL';
-}
-/* 기본 페이지 높이 = 1500px */
-#container{
-  margin: 40px;
-  background-color: #ffffff;
-  height: 1500px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-  position: relative;
-  height: 100%; /* 전체 높이를 사용하여 가운데 정렬 */
-}
-
 #container2{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-40%, -50%);
-    width: 100%; /* 원하는 너비값으로 조정 */
-    height: 100%;
+    position: relative;
+  height: 100%;
 }
 
-#writeform{
-   position: absolute;
-   top: 92px;
+.writeform{
+   width: 100%;
+   height: 500px;
+}
+#mcontainer{
    width: 80%;
-   height: 100%;
+  height: 95%;
+  position: relative;
+  margin: 0 auto;
+  padding: 70px 30px; /* 좌우 여백 조정 */
 }
-
+ 
+ 
+/* ------------------------------------------------- */
+ 
+ 
+ 
+ #diarywrite_title{
+ 	font-size: 30px;
+ 	padding-bottom: 20px;
+	font-family: 'SBAggroM';
+	text-align: left; 
+  border-bottom: 1px solid black;
+}
+ 
+ 
 #title input[type="text"] {
-   border: none;
-   border-bottom: 2px solid #ccc;
-   width: 90%;
+ 	 border: 1px solid #ccc;
+   width: 98%;
    margin: 30px 0 20px 0;
+   padding: 10px;
 }
 
 #content textarea {
-   border: 2px solid #ccc;
-   border-radius: 10px;
-   width: 90%;
-   height: 300px;
-   margin-bottom: 20px;
-   vertical-align: top;
+  border: 1px solid #ccc;
+  width: 98%;
+  padding: 10px;
+  margin-bottom: 20px;
+  resize: none;
 }
+
 /* 파일 첨부 스타일 */
 .filebox .upload-name{
-   border: none;
-   border-bottom: 2px solid #ccc;
-   width: 70%;
-   margin-left: 20px;
-   color: #ccc;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 89.2%;
+    padding: 10px;
+    color: #9C9C9C;
 }
 
 .filebox input[type="file"]{
@@ -95,16 +69,17 @@ body{
    background: #F1F3E1;
    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
    color: black;
-   padding: 5px 15px;
+   border-radius: 5px;
+   padding: 7px 15px;
    font-size: 12px;
    margin-left: 10px;
    border: none;
-   font-family: 'SBAggroL';
+   font-family: 'SBAggroM';
 }
 
 #btn-box{
    position: absolute;
-   left: 84.5%;
+   right: 1%;
    width: 100px;
    display: flex;
    padding: 5px 15px;

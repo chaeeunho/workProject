@@ -122,6 +122,9 @@ li{
    right: 10px;
 }
 .newscreatetime{
+	position: absolute;
+   top: 82%;
+   left: 2%;
    font-size: 12px;
    color: gray;
    float: right;

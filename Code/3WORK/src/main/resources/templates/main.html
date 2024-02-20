@@ -48,10 +48,10 @@
 	                  <li onclick="showhide3()">User</li>
 	                  <div id="user">
 		                  <!-- 로그인 전 -->
-		                  <th:block sec:authorize="isAnonymous()">
-			                  <li><a th:href="@{/login}">로그인</a></li>
-			                  <li><a th:href="@{/user/join}">회원가입</a></li>
-		                  </th:block>
+		                  <li><a th:href="@{/login}">로그인</a></li>
+		                  <li><a th:href="@{/user/join}">회원가입</a></li>
+		                  
+		                  <!-- 로그인 후 -->
 		                  <th:block sec:authorize="isAuthenticated()">
 		                  	<th:block th:each="user : ${users}" th:if="${user.uid == principal.username}">
 						                <a th:href="@{|/user/userpage/${user.uno}|}">

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ import com.work.community.service.CommentsService;
 import com.work.community.service.EmailService;
 import com.work.community.service.UsersService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -109,6 +111,7 @@ public class UsersController {
    //로그아웃
    @GetMapping("/logout")
    public String logout() {
+	   SecurityContextHolder.clearContext();
       return "redirect:/main";
    }
    
@@ -123,9 +126,11 @@ public class UsersController {
 
    //회원 삭제
    @GetMapping("/user/delete/{uno}")
-   public String deleteUsers(@PathVariable Integer uno) {
+   public String deleteUsers(@PathVariable Integer uno, HttpSession session) {
       usersService.deleteById(uno);
-      return "redirect:/user/list";
+      SecurityContextHolder.clearContext();
+      session.invalidate();
+      return "redirect:/main";
    }
    
    // 아이디 찾기 페이지
@@ -133,8 +138,8 @@ public class UsersController {
    public String idSearchForm() {
        return "user/id_search"; // 아이디 찾기 폼 페이지 반환
    }
-
-   //아이디 찾기 ( 이름과전화번호)
+ 
+   //아이디 찾기 ( 이름과 전화번호)
    @PostMapping("/user/id_search")
    public String idSearch(@RequestParam("uname") String name, @RequestParam("uphone") String phone, Model model) {
        Optional<Users> usersOptional = usersRepository.findByUnameAndUphone(name, phone);
@@ -142,10 +147,10 @@ public class UsersController {
            Users users = usersOptional.get();
            model.addAttribute("uId", users.getUid());
            model.addAttribute("joinDate", users.getCreatedDate()); // 가입 날짜, BaseEntity에서 상속받은 createdAt 사용
-           return "/user/id_result"; // 결과 페이지로 이동
+           return "user/id_result"; // 결과 페이지로 이동
        } else {
            model.addAttribute("message", "일치하는 사용자 정보가 없습니다.");
-           return "/user/id_search"; // 정보가 없는 경우 다시 아이디 찾기 페이지로 이동
+           return "user/id_search"; // 정보가 없는 경우 다시 아이디 찾기 페이지로 이동
        }
    }
    
@@ -181,7 +186,7 @@ public class UsersController {
       return "user/resetpassword2";
       }
    
-   @PostMapping("/user/resetPassword")
+   @PostMapping("/user/resetpassword")
    public String resetPassword(@ModelAttribute UsersDTO usersDTO,Model model)   {
       boolean isMatch = usersService.isUidAndUphoneAndUnameMatch(usersDTO.getUid(), usersDTO.getUname(), usersDTO.getUphone());
       if(isMatch) {

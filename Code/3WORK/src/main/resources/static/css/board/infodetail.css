@@ -47,11 +47,13 @@ a{
  .thumbnail-image {
     width: 670px;
     height: 470px;
-   float: left;
+     text-align: center;
+    border-radius: 10px;
 }
 .infocontent_box{
    text-align: justify;
    line-height: 2;
+   text-align: center;
 }
 .infocreatetime{
    font-size: 12px;
@@ -59,7 +61,11 @@ a{
    float: right;
 }
 
-
+#line{
+   border-bottom: 1px solid black;
+   width: 100%;
+   height: 20px;
+}
 
 /* ------------------------------------------------- */
 

@@ -33,6 +33,12 @@
 	margin-bottom: 30px;
 }
 
+.message{
+   font-size: 0.3em;
+   color: red;
+   margin-bottom: 15px;
+}
+
 #search_input{
 	width: 500px;
 	border-radius: 5px;

@@ -9,26 +9,30 @@
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="container" style="height: 900px;">
-		<div id="id_search">
-   	<!-- header.html 연결 -->
+   <div id="container" style="height: 900px;">
+      <div id="id_search">
+      <!-- header.html 연결 -->
      <div th:replace="~{header}"></div>
      
      <section id="id_search_body">
-     	<div id="id_search_title">
-      	<p>아이디 찾기</p>
-      	<p>아이디는 가입 시 입력한 이름과 전화번호를 통해 찾을 수 있습니다.</p>
-      	<form th:action="@{/user/id_search}" method="post">
-		    <input type="text" name="uname" placeholder="이름 (한글만 가능)" id="search_input">
-		    <input type="text" name="uphone" placeholder="연락처 ('-' 포함해 11자리 입력)" id="search_input">
-		    <button type="submit" id="search_btn">아이디 찾기</button>
-		</form>
-     	</div>
+        <div id="id_search_title">
+         <p>아이디 찾기</p>
+         <p>아이디는 가입 시 입력한 이름과 전화번호를 통해 찾을 수 있습니다.</p>
+         <form th:action="@{/user/id_search}" method="post">
+           <div class="message">
+              <p th:text="${message}" class="success-message"></p>
+           </div>
+          <input type="text" name="uname" placeholder="이름 (한글만 가능)" id="search_input">
+          <input type="text" name="uphone" placeholder="연락처 ('-' 포함해 11자리 입력)" id="search_input">
+          <button type="submit" id="search_btn">아이디 찾기</button>
+          
+      </form>
+        </div>
      </section>
      
-   	<!-- footer.html 연결 -->
+      <!-- footer.html 연결 -->
      <div th:replace="~{footer}"></div>
-  	</div>
+     </div>
   </div>
 </body>
 </html>

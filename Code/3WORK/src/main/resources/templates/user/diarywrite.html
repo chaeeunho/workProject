@@ -4,27 +4,28 @@
 <head>
 <meta charset="UTF-8">
 <title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
 <link rel="stylesheet" th:href="@{/css/user/diarywriter.css}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
    <div id="container" style="height: 1000px;">
-      <div th:replace="~{header}"></div>
       <div id="container2">
-         <section id="writeform">
+         <section class="writeform">
+         	<div id="mcontainer">
             <div sec:authorize="isAuthenticated()">
-               <h2>
-                  <span sec:authentication="principal.users.unickname"></span>의 My
-                  Health Diary
+               <h2 id="diarywrite_title">
+                  <span sec:authentication="principal.users.unickname"></span>의
+                  건강 다이어리
                </h2>
             </div>
             <form th:action="@{|/user/diarywrite/${uno}|}" method="post" enctype="multipart/form-data">
                <div id="title">
-                  <input type="text" name="dtitle" placeholder="글 제목">
+                  <input type="text" name="dtitle" placeholder="제목을 작성해주세요.">
                </div>
                <div id="content">
                   <textarea rows="20" cols="2000" name="dcontent"
-                     placeholder="내용을 입력해주세요"></textarea>
+                     placeholder="내용을 입력해주세요."></textarea>
                </div>
                
                <div class="filebox">
@@ -39,9 +40,10 @@
                   </a>
                </div>
             </form>
+			     </div>
          </section>
+	      <div th:replace="~{footer}"></div>
       </div>
-      <div th:replace="~{footer}"></div>
    </div>
 
    <!-- 파일명 들어가기 -->

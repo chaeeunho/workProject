@@ -154,6 +154,12 @@
                      <a th:href="@{|/user/userpage/${users.uno}|}" id="btbtns">
                      	<button type="button" id="save_btn3">미니홈피로 돌아가기</button>
                      </a>
+                     <p id="userout">
+                     	회원 탈퇴를 하시겠습니까 ?
+	                     <a th:href="@{|/user/delete/${users.uno}|}" onclick="return confirm('회원탈퇴를 하시겠습니까?')">
+	                     		회원탈퇴
+	                     	</a>
+                     </p>
                   </td>
                </tr>
            </table>

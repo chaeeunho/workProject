@@ -95,6 +95,9 @@ public class Users extends BaseEntity {
    @OrderBy("cno desc")
    private List<Comments> commentsList;
    
+   @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+   private List<UserDiary> userDiaryList;
+   
    // 회원 1명당 1개의 장바구니를 가짐 - 일대일 양방향 관계
    @OneToOne(fetch = FetchType.EAGER, mappedBy = "users", cascade = CascadeType.ALL)
    @JoinColumn(name = "cartno")

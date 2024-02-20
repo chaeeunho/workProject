@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>3WORK : WWW</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/user/join_wel.css}">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div id="container" style="height: 900px;">   
+      <div id="join_wel">
+        <!-- header.html 연결 -->
+       <div th:replace="~{header}"></div>
+       
+       <section id="join_wel_body">
+          <div id="welcome_content">
+              <p>접근이 불가한 페이지입니다.</p>
+              <p>일반회원이 사용 불가한 페이지에요<br>
+                  관리자에게 문의해주세요 :)</p>
+              <a th:href="@{/main}">
+                  <button type="button" id="login_btn">홈으로 돌아가기</span></button>
+               </a>
+          </div>
+       </section>
+       
+        <!-- footer.html 연결 -->
+       <div th:replace="~{footer}"></div>
+    </div>
+  </div>
+</body>
+</html>

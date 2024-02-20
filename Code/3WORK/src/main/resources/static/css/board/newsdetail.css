@@ -49,14 +49,21 @@ a{
  	height: 470px;
 	float: left;
 }
+.newscontent{
+	border-bottom: 1px solid black;
+  padding-bottom: 20px;
+}
 .newscontent_box{
 	text-align: justify;
 	line-height: 2;
 }
 .newscreatetime{
-	font-size: 12px;
-	color: gray;
-	float: right;
+	position: absolute;
+   top: 82%;
+   left: 2%;
+   font-size: 12px;
+   color: gray;
+   float: right;
 }
 
 

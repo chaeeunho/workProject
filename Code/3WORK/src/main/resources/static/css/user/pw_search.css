@@ -20,17 +20,24 @@
 	transform: translate(-50%, -50%);
 }
 
-#pw_search_title p:nth-of-type(1) {
+.pw_search_title1 {
 	font-size: 30px;
 	font-family: 'SBAggroM';
 	margin-top: 0;
 	margin-bottom: 10px;
 }
 
-#pw_search_title p:nth-of-type(2) {
+.pw_search_title2 {
 	font-size: 12px;
 	color: #A09D9D;
 	margin-bottom: 30px;
+}
+
+#message{
+   font-size: 1.4em;
+   color: red;
+   margin-bottom: 15px;
+   font-family: 'SBAggroM';
 }
 
 #search_input{

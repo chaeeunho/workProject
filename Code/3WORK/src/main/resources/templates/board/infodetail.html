@@ -24,9 +24,10 @@
              </div>
              <div class ="infocontent_box">
                 <p class = "infocontent">
-                   <span th:text="${info.incontent}"></span>
+                   <span th:text="${info.incontent}" style = "white-space: pre-line;"></span>
                 </p>
              </div>
+             <p id="line"></p>
              <div class = "infobuttonbox">
                 <span class= "inbutton">
                    <a th:href = "@{/board/info}"><button class = "inbt">목록</button></a>

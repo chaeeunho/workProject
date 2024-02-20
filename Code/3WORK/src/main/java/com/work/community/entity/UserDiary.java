@@ -13,14 +13,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
+@Setter
+@Getter
 @Table(name = "userdiary")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Entity
 public class UserDiary extends BaseEntity{
    
@@ -39,7 +41,7 @@ public class UserDiary extends BaseEntity{
    private String dfilepath;
    
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn //memberId의 name값과 일치해야함
+   @JoinColumn(name = "uno") //memberId의 name값과 일치해야함
    private Users users;
 
    public static UserDiary saveToEntity(UserDiaryDTO userDiaryDTO) {
@@ -56,7 +58,7 @@ public class UserDiary extends BaseEntity{
 
    public static UserDiary saveToUpdate(UserDiaryDTO userDiaryDTO) {
       UserDiary userDiary = UserDiary.builder()
-            .dno(userDiaryDTO.getDno())
+               .dno(userDiaryDTO.getDno())
                .dtitle(userDiaryDTO.getDtitle())
                .dcontent(userDiaryDTO.getDcontent())
                .dfilename(userDiaryDTO.getDfilename())
