@@ -21,8 +21,9 @@ Spring Boot와 JPA를 활용한 건강 커뮤니티 사이트
 고병진(팀원) : 지도 API연동, 노래, 뉴스, 아이템 정보 및 서브메뉴 페이지 디자인(HTML, CSS)
 
 ⚙️ 개발 환경 (JAVA / JDK 17)
+![327444640-87c813d7-a9fa-4dc7-a646-d04ca5b00b6a](https://github.com/chaeeunho/workProject/assets/145078937/f213d3d8-7c84-48fc-b747-56dc248d58be)
 
-image
+
 
 💡 주요 기능
 
